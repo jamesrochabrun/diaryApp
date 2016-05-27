@@ -20,6 +20,8 @@
 		7B74B9A71CF7B71D00F69544 /* THDiaryEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B74B9A51CF7B71D00F69544 /* THDiaryEntry.m */; };
 		7B74B9AC1CF7BC2300F69544 /* THEntryViewcontroller.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B74B9AB1CF7BC2300F69544 /* THEntryViewcontroller.m */; };
 		7B74B9AF1CF7D97500F69544 /* THEntrylistViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B74B9AE1CF7D97500F69544 /* THEntrylistViewController.m */; };
+		7B74B9B41CF80FAF00F69544 /* THNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B74B9B31CF80FAF00F69544 /* THNavigationController.m */; };
+		7B74B9B81CF8148D00F69544 /* THEntryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B74B9B71CF8148D00F69544 /* THEntryCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +58,10 @@
 		7B74B9AB1CF7BC2300F69544 /* THEntryViewcontroller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THEntryViewcontroller.m; sourceTree = "<group>"; };
 		7B74B9AD1CF7D97500F69544 /* THEntrylistViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = THEntrylistViewController.h; path = ../THEntrylistViewController.h; sourceTree = "<group>"; };
 		7B74B9AE1CF7D97500F69544 /* THEntrylistViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = THEntrylistViewController.m; path = ../THEntrylistViewController.m; sourceTree = "<group>"; };
+		7B74B9B21CF80FAF00F69544 /* THNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = THNavigationController.h; path = BlogReaderApp/THNavigationController.h; sourceTree = "<group>"; };
+		7B74B9B31CF80FAF00F69544 /* THNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = THNavigationController.m; path = BlogReaderApp/THNavigationController.m; sourceTree = "<group>"; };
+		7B74B9B61CF8148D00F69544 /* THEntryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = THEntryCell.h; path = BlogReaderApp/THEntryCell.h; sourceTree = "<group>"; };
+		7B74B9B71CF8148D00F69544 /* THEntryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = THEntryCell.m; path = BlogReaderApp/THEntryCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,8 +86,9 @@
 		7B74B9691CF7ABF200F69544 = {
 			isa = PBXGroup;
 			children = (
-				7B74B9A91CF7B75500F69544 /* controller */,
 				7B74B9A81CF7B73D00F69544 /* model */,
+				7B74B9B51CF80FBF00F69544 /* view */,
+				7B74B9A91CF7B75500F69544 /* controller */,
 				7B74B9741CF7ABF200F69544 /* BlogReaderApp */,
 				7B74B9911CF7ABF200F69544 /* BlogReaderAppTests */,
 				7B74B9731CF7ABF200F69544 /* Products */,
@@ -169,6 +176,17 @@
 				7B74B99F1CF7B3C400F69544 /* THCoreDataStack.h */,
 			);
 			name = coreDataStack;
+			sourceTree = "<group>";
+		};
+		7B74B9B51CF80FBF00F69544 /* view */ = {
+			isa = PBXGroup;
+			children = (
+				7B74B9B21CF80FAF00F69544 /* THNavigationController.h */,
+				7B74B9B31CF80FAF00F69544 /* THNavigationController.m */,
+				7B74B9B61CF8148D00F69544 /* THEntryCell.h */,
+				7B74B9B71CF8148D00F69544 /* THEntryCell.m */,
+			);
+			name = view;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -277,8 +295,10 @@
 				7B74B9AC1CF7BC2300F69544 /* THEntryViewcontroller.m in Sources */,
 				7B74B97A1CF7ABF200F69544 /* AppDelegate.m in Sources */,
 				7B74B9831CF7ABF200F69544 /* BlogReaderApp.xcdatamodeld in Sources */,
+				7B74B9B81CF8148D00F69544 /* THEntryCell.m in Sources */,
 				7B74B9771CF7ABF200F69544 /* main.m in Sources */,
 				7B74B9AF1CF7D97500F69544 /* THEntrylistViewController.m in Sources */,
+				7B74B9B41CF80FAF00F69544 /* THNavigationController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -467,6 +487,7 @@
 				7B74B9991CF7ABF200F69544 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		7B74B99A1CF7ABF200F69544 /* Build configuration list for PBXNativeTarget "BlogReaderAppTests" */ = {
 			isa = XCConfigurationList;
@@ -475,6 +496,7 @@
 				7B74B99C1CF7ABF200F69544 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

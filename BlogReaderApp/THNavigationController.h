@@ -1,5 +1,5 @@
 //
-//  THNewEntryViewcontroller.h
+//  THNavigationController.h
 //  BlogReaderApp
 //
 //  Created by James Rochabrun on 26-05-16.
@@ -8,10 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@class THDiaryEntry;
-
-@interface THEntryViewcontroller : UIViewController
-
-@property (nonatomic, strong) THDiaryEntry *entry;
+@interface THNavigationController : UINavigationController
 
 @end

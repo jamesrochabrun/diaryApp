@@ -20,6 +20,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    if (self.entry != nil) {
+        self.textField.text = self.entry.body;
+    }
 }
 
 - (IBAction)cancelWasPressed:(UIBarButtonItem *)sender {
@@ -27,7 +30,13 @@
 }
 
 - (IBAction)doneWasPressed:(id)sender {
-    [self insertDiaryEntry];
+    
+    if (self.entry != nil) {
+        [self updateDiaryEntry];
+    }else {
+        [self insertDiaryEntry];
+    }
+    
     [self dismissSelf];
 }
 
@@ -44,7 +53,13 @@
     entry.body = self.textField.text;
     entry.date = [[NSDate date] timeIntervalSince1970];
     [coreDataStack saveContext];
+}
+
+- (void)updateDiaryEntry {
     
+    self.entry.body = self.textField.text;
+    THCoreDataStack *coreDataStack = [THCoreDataStack defaultStack];
+    [coreDataStack saveContext];
 }
     
 

@@ -9,6 +9,9 @@
 #import "THEntrylistViewController.h"
 #import "THCoreDataStack.h"
 #import "THDiaryEntry.h"
+#import "THEntryViewcontroller.h"
+#import "THEntryCell.h"
+
 
 @interface THEntrylistViewController ()<NSFetchedResultsControllerDelegate>
 @property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
@@ -21,6 +24,7 @@
     [super viewDidLoad];
     //this performs the fetch request
     [self.fetchedResultsController performFetch:nil];
+    self.title = @"Diary";
     NSLog(@"%lu mm", self.fetchedResultsController.sections.count);
 
 }
@@ -111,9 +115,10 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+    THEntryCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
     THDiaryEntry *entry = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    cell.textLabel.text = entry.body;
+    [cell configureCellForEntry:entry];
+    
     return cell;
 }
 
@@ -130,6 +135,25 @@
     [coreDataStack saveContext];
 }
 
+//preparing for segue
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    
+    if ([segue.identifier isEqual :@"edit"]) {
+        UITableViewCell *cell = sender;
+        NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+        UINavigationController *navigationController = segue.destinationViewController;
+        THEntryViewcontroller *entryViewController = (THEntryViewcontroller*)navigationController.topViewController;
+        entryViewController.entry = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    }
+}
+
+//appereance of the cell
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    THDiaryEntry *entry = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    return [THEntryCell heightForEntry: entry];
+
+}
 
 
 
