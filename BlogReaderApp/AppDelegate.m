@@ -17,7 +17,16 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    [self setupAppereance];
     return YES;
+}
+
+- (void)setupAppereance {
+    UINavigationBar *navigationBarAppereance = [UINavigationBar appearance];
+    navigationBarAppereance.barTintColor = [UIColor colorWithRed:77.0/255.0 green:164.0/255.0 blue:191.0/255.0 alpha:1.0f];
+    navigationBarAppereance.tintColor = [UIColor whiteColor];
+    navigationBarAppereance.titleTextAttributes = @{NSForegroundColorAttributeName:[UIColor whiteColor]};
+    
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
