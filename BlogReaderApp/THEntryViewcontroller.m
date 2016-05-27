@@ -9,8 +9,9 @@
 #import "THEntryViewcontroller.h"
 #import "THCoreDataStack.h"
 #import "THDiaryEntry.h"
+#import <CoreLocation/CoreLocation.h>
 
-@interface THEntryViewcontroller ()<UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+@interface THEntryViewcontroller ()<UIImagePickerControllerDelegate, UINavigationControllerDelegate, CLLocationManagerDelegate>
 @property (weak, nonatomic) IBOutlet UITextView *textView;
 
 @property (nonatomic, assign) enum  DiaryEntryMood pickedMood;
@@ -21,6 +22,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
 @property (weak, nonatomic) IBOutlet UIButton *imageButton;
 @property (nonatomic,strong) UIImage *pickedImage;
+@property (nonatomic,strong) CLLocationManager *locationManager;
+@property (nonatomic,strong) NSString *location;
 
 @end
 
@@ -29,6 +32,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     //if theres not an entry create it with the textfield
+    
+    if ([self.locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
+        [self.locationManager requestWhenInUseAuthorization];
+    }
     NSDate *date;
     if (self.entry != nil) {
         self.textView.text = self.entry.body;
@@ -37,6 +44,7 @@
     } else {
         self.pickedMood = DiaryEntryMoodGood;
         date = [NSDate date];
+        [self loadLocation];
     }
     
     if (self.entry.image != nil) {
@@ -52,12 +60,29 @@
     self.imageButton.layer.cornerRadius = CGRectGetWidth(self.imageButton.frame) / 2.0f;
 }
 
+- (void)loadLocation {
+    
+    self.locationManager = [CLLocationManager new];
+    self.locationManager.delegate = self;
+    self.locationManager.desiredAccuracy = 1000;
+    [self.locationManager startUpdatingLocation];
+}
 
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations {
+    
+    [self.locationManager stopUpdatingLocation];
+    CLLocation *location = [locations firstObject];
+    CLGeocoder *geocoer = [[CLGeocoder alloc]init];
+    [geocoer reverseGeocodeLocation:location completionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks, NSError * _Nullable error) {
+        CLPlacemark *placeMark = [placemarks firstObject];
+        self.location = placeMark.name;
+    }];
+}
+
+//this puts the | in the textview
 - (void)viewWillAppear:(BOOL)animated {
     [self.textView becomeFirstResponder];
 }
-
-
 
 - (IBAction)cancelWasPressed:(UIBarButtonItem *)sender {
     [self dismissSelf];
@@ -88,6 +113,7 @@
     entry.date = [[NSDate date] timeIntervalSince1970];
     entry.mood = self.pickedMood;
     entry.image = UIImageJPEGRepresentation(self.pickedImage, 0.75);
+    entry.location = self.location;
 
     [coreDataStack saveContext];
 }
