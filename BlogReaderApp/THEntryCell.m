@@ -28,7 +28,7 @@
     self.bodyLabel.text = entry.body;
     self.locationLabel.text = entry.location;
     NSDateFormatter *dateFormatter = [NSDateFormatter new];
-    [dateFormatter setDateFormat:@"EEEE, MMMMM d yyyy"];
+    [dateFormatter setDateFormat:@"EEEE, MMMM d yyyy"];
     NSDate *date = [NSDate dateWithTimeIntervalSince1970:entry.date];
     self.dateLabel.text = [dateFormatter stringFromDate:date];
     
@@ -40,12 +40,18 @@
     
     if(entry.mood == DiaryEntryMoodGood) {
         self.moodImageView.image = [UIImage imageNamed:@"icn_happy"];
-    } else if (entry.mood == DiaryEntryMoodBad) {
+    } else if (entry.mood == DiaryEntryMoodAverage) {
         self.moodImageView.image = [UIImage imageNamed:@"icn_average"];
     } else if (entry.mood == DiaryEntryMoodBad) {
         self.moodImageView.image = [UIImage imageNamed:@"icn_bad"];
     }
 }
+
+
+
+
+
+
 
 - (void)awakeFromNib {
     [super awakeFromNib];

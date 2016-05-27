@@ -13,12 +13,23 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-typedef enum {
-    DiaryEntryMoodGood = 0,
-    DiaryEntryMoodAverage = 1,
-    DiaryEntryMoodBad = 2
-} DiaryEntryMood;
+//typedef enum {
+//    DiaryEntryMoodGood = 0,
+//    DiaryEntryMoodAverage = 1,
+//    DiaryEntryMoodBad = 2
+//} DiaryEntryMood;
 
+//NS_ENUM(int16_t,  DiaryEntryMood) {
+//    DiaryEntryMoodGood = 0,
+//    DiaryEntryMoodAverage = 1,
+//    DiaryEntryMoodBad = 2
+//};
+
+typedef NS_ENUM(NSInteger, DiaryEntryMood) {
+        DiaryEntryMoodGood = 0,
+        DiaryEntryMoodAverage = 1,
+        DiaryEntryMoodBad = 2
+};
 
 @interface THDiaryEntry (CoreDataProperties)
 
