@@ -22,6 +22,7 @@
 		7B74B9AF1CF7D97500F69544 /* THEntrylistViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B74B9AE1CF7D97500F69544 /* THEntrylistViewController.m */; };
 		7B74B9B41CF80FAF00F69544 /* THNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B74B9B31CF80FAF00F69544 /* THNavigationController.m */; };
 		7B74B9B81CF8148D00F69544 /* THEntryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B74B9B71CF8148D00F69544 /* THEntryCell.m */; };
+		7BCF0D571CF8D4EC003E4CB1 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BCF0D561CF8D4EC003E4CB1 /* QuartzCore.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +63,7 @@
 		7B74B9B31CF80FAF00F69544 /* THNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = THNavigationController.m; path = BlogReaderApp/THNavigationController.m; sourceTree = "<group>"; };
 		7B74B9B61CF8148D00F69544 /* THEntryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = THEntryCell.h; path = BlogReaderApp/THEntryCell.h; sourceTree = "<group>"; };
 		7B74B9B71CF8148D00F69544 /* THEntryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = THEntryCell.m; path = BlogReaderApp/THEntryCell.m; sourceTree = "<group>"; };
+		7BCF0D561CF8D4EC003E4CB1 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +71,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7BCF0D571CF8D4EC003E4CB1 /* QuartzCore.framework in Frameworks */,
 				7B74B99E1CF7B1F300F69544 /* CoreData.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -86,6 +89,7 @@
 		7B74B9691CF7ABF200F69544 = {
 			isa = PBXGroup;
 			children = (
+				7BCF0D561CF8D4EC003E4CB1 /* QuartzCore.framework */,
 				7B74B9A81CF7B73D00F69544 /* model */,
 				7B74B9B51CF80FBF00F69544 /* view */,
 				7B74B9A91CF7B75500F69544 /* controller */,

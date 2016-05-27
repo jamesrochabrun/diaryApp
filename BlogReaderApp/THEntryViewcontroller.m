@@ -49,6 +49,7 @@
     self.dateLabel.text = [dateFormatter stringFromDate:date];
     
     self.textView.inputAccessoryView = self.accesoryView;
+    self.imageButton.layer.cornerRadius = CGRectGetWidth(self.imageButton.frame) / 2.0f;
 }
 
 
@@ -209,9 +210,7 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
-    [self dismissViewControllerAnimated:YES completion:nil];
-}
+
 
 
 
