@@ -10,14 +10,17 @@
 #import "THCoreDataStack.h"
 #import "THDiaryEntry.h"
 
-@interface THEntryViewcontroller ()
-@property (weak, nonatomic) IBOutlet UITextField *textField;
+@interface THEntryViewcontroller ()<UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+@property (weak, nonatomic) IBOutlet UITextView *textView;
+
 @property (nonatomic, assign) enum  DiaryEntryMood pickedMood;
 @property (weak, nonatomic) IBOutlet UIButton *badButton;
 @property (weak, nonatomic) IBOutlet UIButton *averageButton;
 @property (weak, nonatomic) IBOutlet UIButton *goodButton;
 @property (strong, nonatomic) IBOutlet UIView *accesoryView;
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
+@property (weak, nonatomic) IBOutlet UIButton *imageButton;
+@property (nonatomic,strong) UIImage *pickedImage;
 
 @end
 
@@ -28,7 +31,7 @@
     //if theres not an entry create it with the textfield
     NSDate *date;
     if (self.entry != nil) {
-        self.textField.text = self.entry.body;
+        self.textView.text = self.entry.body;
         self.pickedMood = self.entry.mood;
         date = [NSDate dateWithTimeIntervalSince1970:self.entry.date];
     } else {
@@ -36,11 +39,21 @@
         date = [NSDate date];
     }
     
+    if (self.entry.image != nil) {
+        UIImage *image = [UIImage imageWithData:self.entry.image];
+        [self.imageButton setImage:image forState:UIControlStateNormal];
+    }
+    
     NSDateFormatter *dateFormatter = [NSDateFormatter new];
     [dateFormatter setDateFormat:@"EEEE MMMM d, YYYY"];
     self.dateLabel.text = [dateFormatter stringFromDate:date];
     
-    self.textField.inputAccessoryView = self.accesoryView;
+    self.textView.inputAccessoryView = self.accesoryView;
+}
+
+
+- (void)viewWillAppear:(BOOL)animated {
+    [self.textView becomeFirstResponder];
 }
 
 
@@ -70,17 +83,21 @@
     THCoreDataStack *coreDataStack = [THCoreDataStack defaultStack];
     THDiaryEntry *entry = [NSEntityDescription insertNewObjectForEntityForName:@"THDiaryEntry" inManagedObjectContext:coreDataStack.managedObjectContext];
     
-    entry.body = self.textField.text;
+    entry.body = self.textView.text;
     entry.date = [[NSDate date] timeIntervalSince1970];
     entry.mood = self.pickedMood;
+    entry.image = UIImageJPEGRepresentation(self.pickedImage, 0.75);
 
     [coreDataStack saveContext];
 }
 
 - (void)updateDiaryEntry {
     
-    self.entry.body = self.textField.text;
-    self.entry.mood = self.pickedMood; //Add this line
+    self.entry.body = self.textView.text;
+    self.entry.mood = self.pickedMood;
+    if (self.pickedImage != nil) {
+        self.entry.image = UIImageJPEGRepresentation(self.pickedImage, 0.75);
+    }
     THCoreDataStack *coreDataStack = [THCoreDataStack defaultStack];
     [coreDataStack saveContext];
 }
@@ -118,6 +135,91 @@
             break;
     }
 }
+
+- (IBAction)imageButtonWasPressed:(id)sender {
+    
+    if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+        [self promptForSource];
+    } else{
+        [self promptForPhotoRoll];
+    }
+}
+
+#pragma camera actions
+
+- (void)promptForSource {
+    
+    dispatch_async(dispatch_get_main_queue(), ^(void){
+        
+        UIAlertController *modalAlert = [UIAlertController alertControllerWithTitle: @"Image Source"
+                                                                            message: nil
+                                                                     preferredStyle:UIAlertControllerStyleActionSheet];
+        UIAlertAction *camera = [UIAlertAction actionWithTitle:@"Camera"
+                                                         style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+                                                             [self promptForCamera];
+                                                         }];
+        UIAlertAction *photoRoll = [UIAlertAction actionWithTitle:@"Photo Roll"
+                                                            style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+                                                                [self promptForPhotoRoll];
+                                                            }];
+        UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"Cancel"
+                                                         style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+                                                             [self dismissViewControllerAnimated:YES completion:nil];
+                                                             NSLog(@"photo dont saved");
+                                                         }];
+        [modalAlert addAction:camera];
+        [modalAlert addAction:photoRoll];
+        [modalAlert addAction:cancel];
+        
+        [self presentViewController:modalAlert animated:YES completion:nil];
+        
+    });
+}
+
+- (void)promptForCamera {
+    UIImagePickerController *controller = [UIImagePickerController new];
+    controller.sourceType = UIImagePickerControllerSourceTypeCamera;
+    controller.delegate = self;
+    [self presentViewController:controller animated:YES completion:nil];
+}
+
+- (void)promptForPhotoRoll {
+    UIImagePickerController *controller = [UIImagePickerController new];
+    controller.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    controller.delegate = self;
+    [self presentViewController:controller animated:YES completion:nil];
+}
+
+//overwriting the setter for pickedImage
+- (void)setPickedImage:(UIImage *)pickedImage {
+    _pickedImage = pickedImage;
+    
+    if (pickedImage == nil) {
+        [self.imageButton setImage:[UIImage imageNamed:@"icn_noimage"] forState:UIControlStateNormal];
+    } else {
+        [self.imageButton setImage:pickedImage forState:UIControlStateNormal];
+    }
+    
+}
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
+    
+    UIImage *image = info[UIImagePickerControllerOriginalImage];
+    self.pickedImage = image;
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+
+
+
+
+
+
+
 
 
 
