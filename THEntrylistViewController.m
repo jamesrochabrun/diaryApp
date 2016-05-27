@@ -101,9 +101,11 @@
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    
+
+    //this returns a object, this is part of the nsfetchresultcontrollerdelegate
     id <NSFetchedResultsSectionInfo> sectionInfo = [[self.fetchedResultsController sections] objectAtIndex:section];
     NSString *sectionName = [sectionInfo name];
+    //this is setted in the "THDiaryEntry+CoreDataProperties.h" file, here we can use other info like location etc
     return sectionName;
 }
 
@@ -147,13 +149,6 @@
     }
 }
 
-//appereance of the cell
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    THDiaryEntry *entry = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    return [THEntryCell heightForEntry: entry];
-
-}
 
 
 

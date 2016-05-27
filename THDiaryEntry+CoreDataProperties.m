@@ -23,7 +23,7 @@
 //this returns a string for the property sectionName
 - (NSString *)sectionName {
     
-    NSDate *date  = [NSDate dateWithTimeIntervalSinceNow:self.date];
+    NSDate *date  = [NSDate dateWithTimeIntervalSince1970:self.date];
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
     [dateFormatter setDateFormat:@"MMM yyy"];
     NSString *stringDate  = [dateFormatter stringFromDate:date];

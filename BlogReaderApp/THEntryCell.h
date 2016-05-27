@@ -19,7 +19,7 @@
 
 
 //class method
-+ (CGFloat)heightForEntry:(THDiaryEntry *)entry;
+//+ (CGFloat)heightForEntry:(THDiaryEntry *)entry;
 - (void)configureCellForEntry:(THDiaryEntry*)entry;
 
 @end

@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>&quot;Make it more memorable and allow to add your location&quot;</string>
+	<string></string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>&quot;Make it more memorable and allow to add your location&quot;</string>
+	<string></string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleExecutable</key>
