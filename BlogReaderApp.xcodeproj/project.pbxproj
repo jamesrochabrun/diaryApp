@@ -37,6 +37,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7B24DAFD1CF962A4001435E7 /* billabong.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = billabong.ttf; path = ../billabong.ttf; sourceTree = "<group>"; };
+		7B24DAFE1CF962A4001435E7 /* Gotham Narrow Book.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Gotham Narrow Book.otf"; path = "../Gotham Narrow Book.otf"; sourceTree = "<group>"; };
+		7B24DAFF1CF962A4001435E7 /* GOTHAM-MEDIUM.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; name = "GOTHAM-MEDIUM.TTF"; path = "../GOTHAM-MEDIUM.TTF"; sourceTree = "<group>"; };
 		7B74B9721CF7ABF200F69544 /* BlogReaderApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BlogReaderApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7B74B9761CF7ABF200F69544 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		7B74B9781CF7ABF200F69544 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -89,6 +92,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7B24DB001CF962AF001435E7 /* fonts */ = {
+			isa = PBXGroup;
+			children = (
+				7B24DAFE1CF962A4001435E7 /* Gotham Narrow Book.otf */,
+				7B24DAFF1CF962A4001435E7 /* GOTHAM-MEDIUM.TTF */,
+				7B24DAFD1CF962A4001435E7 /* billabong.ttf */,
+			);
+			name = fonts;
+			sourceTree = "<group>";
+		};
 		7B74B9691CF7ABF200F69544 = {
 			isa = PBXGroup;
 			children = (
@@ -116,8 +129,9 @@
 		7B74B9741CF7ABF200F69544 /* BlogReaderApp */ = {
 			isa = PBXGroup;
 			children = (
-				7B74B9781CF7ABF200F69544 /* AppDelegate.h */,
+				7B24DB001CF962AF001435E7 /* fonts */,
 				7B74B9791CF7ABF200F69544 /* AppDelegate.m */,
+				7B74B9781CF7ABF200F69544 /* AppDelegate.h */,
 				7B74B97E1CF7ABF200F69544 /* Main.storyboard */,
 				7B74B9841CF7ABF200F69544 /* Assets.xcassets */,
 				7B74B9861CF7ABF200F69544 /* LaunchScreen.storyboard */,

@@ -88,6 +88,8 @@
 
 - (IBAction)cancelWasPressed:(UIBarButtonItem *)sender {
     [self dismissSelf];
+    [self.view endEditing:YES];
+
 }
 
 - (IBAction)doneWasPressed:(id)sender {
@@ -97,8 +99,8 @@
     }else {
         [self insertDiaryEntry];
     }
-    
     [self dismissSelf];
+    [self.view endEditing:YES];
 }
 
 - (void)dismissSelf {
@@ -165,6 +167,8 @@
     }
 }
 
+#pragma camera actions
+
 - (IBAction)imageButtonWasPressed:(id)sender {
     
     if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
@@ -174,7 +178,6 @@
     }
 }
 
-#pragma camera actions
 
 - (void)promptForSource {
     
@@ -193,8 +196,6 @@
                                                             }];
         UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"Cancel"
                                                          style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
-                                                             [self dismissViewControllerAnimated:YES completion:nil];
-                                                             NSLog(@"photo dont saved");
                                                          }];
         [modalAlert addAction:camera];
         [modalAlert addAction:photoRoll];
@@ -244,10 +245,8 @@
     double ratio;
     double delta;
     CGPoint offset;
-    
     //make a new square size, that is the resized imaged width
     CGSize sz = CGSizeMake(newSize.width, newSize.width);
-    
     //figure out if the picture is landscape or portrait, then
     //calculate scale factor and offset
     if (image.size.width > image.size.height) {
@@ -259,12 +258,10 @@
         delta = (ratio*image.size.height - ratio*image.size.width);
         offset = CGPointMake(0, delta/2);
     }
-    
     //make the final clipping rect based on the calculated values
     CGRect clipRect = CGRectMake(-offset.x, -offset.y,
                                  (ratio * image.size.width) + delta,
                                  (ratio * image.size.height) + delta);
-    
     
     //start a new context, with scale factor 0.0 so retina displays get
     //high quality image

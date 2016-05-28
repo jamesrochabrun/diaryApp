@@ -100,13 +100,28 @@
     return  self.fetchedResultsController.sections.count;
 }
 
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
 
-    //this returns a object, this is part of the nsfetchresultcontrollerdelegate
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, 18)];
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 12, tableView.frame.size.width, 32)];
+    [label setFont:[UIFont fontWithName:@"GothamMedium" size:15]];
+    [label setTextAlignment:NSTextAlignmentCenter];
+    [label setTextColor:[UIColor whiteColor]];
+    //NSFETCHRESULTCONTROLLE
     id <NSFetchedResultsSectionInfo> sectionInfo = [[self.fetchedResultsController sections] objectAtIndex:section];
+    //this is setted in THDiaryEntry+CoreDataProperties.m
     NSString *sectionName = [sectionInfo name];
-    //this is setted in the "THDiaryEntry+CoreDataProperties.h" file, here we can use other info like location etc
-    return sectionName;
+    ///////////////////////////////////////////
+    [label setText:sectionName];
+    [view addSubview:label];
+    [view setBackgroundColor:[UIColor colorWithRed:0.455 green:1.000 blue:0.761 alpha:1.000]]; //your background
+    return view;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 50;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
