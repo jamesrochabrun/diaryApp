@@ -112,7 +112,7 @@
     ///////////////////////////////////////////
     [label setText:sectionName];
     [view addSubview:label];
-    [view setBackgroundColor:[UIColor colorWithRed:0.176 green:0.184 blue:0.200 alpha:0.5]]; //your background
+    [view setBackgroundColor:[UIColor colorWithRed:0.976 green:0.655 blue:0.600 alpha:0.7]]; //your background
     return view;
 }
 

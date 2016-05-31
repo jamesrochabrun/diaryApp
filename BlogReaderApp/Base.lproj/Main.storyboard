@@ -141,18 +141,24 @@
                                 </constraints>
                                 <state key="normal" image="icn_noimage"/>
                                 <connections>
-                                    <action selector="imageButtonWasPressed:" destination="Kn8-zt-PB9" eventType="touchUpInside" id="NbY-e4-5p8"/>
+                                    <segue destination="2Yk-SI-ikQ" kind="modal" identifier="showImage" id="oD1-yX-6CU"/>
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Xrd-3x-LC1">
                                 <rect key="frame" x="49" y="118" width="25" height="25"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9UE-Ly-6OX">
-                                <rect key="frame" x="21" y="158" width="46" height="30"/>
-                                <state key="normal" title="Button"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9UE-Ly-6OX">
+                                <rect key="frame" x="66" y="269" width="200" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="5LJ-uC-JXx"/>
+                                    <constraint firstAttribute="width" constant="200" id="YGZ-t8-OmR"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <state key="normal" title="choose Image">
+                                    <color key="titleColor" red="0.4549019608" green="1" blue="0.76078431369999999" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
                                 <connections>
-                                    <action selector="performSegueWithbutton:" destination="Kn8-zt-PB9" eventType="touchUpInside" id="gLR-4M-v07"/>
-                                    <segue destination="2Yk-SI-ikQ" kind="modal" identifier="showImage" id="3lp-Hq-EHz"/>
+                                    <action selector="changeImageButtonPressed:" destination="Kn8-zt-PB9" eventType="touchUpInside" id="ScA-kt-jnc"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -168,6 +174,8 @@
                             <constraint firstItem="MbW-6d-CS0" firstAttribute="top" secondItem="EYv-jA-1ys" secondAttribute="bottom" constant="13" id="e5Z-Fb-aP9"/>
                             <constraint firstItem="Xrd-3x-LC1" firstAttribute="top" secondItem="Vvu-Hu-2P2" secondAttribute="bottom" constant="-25" id="pcv-i4-fcP"/>
                             <constraint firstItem="MbW-6d-CS0" firstAttribute="leading" secondItem="Vvu-Hu-2P2" secondAttribute="trailing" constant="27" id="q74-iV-QIp"/>
+                            <constraint firstItem="9UE-Ly-6OX" firstAttribute="centerX" secondItem="quz-N3-3Nx" secondAttribute="centerX" constant="6" id="qlP-qJ-fur"/>
+                            <constraint firstItem="9UE-Ly-6OX" firstAttribute="centerY" secondItem="quz-N3-3Nx" secondAttribute="centerY" constant="5" id="yNb-4c-PNp"/>
                             <constraint firstItem="Xrd-3x-LC1" firstAttribute="bottom" secondItem="Vvu-Hu-2P2" secondAttribute="bottom" id="zJe-Cw-NJZ"/>
                         </constraints>
                     </view>
@@ -187,6 +195,7 @@
                         <outlet property="accesoryView" destination="39H-pC-2aB" id="jZ5-fn-qNt"/>
                         <outlet property="averageButton" destination="4MH-4c-kIL" id="WMb-xE-Hg9"/>
                         <outlet property="badButton" destination="te7-Iu-aV0" id="dTx-F5-gLl"/>
+                        <outlet property="changeImageButton" destination="9UE-Ly-6OX" id="itf-YF-Sdb"/>
                         <outlet property="dateLabel" destination="EYv-jA-1ys" id="hpU-Dd-eLs"/>
                         <outlet property="goodButton" destination="FnN-NI-oE0" id="ckY-Nw-qx9"/>
                         <outlet property="imageButton" destination="Vvu-Hu-2P2" id="eWk-DS-nT9"/>
@@ -264,17 +273,28 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="LcV-iy-AWd">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                             </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No picture available to show" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="thI-dr-EM8">
+                                <rect key="frame" x="33" y="275" width="255" height="18"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="255" id="VMW-93-9b2"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" red="0.1764705882" green="0.1843137255" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="LcV-iy-AWd" firstAttribute="top" secondItem="XGU-cr-ngq" secondAttribute="top" id="Jwp-SQ-dnH"/>
                             <constraint firstAttribute="trailing" secondItem="LcV-iy-AWd" secondAttribute="trailing" id="KNR-Ld-wO2"/>
+                            <constraint firstItem="thI-dr-EM8" firstAttribute="centerY" secondItem="XGU-cr-ngq" secondAttribute="centerY" id="LU8-NE-XE0"/>
+                            <constraint firstItem="thI-dr-EM8" firstAttribute="centerX" secondItem="XGU-cr-ngq" secondAttribute="centerX" id="Rqr-DH-YpR"/>
                             <constraint firstItem="LcV-iy-AWd" firstAttribute="leading" secondItem="XGU-cr-ngq" secondAttribute="leading" id="Vcr-02-u8v"/>
                             <constraint firstItem="0TB-OS-0DF" firstAttribute="top" secondItem="LcV-iy-AWd" secondAttribute="bottom" id="uL8-au-UyW"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="GMY-dH-wqM">
-                        <barButtonItem key="rightBarButtonItem" title="DISMISS" id="AgZ-83-KPh">
+                        <barButtonItem key="rightBarButtonItem" title="Dismiss" id="AgZ-83-KPh">
                             <connections>
                                 <action selector="dismissViewcontroller:" destination="W6m-TC-84v" id="i2q-8f-xK4"/>
                             </connections>
@@ -282,6 +302,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="imageView" destination="LcV-iy-AWd" id="gbJ-22-LdA"/>
+                        <outlet property="messageLabel" destination="thI-dr-EM8" id="pAf-vk-9mK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WU7-d2-MFv" userLabel="First Responder" sceneMemberID="firstResponder"/>

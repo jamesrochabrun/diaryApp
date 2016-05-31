@@ -12,6 +12,7 @@
 #import <CoreLocation/CoreLocation.h>
 #import "ImageViewController.h"
 
+
 @interface THEntryViewcontroller ()<UIImagePickerControllerDelegate, UINavigationControllerDelegate, CLLocationManagerDelegate>
 @property (weak, nonatomic) IBOutlet UITextView *textView;
 
@@ -26,6 +27,7 @@
 @property (nonatomic,strong) CLLocationManager *locationManager;
 @property (nonatomic,strong) NSString *location;
 @property (weak, nonatomic) IBOutlet UIImageView *moodEntryImage;
+@property (weak, nonatomic) IBOutlet UIButton *changeImageButton;
 
 @end
 
@@ -69,8 +71,14 @@
     //this line performs theapperabce of the mood buttons view in th keyboard;
     //also drag the view outside the hierarchy of the storyboard
     self.textView.inputAccessoryView = self.accesoryView;
-    
+    //appereance
     self.imageButton.layer.cornerRadius = CGRectGetWidth(self.imageButton.frame) / 2.0f;
+    self.imageButton.titleLabel.font = [UIFont fontWithName:@"GOTHAM Narrow" size:13];
+    [[self.imageButton layer] setBorderWidth:2.0f];
+    [[self.imageButton layer] setBorderColor:[UIColor colorWithRed:0.455 green:1.000 blue:0.761 alpha:1.000].CGColor];
+    [[self.changeImageButton layer] setBorderWidth:2.5f];
+    [[self.changeImageButton layer] setBorderColor:[UIColor colorWithRed:0.455 green:1.000 blue:0.761 alpha:1.000].CGColor];
+    self.dateLabel.font = [UIFont fontWithName:@"GOTHAM Narrow" size:15];
 }
 
 - (void)loadLocation {
@@ -187,14 +195,16 @@
 #pragma camera actions
 
 - (IBAction)imageButtonWasPressed:(id)sender {
-    
+    //this shows the image viewwhen the small image is tapped, presenting the next Viewcontroller
+}
+
+- (IBAction)changeImageButtonPressed:(UIButton *)sender {
     if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
         [self promptForSource];
     } else{
         [self promptForPhotoRoll];
     }
 }
-
 
 - (void)promptForSource {
     
@@ -299,20 +309,11 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
     if ([segue.identifier isEqual :@"showImage"]) {
-   
         UINavigationController *navigationController = segue.destinationViewController;
-       ImageViewController *controller = (ImageViewController*)navigationController.topViewController;
-        
+        ImageViewController *controller = (ImageViewController*)navigationController.topViewController;
         controller.pickedImage = self.entry.image;
-        NSLog(@"this was pushed");
-
     }
 }
-
-
-- (IBAction)performSegueWithbutton:(UIButton *)sender {
-}
-
 
 
 

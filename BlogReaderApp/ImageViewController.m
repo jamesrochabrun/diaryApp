@@ -9,6 +9,7 @@
 #import "ImageViewController.h"
 
 @interface ImageViewController ()
+@property (weak, nonatomic) IBOutlet UILabel *messageLabel;
 
 @end
 
@@ -17,10 +18,21 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.imageView.image = [UIImage imageWithData: self.pickedImage];
+    self.messageLabel.font = [UIFont fontWithName:@"GOTHAM Narrow" size:20];
+    [self showOrHideLabel];
 }
 
 - (IBAction)dismissViewcontroller:(UIBarButtonItem *)sender {
     [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)showOrHideLabel {
+    
+    if (self.pickedImage == nil) {
+        self.messageLabel.hidden = NO;
+    } else {
+        self.messageLabel.hidden = YES;
+    }
 }
 
 
