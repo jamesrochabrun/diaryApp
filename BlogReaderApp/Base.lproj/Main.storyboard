@@ -261,7 +261,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="LcV-iy-AWd">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="LcV-iy-AWd">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                             </imageView>
                         </subviews>
@@ -273,7 +273,13 @@
                             <constraint firstItem="0TB-OS-0DF" firstAttribute="top" secondItem="LcV-iy-AWd" secondAttribute="bottom" id="uL8-au-UyW"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="GMY-dH-wqM"/>
+                    <navigationItem key="navigationItem" id="GMY-dH-wqM">
+                        <barButtonItem key="rightBarButtonItem" title="DISMISS" id="AgZ-83-KPh">
+                            <connections>
+                                <action selector="dismissViewcontroller:" destination="W6m-TC-84v" id="i2q-8f-xK4"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="imageView" destination="LcV-iy-AWd" id="gbJ-22-LdA"/>
                     </connections>

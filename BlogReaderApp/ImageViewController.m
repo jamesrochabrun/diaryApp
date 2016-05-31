@@ -17,11 +17,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.imageView.image = [UIImage imageWithData: self.pickedImage];
-    
 }
 
-
-
+- (IBAction)dismissViewcontroller:(UIBarButtonItem *)sender {
+    [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+}
 
 
 @end
