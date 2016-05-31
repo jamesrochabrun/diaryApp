@@ -89,10 +89,7 @@
         default:
             break;
     }
-    
 }
-
-
 
 #pragma tableView methods
 
@@ -115,7 +112,7 @@
     ///////////////////////////////////////////
     [label setText:sectionName];
     [view addSubview:label];
-    [view setBackgroundColor:[UIColor colorWithRed:0.455 green:1.000 blue:0.761 alpha:1.000]]; //your background
+    [view setBackgroundColor:[UIColor colorWithRed:0.176 green:0.184 blue:0.200 alpha:0.5]]; //your background
     return view;
 }
 

@@ -13,7 +13,17 @@
 
 @implementation THEntryCell
 
+- (void)awakeFromNib {
+    [super awakeFromNib];
+    
+    NSArray *labels = @[self.bodyLabel , self.locationLabel , self.dateLabel ];
+    for (UILabel *label in labels) {
+        label.font = [UIFont fontWithName:@"GOTHAM Narrow" size:15];
+    }
+}
+
 - (void)configureCellForEntry:(THDiaryEntry*)entry {
+    
     self.bodyLabel.numberOfLines = 0;
     [self.bodyLabel sizeToFit];
     self.bodyLabel.text = entry.body;
@@ -47,10 +57,7 @@
 }
 
 
-- (void)awakeFromNib {
-    [super awakeFromNib];
-    // Initialization code
-}
+
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];

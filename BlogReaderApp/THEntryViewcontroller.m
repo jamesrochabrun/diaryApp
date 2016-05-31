@@ -24,6 +24,7 @@
 @property (nonatomic,strong) UIImage *pickedImage;
 @property (nonatomic,strong) CLLocationManager *locationManager;
 @property (nonatomic,strong) NSString *location;
+@property (weak, nonatomic) IBOutlet UIImageView *moodEntryImage;
 
 @end
 
@@ -40,9 +41,18 @@
         self.textView.text = self.entry.body;
         self.pickedMood = self.entry.mood;
         date = [NSDate dateWithTimeIntervalSince1970:self.entry.date];
+        if(self.entry.mood == DiaryEntryMoodGood) {
+            self.moodEntryImage.image = [UIImage imageNamed:@"icn_happy"];
+        } else if (self.entry.mood == DiaryEntryMoodAverage) {
+            self.moodEntryImage.image = [UIImage imageNamed:@"icn_average"];
+        } else if (self.entry.mood == DiaryEntryMoodBad) {
+            self.moodEntryImage.image = [UIImage imageNamed:@"icn_bad"];
+        }
     } else {
         self.pickedMood = DiaryEntryMoodGood;
+        self.moodEntryImage.image = [UIImage imageNamed:@"icn_happy"];
         date = [NSDate date];
+        //we only want to load location for a new entry
         [self loadLocation];
     }
     
@@ -56,7 +66,7 @@
     self.dateLabel.text = [dateFormatter stringFromDate:date];
     
     //this line performs theapperabce of the mood buttons view in th keyboard;
-    //also drag the view outside the hierarchy oif the storyboard
+    //also drag the view outside the hierarchy of the storyboard
     self.textView.inputAccessoryView = self.accesoryView;
     
     self.imageButton.layer.cornerRadius = CGRectGetWidth(self.imageButton.frame) / 2.0f;
@@ -109,17 +119,20 @@
 
 
 - (void)insertDiaryEntry {
-    //creating a new coreDataStack entity (singleton)
-    THCoreDataStack *coreDataStack = [THCoreDataStack defaultStack];
-    THDiaryEntry *entry = [NSEntityDescription insertNewObjectForEntityForName:@"THDiaryEntry" inManagedObjectContext:coreDataStack.managedObjectContext];
     
-    entry.body = self.textView.text;
-    entry.date = [[NSDate date] timeIntervalSince1970];
-    entry.mood = self.pickedMood;
-    entry.image = UIImageJPEGRepresentation(self.pickedImage, 0.75);
-    entry.location = self.location;
-
-    [coreDataStack saveContext];
+    if (self.textView.text.length != 0) {
+        //creating a new coreDataStack entity (singleton)
+        THCoreDataStack *coreDataStack = [THCoreDataStack defaultStack];
+        THDiaryEntry *entry = [NSEntityDescription insertNewObjectForEntityForName:@"THDiaryEntry" inManagedObjectContext:coreDataStack.managedObjectContext];
+        
+        entry.body = self.textView.text;
+        entry.date = [[NSDate date] timeIntervalSince1970];
+        entry.mood = self.pickedMood;
+        entry.image = UIImageJPEGRepresentation(self.pickedImage, 0.75);
+        entry.location = self.location;
+        
+        [coreDataStack saveContext];
+    }
 }
 
 - (void)updateDiaryEntry {
@@ -135,22 +148,25 @@
 
 - (IBAction)badWasPressed:(UIButton *)sender {
     self.pickedMood = DiaryEntryMoodBad;
+    self.moodEntryImage.image = [UIImage imageNamed:@"icn_bad"];
 }
 - (IBAction)averageWasPressed:(UIButton *)sender {
     self.pickedMood = DiaryEntryMoodAverage;
+    self.moodEntryImage.image = [UIImage imageNamed:@"icn_average"];
 }
 
 - (IBAction)goodWasPressed:(UIButton *)sender {
     self.pickedMood = DiaryEntryMoodGood;
+    self.moodEntryImage.image = [UIImage imageNamed:@"icn_happy"];
 }
 
 //creating a setter for pickedMood
 - (void)setPickedMood:(enum DiaryEntryMood)pickedMood {
     _pickedMood = pickedMood;
    
-    self.averageButton.alpha = 0.5f;
-    self.goodButton.alpha = 0.5f;
-    self.badButton.alpha = 0.5f;
+    self.averageButton.alpha = 0.3f;
+    self.goodButton.alpha = 0.3f;
+    self.badButton.alpha = 0.3f;
 
     switch (pickedMood) {
         case DiaryEntryMoodGood:
@@ -229,7 +245,6 @@
     } else {
         [self.imageButton setImage:pickedImage forState:UIControlStateNormal];
     }
-    
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
@@ -277,24 +292,6 @@
     
     return newImage;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

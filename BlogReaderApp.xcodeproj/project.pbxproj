@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7B5045961CF9FB00008A6AB6 /* Gotham Narrow Book.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7B24DAFE1CF962A4001435E7 /* Gotham Narrow Book.otf */; };
+		7B5045971CF9FB00008A6AB6 /* GOTHAM-MEDIUM.TTF in Resources */ = {isa = PBXBuildFile; fileRef = 7B24DAFF1CF962A4001435E7 /* GOTHAM-MEDIUM.TTF */; };
+		7B5045981CF9FB00008A6AB6 /* billabong.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7B24DAFD1CF962A4001435E7 /* billabong.ttf */; };
 		7B74B9771CF7ABF200F69544 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B74B9761CF7ABF200F69544 /* main.m */; };
 		7B74B97A1CF7ABF200F69544 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B74B9791CF7ABF200F69544 /* AppDelegate.m */; };
 		7B74B9801CF7ABF200F69544 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7B74B97E1CF7ABF200F69544 /* Main.storyboard */; };
@@ -291,6 +294,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7B5045961CF9FB00008A6AB6 /* Gotham Narrow Book.otf in Resources */,
+				7B5045971CF9FB00008A6AB6 /* GOTHAM-MEDIUM.TTF in Resources */,
+				7B5045981CF9FB00008A6AB6 /* billabong.ttf in Resources */,
 				7B74B9881CF7ABF200F69544 /* LaunchScreen.storyboard in Resources */,
 				7B74B9851CF7ABF200F69544 /* Assets.xcassets in Resources */,
 				7B74B9801CF7ABF200F69544 /* Main.storyboard in Resources */,
