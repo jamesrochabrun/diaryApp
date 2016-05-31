@@ -10,6 +10,7 @@
 #import "THCoreDataStack.h"
 #import "THDiaryEntry.h"
 #import <CoreLocation/CoreLocation.h>
+#import "ImageViewController.h"
 
 @interface THEntryViewcontroller ()<UIImagePickerControllerDelegate, UINavigationControllerDelegate, CLLocationManagerDelegate>
 @property (weak, nonatomic) IBOutlet UITextView *textView;
@@ -292,6 +293,31 @@
     
     return newImage;
 }
+
+#pragma passing the image
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    
+    if ([segue.identifier isEqual :@"showImage"]) {
+   
+        UINavigationController *navigationController = segue.destinationViewController;
+       ImageViewController *controller = (ImageViewController*)navigationController.topViewController;
+        
+        controller.pickedImage = self.entry.image;
+        NSLog(@"this was pushed");
+
+    }
+}
+
+
+- (IBAction)performSegueWithbutton:(UIButton *)sender {
+}
+
+
+
+
+
+
 
 
 

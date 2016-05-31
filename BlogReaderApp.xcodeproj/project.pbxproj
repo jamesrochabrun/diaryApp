@@ -27,6 +27,7 @@
 		7B74B9B81CF8148D00F69544 /* THEntryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B74B9B71CF8148D00F69544 /* THEntryCell.m */; };
 		7BCF0D571CF8D4EC003E4CB1 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BCF0D561CF8D4EC003E4CB1 /* QuartzCore.framework */; };
 		7BCF0D591CF8D6F2003E4CB1 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BCF0D581CF8D6F2003E4CB1 /* CoreLocation.framework */; };
+		7BF359911CFE14F300ABB239 /* ImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BF359901CFE14F300ABB239 /* ImageViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,6 +73,8 @@
 		7B74B9B71CF8148D00F69544 /* THEntryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = THEntryCell.m; path = BlogReaderApp/THEntryCell.m; sourceTree = "<group>"; };
 		7BCF0D561CF8D4EC003E4CB1 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		7BCF0D581CF8D6F2003E4CB1 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		7BF3598F1CFE14F300ABB239 /* ImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageViewController.h; sourceTree = "<group>"; };
+		7BF359901CFE14F300ABB239 /* ImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -178,6 +181,8 @@
 				7B74B9AE1CF7D97500F69544 /* THEntrylistViewController.m */,
 				7B74B9AA1CF7BC2300F69544 /* THEntryViewcontroller.h */,
 				7B74B9AB1CF7BC2300F69544 /* THEntryViewcontroller.m */,
+				7BF3598F1CFE14F300ABB239 /* ImageViewController.h */,
+				7BF359901CFE14F300ABB239 /* ImageViewController.m */,
 			);
 			name = controller;
 			path = BlogReaderApp;
@@ -321,6 +326,7 @@
 				7B74B9A71CF7B71D00F69544 /* THDiaryEntry.m in Sources */,
 				7B74B9A61CF7B71D00F69544 /* THDiaryEntry+CoreDataProperties.m in Sources */,
 				7B74B9AC1CF7BC2300F69544 /* THEntryViewcontroller.m in Sources */,
+				7BF359911CFE14F300ABB239 /* ImageViewController.m in Sources */,
 				7B74B97A1CF7ABF200F69544 /* AppDelegate.m in Sources */,
 				7B74B9831CF7ABF200F69544 /* BlogReaderApp.xcdatamodeld in Sources */,
 				7B74B9B81CF8148D00F69544 /* THEntryCell.m in Sources */,
