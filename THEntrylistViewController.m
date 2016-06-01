@@ -25,7 +25,7 @@
     //this performs the fetch request
     [self.fetchedResultsController performFetch:nil];
     self.title = @"Diary";
-    NSLog(@"%lu mm", self.fetchedResultsController.sections.count);
+
 
 }
 
@@ -160,6 +160,12 @@
         entryViewController.entry = [self.fetchedResultsController objectAtIndexPath:indexPath];
     }
 }
+
+
+
+
+
+
 
 
 
