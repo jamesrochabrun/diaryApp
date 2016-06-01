@@ -11,6 +11,9 @@
 
 
 @interface AuthenticationViewController ()
+@property (weak, nonatomic) IBOutlet UILabel *touchIDlabel;
+@property (weak, nonatomic) IBOutlet UILabel *introductionLabel;
+
 
 @end
 
@@ -19,6 +22,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.view.backgroundColor = [UIColor colorWithRed:0.455 green:1.000 blue:0.761 alpha:1.000];\
+    self.touchIDlabel.font = [UIFont fontWithName:@"Gotham Narrow" size:15];
+    self.introductionLabel.font = [UIFont fontWithName:@"billabong" size:30];
 }
 
 #pragma localAutentication Touch Id
@@ -29,7 +35,7 @@
     
     NSError *error = nil;
     
-    NSString *myLocalizedReasonString = @"Used for quick and secure access to the test app";
+    NSString *myLocalizedReasonString = @"This is a private diary and needs authentication";
     
     if ([context canEvaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics error:&error]) {
         // Authenticate User
@@ -64,14 +70,15 @@
                               });
                           }];
     } else {
-        [self deviceDontCountWithTouchId];
+//        [self deviceDontCountWithTouchId];
+        [self touchIdIsNotConfigured];
     }
 }
 
 
 - (void)authenticationSuccesful {
     
-    UIAlertController *settingAlert = [UIAlertController alertControllerWithTitle:@"Success"
+    UIAlertController *settingAlert = [UIAlertController alertControllerWithTitle:@"Authentication was successful"
                                                                           message:@"welcome!"
                                                                    preferredStyle:UIAlertControllerStyleAlert];
     
@@ -80,7 +87,7 @@
                                                  style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
                                                      
                                                      //HERE GOES THE MAMBO
-                                                     UIViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"successnns"];
+                                                     UIViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"success"];
                                                      [self.navigationController pushViewController:controller animated:YES];
 
                                                  }];
@@ -89,8 +96,8 @@
 }
 
 - (void)authenticationFailed {
-    UIAlertController *settingAlert = [UIAlertController alertControllerWithTitle:@"Fail"
-                                                                          message:@"Authentication failed"
+    UIAlertController *settingAlert = [UIAlertController alertControllerWithTitle:@"Authentication failed"
+                                                                          message:@"please try again"
                                                                    preferredStyle:UIAlertControllerStyleAlert];
     
     UIAlertAction *ok = [UIAlertAction actionWithTitle:@"OK"
@@ -110,8 +117,8 @@
 }
 
 - (void)touchIdIsNotConfigured {
-    UIAlertController *settingAlert = [UIAlertController alertControllerWithTitle:@""
-                                                                          message:@"Touch Id is not configured"
+    UIAlertController *settingAlert = [UIAlertController alertControllerWithTitle:@"Touch ID is not configured"
+                                                                          message:@"Please go to your settings and configure it"
                                                                    preferredStyle:UIAlertControllerStyleAlert];
     
     UIAlertAction *ok = [UIAlertAction actionWithTitle:@"OK"
@@ -122,7 +129,7 @@
 }
 
 - (void)deviceDontCountWithTouchId {
-    UIAlertController *settingAlert = [UIAlertController alertControllerWithTitle:@"error"
+    UIAlertController *settingAlert = [UIAlertController alertControllerWithTitle:@"Sorry!"
                                                                           message:@"Your device cannot authenticate using TouchID."
                                                                    preferredStyle:UIAlertControllerStyleAlert];
     
