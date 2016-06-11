@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:BlogReaderApp.xcodeproj">
+      location = "self:/Users/jamesrochabrun/Desktop/iOSLibrary/BlogReaderApp/secret diary.xcodeproj">
    </FileRef>
 </Workspace>

@@ -24,7 +24,7 @@
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor colorWithRed:0.455 green:1.000 blue:0.761 alpha:1.000];\
     self.touchIDlabel.font = [UIFont fontWithName:@"Gotham Narrow" size:15];
-    self.introductionLabel.font = [UIFont fontWithName:@"billabong" size:30];
+    self.introductionLabel.font = [UIFont fontWithName:@"Gotham Narrow" size:20];
 }
 
 #pragma localAutentication Touch Id
@@ -70,7 +70,6 @@
                               });
                           }];
     } else {
-//        [self deviceDontCountWithTouchId];
         [self touchIdIsNotConfigured];
     }
 }
@@ -128,17 +127,7 @@
     [self presentViewController:settingAlert animated:YES completion:nil];
 }
 
-- (void)deviceDontCountWithTouchId {
-    UIAlertController *settingAlert = [UIAlertController alertControllerWithTitle:@"Sorry!"
-                                                                          message:@"Your device cannot authenticate using TouchID."
-                                                                   preferredStyle:UIAlertControllerStyleAlert];
-    
-    UIAlertAction *ok = [UIAlertAction actionWithTitle:@"OK"
-                                                 style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
-                                                 }];
-    [settingAlert addAction:ok];
-    [self presentViewController:settingAlert animated:YES completion:nil];
-}
+
 
 
 

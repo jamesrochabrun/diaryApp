@@ -48,7 +48,7 @@
 		7B24DAFF1CF962A4001435E7 /* GOTHAM-MEDIUM.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; name = "GOTHAM-MEDIUM.TTF"; path = "../GOTHAM-MEDIUM.TTF"; sourceTree = "<group>"; };
 		7B380F3C1CFE92FC00EF3735 /* AuthenticationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuthenticationViewController.h; sourceTree = "<group>"; };
 		7B380F3D1CFE92FC00EF3735 /* AuthenticationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AuthenticationViewController.m; sourceTree = "<group>"; };
-		7B74B9721CF7ABF200F69544 /* BlogReaderApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BlogReaderApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		7B74B9721CF7ABF200F69544 /* secret diary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "secret diary.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7B74B9761CF7ABF200F69544 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		7B74B9781CF7ABF200F69544 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		7B74B9791CF7ABF200F69544 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -57,7 +57,7 @@
 		7B74B9841CF7ABF200F69544 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7B74B9871CF7ABF200F69544 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7B74B9891CF7ABF200F69544 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		7B74B98E1CF7ABF200F69544 /* BlogReaderAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BlogReaderAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		7B74B98E1CF7ABF200F69544 /* secret diary.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "secret diary.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7B74B9921CF7ABF200F69544 /* BlogReaderAppTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BlogReaderAppTests.m; sourceTree = "<group>"; };
 		7B74B9941CF7ABF200F69544 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7B74B99D1CF7B1F300F69544 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
@@ -133,8 +133,8 @@
 		7B74B9731CF7ABF200F69544 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				7B74B9721CF7ABF200F69544 /* BlogReaderApp.app */,
-				7B74B98E1CF7ABF200F69544 /* BlogReaderAppTests.xctest */,
+				7B74B9721CF7ABF200F69544 /* secret diary.app */,
+				7B74B98E1CF7ABF200F69544 /* secret diary.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -231,9 +231,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		7B74B9711CF7ABF200F69544 /* BlogReaderApp */ = {
+		7B74B9711CF7ABF200F69544 /* secret diary */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 7B74B9971CF7ABF200F69544 /* Build configuration list for PBXNativeTarget "BlogReaderApp" */;
+			buildConfigurationList = 7B74B9971CF7ABF200F69544 /* Build configuration list for PBXNativeTarget "secret diary" */;
 			buildPhases = (
 				7B74B96E1CF7ABF200F69544 /* Sources */,
 				7B74B96F1CF7ABF200F69544 /* Frameworks */,
@@ -243,14 +243,14 @@
 			);
 			dependencies = (
 			);
-			name = BlogReaderApp;
+			name = "secret diary";
 			productName = BlogReaderApp;
-			productReference = 7B74B9721CF7ABF200F69544 /* BlogReaderApp.app */;
+			productReference = 7B74B9721CF7ABF200F69544 /* secret diary.app */;
 			productType = "com.apple.product-type.application";
 		};
-		7B74B98D1CF7ABF200F69544 /* BlogReaderAppTests */ = {
+		7B74B98D1CF7ABF200F69544 /* secret diaryTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 7B74B99A1CF7ABF200F69544 /* Build configuration list for PBXNativeTarget "BlogReaderAppTests" */;
+			buildConfigurationList = 7B74B99A1CF7ABF200F69544 /* Build configuration list for PBXNativeTarget "secret diaryTests" */;
 			buildPhases = (
 				7B74B98A1CF7ABF200F69544 /* Sources */,
 				7B74B98B1CF7ABF200F69544 /* Frameworks */,
@@ -261,9 +261,9 @@
 			dependencies = (
 				7B74B9901CF7ABF200F69544 /* PBXTargetDependency */,
 			);
-			name = BlogReaderAppTests;
+			name = "secret diaryTests";
 			productName = BlogReaderAppTests;
-			productReference = 7B74B98E1CF7ABF200F69544 /* BlogReaderAppTests.xctest */;
+			productReference = 7B74B98E1CF7ABF200F69544 /* secret diary.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -277,6 +277,7 @@
 				TargetAttributes = {
 					7B74B9711CF7ABF200F69544 = {
 						CreatedOnToolsVersion = 7.3;
+						DevelopmentTeam = ULU46F325W;
 					};
 					7B74B98D1CF7ABF200F69544 = {
 						CreatedOnToolsVersion = 7.3;
@@ -284,7 +285,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 7B74B96D1CF7ABF200F69544 /* Build configuration list for PBXProject "BlogReaderApp" */;
+			buildConfigurationList = 7B74B96D1CF7ABF200F69544 /* Build configuration list for PBXProject "secret diary" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -297,8 +298,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				7B74B9711CF7ABF200F69544 /* BlogReaderApp */,
-				7B74B98D1CF7ABF200F69544 /* BlogReaderAppTests */,
+				7B74B9711CF7ABF200F69544 /* secret diary */,
+				7B74B98D1CF7ABF200F69544 /* secret diaryTests */,
 			);
 		};
 /* End PBXProject section */
@@ -359,7 +360,7 @@
 /* Begin PBXTargetDependency section */
 		7B74B9901CF7ABF200F69544 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 7B74B9711CF7ABF200F69544 /* BlogReaderApp */;
+			target = 7B74B9711CF7ABF200F69544 /* secret diary */;
 			targetProxy = 7B74B98F1CF7ABF200F69544 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -470,11 +471,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = BlogReaderApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = yo.BlogReaderApp;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.speedelo.secretdiary;
+				PRODUCT_NAME = "secret diary";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -483,11 +485,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = BlogReaderApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = yo.BlogReaderApp;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.speedelo.secretdiary;
+				PRODUCT_NAME = "secret diary";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
@@ -499,8 +502,8 @@
 				INFOPLIST_FILE = BlogReaderAppTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = yo.BlogReaderAppTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BlogReaderApp.app/BlogReaderApp";
+				PRODUCT_NAME = "secret diary";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/secret diary.app/secret diary";
 			};
 			name = Debug;
 		};
@@ -511,15 +514,15 @@
 				INFOPLIST_FILE = BlogReaderAppTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = yo.BlogReaderAppTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BlogReaderApp.app/BlogReaderApp";
+				PRODUCT_NAME = "secret diary";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/secret diary.app/secret diary";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		7B74B96D1CF7ABF200F69544 /* Build configuration list for PBXProject "BlogReaderApp" */ = {
+		7B74B96D1CF7ABF200F69544 /* Build configuration list for PBXProject "secret diary" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				7B74B9951CF7ABF200F69544 /* Debug */,
@@ -528,7 +531,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		7B74B9971CF7ABF200F69544 /* Build configuration list for PBXNativeTarget "BlogReaderApp" */ = {
+		7B74B9971CF7ABF200F69544 /* Build configuration list for PBXNativeTarget "secret diary" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				7B74B9981CF7ABF200F69544 /* Debug */,
@@ -537,7 +540,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		7B74B99A1CF7ABF200F69544 /* Build configuration list for PBXNativeTarget "BlogReaderAppTests" */ = {
+		7B74B99A1CF7ABF200F69544 /* Build configuration list for PBXNativeTarget "secret diaryTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				7B74B99B1CF7ABF200F69544 /* Debug */,

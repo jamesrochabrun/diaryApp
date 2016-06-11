@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "7B74B9711CF7ABF200F69544"
-               BuildableName = "BlogReaderApp.app"
-               BlueprintName = "BlogReaderApp"
-               ReferencedContainer = "container:BlogReaderApp.xcodeproj">
+               BuildableName = "secret diary.app"
+               BlueprintName = "secret diary"
+               ReferencedContainer = "container:secret diary.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "7B74B98D1CF7ABF200F69544"
-               BuildableName = "BlogReaderAppTests.xctest"
-               BlueprintName = "BlogReaderAppTests"
-               ReferencedContainer = "container:BlogReaderApp.xcodeproj">
+               BuildableName = "secret diary.xctest"
+               BlueprintName = "secret diaryTests"
+               ReferencedContainer = "container:secret diary.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -43,9 +43,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "7B74B9711CF7ABF200F69544"
-            BuildableName = "BlogReaderApp.app"
-            BlueprintName = "BlogReaderApp"
-            ReferencedContainer = "container:BlogReaderApp.xcodeproj">
+            BuildableName = "secret diary.app"
+            BlueprintName = "secret diary"
+            ReferencedContainer = "container:secret diary.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -66,9 +66,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "7B74B9711CF7ABF200F69544"
-            BuildableName = "BlogReaderApp.app"
-            BlueprintName = "BlogReaderApp"
-            ReferencedContainer = "container:BlogReaderApp.xcodeproj">
+            BuildableName = "secret diary.app"
+            BlueprintName = "secret diary"
+            ReferencedContainer = "container:secret diary.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -85,9 +85,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "7B74B9711CF7ABF200F69544"
-            BuildableName = "BlogReaderApp.app"
-            BlueprintName = "BlogReaderApp"
-            ReferencedContainer = "container:BlogReaderApp.xcodeproj">
+            BuildableName = "secret diary.app"
+            BlueprintName = "secret diary"
+            ReferencedContainer = "container:secret diary.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

@@ -68,8 +68,8 @@
     [dateFormatter setDateFormat:@"EEEE MMMM d, YYYY"];
     self.dateLabel.text = [dateFormatter stringFromDate:date];
     
-    //this line performs theapperabce of the mood buttons view in th keyboard;
-    //also drag the view outside the hierarchy of the storyboard
+    //this line performs the appereance of the mood buttons view in th keyboard;
+    //reminder : also drag the view outside the hierarchy of the storyboard
     self.textView.inputAccessoryView = self.accesoryView;
     //appereance
     self.imageButton.layer.cornerRadius = CGRectGetWidth(self.imageButton.frame) / 2.0f;
@@ -100,7 +100,6 @@
     }];
 }
 
-//this puts the | in the textview
 - (void)viewWillAppear:(BOOL)animated {
     [self.textView becomeFirstResponder];
 }

@@ -24,7 +24,7 @@
     [super viewDidLoad];
     //this performs the fetch request
     [self.fetchedResultsController performFetch:nil];
-    self.title = @"Diary";
+    self.title = @"My Diary";
 
 
 }
@@ -105,7 +105,7 @@
     [label setFont:[UIFont fontWithName:@"GothamMedium" size:15]];
     [label setTextAlignment:NSTextAlignmentCenter];
     [label setTextColor:[UIColor whiteColor]];
-    //NSFETCHRESULTCONTROLLE
+    //NSFETCHRESULTCONTROLLER
     id <NSFetchedResultsSectionInfo> sectionInfo = [[self.fetchedResultsController sections] objectAtIndex:section];
     //this is setted in THDiaryEntry+CoreDataProperties.m
     NSString *sectionName = [sectionInfo name];
@@ -149,7 +149,6 @@
     [coreDataStack saveContext];
 }
 
-//preparing for segue
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
     if ([segue.identifier isEqual :@"edit"]) {

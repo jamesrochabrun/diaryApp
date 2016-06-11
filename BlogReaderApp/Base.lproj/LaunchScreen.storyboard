@@ -1,8 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8150" systemVersion="15A204g" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" initialViewController="01J-lp-oVM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" initialViewController="01J-lp-oVM">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8122"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="GOTHAM-MEDIUM.TTF">
+            <string>GothamMedium</string>
+        </mutableArray>
+    </customFonts>
     <scenes>
         <!--View Controller-->
         <scene sceneID="EHf-IW-A2E">
@@ -15,13 +22,75 @@
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <animations/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="unicorn" translatesAutoresizingMaskIntoConstraints="NO" id="cSf-7N-aT6">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My secret diary " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gVf-8h-Kp1">
+                                <rect key="frame" x="-42" y="-21" width="42" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="360" id="9EF-cT-HfY"/>
+                                    <constraint firstAttribute="height" constant="21" id="rdN-NT-Tbb"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="GothamMedium" family="Gotham Medium" pointSize="17"/>
+                                <color key="textColor" red="0.1764705882" green="0.1843137255" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="9EF-cT-HfY"/>
+                                        <exclude reference="rdN-NT-Tbb"/>
+                                    </mask>
+                                </variation>
+                                <variation key="widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="9EF-cT-HfY"/>
+                                        <include reference="rdN-NT-Tbb"/>
+                                    </mask>
+                                </variation>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="gVf-8h-Kp1" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leadingMargin" id="Cin-YM-poo"/>
+                            <constraint firstItem="cSf-7N-aT6" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="Di8-Dj-MmH"/>
+                            <constraint firstItem="gVf-8h-Kp1" firstAttribute="top" secondItem="cSf-7N-aT6" secondAttribute="bottom" constant="11" id="RHZ-Ed-yFA"/>
+                            <constraint firstItem="gVf-8h-Kp1" firstAttribute="trailing" secondItem="Ze5-6b-2t3" secondAttribute="trailingMargin" id="wXC-1y-IEQ"/>
+                            <constraint firstItem="cSf-7N-aT6" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="wew-sQ-RCT"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="cSf-7N-aT6"/>
+                                <exclude reference="gVf-8h-Kp1"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="Cin-YM-poo"/>
+                                <exclude reference="RHZ-Ed-yFA"/>
+                                <exclude reference="wXC-1y-IEQ"/>
+                                <exclude reference="Di8-Dj-MmH"/>
+                                <exclude reference="wew-sQ-RCT"/>
+                            </mask>
+                        </variation>
+                        <variation key="widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="cSf-7N-aT6"/>
+                                <include reference="gVf-8h-Kp1"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="Cin-YM-poo"/>
+                                <include reference="RHZ-Ed-yFA"/>
+                                <include reference="wXC-1y-IEQ"/>
+                                <include reference="Di8-Dj-MmH"/>
+                                <include reference="wew-sQ-RCT"/>
+                            </mask>
+                        </variation>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="53" y="375"/>
+            <point key="canvasLocation" x="52.5" y="375"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="unicorn" width="224" height="237"/>
+    </resources>
 </document>
