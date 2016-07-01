@@ -39,6 +39,7 @@
     if ([self.locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
         [self.locationManager requestWhenInUseAuthorization];
     }
+
     NSDate *date;
     if (self.entry != nil) {
         self.textView.text = self.entry.body;
@@ -83,7 +84,7 @@
 
 - (void)loadLocation {
     
-    self.locationManager = [CLLocationManager new];
+    self.locationManager = [[CLLocationManager alloc] init];
     self.locationManager.delegate = self;
     self.locationManager.desiredAccuracy = 1000;
     [self.locationManager startUpdatingLocation];
@@ -99,6 +100,7 @@
         self.location = placeMark.name;
     }];
 }
+
 
 - (void)viewWillAppear:(BOOL)animated {
     [self.textView becomeFirstResponder];
@@ -125,7 +127,7 @@
     [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
 }
 
-
+//step 1 insert data and save it 
 - (void)insertDiaryEntry {
     
     if (self.textView.text.length != 0) {
@@ -138,6 +140,11 @@
         entry.mood = self.pickedMood;
         entry.image = UIImageJPEGRepresentation(self.pickedImage, 0.75);
         entry.location = self.location;
+        NSLog(@"location: %@", self.location);
+        
+        if (self.location == nil) {
+            NSLog(@"heloo");
+        }
         
         [coreDataStack saveContext];
     }

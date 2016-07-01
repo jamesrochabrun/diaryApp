@@ -23,6 +23,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     //this performs the fetch request
+    //step 4
     [self.fetchedResultsController performFetch:nil];
     self.title = @"My Diary";
 
@@ -31,18 +32,23 @@
 
 #pragma Coredata Methods
 
+
+//step 2
 - (NSFetchRequest *)entrylistfetchRequest {
+    
     NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"THDiaryEntry"];
     fetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"date" ascending:NO]];
     return  fetchRequest;
 }
 
+//step 3
 //this is a getter so thats why we replace self for  _
 //sectionName is a property in the THDiaryEntry object we can use any name of a property in the thDiaryEntry for create a section
 - (NSFetchedResultsController*)fetchedResultsController {
     if (_fetchedResultsController != nil) {
         return _fetchedResultsController;
     }
+    
     THCoreDataStack *coreDataStack = [THCoreDataStack  defaultStack];
     NSFetchRequest *fetchRequest = [self entrylistfetchRequest];
     
@@ -51,14 +57,19 @@
     return _fetchedResultsController;
 }
 
+//delegate methods
 - (void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
     [self.tableView beginUpdates];
 }
 
+
+//step 8
+//delegate method
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
     [self.tableView endUpdates];
 }
 
+//this performs the animation
 - (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath {
     
     switch (type) {
@@ -76,6 +87,7 @@
     }
 }
 
+//if we dont use this method the app will crash when we delete tha last item
 - (void)controller:(NSFetchedResultsController *)controller didChangeSection:(id<NSFetchedResultsSectionInfo>)sectionInfo atIndex:(NSUInteger)sectionIndex forChangeType:(NSFetchedResultsChangeType)type {
     
     switch (type) {
@@ -121,12 +133,15 @@
     return 50;
 }
 
+//step 6
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
     id <NSFetchedResultsSectionInfo> sectionInfo = [[self.fetchedResultsController sections] objectAtIndex:section];
     return [sectionInfo numberOfObjects];
 }
 
+
+//step 7
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     THEntryCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
@@ -141,6 +156,7 @@
     return UITableViewCellEditingStyleDelete;
 }
 
+//deleting coredata method
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
     
     THDiaryEntry *entry = [self.fetchedResultsController objectAtIndexPath:indexPath];

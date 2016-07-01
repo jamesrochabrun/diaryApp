@@ -21,6 +21,7 @@
     return YES;
 }
 
+//custom apereance method
 - (void)setupAppereance {
     UINavigationBar *navigationBarAppereance = [UINavigationBar appearance];
     navigationBarAppereance.barTintColor = [UIColor colorWithRed:0.455 green:1.000 blue:0.761 alpha:1.000];

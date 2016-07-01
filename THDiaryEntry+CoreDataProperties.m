@@ -21,11 +21,12 @@
 
 
 //this returns a string for the property sectionName
+//step 10 this will go in the method fetchedResultsController as a sectionNameKeyPath
 - (NSString *)sectionName {
     
     NSDate *date  = [NSDate dateWithTimeIntervalSince1970:self.date];
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
-    [dateFormatter setDateFormat:@"MMM yyy"];
+    [dateFormatter setDateFormat:@"MMM yyyy"];
     NSString *stringDate  = [dateFormatter stringFromDate:date];
     return stringDate;
 }
