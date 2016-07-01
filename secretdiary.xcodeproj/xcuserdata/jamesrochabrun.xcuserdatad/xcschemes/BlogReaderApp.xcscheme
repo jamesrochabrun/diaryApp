@@ -45,7 +45,7 @@
             BlueprintIdentifier = "7B74B9711CF7ABF200F69544"
             BuildableName = "secret diary.app"
             BlueprintName = "secret diary"
-            ReferencedContainer = "container:secret diary.xcodeproj">
+            ReferencedContainer = "container:secretdiary.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -68,7 +68,7 @@
             BlueprintIdentifier = "7B74B9711CF7ABF200F69544"
             BuildableName = "secret diary.app"
             BlueprintName = "secret diary"
-            ReferencedContainer = "container:secret diary.xcodeproj">
+            ReferencedContainer = "container:secretdiary.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>

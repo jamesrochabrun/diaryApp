@@ -35,6 +35,10 @@
     
     if (entry.image) {
         self.mainImageView.image = [UIImage imageWithData:entry.image];
+        UIImageView *imageView = [[UIImageView alloc]init];
+        imageView.contentMode = UIViewContentModeScaleAspectFill;
+        imageView.image = [UIImage imageWithData:entry.image];
+        self.backgroundView = imageView;
     } else {
         self.mainImageView.image = [UIImage imageNamed:@"icn_noimage"];
     }

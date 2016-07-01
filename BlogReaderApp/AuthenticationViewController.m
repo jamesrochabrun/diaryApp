@@ -22,7 +22,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.view.backgroundColor = [UIColor colorWithRed:0.455 green:1.000 blue:0.761 alpha:1.000];\
+    self.view.backgroundColor = [UIColor colorWithRed:0.114 green:0.5722 blue:0.7362 alpha:1.0];
     self.touchIDlabel.font = [UIFont fontWithName:@"Gotham Narrow" size:15];
     self.introductionLabel.font = [UIFont fontWithName:@"Gotham Narrow" size:20];
 }

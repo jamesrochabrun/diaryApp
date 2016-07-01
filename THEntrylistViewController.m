@@ -116,7 +116,7 @@
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 12, tableView.frame.size.width, 32)];
     [label setFont:[UIFont fontWithName:@"GothamMedium" size:15]];
     [label setTextAlignment:NSTextAlignmentCenter];
-    [label setTextColor:[UIColor whiteColor]];
+    [label setTextColor:[UIColor colorWithRed:0.471 green:0.4537 blue:0.3451 alpha:1.0]];
     //NSFETCHRESULTCONTROLLER
     id <NSFetchedResultsSectionInfo> sectionInfo = [[self.fetchedResultsController sections] objectAtIndex:section];
     //this is setted in THDiaryEntry+CoreDataProperties.m
@@ -124,7 +124,7 @@
     ///////////////////////////////////////////
     [label setText:sectionName];
     [view addSubview:label];
-    [view setBackgroundColor:[UIColor colorWithRed:0.976 green:0.655 blue:0.600 alpha:0.7]]; //your background
+    [view setBackgroundColor:[UIColor colorWithRed:0.9946 green:1.0 blue:0.9491 alpha:1.0]]; //your background
     return view;
 }
 

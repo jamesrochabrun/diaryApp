@@ -74,12 +74,12 @@
     self.textView.inputAccessoryView = self.accesoryView;
     //appereance
     self.imageButton.layer.cornerRadius = CGRectGetWidth(self.imageButton.frame) / 2.0f;
-    self.imageButton.titleLabel.font = [UIFont fontWithName:@"GOTHAM Narrow" size:13];
+    self.imageButton.titleLabel.font = [UIFont fontWithName:@"Gotham Narrow" size:13];
     [[self.imageButton layer] setBorderWidth:2.0f];
-    [[self.imageButton layer] setBorderColor:[UIColor colorWithRed:0.455 green:1.000 blue:0.761 alpha:1.000].CGColor];
+    [[self.imageButton layer] setBorderColor:[UIColor colorWithRed:0.114 green:0.5722 blue:0.7362 alpha:1.0].CGColor];
     [[self.changeImageButton layer] setBorderWidth:2.5f];
-    [[self.changeImageButton layer] setBorderColor:[UIColor colorWithRed:0.455 green:1.000 blue:0.761 alpha:1.000].CGColor];
-    self.dateLabel.font = [UIFont fontWithName:@"GOTHAM Narrow" size:15];
+    [[self.changeImageButton layer] setBorderColor:[UIColor colorWithRed:0.114 green:0.5722 blue:0.7362 alpha:0.76].CGColor];
+    self.dateLabel.font = [UIFont fontWithName:@"Gotham Narrow" size:15];
 }
 
 - (void)loadLocation {

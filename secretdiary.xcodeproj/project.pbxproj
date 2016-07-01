@@ -114,6 +114,14 @@
 			name = fonts;
 			sourceTree = "<group>";
 		};
+		7B470C201D271AF5009C01D0 /* categories */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = categories;
+			path = BlogReaderApp;
+			sourceTree = "<group>";
+		};
 		7B74B9691CF7ABF200F69544 = {
 			isa = PBXGroup;
 			children = (
@@ -122,6 +130,7 @@
 				7B74B99D1CF7B1F300F69544 /* CoreData.framework */,
 				7BCF0D561CF8D4EC003E4CB1 /* QuartzCore.framework */,
 				7B74B9A81CF7B73D00F69544 /* model */,
+				7B470C201D271AF5009C01D0 /* categories */,
 				7B74B9B51CF80FBF00F69544 /* view */,
 				7B74B9A91CF7B75500F69544 /* controller */,
 				7B74B9741CF7ABF200F69544 /* BlogReaderApp */,
@@ -285,7 +294,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 7B74B96D1CF7ABF200F69544 /* Build configuration list for PBXProject "secret diary" */;
+			buildConfigurationList = 7B74B96D1CF7ABF200F69544 /* Build configuration list for PBXProject "secretdiary" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -522,7 +531,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		7B74B96D1CF7ABF200F69544 /* Build configuration list for PBXProject "secret diary" */ = {
+		7B74B96D1CF7ABF200F69544 /* Build configuration list for PBXProject "secretdiary" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				7B74B9951CF7ABF200F69544 /* Debug */,
