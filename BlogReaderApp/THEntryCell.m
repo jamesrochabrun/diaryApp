@@ -9,16 +9,18 @@
 #import "THEntryCell.h"
 #import "THDiaryEntry.h"
 #import <QuartzCore/QuartzCore.h>
+#import "UIFont+CustomFont.h"
 
 
 @implementation THEntryCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];
+    self.selectionStyle = UITableViewCellSelectionStyleNone;
     
     NSArray *labels = @[self.bodyLabel , self.locationLabel , self.dateLabel ];
     for (UILabel *label in labels) {
-        label.font = [UIFont fontWithName:@"GOTHAM Narrow" size:15];
+        label.font = [UIFont regularFont:15];
     }
 }
 

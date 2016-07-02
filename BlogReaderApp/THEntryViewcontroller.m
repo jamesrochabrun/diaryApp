@@ -11,6 +11,8 @@
 #import "THDiaryEntry.h"
 #import <CoreLocation/CoreLocation.h>
 #import "ImageViewController.h"
+#import "UIColor+CustomColor.h"
+#import "UIFont+CustomFont.h"
 
 
 @interface THEntryViewcontroller ()<UIImagePickerControllerDelegate, UINavigationControllerDelegate, CLLocationManagerDelegate>
@@ -27,7 +29,6 @@
 @property (nonatomic,strong) CLLocationManager *locationManager;
 @property (nonatomic,strong) NSString *location;
 @property (weak, nonatomic) IBOutlet UIImageView *moodEntryImage;
-@property (weak, nonatomic) IBOutlet UIButton *changeImageButton;
 
 @end
 
@@ -40,6 +41,7 @@
         [self.locationManager requestWhenInUseAuthorization];
     }
 
+    NSLog(@"this is the entry %@" , self.entry);
     NSDate *date;
     if (self.entry != nil) {
         self.textView.text = self.entry.body;
@@ -74,12 +76,10 @@
     self.textView.inputAccessoryView = self.accesoryView;
     //appereance
     self.imageButton.layer.cornerRadius = CGRectGetWidth(self.imageButton.frame) / 2.0f;
-    self.imageButton.titleLabel.font = [UIFont fontWithName:@"Gotham Narrow" size:13];
+    self.imageButton.titleLabel.font = [UIFont regularFont:13];
     [[self.imageButton layer] setBorderWidth:2.0f];
-    [[self.imageButton layer] setBorderColor:[UIColor colorWithRed:0.114 green:0.5722 blue:0.7362 alpha:1.0].CGColor];
-    [[self.changeImageButton layer] setBorderWidth:2.5f];
-    [[self.changeImageButton layer] setBorderColor:[UIColor colorWithRed:0.114 green:0.5722 blue:0.7362 alpha:0.76].CGColor];
-    self.dateLabel.font = [UIFont fontWithName:@"Gotham Narrow" size:15];
+    [[self.imageButton layer] setBorderColor:(__bridge CGColorRef _Nullable)([UIColor mainColor])];
+    self.dateLabel.font = [UIFont regularFont:15];
 }
 
 - (void)loadLocation {
@@ -201,10 +201,6 @@
 #pragma camera actions
 
 - (IBAction)imageButtonWasPressed:(id)sender {
-    //this shows the image viewwhen the small image is tapped, presenting the next Viewcontroller
-}
-
-- (IBAction)changeImageButtonPressed:(UIButton *)sender {
     if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
         [self promptForSource];
     } else{
@@ -310,16 +306,16 @@
     return newImage;
 }
 
-#pragma passing the image
+#pragma passing the imag
 
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    
-    if ([segue.identifier isEqual :@"showImage"]) {
-        UINavigationController *navigationController = segue.destinationViewController;
-        ImageViewController *controller = (ImageViewController*)navigationController.topViewController;
-        controller.pickedImage = self.entry.image;
-    }
-}
+//- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+//    
+//    if ([segue.identifier isEqual :@"showImage"]) {
+//        UINavigationController *navigationController = segue.destinationViewController;
+//        ImageViewController *controller = (ImageViewController*)navigationController.topViewController;
+//        controller.pickedImage = self.entry.image;
+//    }
+//}
 
 
 

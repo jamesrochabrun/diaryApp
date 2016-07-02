@@ -7,6 +7,7 @@
 //
 
 #import "ImageViewController.h"
+#import "UIFont+CustomFont.h"
 
 @interface ImageViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *messageLabel;
@@ -18,7 +19,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.imageView.image = [UIImage imageWithData: self.pickedImage];
-    self.messageLabel.font = [UIFont fontWithName:@"GOTHAM Narrow" size:20];
+    self.messageLabel.font = [UIFont regularFont:20];
     [self showOrHideLabel];
 }
 
