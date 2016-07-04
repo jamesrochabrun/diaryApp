@@ -8,8 +8,12 @@
 
 #import "DetailViewController.h"
 #import "THDiaryEntry.h"
+#import "THEntryViewcontroller.h"
 
 @interface DetailViewController ()
+@property (weak, nonatomic) IBOutlet UIImageView *entryImage;
+@property (weak, nonatomic) IBOutlet UILabel *entryLabel;
+
 
 @end
 
@@ -18,7 +22,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    NSLog(@"hola %@" ,  self.entry.location);
+    
+    self.entryImage.image = [UIImage imageWithData:self.entry.image];
+    self.entryLabel.text = self.entry.body;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -32,6 +38,24 @@
 //    [self.view endEditing:YES];
 }
 
+- (IBAction)editEntryButtonTapped:(UIBarButtonItem *)sender {
+ 
+//    [self performSegueWithIdentifier:@"" sender:self];
+}
+
+
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    
+    THEntryViewcontroller *destinationController = [[THEntryViewcontroller alloc] init];
+    destinationController.entry = self.entry;
+    destinationController.test = @"hello";
+    //                                            [self.navigationController pushViewController:destinationController animated:YES];
+    NSLog(@" esto es hey hey segue :%@",  self.entry.body);
+    
+    
+    
+}
 
 
 

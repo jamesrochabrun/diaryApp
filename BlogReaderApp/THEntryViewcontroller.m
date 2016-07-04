@@ -42,6 +42,9 @@
     }
 
     NSLog(@"this is the entry %@" , self.entry);
+    NSLog(@"this is the test %@" , self.test);
+
+    
     NSDate *date;
     if (self.entry != nil) {
         self.textView.text = self.entry.body;

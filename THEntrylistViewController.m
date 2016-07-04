@@ -184,7 +184,7 @@
                                      }];
     deleteButton.backgroundColor = [UIColor alertColor]; //arbitrary color
     
-    return @[editButton, deleteButton];
+    return @[deleteButton];
 }
 
 - (void)removeEntryFromCoreData:(NSIndexPath*)indexPath {
@@ -193,9 +193,6 @@
     [[coreDataStack managedObjectContext] deleteObject:entry];
     [coreDataStack saveContext];
 }
-
-
-//cant perform action need to find the indexpath  reminder
 
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {

@@ -111,9 +111,6 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
-                    <connections>
-                        <segue destination="PXd-Lp-5Ze" kind="modal" identifier="edit" id="cm0-cV-SP9"/>
-                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HI3-bz-UHp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -130,7 +127,32 @@
                     <view key="view" contentMode="scaleToFill" id="6rN-cX-DzI">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="LOV-XR-Vnz">
+                                <rect key="frame" x="-4" y="64" width="328" height="269"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="269" id="dSu-g4-1aJ"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C2i-iK-iUG">
+                                <rect key="frame" x="41" y="384" width="238" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="cNS-zM-2XD"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="C2i-iK-iUG" firstAttribute="top" secondItem="LOV-XR-Vnz" secondAttribute="bottom" constant="51" id="BCT-vq-c8w"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="C2i-iK-iUG" secondAttribute="trailing" constant="25" id="JVE-Wj-dXi"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="LOV-XR-Vnz" secondAttribute="trailing" constant="-20" id="L36-xJ-Npm"/>
+                            <constraint firstItem="LOV-XR-Vnz" firstAttribute="leading" secondItem="6rN-cX-DzI" secondAttribute="leadingMargin" constant="-20" id="oab-hu-n3E"/>
+                            <constraint firstItem="C2i-iK-iUG" firstAttribute="leading" secondItem="6rN-cX-DzI" secondAttribute="leadingMargin" constant="25" id="peN-Ai-1mg"/>
+                            <constraint firstItem="LOV-XR-Vnz" firstAttribute="top" secondItem="d25-fZ-d4p" secondAttribute="bottom" id="sOz-sy-Vd5"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="BqZ-DV-5uc">
                         <barButtonItem key="leftBarButtonItem" title="Dismiss" id="Iqc-ld-Jyf">
@@ -138,11 +160,21 @@
                                 <action selector="dismissView:" destination="NBl-zc-T3H" id="PSr-tJ-xO6"/>
                             </connections>
                         </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="EDIT" id="wdo-ZB-nmG">
+                            <connections>
+                                <action selector="editEntryButtonTapped:" destination="NBl-zc-T3H" id="VjB-YG-cYz"/>
+                                <segue destination="PXd-Lp-5Ze" kind="modal" identifier="edit" id="yUV-Jz-bX8"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="entryImage" destination="LOV-XR-Vnz" id="ui4-ft-gEP"/>
+                        <outlet property="entryLabel" destination="C2i-iK-iUG" id="zSg-By-fPE"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Atk-Df-m46" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1732" y="515"/>
+            <point key="canvasLocation" x="1742" y="555"/>
         </scene>
         <!--Entry Viewcontroller-->
         <scene sceneID="MDP-sE-wzK">
@@ -420,7 +452,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nSZ-mU-KOb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1330" y="515"/>
+            <point key="canvasLocation" x="1330" y="555"/>
         </scene>
     </scenes>
     <resources>
@@ -433,6 +465,6 @@
         <image name="shadowB" width="324" height="108"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="f4R-ny-mEF"/>
+        <segue reference="yUV-Jz-bX8"/>
     </inferredMetricsTieBreakers>
 </document>
