@@ -1,8 +1,8 @@
 //
 //  THDiaryEntry+CoreDataProperties.m
-//  BlogReaderApp
+//  secretdiary
 //
-//  Created by James Rochabrun on 26-05-16.
+//  Created by James Rochabrun on 05-07-16.
 //  Copyright © 2016 James Rochabrun. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -13,11 +13,12 @@
 
 @implementation THDiaryEntry (CoreDataProperties)
 
-@dynamic date;
-@dynamic mood;
-@dynamic image;
 @dynamic body;
+@dynamic date;
+@dynamic image;
 @dynamic location;
+@dynamic mood;
+@dynamic isFavorite;
 
 
 //this returns a string for the property sectionName

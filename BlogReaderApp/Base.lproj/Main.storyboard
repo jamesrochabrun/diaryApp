@@ -133,7 +133,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="LOV-XR-Vnz">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="LOV-XR-Vnz" customClass="DoubleTapImage">
                                 <rect key="frame" x="-4" y="64" width="328" height="328"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="328" id="ffk-bv-vse"/>
@@ -146,9 +146,9 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MLH-w4-rlJ">
-                                <rect key="frame" x="247" y="333" width="46" height="46"/>
+                                <rect key="frame" x="179" y="329" width="46" height="46"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="46" id="jyr-bG-bEa"/>
+                                    <constraint firstAttribute="width" constant="46" id="8qO-PD-D6B"/>
                                 </constraints>
                                 <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="Button" image="zoom"/>
@@ -163,19 +163,32 @@
                                     <constraint firstAttribute="width" constant="50" id="q7d-40-TBA"/>
                                 </constraints>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N1o-0b-oVi">
+                                <rect key="frame" x="244" y="329" width="47" height="47"/>
+                                <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="Button" image="favorite"/>
+                                <connections>
+                                    <action selector="onFavoritebuttonPressed:" destination="NBl-zc-T3H" eventType="touchUpInside" id="EPv-Sl-Dvr"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="MLH-w4-rlJ" firstAttribute="top" secondItem="d25-fZ-d4p" secondAttribute="bottom" constant="269" id="0rK-VG-XKp"/>
+                            <constraint firstItem="N1o-0b-oVi" firstAttribute="top" secondItem="MLH-w4-rlJ" secondAttribute="top" id="5UY-at-cuF"/>
+                            <constraint firstItem="N1o-0b-oVi" firstAttribute="baseline" secondItem="MLH-w4-rlJ" secondAttribute="baseline" id="5Yw-oc-gCq"/>
                             <constraint firstItem="LOV-XR-Vnz" firstAttribute="centerX" secondItem="6rN-cX-DzI" secondAttribute="centerX" id="7en-hq-wAA"/>
-                            <constraint firstItem="C2i-iK-iUG" firstAttribute="top" secondItem="MLH-w4-rlJ" secondAttribute="bottom" constant="59" id="8NT-gd-eC6"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="MLH-w4-rlJ" secondAttribute="trailing" constant="11" id="CGw-mM-hpt"/>
+                            <constraint firstItem="C2i-iK-iUG" firstAttribute="top" secondItem="MLH-w4-rlJ" secondAttribute="bottom" constant="63" id="LSJ-9x-deN"/>
+                            <constraint firstItem="N1o-0b-oVi" firstAttribute="centerY" secondItem="MLH-w4-rlJ" secondAttribute="centerY" id="M28-ht-aLg"/>
                             <constraint firstItem="C2i-iK-iUG" firstAttribute="leading" secondItem="6rN-cX-DzI" secondAttribute="leadingMargin" constant="19" id="QER-Mx-k5v"/>
                             <constraint firstItem="LOV-XR-Vnz" firstAttribute="top" secondItem="kb5-JQ-8mi" secondAttribute="bottom" constant="-71" id="Sgp-pP-vW4"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="MLH-w4-rlJ" secondAttribute="trailing" constant="79" id="Spy-wW-HiS"/>
                             <constraint firstItem="LOV-XR-Vnz" firstAttribute="leading" secondItem="kb5-JQ-8mi" secondAttribute="trailing" constant="-74" id="XPa-ph-e54"/>
                             <constraint firstItem="C2i-iK-iUG" firstAttribute="centerX" secondItem="LOV-XR-Vnz" secondAttribute="centerX" id="aMo-b7-e5V"/>
                             <constraint firstItem="C2i-iK-iUG" firstAttribute="top" secondItem="LOV-XR-Vnz" secondAttribute="bottom" constant="46" id="de3-qh-5dJ"/>
+                            <constraint firstItem="N1o-0b-oVi" firstAttribute="leading" secondItem="MLH-w4-rlJ" secondAttribute="trailing" constant="19" id="jp0-3a-INW"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="N1o-0b-oVi" secondAttribute="trailing" constant="13" id="mkX-Rv-bCD"/>
                             <constraint firstItem="LOV-XR-Vnz" firstAttribute="leading" secondItem="6rN-cX-DzI" secondAttribute="leadingMargin" constant="-20" id="nSq-7S-vlL"/>
+                            <constraint firstItem="MLH-w4-rlJ" firstAttribute="top" secondItem="d25-fZ-d4p" secondAttribute="bottom" constant="265" id="q6a-wr-qed"/>
                             <constraint firstItem="LOV-XR-Vnz" firstAttribute="top" secondItem="d25-fZ-d4p" secondAttribute="bottom" id="qsn-Ik-SSZ"/>
                         </constraints>
                     </view>
@@ -192,8 +205,9 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="entryImage" destination="LOV-XR-Vnz" id="ui4-ft-gEP"/>
+                        <outlet property="doubleTapImage" destination="LOV-XR-Vnz" id="BbG-gv-ND9"/>
                         <outlet property="entryLabel" destination="C2i-iK-iUG" id="zSg-By-fPE"/>
+                        <outlet property="isFavoriteButton" destination="N1o-0b-oVi" id="k8N-Qe-Shd"/>
                         <outlet property="moodImage" destination="kb5-JQ-8mi" id="UUq-wo-VD0"/>
                     </connections>
                 </viewController>
@@ -560,6 +574,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="favorite" width="93" height="94"/>
         <image name="huella@2x (1)" width="220" height="217"/>
         <image name="icn_average_lrg" width="15" height="15"/>
         <image name="icn_bad_lrg" width="15" height="15"/>
@@ -569,6 +584,6 @@
         <image name="zoom" width="94" height="94"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="f4R-ny-mEF"/>
+        <segue reference="yUV-Jz-bX8"/>
     </inferredMetricsTieBreakers>
 </document>

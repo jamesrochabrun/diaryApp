@@ -10,12 +10,14 @@
 #import "THDiaryEntry.h"
 #import "THEntryViewcontroller.h"
 #import "ImageViewController.h"
+#import "DoubleTapImage.h"
 
-@interface DetailViewController ()
-@property (weak, nonatomic) IBOutlet UIImageView *entryImage;
+@interface DetailViewController ()<DoubleTapImagedelegate>
 @property (weak, nonatomic) IBOutlet UILabel *entryLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *moodImage;
 
+@property (weak, nonatomic) IBOutlet UIButton *isFavoriteButton;
+@property (weak, nonatomic) IBOutlet DoubleTapImage *doubleTapImage;
 
 
 @end
@@ -26,7 +28,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    self.entryImage.image = [UIImage imageWithData:self.entry.image];
+    self.doubleTapImage.image = [UIImage imageWithData:self.entry.image];
     self.entryLabel.text = self.entry.body;
 
     if(self.entry.mood == DiaryEntryMoodGood) {
@@ -35,6 +37,16 @@
         self.moodImage.image = [UIImage imageNamed:@"icn_average"];
     } else if (self.entry.mood == DiaryEntryMoodBad) {
         self.moodImage.image = [UIImage imageNamed:@"icn_bad"];
+    }
+    
+    self.doubleTapImage.delegate = self;
+    
+    BOOL isFavorite = [self.entry.isFavorite boolValue];
+    
+    if (isFavorite) {
+        [self.isFavoriteButton setSelected:YES];
+    } else {
+        [self.isFavoriteButton setSelected:NO];
     }
 }
 
@@ -61,8 +73,22 @@
         THEntryViewcontroller *entryViewController = (THEntryViewcontroller*)navigationController.topViewController;
         entryViewController.entry = self.entry;
     }
-
 }
+
+- (IBAction)onFavoritebuttonPressed:(UIButton *)sender {
+}
+
+- (void)didImageDoubleTapped {
+    NSLog(@"hello");
+}
+
+
+
+
+
+
+
+
 
 
 

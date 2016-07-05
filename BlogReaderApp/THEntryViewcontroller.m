@@ -145,6 +145,8 @@
         entry.mood = self.pickedMood;
         entry.image = UIImageJPEGRepresentation(self.pickedImage, 0.75);
         entry.location = self.location;
+        BOOL myBool = NO;
+        entry.isFavorite = [NSNumber numberWithBool:myBool];
         NSLog(@"location: %@", self.location);
         
         if (self.location == nil) {

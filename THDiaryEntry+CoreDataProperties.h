@@ -1,8 +1,8 @@
 //
 //  THDiaryEntry+CoreDataProperties.h
-//  BlogReaderApp
+//  secretdiary
 //
-//  Created by James Rochabrun on 26-05-16.
+//  Created by James Rochabrun on 05-07-16.
 //  Copyright © 2016 James Rochabrun. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -12,6 +12,7 @@
 #import "THDiaryEntry.h"
 
 NS_ASSUME_NONNULL_BEGIN
+
 
 //typedef enum {
 //    DiaryEntryMoodGood = 0,
@@ -26,18 +27,19 @@ NS_ASSUME_NONNULL_BEGIN
 //};
 
 typedef NS_ENUM(NSInteger, DiaryEntryMood) {
-        DiaryEntryMoodGood = 0,
-        DiaryEntryMoodAverage = 1,
-        DiaryEntryMoodBad = 2
+    DiaryEntryMoodGood = 0,
+    DiaryEntryMoodAverage = 1,
+    DiaryEntryMoodBad = 2
 };
 
 @interface THDiaryEntry (CoreDataProperties)
 
-@property (nonatomic) NSTimeInterval date;
-@property (nonatomic) int16_t mood;
-@property (nullable, nonatomic, retain) NSData *image;
 @property (nullable, nonatomic, retain) NSString *body;
+@property (nonatomic) NSTimeInterval date;
+@property (nullable, nonatomic, retain) NSData *image;
 @property (nullable, nonatomic, retain) NSString *location;
+@property (nonatomic) int16_t mood;
+@property (nullable, nonatomic, retain) NSNumber *isFavorite;
 
 //for a section we create this property
 @property (nonatomic, readonly) NSString *sectionName;
