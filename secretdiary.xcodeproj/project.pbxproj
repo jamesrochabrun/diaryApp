@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		7B380F3E1CFE92FC00EF3735 /* AuthenticationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B380F3D1CFE92FC00EF3735 /* AuthenticationViewController.m */; };
+		7B470C231D272140009C01D0 /* UIFont+CustomFont.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B470C221D272140009C01D0 /* UIFont+CustomFont.m */; };
+		7B470C261D272429009C01D0 /* UIColor+CustomColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B470C251D272429009C01D0 /* UIColor+CustomColor.m */; };
+		7B470C291D27516D009C01D0 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B470C281D27516D009C01D0 /* DetailViewController.m */; };
 		7B5045961CF9FB00008A6AB6 /* Gotham Narrow Book.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7B24DAFE1CF962A4001435E7 /* Gotham Narrow Book.otf */; };
 		7B5045971CF9FB00008A6AB6 /* GOTHAM-MEDIUM.TTF in Resources */ = {isa = PBXBuildFile; fileRef = 7B24DAFF1CF962A4001435E7 /* GOTHAM-MEDIUM.TTF */; };
 		7B5045981CF9FB00008A6AB6 /* billabong.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7B24DAFD1CF962A4001435E7 /* billabong.ttf */; };
@@ -48,6 +51,12 @@
 		7B24DAFF1CF962A4001435E7 /* GOTHAM-MEDIUM.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; name = "GOTHAM-MEDIUM.TTF"; path = "../GOTHAM-MEDIUM.TTF"; sourceTree = "<group>"; };
 		7B380F3C1CFE92FC00EF3735 /* AuthenticationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuthenticationViewController.h; sourceTree = "<group>"; };
 		7B380F3D1CFE92FC00EF3735 /* AuthenticationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AuthenticationViewController.m; sourceTree = "<group>"; };
+		7B470C211D272140009C01D0 /* UIFont+CustomFont.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIFont+CustomFont.h"; sourceTree = "<group>"; };
+		7B470C221D272140009C01D0 /* UIFont+CustomFont.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIFont+CustomFont.m"; sourceTree = "<group>"; };
+		7B470C241D272429009C01D0 /* UIColor+CustomColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+CustomColor.h"; sourceTree = "<group>"; };
+		7B470C251D272429009C01D0 /* UIColor+CustomColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+CustomColor.m"; sourceTree = "<group>"; };
+		7B470C271D27516D009C01D0 /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
+		7B470C281D27516D009C01D0 /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
 		7B74B9721CF7ABF200F69544 /* secret diary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "secret diary.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7B74B9761CF7ABF200F69544 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		7B74B9781CF7ABF200F69544 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -114,6 +123,18 @@
 			name = fonts;
 			sourceTree = "<group>";
 		};
+		7B470C201D271AF5009C01D0 /* categories */ = {
+			isa = PBXGroup;
+			children = (
+				7B470C211D272140009C01D0 /* UIFont+CustomFont.h */,
+				7B470C221D272140009C01D0 /* UIFont+CustomFont.m */,
+				7B470C241D272429009C01D0 /* UIColor+CustomColor.h */,
+				7B470C251D272429009C01D0 /* UIColor+CustomColor.m */,
+			);
+			name = categories;
+			path = BlogReaderApp;
+			sourceTree = "<group>";
+		};
 		7B74B9691CF7ABF200F69544 = {
 			isa = PBXGroup;
 			children = (
@@ -122,6 +143,7 @@
 				7B74B99D1CF7B1F300F69544 /* CoreData.framework */,
 				7BCF0D561CF8D4EC003E4CB1 /* QuartzCore.framework */,
 				7B74B9A81CF7B73D00F69544 /* model */,
+				7B470C201D271AF5009C01D0 /* categories */,
 				7B74B9B51CF80FBF00F69544 /* view */,
 				7B74B9A91CF7B75500F69544 /* controller */,
 				7B74B9741CF7ABF200F69544 /* BlogReaderApp */,
@@ -188,6 +210,8 @@
 				7B380F3D1CFE92FC00EF3735 /* AuthenticationViewController.m */,
 				7B74B9AD1CF7D97500F69544 /* THEntrylistViewController.h */,
 				7B74B9AE1CF7D97500F69544 /* THEntrylistViewController.m */,
+				7B470C271D27516D009C01D0 /* DetailViewController.h */,
+				7B470C281D27516D009C01D0 /* DetailViewController.m */,
 				7B74B9AA1CF7BC2300F69544 /* THEntryViewcontroller.h */,
 				7B74B9AB1CF7BC2300F69544 /* THEntryViewcontroller.m */,
 				7BF3598F1CFE14F300ABB239 /* ImageViewController.h */,
@@ -285,7 +309,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 7B74B96D1CF7ABF200F69544 /* Build configuration list for PBXProject "secret diary" */;
+			buildConfigurationList = 7B74B96D1CF7ABF200F69544 /* Build configuration list for PBXProject "secretdiary" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -337,12 +361,15 @@
 				7B74B9A61CF7B71D00F69544 /* THDiaryEntry+CoreDataProperties.m in Sources */,
 				7B74B9AC1CF7BC2300F69544 /* THEntryViewcontroller.m in Sources */,
 				7B380F3E1CFE92FC00EF3735 /* AuthenticationViewController.m in Sources */,
+				7B470C291D27516D009C01D0 /* DetailViewController.m in Sources */,
 				7BF359911CFE14F300ABB239 /* ImageViewController.m in Sources */,
 				7B74B97A1CF7ABF200F69544 /* AppDelegate.m in Sources */,
 				7B74B9831CF7ABF200F69544 /* BlogReaderApp.xcdatamodeld in Sources */,
 				7B74B9B81CF8148D00F69544 /* THEntryCell.m in Sources */,
 				7B74B9771CF7ABF200F69544 /* main.m in Sources */,
 				7B74B9AF1CF7D97500F69544 /* THEntrylistViewController.m in Sources */,
+				7B470C231D272140009C01D0 /* UIFont+CustomFont.m in Sources */,
+				7B470C261D272429009C01D0 /* UIColor+CustomColor.m in Sources */,
 				7B74B9B41CF80FAF00F69544 /* THNavigationController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -522,7 +549,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		7B74B96D1CF7ABF200F69544 /* Build configuration list for PBXProject "secret diary" */ = {
+		7B74B96D1CF7ABF200F69544 /* Build configuration list for PBXProject "secretdiary" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				7B74B9951CF7ABF200F69544 /* Debug */,

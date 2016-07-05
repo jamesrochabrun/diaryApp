@@ -9,16 +9,18 @@
 #import "THEntryCell.h"
 #import "THDiaryEntry.h"
 #import <QuartzCore/QuartzCore.h>
+#import "UIFont+CustomFont.h"
 
 
 @implementation THEntryCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];
+    self.selectionStyle = UITableViewCellSelectionStyleNone;
     
     NSArray *labels = @[self.bodyLabel , self.locationLabel , self.dateLabel ];
     for (UILabel *label in labels) {
-        label.font = [UIFont fontWithName:@"GOTHAM Narrow" size:15];
+        label.font = [UIFont regularFont:15];
     }
 }
 
@@ -35,6 +37,10 @@
     
     if (entry.image) {
         self.mainImageView.image = [UIImage imageWithData:entry.image];
+        UIImageView *imageView = [[UIImageView alloc]init];
+        imageView.contentMode = UIViewContentModeScaleAspectFill;
+        imageView.image = [UIImage imageWithData:entry.image];
+        self.backgroundView = imageView;
     } else {
         self.mainImageView.image = [UIImage imageNamed:@"icn_noimage"];
     }

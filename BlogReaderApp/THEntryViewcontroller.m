@@ -11,11 +11,13 @@
 #import "THDiaryEntry.h"
 #import <CoreLocation/CoreLocation.h>
 #import "ImageViewController.h"
+#import "UIColor+CustomColor.h"
+#import "UIFont+CustomFont.h"
 
 
-@interface THEntryViewcontroller ()<UIImagePickerControllerDelegate, UINavigationControllerDelegate, CLLocationManagerDelegate>
+@interface THEntryViewcontroller ()<UIImagePickerControllerDelegate, UINavigationControllerDelegate, CLLocationManagerDelegate,UITextViewDelegate>
+
 @property (weak, nonatomic) IBOutlet UITextView *textView;
-
 @property (nonatomic, assign) enum  DiaryEntryMood pickedMood;
 @property (weak, nonatomic) IBOutlet UIButton *badButton;
 @property (weak, nonatomic) IBOutlet UIButton *averageButton;
@@ -27,7 +29,9 @@
 @property (nonatomic,strong) CLLocationManager *locationManager;
 @property (nonatomic,strong) NSString *location;
 @property (weak, nonatomic) IBOutlet UIImageView *moodEntryImage;
-@property (weak, nonatomic) IBOutlet UIButton *changeImageButton;
+@property (weak, nonatomic) IBOutlet UILabel *counterLabel;
+
+
 
 @end
 
@@ -74,12 +78,13 @@
     self.textView.inputAccessoryView = self.accesoryView;
     //appereance
     self.imageButton.layer.cornerRadius = CGRectGetWidth(self.imageButton.frame) / 2.0f;
-    self.imageButton.titleLabel.font = [UIFont fontWithName:@"GOTHAM Narrow" size:13];
+    self.imageButton.titleLabel.font = [UIFont regularFont:13];
     [[self.imageButton layer] setBorderWidth:2.0f];
-    [[self.imageButton layer] setBorderColor:[UIColor colorWithRed:0.455 green:1.000 blue:0.761 alpha:1.000].CGColor];
-    [[self.changeImageButton layer] setBorderWidth:2.5f];
-    [[self.changeImageButton layer] setBorderColor:[UIColor colorWithRed:0.455 green:1.000 blue:0.761 alpha:1.000].CGColor];
-    self.dateLabel.font = [UIFont fontWithName:@"GOTHAM Narrow" size:15];
+    [[self.imageButton layer] setBorderColor:(__bridge CGColorRef _Nullable)([UIColor mainColor])];
+    self.dateLabel.font = [UIFont regularFont:15];
+    
+    //setting the counter
+    self.counterLabel.text = [NSString stringWithFormat:@"%lu / max 210", self.textView.text.length ];
 }
 
 - (void)loadLocation {
@@ -130,7 +135,7 @@
 //step 1 insert data and save it 
 - (void)insertDiaryEntry {
     
-    if (self.textView.text.length != 0) {
+    if (self.pickedImage != nil) {
         //creating a new coreDataStack entity (singleton)
         THCoreDataStack *coreDataStack = [THCoreDataStack defaultStack];
         THDiaryEntry *entry = [NSEntityDescription insertNewObjectForEntityForName:@"THDiaryEntry" inManagedObjectContext:coreDataStack.managedObjectContext];
@@ -198,13 +203,20 @@
     }
 }
 
+#pragma textview delegate max characters
+
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
+    
+    self.counterLabel.text = [NSString stringWithFormat:@"%lu / max 210", self.textView.text.length ];
+    
+    BOOL maxCounter = textView.text.length + (text.length - range.length) <= 210;
+
+    return maxCounter;
+}
+
 #pragma camera actions
 
 - (IBAction)imageButtonWasPressed:(id)sender {
-    //this shows the image viewwhen the small image is tapped, presenting the next Viewcontroller
-}
-
-- (IBAction)changeImageButtonPressed:(UIButton *)sender {
     if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
         [self promptForSource];
     } else{
@@ -310,16 +322,7 @@
     return newImage;
 }
 
-#pragma passing the image
 
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    
-    if ([segue.identifier isEqual :@"showImage"]) {
-        UINavigationController *navigationController = segue.destinationViewController;
-        ImageViewController *controller = (ImageViewController*)navigationController.topViewController;
-        controller.pickedImage = self.entry.image;
-    }
-}
 
 
 

@@ -2,7 +2,6 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" initialViewController="01J-lp-oVM">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
-        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -25,37 +24,38 @@
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="unicorn" translatesAutoresizingMaskIntoConstraints="NO" id="cSf-7N-aT6">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My secret diary " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gVf-8h-Kp1">
-                                <rect key="frame" x="-42" y="-21" width="42" height="21"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="360" id="9EF-cT-HfY"/>
-                                    <constraint firstAttribute="height" constant="21" id="rdN-NT-Tbb"/>
+                                    <constraint firstAttribute="width" constant="91" id="ovA-jT-KT1"/>
+                                    <constraint firstAttribute="height" constant="97" id="xE4-W4-V9B"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="GothamMedium" family="Gotham Medium" pointSize="17"/>
-                                <color key="textColor" red="0.1764705882" green="0.1843137255" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
                                 <variation key="default">
                                     <mask key="constraints">
-                                        <exclude reference="9EF-cT-HfY"/>
-                                        <exclude reference="rdN-NT-Tbb"/>
+                                        <exclude reference="ovA-jT-KT1"/>
+                                        <exclude reference="xE4-W4-V9B"/>
                                     </mask>
                                 </variation>
                                 <variation key="widthClass=compact">
                                     <mask key="constraints">
-                                        <include reference="9EF-cT-HfY"/>
-                                        <include reference="rdN-NT-Tbb"/>
+                                        <include reference="ovA-jT-KT1"/>
+                                        <include reference="xE4-W4-V9B"/>
                                     </mask>
                                 </variation>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My secret diary " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gVf-8h-Kp1">
+                                <rect key="frame" x="-42" y="-21" width="42" height="21"/>
+                                <fontDescription key="fontDescription" name="GothamMedium" family="Gotham Medium" pointSize="28"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.10980392160000001" green="0.63921568630000003" blue="0.7843137255" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="gVf-8h-Kp1" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leadingMargin" id="Cin-YM-poo"/>
-                            <constraint firstItem="cSf-7N-aT6" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="Di8-Dj-MmH"/>
-                            <constraint firstItem="gVf-8h-Kp1" firstAttribute="top" secondItem="cSf-7N-aT6" secondAttribute="bottom" constant="11" id="RHZ-Ed-yFA"/>
-                            <constraint firstItem="gVf-8h-Kp1" firstAttribute="trailing" secondItem="Ze5-6b-2t3" secondAttribute="trailingMargin" id="wXC-1y-IEQ"/>
-                            <constraint firstItem="cSf-7N-aT6" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="wew-sQ-RCT"/>
+                            <constraint firstItem="gVf-8h-Kp1" firstAttribute="top" secondItem="cSf-7N-aT6" secondAttribute="bottom" constant="10" id="2dy-4H-gCm"/>
+                            <constraint firstItem="cSf-7N-aT6" firstAttribute="top" secondItem="Llm-lL-Icb" secondAttribute="bottom" constant="225" id="F78-ro-aOX"/>
+                            <constraint firstItem="gVf-8h-Kp1" firstAttribute="centerX" secondItem="cSf-7N-aT6" secondAttribute="centerX" id="FRQ-bf-5QB"/>
+                            <constraint firstItem="gVf-8h-Kp1" firstAttribute="trailing" secondItem="Ze5-6b-2t3" secondAttribute="trailingMargin" id="Hf4-5W-YL4"/>
+                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="gVf-8h-Kp1" secondAttribute="bottom" constant="217" id="hCz-MX-VAd"/>
+                            <constraint firstItem="gVf-8h-Kp1" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leadingMargin" id="nCB-5O-H7X"/>
                         </constraints>
                         <variation key="default">
                             <mask key="subviews">
@@ -63,11 +63,12 @@
                                 <exclude reference="gVf-8h-Kp1"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="Cin-YM-poo"/>
-                                <exclude reference="RHZ-Ed-yFA"/>
-                                <exclude reference="wXC-1y-IEQ"/>
-                                <exclude reference="Di8-Dj-MmH"/>
-                                <exclude reference="wew-sQ-RCT"/>
+                                <exclude reference="F78-ro-aOX"/>
+                                <exclude reference="2dy-4H-gCm"/>
+                                <exclude reference="FRQ-bf-5QB"/>
+                                <exclude reference="Hf4-5W-YL4"/>
+                                <exclude reference="nCB-5O-H7X"/>
+                                <exclude reference="hCz-MX-VAd"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
@@ -76,11 +77,12 @@
                                 <include reference="gVf-8h-Kp1"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="Cin-YM-poo"/>
-                                <include reference="RHZ-Ed-yFA"/>
-                                <include reference="wXC-1y-IEQ"/>
-                                <include reference="Di8-Dj-MmH"/>
-                                <include reference="wew-sQ-RCT"/>
+                                <include reference="F78-ro-aOX"/>
+                                <include reference="2dy-4H-gCm"/>
+                                <include reference="FRQ-bf-5QB"/>
+                                <include reference="Hf4-5W-YL4"/>
+                                <include reference="nCB-5O-H7X"/>
+                                <include reference="hCz-MX-VAd"/>
                             </mask>
                         </variation>
                     </view>
