@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" initialViewController="01J-lp-oVM">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -63,12 +64,12 @@
                                 <exclude reference="gVf-8h-Kp1"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="F78-ro-aOX"/>
+                                <exclude reference="hCz-MX-VAd"/>
                                 <exclude reference="2dy-4H-gCm"/>
                                 <exclude reference="FRQ-bf-5QB"/>
                                 <exclude reference="Hf4-5W-YL4"/>
                                 <exclude reference="nCB-5O-H7X"/>
-                                <exclude reference="hCz-MX-VAd"/>
+                                <exclude reference="F78-ro-aOX"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
@@ -77,12 +78,12 @@
                                 <include reference="gVf-8h-Kp1"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="F78-ro-aOX"/>
+                                <include reference="hCz-MX-VAd"/>
                                 <include reference="2dy-4H-gCm"/>
                                 <include reference="FRQ-bf-5QB"/>
                                 <include reference="Hf4-5W-YL4"/>
                                 <include reference="nCB-5O-H7X"/>
-                                <include reference="hCz-MX-VAd"/>
+                                <include reference="F78-ro-aOX"/>
                             </mask>
                         </variation>
                     </view>

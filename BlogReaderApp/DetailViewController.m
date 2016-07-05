@@ -11,6 +11,7 @@
 #import "THEntryViewcontroller.h"
 #import "ImageViewController.h"
 #import "DoubleTapImage.h"
+#import "THCoreDataStack.h"
 
 @interface DetailViewController ()<DoubleTapImagedelegate>
 @property (weak, nonatomic) IBOutlet UILabel *entryLabel;
@@ -29,6 +30,8 @@
     // Do any additional setup after loading the view.
     
     self.doubleTapImage.image = [UIImage imageWithData:self.entry.image];
+    [self.isFavoriteButton setImage:[UIImage imageNamed:@"favorite"] forState:UIControlStateNormal];
+    [self.isFavoriteButton setImage:[UIImage imageNamed:@"favoriteFull"] forState:UIControlStateSelected];
     self.entryLabel.text = self.entry.body;
 
     if(self.entry.mood == DiaryEntryMoodGood) {
@@ -76,9 +79,52 @@
 }
 
 - (IBAction)onFavoritebuttonPressed:(UIButton *)sender {
+    
+    BOOL isFavorite = [self.entry.isFavorite boolValue];
+    if (!isFavorite) {
+        [sender setSelected:YES];
+        [self changingIsFavoriteToTrue];
+    } else {
+        [sender setSelected:NO];
+        [self changingIsFavoriteToFalse];
+    }
 }
 
+- (void)changingIsFavoriteToTrue {
+    
+    BOOL myBool = YES;
+    self.entry.isFavorite = [NSNumber numberWithBool:myBool];
+    
+    THCoreDataStack *coreDataStack = [THCoreDataStack defaultStack];
+    [coreDataStack saveContext];
+    
+    UIAlertController *alertSaved = [UIAlertController alertControllerWithTitle:@"Added to favorites!" message:@"You can revisit this in your favorites section" preferredStyle:UIAlertControllerStyleAlert];
+    [self presentViewController:alertSaved animated:YES completion:nil];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [alertSaved dismissViewControllerAnimated:YES completion:nil];
+    });
+}
+
+- (void)changingIsFavoriteToFalse {
+   
+    BOOL myBool = NO;
+    self.entry.isFavorite = [NSNumber numberWithBool:myBool];
+    
+    THCoreDataStack *coreDataStack = [THCoreDataStack defaultStack];
+    [coreDataStack saveContext];
+}
+
+
 - (void)didImageDoubleTapped {
+    
+    BOOL isFavorite = [self.entry.isFavorite boolValue];
+    if (!isFavorite) {
+        [self.isFavoriteButton setSelected:YES];
+        [self changingIsFavoriteToTrue];
+    } else {
+        [self.isFavoriteButton setSelected:NO];
+        [self changingIsFavoriteToFalse];
+    }
     NSLog(@"hello");
 }
 
