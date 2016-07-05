@@ -13,6 +13,5 @@
 @interface THEntryViewcontroller : UIViewController
 
 @property (nonatomic, strong) THDiaryEntry *entry;
-@property NSString *test;
 
 @end

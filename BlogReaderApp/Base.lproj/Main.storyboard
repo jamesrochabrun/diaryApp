@@ -8,6 +8,7 @@
         <mutableArray key="Gotham Narrow Book.otf">
             <string>GothamNarrow-Book</string>
             <string>GothamNarrow-Book</string>
+            <string>GothamNarrow-Book</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -129,29 +130,42 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="LOV-XR-Vnz">
-                                <rect key="frame" x="-4" y="64" width="328" height="269"/>
+                                <rect key="frame" x="-4" y="64" width="328" height="328"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="269" id="dSu-g4-1aJ"/>
+                                    <constraint firstAttribute="height" constant="328" id="ffk-bv-vse"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C2i-iK-iUG">
-                                <rect key="frame" x="41" y="384" width="238" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C2i-iK-iUG">
+                                <rect key="frame" x="41" y="417" width="238" height="17"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="21" id="cNS-zM-2XD"/>
+                                    <constraint firstAttribute="width" constant="238" id="Om5-gj-Knj"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="GothamNarrow-Book" family="Gotham Narrow" pointSize="17"/>
+                                <color key="textColor" red="0.5450980392" green="0.52549019610000003" blue="0.41960784309999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MLH-w4-rlJ">
+                                <rect key="frame" x="254" y="324" width="46" height="46"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="46" id="hIh-Yf-03v"/>
+                                </constraints>
+                                <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="Button" image="zoom"/>
+                                <connections>
+                                    <segue destination="G8q-oh-10k" kind="modal" identifier="image" id="qRO-Vc-2PR"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="C2i-iK-iUG" firstAttribute="top" secondItem="LOV-XR-Vnz" secondAttribute="bottom" constant="51" id="BCT-vq-c8w"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="C2i-iK-iUG" secondAttribute="trailing" constant="25" id="JVE-Wj-dXi"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="LOV-XR-Vnz" secondAttribute="trailing" constant="-20" id="L36-xJ-Npm"/>
-                            <constraint firstItem="LOV-XR-Vnz" firstAttribute="leading" secondItem="6rN-cX-DzI" secondAttribute="leadingMargin" constant="-20" id="oab-hu-n3E"/>
-                            <constraint firstItem="C2i-iK-iUG" firstAttribute="leading" secondItem="6rN-cX-DzI" secondAttribute="leadingMargin" constant="25" id="peN-Ai-1mg"/>
-                            <constraint firstItem="LOV-XR-Vnz" firstAttribute="top" secondItem="d25-fZ-d4p" secondAttribute="bottom" id="sOz-sy-Vd5"/>
+                            <constraint firstItem="LOV-XR-Vnz" firstAttribute="centerX" secondItem="6rN-cX-DzI" secondAttribute="centerX" id="7en-hq-wAA"/>
+                            <constraint firstItem="C2i-iK-iUG" firstAttribute="top" secondItem="MLH-w4-rlJ" secondAttribute="bottom" constant="47" id="Amv-qe-afh"/>
+                            <constraint firstItem="C2i-iK-iUG" firstAttribute="top" secondItem="LOV-XR-Vnz" secondAttribute="bottom" constant="25" id="Cjn-zl-daj"/>
+                            <constraint firstItem="C2i-iK-iUG" firstAttribute="centerX" secondItem="6rN-cX-DzI" secondAttribute="centerX" id="HET-O2-wru"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="MLH-w4-rlJ" secondAttribute="trailing" constant="4" id="ICO-kE-ENy"/>
+                            <constraint firstItem="MLH-w4-rlJ" firstAttribute="top" secondItem="d25-fZ-d4p" secondAttribute="bottom" constant="260" id="ZHX-JG-lCO"/>
+                            <constraint firstItem="LOV-XR-Vnz" firstAttribute="leading" secondItem="6rN-cX-DzI" secondAttribute="leadingMargin" constant="-20" id="nSq-7S-vlL"/>
+                            <constraint firstItem="LOV-XR-Vnz" firstAttribute="top" secondItem="d25-fZ-d4p" secondAttribute="bottom" id="qsn-Ik-SSZ"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="BqZ-DV-5uc">
@@ -162,7 +176,6 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="EDIT" id="wdo-ZB-nmG">
                             <connections>
-                                <action selector="editEntryButtonTapped:" destination="NBl-zc-T3H" id="VjB-YG-cYz"/>
                                 <segue destination="PXd-Lp-5Ze" kind="modal" identifier="edit" id="yUV-Jz-bX8"/>
                             </connections>
                         </barButtonItem>
@@ -175,6 +188,50 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Atk-Df-m46" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1742" y="555"/>
+        </scene>
+        <!--Image View Controller-->
+        <scene sceneID="Lvq-ma-32F">
+            <objects>
+                <viewController id="7B3-sf-9cJ" customClass="ImageViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="iqE-Pm-XXs"/>
+                        <viewControllerLayoutGuide type="bottom" id="YZW-8v-TJm"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Mhd-Vz-sQC">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xoO-jo-tBu">
+                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="xoO-jo-tBu" secondAttribute="trailing" id="0kG-6y-jCU"/>
+                            <constraint firstItem="xoO-jo-tBu" firstAttribute="leading" secondItem="Mhd-Vz-sQC" secondAttribute="leading" id="5r4-pb-x8e"/>
+                            <constraint firstItem="xoO-jo-tBu" firstAttribute="top" secondItem="iqE-Pm-XXs" secondAttribute="bottom" id="9dc-MF-thY"/>
+                            <constraint firstItem="YZW-8v-TJm" firstAttribute="top" secondItem="xoO-jo-tBu" secondAttribute="bottom" id="Dkc-Br-kPL"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="KkG-tC-Ud9">
+                        <barButtonItem key="leftBarButtonItem" title="Dismiss" id="1hv-lO-zOU">
+                            <connections>
+                                <action selector="dismissViewcontroller:" destination="7B3-sf-9cJ" id="wHr-Vt-s0k"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Share" id="hd6-Tq-IDT">
+                            <connections>
+                                <action selector="shareButtonPressed:" destination="7B3-sf-9cJ" id="aKI-KA-vcI"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="imageView" destination="xoO-jo-tBu" id="scc-pt-uJ8"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="NSH-wx-3Lp" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2811" y="549"/>
         </scene>
         <!--Entry Viewcontroller-->
         <scene sceneID="MDP-sE-wzK">
@@ -454,6 +511,25 @@
             </objects>
             <point key="canvasLocation" x="1330" y="555"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="7Md-IF-r54">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="G8q-oh-10k" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="0UW-rJ-XtI"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="42h-zO-N21">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="7B3-sf-9cJ" kind="relationship" relationship="rootViewController" id="dS6-9u-CB2"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7y0-U2-jp9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2279" y="549"/>
+        </scene>
     </scenes>
     <resources>
         <image name="huella@2x (1)" width="220" height="217"/>
@@ -461,8 +537,9 @@
         <image name="icn_bad_lrg" width="15" height="15"/>
         <image name="icn_good_lrg" width="15" height="15"/>
         <image name="icn_noimage" width="47" height="47"/>
-        <image name="shadowA" width="324" height="108"/>
-        <image name="shadowB" width="324" height="108"/>
+        <image name="shadowA" width="500" height="179"/>
+        <image name="shadowB" width="301" height="108"/>
+        <image name="zoom" width="94" height="94"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="yUV-Jz-bX8"/>

@@ -9,6 +9,7 @@
 #import "DetailViewController.h"
 #import "THDiaryEntry.h"
 #import "THEntryViewcontroller.h"
+#import "ImageViewController.h"
 
 @interface DetailViewController ()
 @property (weak, nonatomic) IBOutlet UIImageView *entryImage;
@@ -35,26 +36,22 @@
 - (IBAction)dismissView:(UIBarButtonItem *)sender {
     
     [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
-//    [self.view endEditing:YES];
 }
 
-- (IBAction)editEntryButtonTapped:(UIBarButtonItem *)sender {
- 
-//    [self performSegueWithIdentifier:@"" sender:self];
-}
-
-
-
+//remeber with buttons the file dont need ibactions just define the segue identifiers to perform the action (pass the data);
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
-    THEntryViewcontroller *destinationController = [[THEntryViewcontroller alloc] init];
-    destinationController.entry = self.entry;
-    destinationController.test = @"hello";
-    //                                            [self.navigationController pushViewController:destinationController animated:YES];
-    NSLog(@" esto es hey hey segue :%@",  self.entry.body);
-    
-    
-    
+    if ([segue.identifier isEqual :@"image"]) {
+        UINavigationController *navigationController = segue.destinationViewController;
+        ImageViewController *controller = (ImageViewController*)navigationController.topViewController;
+        controller.pickedImage = self.entry.image;
+    } else {
+        
+        UINavigationController *navigationController = segue.destinationViewController;
+        THEntryViewcontroller *entryViewController = (THEntryViewcontroller*)navigationController.topViewController;
+        entryViewController.entry = self.entry;
+    }
+
 }
 
 

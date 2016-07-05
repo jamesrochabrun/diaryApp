@@ -41,10 +41,6 @@
         [self.locationManager requestWhenInUseAuthorization];
     }
 
-    NSLog(@"this is the entry %@" , self.entry);
-    NSLog(@"this is the test %@" , self.test);
-
-    
     NSDate *date;
     if (self.entry != nil) {
         self.textView.text = self.entry.body;
@@ -133,7 +129,7 @@
 //step 1 insert data and save it 
 - (void)insertDiaryEntry {
     
-    if (self.textView.text.length != 0) {
+    if (self.pickedImage != nil) {
         //creating a new coreDataStack entity (singleton)
         THCoreDataStack *coreDataStack = [THCoreDataStack defaultStack];
         THDiaryEntry *entry = [NSEntityDescription insertNewObjectForEntityForName:@"THDiaryEntry" inManagedObjectContext:coreDataStack.managedObjectContext];
@@ -309,16 +305,7 @@
     return newImage;
 }
 
-#pragma passing the imag
 
-//- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-//    
-//    if ([segue.identifier isEqual :@"showImage"]) {
-//        UINavigationController *navigationController = segue.destinationViewController;
-//        ImageViewController *controller = (ImageViewController*)navigationController.topViewController;
-//        controller.pickedImage = self.entry.image;
-//    }
-//}
 
 
 

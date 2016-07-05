@@ -25,6 +25,22 @@
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="unicorn" translatesAutoresizingMaskIntoConstraints="NO" id="cSf-7N-aT6">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="91" id="ovA-jT-KT1"/>
+                                    <constraint firstAttribute="height" constant="97" id="xE4-W4-V9B"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="ovA-jT-KT1"/>
+                                        <exclude reference="xE4-W4-V9B"/>
+                                    </mask>
+                                </variation>
+                                <variation key="widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="ovA-jT-KT1"/>
+                                        <include reference="xE4-W4-V9B"/>
+                                    </mask>
+                                </variation>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My secret diary " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gVf-8h-Kp1">
                                 <rect key="frame" x="-42" y="-21" width="42" height="21"/>
@@ -32,8 +48,8 @@
                                     <constraint firstAttribute="width" constant="360" id="9EF-cT-HfY"/>
                                     <constraint firstAttribute="height" constant="21" id="rdN-NT-Tbb"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="GothamMedium" family="Gotham Medium" pointSize="17"/>
-                                <color key="textColor" red="0.1764705882" green="0.1843137255" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="GothamMedium" family="Gotham Medium" pointSize="28"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                                 <variation key="default">
                                     <mask key="constraints">
@@ -49,13 +65,13 @@
                                 </variation>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.10980392160000001" green="0.63921568630000003" blue="0.7843137255" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="gVf-8h-Kp1" firstAttribute="top" secondItem="cSf-7N-aT6" secondAttribute="bottom" constant="20" id="5hd-Hi-aJZ"/>
+                            <constraint firstItem="cSf-7N-aT6" firstAttribute="centerX" secondItem="gVf-8h-Kp1" secondAttribute="centerX" id="BSM-0g-Drm"/>
                             <constraint firstItem="gVf-8h-Kp1" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leadingMargin" id="Cin-YM-poo"/>
-                            <constraint firstItem="cSf-7N-aT6" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="Di8-Dj-MmH"/>
-                            <constraint firstItem="gVf-8h-Kp1" firstAttribute="top" secondItem="cSf-7N-aT6" secondAttribute="bottom" constant="11" id="RHZ-Ed-yFA"/>
+                            <constraint firstItem="cSf-7N-aT6" firstAttribute="top" secondItem="Llm-lL-Icb" secondAttribute="bottom" constant="225" id="F78-ro-aOX"/>
                             <constraint firstItem="gVf-8h-Kp1" firstAttribute="trailing" secondItem="Ze5-6b-2t3" secondAttribute="trailingMargin" id="wXC-1y-IEQ"/>
-                            <constraint firstItem="cSf-7N-aT6" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="wew-sQ-RCT"/>
                         </constraints>
                         <variation key="default">
                             <mask key="subviews">
@@ -63,11 +79,11 @@
                                 <exclude reference="gVf-8h-Kp1"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="BSM-0g-Drm"/>
+                                <exclude reference="F78-ro-aOX"/>
+                                <exclude reference="5hd-Hi-aJZ"/>
                                 <exclude reference="Cin-YM-poo"/>
-                                <exclude reference="RHZ-Ed-yFA"/>
                                 <exclude reference="wXC-1y-IEQ"/>
-                                <exclude reference="Di8-Dj-MmH"/>
-                                <exclude reference="wew-sQ-RCT"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
@@ -76,11 +92,11 @@
                                 <include reference="gVf-8h-Kp1"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="BSM-0g-Drm"/>
+                                <include reference="F78-ro-aOX"/>
+                                <include reference="5hd-Hi-aJZ"/>
                                 <include reference="Cin-YM-poo"/>
-                                <include reference="RHZ-Ed-yFA"/>
                                 <include reference="wXC-1y-IEQ"/>
-                                <include reference="Di8-Dj-MmH"/>
-                                <include reference="wew-sQ-RCT"/>
                             </mask>
                         </variation>
                     </view>

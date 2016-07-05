@@ -165,19 +165,7 @@
 
 //adding an extra button to the cell
 -(NSArray *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    UITableViewRowAction *editButton = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:@"Edit" handler:^(UITableViewRowAction *action, NSIndexPath *indexPath)
-                                        {
-
-                                            
-                                            THEntryViewcontroller *destinationController = [[THEntryViewcontroller alloc] init];
-                                            destinationController.entry = [self.fetchedResultsController objectAtIndexPath:indexPath];
-//                                            [self.navigationController pushViewController:destinationController animated:YES];
-                                            NSLog(@" esto es %@",  destinationController.entry);
-                                            [self performSegueWithIdentifier:@"edit" sender:self];
-                                            
-                                    }];
-    editButton.backgroundColor = [UIColor mainColor]; //arbitrary color
+ 
     UITableViewRowAction *deleteButton = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:@"Delete" handler:^(UITableViewRowAction *action, NSIndexPath *indexPath)
                                      {
                                          [self removeEntryFromCoreData:indexPath];
@@ -197,18 +185,7 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
-
-    if ([segue.identifier isEqual :@"edit"]) {
-
-        UITableViewCell *cell = sender;
-        NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
-        UINavigationController *navigationController = segue.destinationViewController;
-        THEntryViewcontroller *entryViewController = (THEntryViewcontroller*)navigationController.topViewController;
-        entryViewController.entry = [self.fetchedResultsController objectAtIndexPath:indexPath];
-        NSLog(@"edit   %@", entryViewController.entry);
-
-        
-    } else if ([segue.identifier isEqual :@"show"]) {
+    if ([segue.identifier isEqual :@"show"]) {
         UITableViewCell *cell = sender;
         NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
         UINavigationController *navigationController = segue.destinationViewController;
