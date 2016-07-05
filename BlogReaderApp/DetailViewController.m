@@ -14,6 +14,8 @@
 @interface DetailViewController ()
 @property (weak, nonatomic) IBOutlet UIImageView *entryImage;
 @property (weak, nonatomic) IBOutlet UILabel *entryLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *moodImage;
+
 
 
 @end
@@ -26,6 +28,14 @@
     
     self.entryImage.image = [UIImage imageWithData:self.entry.image];
     self.entryLabel.text = self.entry.body;
+
+    if(self.entry.mood == DiaryEntryMoodGood) {
+        self.moodImage.image = [UIImage imageNamed:@"icn_happy"];
+    } else if (self.entry.mood == DiaryEntryMoodAverage) {
+        self.moodImage.image = [UIImage imageNamed:@"icn_average"];
+    } else if (self.entry.mood == DiaryEntryMoodBad) {
+        self.moodImage.image = [UIImage imageNamed:@"icn_bad"];
+    }
 }
 
 - (void)didReceiveMemoryWarning {

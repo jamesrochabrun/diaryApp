@@ -37,6 +37,24 @@
 }
 
 - (IBAction)shareButtonPressed:(UIBarButtonItem *)sender {
+    
+    NSURL *shareLink = [[NSURL alloc] initWithString:@"https://itunes.apple.com/us/app/blogdiary/id1119667410?l=es&ls=1&mt=8"];
+    UIImage *shareImage = [UIImage imageWithData:self.pickedImage];
+    
+    UIActivityViewController *activityViewController =
+    [[UIActivityViewController alloc] initWithActivityItems:@[shareLink,shareImage]
+                                      applicationActivities:nil];
+    
+    [activityViewController setModalTransitionStyle:UIModalTransitionStyleCoverVertical];
+    
+    [activityViewController setExcludedActivityTypes:@[UIActivityTypePostToWeibo,
+                                                       UIActivityTypeCopyToPasteboard,
+                                                       UIActivityTypeMessage]];
+    
+    dispatch_async(dispatch_get_main_queue(), ^(void){
+        [self presentViewController:activityViewController animated:YES completion:nil];
+    });
+    
 }
 
 

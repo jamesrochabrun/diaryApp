@@ -15,9 +15,9 @@
 #import "UIFont+CustomFont.h"
 
 
-@interface THEntryViewcontroller ()<UIImagePickerControllerDelegate, UINavigationControllerDelegate, CLLocationManagerDelegate>
-@property (weak, nonatomic) IBOutlet UITextView *textView;
+@interface THEntryViewcontroller ()<UIImagePickerControllerDelegate, UINavigationControllerDelegate, CLLocationManagerDelegate,UITextViewDelegate>
 
+@property (weak, nonatomic) IBOutlet UITextView *textView;
 @property (nonatomic, assign) enum  DiaryEntryMood pickedMood;
 @property (weak, nonatomic) IBOutlet UIButton *badButton;
 @property (weak, nonatomic) IBOutlet UIButton *averageButton;
@@ -29,6 +29,9 @@
 @property (nonatomic,strong) CLLocationManager *locationManager;
 @property (nonatomic,strong) NSString *location;
 @property (weak, nonatomic) IBOutlet UIImageView *moodEntryImage;
+@property (weak, nonatomic) IBOutlet UILabel *counterLabel;
+
+
 
 @end
 
@@ -79,6 +82,9 @@
     [[self.imageButton layer] setBorderWidth:2.0f];
     [[self.imageButton layer] setBorderColor:(__bridge CGColorRef _Nullable)([UIColor mainColor])];
     self.dateLabel.font = [UIFont regularFont:15];
+    
+    //setting the counter
+    self.counterLabel.text = [NSString stringWithFormat:@"%lu / max 210", self.textView.text.length ];
 }
 
 - (void)loadLocation {
@@ -195,6 +201,17 @@
         default:
             break;
     }
+}
+
+#pragma textview delegate max characters
+
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
+    
+    self.counterLabel.text = [NSString stringWithFormat:@"%lu / max 210", self.textView.text.length ];
+    
+    BOOL maxCounter = textView.text.length + (text.length - range.length) <= 210;
+
+    return maxCounter;
 }
 
 #pragma camera actions
