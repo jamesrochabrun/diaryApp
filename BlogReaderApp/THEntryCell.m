@@ -21,6 +21,7 @@
     NSArray *labels = @[self.bodyLabel , self.locationLabel , self.dateLabel ];
     for (UILabel *label in labels) {
         label.font = [UIFont regularFont:15];
+        label.textColor = [UIColor whiteColor];
     }
 }
 
@@ -36,13 +37,10 @@
     self.dateLabel.text = [dateFormatter stringFromDate:date];
     
     if (entry.image) {
-        self.mainImageView.image = [UIImage imageWithData:entry.image];
         UIImageView *imageView = [[UIImageView alloc]init];
         imageView.contentMode = UIViewContentModeScaleAspectFill;
         imageView.image = [UIImage imageWithData:entry.image];
         self.backgroundView = imageView;
-    } else {
-        self.mainImageView.image = [UIImage imageNamed:@"icn_noimage"];
     }
     
     if(entry.mood == DiaryEntryMoodGood) {
@@ -53,7 +51,6 @@
         self.moodImageView.image = [UIImage imageNamed:@"icn_bad"];
     }
     
-    self.mainImageView.layer.cornerRadius = CGRectGetWidth(self.mainImageView.frame) / 2.0f;
     
     if (entry.location.length > 0) {
         self.locationLabel.text = entry.location;

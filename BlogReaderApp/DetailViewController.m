@@ -71,7 +71,6 @@
         ImageViewController *controller = (ImageViewController*)navigationController.topViewController;
         controller.pickedImage = self.entry.image;
     } else {
-        
         UINavigationController *navigationController = segue.destinationViewController;
         THEntryViewcontroller *entryViewController = (THEntryViewcontroller*)navigationController.topViewController;
         entryViewController.entry = self.entry;

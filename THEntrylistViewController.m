@@ -18,6 +18,8 @@
 
 @interface THEntrylistViewController ()<NSFetchedResultsControllerDelegate>
 @property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+
 
 @end
 
@@ -31,7 +33,43 @@
 
     self.title = @"My Diary";
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    [self createToolbar];
 
+}
+
+
+#pragma toolbar
+- (void)createToolbar {
+    
+    CGRect frame = CGRectMake(0, [[UIScreen mainScreen] bounds].size.height - 50, [[UIScreen mainScreen] bounds].size.width, 50);
+    UIToolbar *toolbar = [[UIToolbar alloc] initWithFrame:frame];
+    [toolbar setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin];
+    [toolbar setBarTintColor:[UIColor whiteColor]];
+    [self.view addSubview:toolbar];
+    
+    UIBarButtonItem *home = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"chart"] style:UIBarButtonItemStylePlain target:self action:@selector(goToHome:)];
+    [home setTintColor:[UIColor colorWithRed:0.4976 green:0.4952 blue:0.5 alpha:1.0]];
+    [home setTitle:@"HOME"];
+    [home setWidth:85];
+    
+    UIBarButtonItem *favorites = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"favorites"] style:UIBarButtonItemStylePlain target:self action:@selector(goToFavorites:)];
+    [favorites setTintColor:[UIColor colorWithRed:0.4976 green:0.4952 blue:0.5 alpha:1.0]];
+    [favorites setTitle:@"FAVORITES"];
+    [favorites setWidth:85];
+    
+    UIBarButtonItem *spacer = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil];
+    
+    NSArray *buttonItems = [NSArray arrayWithObjects:spacer, home, spacer, favorites,spacer, nil];
+    [toolbar setItems:buttonItems];
+    
+}
+
+- (void)goToHome:(NSFetchRequest*)fetchRequest {
+    
+}
+
+- (void)goToFavorites:(NSFetchRequest*)fetchRequest {
+ 
 
 }
 
@@ -60,6 +98,7 @@
     _fetchedResultsController.delegate = self;
     return _fetchedResultsController;
 }
+
 
 //delegate methods
 - (void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
@@ -113,8 +152,7 @@
 }
 
 
--(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
-{
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, 18)];
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 12, tableView.frame.size.width, 32)];
     [label setFont:[UIFont MediumFont:20]];
@@ -131,8 +169,7 @@
     return view;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
-{
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     return 50;
 }
 

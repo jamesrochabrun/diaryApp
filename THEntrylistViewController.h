@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface THEntrylistViewController : UITableViewController
+@interface THEntrylistViewController : UIViewController
 
 @end
