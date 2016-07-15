@@ -37,7 +37,7 @@
     self.dateLabel.text = [dateFormatter stringFromDate:date];
     
     if (entry.image) {
-        UIImageView *imageView = [[UIImageView alloc]init];
+        UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, self.bounds.size.width, self.bounds.size.height)];
         imageView.contentMode = UIViewContentModeScaleAspectFill;
         imageView.image = [UIImage imageWithData:entry.image];
         self.backgroundView = imageView;

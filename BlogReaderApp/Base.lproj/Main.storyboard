@@ -381,20 +381,21 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="7oJ-S9-DgR">
-                                <rect key="frame" x="0.0" y="64" width="320" height="46"/>
+                                <rect key="frame" x="0.0" y="64" width="320" height="39"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="45" id="Zep-KY-9Ba"/>
+                                    <constraint firstAttribute="height" constant="38" id="Zep-KY-9Ba"/>
                                 </constraints>
                                 <segments>
-                                    <segment title="First"/>
-                                    <segment title="Second"/>
+                                    <segment title="" image="list"/>
+                                    <segment title="" image="grid"/>
                                 </segments>
+                                <color key="tintColor" red="0.114" green="0.57220000000000004" blue="0.73619999999999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
                                     <action selector="segmentedControl:" destination="9Ob-CM-cgc" eventType="valueChanged" id="y3k-dA-8lV"/>
                                 </connections>
                             </segmentedControl>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="T2E-Ns-1x0">
-                                <rect key="frame" x="0.0" y="110" width="320" height="408"/>
+                                <rect key="frame" x="0.0" y="103" width="320" height="415"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="g9p-tJ-8Ky">
                                     <size key="itemSize" width="131" height="127"/>
@@ -433,15 +434,15 @@
                                     <outlet property="delegate" destination="9Ob-CM-cgc" id="H8f-hA-1kW"/>
                                 </connections>
                             </collectionView>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="343" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="6zy-qy-RLu">
-                                <rect key="frame" x="0.0" y="110" width="320" height="408"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="385" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="6zy-qy-RLu">
+                                <rect key="frame" x="0.0" y="103" width="320" height="415"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" rowHeight="343" id="W81-EG-9CX" customClass="THEntryCell">
-                                        <rect key="frame" x="0.0" y="28" width="320" height="343"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" rowHeight="385" id="W81-EG-9CX" customClass="THEntryCell">
+                                        <rect key="frame" x="0.0" y="28" width="320" height="385"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="W81-EG-9CX" id="lEM-a3-5rI">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="342"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="384"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uZE-nw-GPq">
@@ -457,7 +458,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GoG-Ce-4TW">
-                                                    <rect key="frame" x="36" y="224" width="260" height="100"/>
+                                                    <rect key="frame" x="36" y="266" width="260" height="100"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="100" id="PMq-fD-H8W"/>
                                                     </constraints>
@@ -519,7 +520,7 @@
                             <constraint firstItem="T2E-Ns-1x0" firstAttribute="bottom" secondItem="6zy-qy-RLu" secondAttribute="bottom" id="D2X-ya-kq8"/>
                             <constraint firstItem="6G8-1D-507" firstAttribute="top" secondItem="6zy-qy-RLu" secondAttribute="bottom" constant="50" id="MbO-EK-1k9"/>
                             <constraint firstItem="6zy-qy-RLu" firstAttribute="trailing" secondItem="7oJ-S9-DgR" secondAttribute="trailing" id="RfN-FH-WEZ"/>
-                            <constraint firstItem="6zy-qy-RLu" firstAttribute="top" secondItem="Yna-U3-aGJ" secondAttribute="topMargin" constant="110" id="ZFA-1c-Wfg"/>
+                            <constraint firstItem="6zy-qy-RLu" firstAttribute="top" secondItem="Yna-U3-aGJ" secondAttribute="topMargin" constant="103" id="ZFA-1c-Wfg"/>
                             <constraint firstItem="7oJ-S9-DgR" firstAttribute="leading" secondItem="Yna-U3-aGJ" secondAttribute="leading" id="fSV-cL-pfI"/>
                             <constraint firstItem="T2E-Ns-1x0" firstAttribute="leading" secondItem="7oJ-S9-DgR" secondAttribute="leading" id="hNB-Y5-jdg"/>
                             <constraint firstAttribute="trailing" secondItem="7oJ-S9-DgR" secondAttribute="trailing" id="mPU-ir-h20"/>
@@ -535,7 +536,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="gridCollectionViewController" destination="T2E-Ns-1x0" id="tsH-ly-GUf"/>
-                        <outlet property="segmetedControl" destination="7oJ-S9-DgR" id="Nj5-QD-0UG"/>
+                        <outlet property="segmentedControl" destination="7oJ-S9-DgR" id="PUZ-D5-1Ch"/>
                         <outlet property="tableView" destination="6zy-qy-RLu" id="HZ7-pl-vvf"/>
                     </connections>
                 </viewController>
@@ -619,12 +620,14 @@
         </scene>
     </scenes>
     <resources>
+        <image name="grid" width="45" height="45"/>
         <image name="huella@2x (1)" width="220" height="217"/>
         <image name="icn_average_lrg" width="15" height="15"/>
         <image name="icn_bad_lrg" width="15" height="15"/>
         <image name="icn_calendar" width="28" height="30"/>
         <image name="icn_good_lrg" width="15" height="15"/>
         <image name="icn_noimage" width="47" height="47"/>
+        <image name="list" width="50" height="50"/>
         <image name="zoom" width="94" height="94"/>
     </resources>
     <inferredMetricsTieBreakers>

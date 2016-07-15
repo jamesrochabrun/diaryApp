@@ -23,7 +23,8 @@
 @property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UICollectionView *gridCollectionViewController;
-@property (weak, nonatomic) IBOutlet UISegmentedControl *segmetedControl;
+
+@property (weak, nonatomic) IBOutlet UISegmentedControl *segmentedControl;
 @property NSBlockOperation *blockOperation;
 @property BOOL shouldReloadCollectionView;
 
@@ -36,14 +37,12 @@
     [super viewDidLoad];
     //this performs the fetch request
     //step 4
+    self.title = @"My Diary";
     [self.fetchedResultsController performFetch:nil];
     self.gridCollectionViewController.collectionViewLayout = [[GridCollectionViewFlowLayout alloc] init];
-
-    self.title = @"My Diary";
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    //collectionView
     [self createToolbar];
-
+    
 }
 
 #pragma show tableview or collectionView
@@ -55,11 +54,6 @@
         self.tableView.hidden = NO;
     }
 }
-
-//- (void)viewWillAppear:(BOOL)animated {
-//    [self.gridCollectionViewController reloadData];
-//}
-
 
 #pragma toolbar
 - (void)createToolbar {
@@ -227,8 +221,8 @@
 
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, 18)];
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 12, tableView.frame.size.width, 32)];
-    [label setFont:[UIFont MediumFont:20]];
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 4, tableView.frame.size.width, 25)];
+    [label setFont:[UIFont regularFont:15]];
     [label setTextAlignment:NSTextAlignmentCenter];
     [label setTextColor:[UIColor newGrayColor]];
     //NSFETCHRESULTCONTROLLER
@@ -244,7 +238,7 @@
 
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return 50;
+    return 30;
 }
 
 

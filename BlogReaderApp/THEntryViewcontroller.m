@@ -84,7 +84,7 @@
     self.dateLabel.font = [UIFont regularFont:15];
     
     //setting the counter
-    self.counterLabel.text = [NSString stringWithFormat:@"%lu / max 210", self.textView.text.length ];
+    self.counterLabel.text = [NSString stringWithFormat:@"%lu / max 210", (unsigned long)self.textView.text.length ];
 }
 
 - (void)loadLocation {
@@ -209,7 +209,7 @@
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
     
-    self.counterLabel.text = [NSString stringWithFormat:@"%lu / max 210", self.textView.text.length ];
+    self.counterLabel.text = [NSString stringWithFormat:@"%lu / max 210", (unsigned long)self.textView.text.length ];
     
     BOOL maxCounter = textView.text.length + (text.length - range.length) <= 210;
 
