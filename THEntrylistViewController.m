@@ -45,6 +45,7 @@
     
 }
 
+
 #pragma show tableview or collectionView
 - (IBAction)segmentedControl:(UISegmentedControl *)sender {
     
@@ -64,12 +65,12 @@
     [toolbar setBarTintColor:[UIColor whiteColor]];
     [self.view addSubview:toolbar];
     
-    UIBarButtonItem *home = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"chart"] style:UIBarButtonItemStylePlain target:self action:@selector(goToHome:)];
+    UIBarButtonItem *home = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"chart"] style:UIBarButtonItemStylePlain target:self action:@selector(goToHome)];
     [home setTintColor:[UIColor colorWithRed:0.4976 green:0.4952 blue:0.5 alpha:1.0]];
     [home setTitle:@"HOME"];
     [home setWidth:85];
     
-    UIBarButtonItem *favorites = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"favorites"] style:UIBarButtonItemStylePlain target:self action:@selector(goToFavorites:)];
+    UIBarButtonItem *favorites = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"favorites"] style:UIBarButtonItemStylePlain target:self action:@selector(goToFavorites)];
     [favorites setTintColor:[UIColor colorWithRed:0.4976 green:0.4952 blue:0.5 alpha:1.0]];
     [favorites setTitle:@"FAVORITES"];
     [favorites setWidth:85];
@@ -81,12 +82,36 @@
     
 }
 
-- (void)goToHome:(NSFetchRequest*)fetchRequest {
+- (void)goToHome {
     
+    THCoreDataStack *coreDataStack = [THCoreDataStack  defaultStack];
+
+    NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"THDiaryEntry"];
+    fetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"date" ascending:NO]];
+    
+    _fetchedResultsController = [[NSFetchedResultsController alloc]initWithFetchRequest:fetchRequest managedObjectContext:coreDataStack.managedObjectContext sectionNameKeyPath:@"sectionName" cacheName:nil];
+    _fetchedResultsController.delegate = self;
+
+    [self.fetchedResultsController performFetch:nil];
+    [self.tableView reloadData];
+    [self.gridCollectionViewController reloadData];
 }
 
-- (void)goToFavorites:(NSFetchRequest*)fetchRequest {
- 
+- (void)goToFavorites{
+    
+    THCoreDataStack *coreDataStack = [THCoreDataStack  defaultStack];
+
+    NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"THDiaryEntry"];
+    fetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"date" ascending:NO]];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"isFavorite == %d", YES];
+    [fetchRequest setPredicate:predicate];
+    
+    _fetchedResultsController = [[NSFetchedResultsController alloc]initWithFetchRequest:fetchRequest managedObjectContext:coreDataStack.managedObjectContext sectionNameKeyPath:@"sectionName" cacheName:nil];
+    _fetchedResultsController.delegate = self;
+
+    [self.fetchedResultsController performFetch:nil];
+    [self.tableView reloadData];
+    [self.gridCollectionViewController reloadData];
 }
 
 #pragma Coredata Methods

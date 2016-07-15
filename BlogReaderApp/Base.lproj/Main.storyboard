@@ -405,7 +405,7 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" id="8jW-rO-XCX" customClass="GridCollectionViewCell">
-                                        <rect key="frame" x="0.0" y="64" width="131" height="127"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="131" height="127"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="131" height="127"/>
