@@ -10,6 +10,11 @@
 @class THDiaryEntry;
 
 @interface GridCollectionViewCell : UICollectionViewCell
+@property (weak, nonatomic) IBOutlet UIImageView *moodImageView;
+
+
+
 - (void)configureGridCellForEntry:(THDiaryEntry*)entry;
+
 
 @end

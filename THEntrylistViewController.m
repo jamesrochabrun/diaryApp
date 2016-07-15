@@ -254,13 +254,21 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
     if ([segue.identifier isEqual :@"show"]) {
+        
         UITableViewCell *cell = sender;
         NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
         UINavigationController *navigationController = segue.destinationViewController;
         DetailViewController *detailViewController = (DetailViewController*)navigationController.topViewController;
         detailViewController.entry = [self.fetchedResultsController objectAtIndexPath:indexPath];
         NSLog(@"show details %@", detailViewController.entry);
-    }
+        
+    } else if ([segue.identifier isEqualToString:@"showFromGrid"]) {
+        
+        UICollectionViewCell *cell = sender;
+        NSIndexPath *indexPath = [self.gridCollectionViewController indexPathForCell:cell];
+        UINavigationController *navigationController = segue.destinationViewController;
+        DetailViewController *detailViewController = (DetailViewController*)navigationController.topViewController;
+        detailViewController.entry = [self.fetchedResultsController objectAtIndexPath:indexPath];    }
 }
 
 

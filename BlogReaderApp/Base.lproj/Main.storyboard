@@ -409,8 +409,23 @@
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="131" height="127"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="AEE-vc-nbZ">
+                                                    <rect key="frame" x="7" y="7" width="28" height="25"/>
+                                                </imageView>
+                                            </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
+                                        <constraints>
+                                            <constraint firstItem="AEE-vc-nbZ" firstAttribute="top" secondItem="8jW-rO-XCX" secondAttribute="topMargin" constant="-1" id="Ugy-5z-Id0"/>
+                                            <constraint firstItem="AEE-vc-nbZ" firstAttribute="leading" secondItem="8jW-rO-XCX" secondAttribute="leadingMargin" constant="-1" id="b6S-Hu-e6s"/>
+                                            <constraint firstAttribute="bottomMargin" secondItem="AEE-vc-nbZ" secondAttribute="bottom" constant="87" id="rgr-Yp-mtI"/>
+                                            <constraint firstAttribute="trailingMargin" secondItem="AEE-vc-nbZ" secondAttribute="trailing" constant="88" id="xhv-Ag-agd"/>
+                                        </constraints>
+                                        <connections>
+                                            <outlet property="moodImageView" destination="AEE-vc-nbZ" id="uKF-5D-MxA"/>
+                                            <segue destination="6qr-ka-6OA" kind="modal" identifier="showFromGrid" id="wab-nu-Vyw"/>
+                                        </connections>
                                     </collectionViewCell>
                                 </cells>
                                 <connections>
@@ -613,6 +628,7 @@
         <image name="zoom" width="94" height="94"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="wab-nu-Vyw"/>
         <segue reference="ZZb-sx-dDS"/>
     </inferredMetricsTieBreakers>
 </document>
