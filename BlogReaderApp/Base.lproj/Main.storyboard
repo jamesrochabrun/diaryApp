@@ -380,12 +380,50 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="7oJ-S9-DgR">
+                                <rect key="frame" x="0.0" y="64" width="320" height="46"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="45" id="Zep-KY-9Ba"/>
+                                </constraints>
+                                <segments>
+                                    <segment title="First"/>
+                                    <segment title="Second"/>
+                                </segments>
+                                <connections>
+                                    <action selector="segmentedControl:" destination="9Ob-CM-cgc" eventType="valueChanged" id="y3k-dA-8lV"/>
+                                </connections>
+                            </segmentedControl>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="T2E-Ns-1x0">
+                                <rect key="frame" x="0.0" y="110" width="320" height="408"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="g9p-tJ-8Ky">
+                                    <size key="itemSize" width="131" height="127"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" id="8jW-rO-XCX" customClass="GridCollectionViewCell">
+                                        <rect key="frame" x="0.0" y="64" width="131" height="127"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="131" height="127"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                    </collectionViewCell>
+                                </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="9Ob-CM-cgc" id="56F-tf-Q8D"/>
+                                    <outlet property="delegate" destination="9Ob-CM-cgc" id="H8f-hA-1kW"/>
+                                </connections>
+                            </collectionView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="343" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="6zy-qy-RLu">
-                                <rect key="frame" x="0.0" y="45" width="320" height="523"/>
+                                <rect key="frame" x="0.0" y="110" width="320" height="408"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" rowHeight="343" id="W81-EG-9CX" customClass="THEntryCell">
-                                        <rect key="frame" x="0.0" y="92" width="320" height="343"/>
+                                        <rect key="frame" x="0.0" y="28" width="320" height="343"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="W81-EG-9CX" id="lEM-a3-5rI">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="342"/>
@@ -457,24 +495,18 @@
                                     <outlet property="delegate" destination="9Ob-CM-cgc" id="xMs-bW-JrT"/>
                                 </connections>
                             </tableView>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="7oJ-S9-DgR">
-                                <rect key="frame" x="0.0" y="64" width="320" height="46"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="45" id="Zep-KY-9Ba"/>
-                                </constraints>
-                                <segments>
-                                    <segment title="First"/>
-                                    <segment title="Second"/>
-                                </segments>
-                            </segmentedControl>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="6zy-qy-RLu" firstAttribute="leading" secondItem="7oJ-S9-DgR" secondAttribute="leading" id="Ild-71-JQ5"/>
-                            <constraint firstItem="6zy-qy-RLu" firstAttribute="bottom" secondItem="6G8-1D-507" secondAttribute="top" id="Jry-Jf-6K6"/>
-                            <constraint firstItem="6zy-qy-RLu" firstAttribute="trailing" secondItem="7oJ-S9-DgR" secondAttribute="trailing" id="fQw-aO-G1z"/>
+                            <constraint firstItem="T2E-Ns-1x0" firstAttribute="trailing" secondItem="7oJ-S9-DgR" secondAttribute="trailing" id="294-Cv-165"/>
+                            <constraint firstItem="6zy-qy-RLu" firstAttribute="leading" secondItem="7oJ-S9-DgR" secondAttribute="leading" id="9At-ul-3nl"/>
+                            <constraint firstItem="T2E-Ns-1x0" firstAttribute="top" secondItem="7oJ-S9-DgR" secondAttribute="bottom" constant="1" id="BvW-Da-hFg"/>
+                            <constraint firstItem="T2E-Ns-1x0" firstAttribute="bottom" secondItem="6zy-qy-RLu" secondAttribute="bottom" id="D2X-ya-kq8"/>
+                            <constraint firstItem="6G8-1D-507" firstAttribute="top" secondItem="6zy-qy-RLu" secondAttribute="bottom" constant="50" id="MbO-EK-1k9"/>
+                            <constraint firstItem="6zy-qy-RLu" firstAttribute="trailing" secondItem="7oJ-S9-DgR" secondAttribute="trailing" id="RfN-FH-WEZ"/>
+                            <constraint firstItem="6zy-qy-RLu" firstAttribute="top" secondItem="Yna-U3-aGJ" secondAttribute="topMargin" constant="110" id="ZFA-1c-Wfg"/>
                             <constraint firstItem="7oJ-S9-DgR" firstAttribute="leading" secondItem="Yna-U3-aGJ" secondAttribute="leading" id="fSV-cL-pfI"/>
-                            <constraint firstItem="6zy-qy-RLu" firstAttribute="top" secondItem="Yna-U3-aGJ" secondAttribute="topMargin" constant="45" id="h0i-vP-vp4"/>
+                            <constraint firstItem="T2E-Ns-1x0" firstAttribute="leading" secondItem="7oJ-S9-DgR" secondAttribute="leading" id="hNB-Y5-jdg"/>
                             <constraint firstAttribute="trailing" secondItem="7oJ-S9-DgR" secondAttribute="trailing" id="mPU-ir-h20"/>
                             <constraint firstItem="7oJ-S9-DgR" firstAttribute="top" secondItem="pzc-pV-dJC" secondAttribute="bottom" id="nz4-0t-PX1"/>
                         </constraints>
@@ -487,6 +519,8 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="gridCollectionViewController" destination="T2E-Ns-1x0" id="tsH-ly-GUf"/>
+                        <outlet property="segmetedControl" destination="7oJ-S9-DgR" id="Nj5-QD-0UG"/>
                         <outlet property="tableView" destination="6zy-qy-RLu" id="HZ7-pl-vvf"/>
                     </connections>
                 </viewController>

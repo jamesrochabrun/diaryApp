@@ -32,6 +32,8 @@
 		7B74B9B81CF8148D00F69544 /* THEntryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B74B9B71CF8148D00F69544 /* THEntryCell.m */; };
 		7BCF0D571CF8D4EC003E4CB1 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BCF0D561CF8D4EC003E4CB1 /* QuartzCore.framework */; };
 		7BCF0D591CF8D6F2003E4CB1 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BCF0D581CF8D6F2003E4CB1 /* CoreLocation.framework */; };
+		7BDB91681D38886D0004EB6B /* GridCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BDB91671D38886D0004EB6B /* GridCollectionViewCell.m */; };
+		7BDB916B1D388A930004EB6B /* GridCollectionViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BDB916A1D388A930004EB6B /* GridCollectionViewFlowLayout.m */; };
 		7BEB6BCB1CFE49E000C018FD /* LocalAuthentication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BEB6BCA1CFE49E000C018FD /* LocalAuthentication.framework */; };
 		7BF359911CFE14F300ABB239 /* ImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BF359901CFE14F300ABB239 /* ImageViewController.m */; };
 /* End PBXBuildFile section */
@@ -89,6 +91,10 @@
 		7B74B9B71CF8148D00F69544 /* THEntryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = THEntryCell.m; path = BlogReaderApp/THEntryCell.m; sourceTree = "<group>"; };
 		7BCF0D561CF8D4EC003E4CB1 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		7BCF0D581CF8D6F2003E4CB1 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		7BDB91661D38886D0004EB6B /* GridCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GridCollectionViewCell.h; sourceTree = "<group>"; };
+		7BDB91671D38886D0004EB6B /* GridCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GridCollectionViewCell.m; sourceTree = "<group>"; };
+		7BDB91691D388A930004EB6B /* GridCollectionViewFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GridCollectionViewFlowLayout.h; sourceTree = "<group>"; };
+		7BDB916A1D388A930004EB6B /* GridCollectionViewFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GridCollectionViewFlowLayout.m; sourceTree = "<group>"; };
 		7BEB6BCA1CFE49E000C018FD /* LocalAuthentication.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LocalAuthentication.framework; path = System/Library/Frameworks/LocalAuthentication.framework; sourceTree = SDKROOT; };
 		7BF3598F1CFE14F300ABB239 /* ImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageViewController.h; sourceTree = "<group>"; };
 		7BF359901CFE14F300ABB239 /* ImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageViewController.m; sourceTree = "<group>"; };
@@ -247,6 +253,10 @@
 		7B74B9B51CF80FBF00F69544 /* view */ = {
 			isa = PBXGroup;
 			children = (
+				7BDB91691D388A930004EB6B /* GridCollectionViewFlowLayout.h */,
+				7BDB916A1D388A930004EB6B /* GridCollectionViewFlowLayout.m */,
+				7BDB91661D38886D0004EB6B /* GridCollectionViewCell.h */,
+				7BDB91671D38886D0004EB6B /* GridCollectionViewCell.m */,
 				7B41FB7E1D2C10180091DC64 /* DoubleTapImage.h */,
 				7B41FB7F1D2C10180091DC64 /* DoubleTapImage.m */,
 				7B74B9B21CF80FAF00F69544 /* THNavigationController.h */,
@@ -366,6 +376,7 @@
 				7B74B9A61CF7B71D00F69544 /* THDiaryEntry+CoreDataProperties.m in Sources */,
 				7B74B9AC1CF7BC2300F69544 /* THEntryViewcontroller.m in Sources */,
 				7B380F3E1CFE92FC00EF3735 /* AuthenticationViewController.m in Sources */,
+				7BDB91681D38886D0004EB6B /* GridCollectionViewCell.m in Sources */,
 				7B470C291D27516D009C01D0 /* DetailViewController.m in Sources */,
 				7BF359911CFE14F300ABB239 /* ImageViewController.m in Sources */,
 				7B74B97A1CF7ABF200F69544 /* AppDelegate.m in Sources */,
@@ -376,6 +387,7 @@
 				7B470C231D272140009C01D0 /* UIFont+CustomFont.m in Sources */,
 				7B470C261D272429009C01D0 /* UIColor+CustomColor.m in Sources */,
 				7B41FB801D2C10180091DC64 /* DoubleTapImage.m in Sources */,
+				7BDB916B1D388A930004EB6B /* GridCollectionViewFlowLayout.m in Sources */,
 				7B74B9B41CF80FAF00F69544 /* THNavigationController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

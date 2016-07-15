@@ -14,11 +14,17 @@
 #import "UIColor+CustomColor.h"
 #import "UIFont+CustomFont.h"
 #import "DetailviewController.h"
+#import "GridCollectionViewCell.h"
+#import "GridCollectionViewFlowLayout.h"
 
 
-@interface THEntrylistViewController ()<NSFetchedResultsControllerDelegate>
+
+@interface THEntrylistViewController ()<NSFetchedResultsControllerDelegate,UITableViewDelegate,UITableViewDataSource,UICollectionViewDelegate,UICollectionViewDataSource>
 @property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UICollectionView *gridCollectionViewController;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *segmetedControl;
+
 
 
 @end
@@ -30,11 +36,23 @@
     //this performs the fetch request
     //step 4
     [self.fetchedResultsController performFetch:nil];
+    self.gridCollectionViewController.collectionViewLayout = [[GridCollectionViewFlowLayout alloc] init];
 
     self.title = @"My Diary";
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    //collectionView
     [self createToolbar];
 
+}
+
+#pragma show tableview or collectionView
+- (IBAction)segmentedControl:(UISegmentedControl *)sender {
+    
+    if (sender.selectedSegmentIndex == 1) {
+        self.tableView.hidden = YES;
+    } else {
+        self.tableView.hidden = NO;
+    }
 }
 
 
@@ -70,7 +88,6 @@
 
 - (void)goToFavorites:(NSFetchRequest*)fetchRequest {
  
-
 }
 
 #pragma Coredata Methods
@@ -104,9 +121,9 @@
 - (void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
     [self.tableView beginUpdates];
 }
-
-//step 8
-//delegate method
+//
+////step 8
+////delegate method
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
     [self.tableView endUpdates];
 }
@@ -151,7 +168,6 @@
     return  self.fetchedResultsController.sections.count;
 }
 
-
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, 18)];
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 12, tableView.frame.size.width, 32)];
@@ -169,13 +185,20 @@
     return view;
 }
 
+
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     return 50;
 }
 
+
 //step 6
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
+    id <NSFetchedResultsSectionInfo> sectionInfo = [[self.fetchedResultsController sections] objectAtIndex:section];
+    return [sectionInfo numberOfObjects];
+}
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     id <NSFetchedResultsSectionInfo> sectionInfo = [[self.fetchedResultsController sections] objectAtIndex:section];
     return [sectionInfo numberOfObjects];
 }
@@ -188,6 +211,14 @@
     THDiaryEntry *entry = [self.fetchedResultsController objectAtIndexPath:indexPath];
     [cell configureCellForEntry:entry];
     
+    return cell;
+}
+
+- (UICollectionViewCell*)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+  
+    GridCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell" forIndexPath:indexPath];
+    THDiaryEntry *entry = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    [cell configureGridCellForEntry:entry];    
     return cell;
 }
 
