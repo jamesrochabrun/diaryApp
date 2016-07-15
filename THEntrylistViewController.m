@@ -24,7 +24,8 @@
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UICollectionView *gridCollectionViewController;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segmetedControl;
-
+@property NSBlockOperation *blockOperation;
+@property BOOL shouldReloadCollectionView;
 
 
 @end
@@ -54,6 +55,10 @@
         self.tableView.hidden = NO;
     }
 }
+
+//- (void)viewWillAppear:(BOOL)animated {
+//    [self.gridCollectionViewController reloadData];
+//}
 
 
 #pragma toolbar
@@ -120,27 +125,65 @@
 //delegate methods
 - (void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
     [self.tableView beginUpdates];
+    self.shouldReloadCollectionView = NO;
+    self.blockOperation = [[NSBlockOperation alloc]init];
 }
 //
 ////step 8
 ////delegate method
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
     [self.tableView endUpdates];
+    
+    if (self.shouldReloadCollectionView) {
+        [self.gridCollectionViewController reloadData];
+    } else {
+        [self.gridCollectionViewController performBatchUpdates:^{
+            [self.blockOperation start];
+        } completion:nil];
+    }
 }
 
 //this performs the animation
+
 - (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath {
     
+    __weak UICollectionView *collectionView = self.gridCollectionViewController;
+    
     switch (type) {
-        case NSFetchedResultsChangeInsert:
+        case NSFetchedResultsChangeInsert: {
             [self.tableView insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+            if ([collectionView numberOfSections] > 0) {
+                if ([collectionView numberOfItemsInSection:indexPath.section] == 0) {
+                    self.shouldReloadCollectionView = YES;
+                } else {
+                    [self.blockOperation addExecutionBlock:^{
+                        [collectionView insertItemsAtIndexPaths:@[newIndexPath]];
+                    }];
+                }
+            } else {
+                self.shouldReloadCollectionView = YES;
+            }
             break;
-        case NSFetchedResultsChangeDelete:
+        }
+        case NSFetchedResultsChangeDelete: {
             [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+            if ([collectionView numberOfItemsInSection:indexPath.section] == 1) {
+                self.shouldReloadCollectionView = YES;
+            } else {
+                [self.blockOperation addExecutionBlock:^{
+                    [collectionView deleteItemsAtIndexPaths:@[indexPath]];
+                }];
+            }
             break;
-        case NSFetchedResultsChangeUpdate:
+        }
+            
+        case NSFetchedResultsChangeUpdate: {
             [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+            [self.blockOperation addExecutionBlock:^{
+                [collectionView reloadItemsAtIndexPaths:@[indexPath]];
+            }];
             break;
+        }
         default:
             break;
     }
@@ -149,23 +192,37 @@
 //if we dont use this method the app will crash when we delete tha last item
 - (void)controller:(NSFetchedResultsController *)controller didChangeSection:(id<NSFetchedResultsSectionInfo>)sectionInfo atIndex:(NSUInteger)sectionIndex forChangeType:(NSFetchedResultsChangeType)type {
     
+    __weak UICollectionView *collectionView = self.gridCollectionViewController;
+    
     switch (type) {
-        case NSFetchedResultsChangeInsert:
+        case NSFetchedResultsChangeInsert: {
             [self.tableView insertSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationAutomatic];
+            [self.blockOperation addExecutionBlock:^{
+                [collectionView insertSections:[NSIndexSet indexSetWithIndex:sectionIndex]];
+            }];
             break;
-        case NSFetchedResultsChangeDelete:
+        }
+        case NSFetchedResultsChangeDelete: {
             [self.tableView deleteSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationAutomatic];
+            [self.blockOperation addExecutionBlock:^{
+                [collectionView deleteSections:[NSIndexSet indexSetWithIndex:sectionIndex]];
+            }];
             break;
-            
+        }
         default:
             break;
     }
 }
 
+
 #pragma tableView methods
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return  self.fetchedResultsController.sections.count;
+}
+
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
+    return self.fetchedResultsController.sections.count;
 }
 
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
