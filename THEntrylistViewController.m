@@ -38,6 +38,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+
     //this performs the fetch request
     //step 4
     self.title = @"My Diary";
@@ -46,6 +47,11 @@
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self createToolbar];
     
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    self.navigationController.navigationBar.hidden = NO;
+
 }
 
 
@@ -68,24 +74,23 @@
     [toolbar setBarTintColor:[UIColor whiteColor]];
     [self.view addSubview:toolbar];
     
-    _home = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 38, 38)];
+    _home = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 38, 31)];
     [_home addTarget:self action:@selector(goToHome) forControlEvents:UIControlEventTouchUpInside];
     [_home setBackgroundImage:[UIImage imageNamed:@"home"] forState:UIControlStateNormal];
-    [_home setBackgroundImage:[UIImage imageNamed:@"grid"] forState:UIControlStateSelected];
+    [_home setBackgroundImage:[UIImage imageNamed:@"homeSelected"] forState:UIControlStateSelected];
     
     UIBarButtonItem *home = [[UIBarButtonItem alloc] initWithCustomView:_home];
     
-    _addEntry = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 38, 38)];
+    _addEntry = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 32, 32)];
     [_addEntry addTarget:self action:@selector(addentry) forControlEvents:UIControlEventTouchUpInside];
-    [_addEntry setBackgroundImage:[UIImage imageNamed:@"icn_bad"] forState:UIControlStateNormal];
-    [_addEntry setBackgroundImage:[UIImage imageNamed:@"icn_calendar"] forState:UIControlStateSelected];
+    [_addEntry setBackgroundImage:[UIImage imageNamed:@"add"] forState:UIControlStateNormal];
     
     UIBarButtonItem *addEntry = [[UIBarButtonItem alloc] initWithCustomView:_addEntry];
 
-    _favorites = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 38,38)];
+    _favorites = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 36,30)];
     [_favorites addTarget:self action:@selector(goToFavorites) forControlEvents:UIControlEventTouchUpInside];
-    [_favorites setBackgroundImage:[UIImage imageNamed:@"favorites"] forState:UIControlStateNormal];
-    [_favorites setBackgroundImage:[UIImage imageNamed:@"icn_average"] forState:UIControlStateSelected];
+    [_favorites setBackgroundImage:[UIImage imageNamed:@"love"] forState:UIControlStateNormal];
+    [_favorites setBackgroundImage:[UIImage imageNamed:@"favoriteSelected"] forState:UIControlStateSelected];
     
     UIBarButtonItem *favorites = [[UIBarButtonItem alloc] initWithCustomView:_favorites];
     
@@ -102,8 +107,9 @@
 
 - (void)goToHome {
     
-    [_favorites setSelected:NO];
     [_home setSelected:YES];
+    [_favorites setSelected:NO];
+    [_addEntry setSelected:NO];
     THCoreDataStack *coreDataStack = [THCoreDataStack  defaultStack];
 
     NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"THDiaryEntry"];
@@ -121,6 +127,8 @@
     
     [_favorites setSelected:YES];
     [_home setSelected:NO];
+    [_addEntry setSelected:NO];
+
     THCoreDataStack *coreDataStack = [THCoreDataStack  defaultStack];
 
     NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"THDiaryEntry"];

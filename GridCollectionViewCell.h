@@ -11,6 +11,7 @@
 
 @interface GridCollectionViewCell : UICollectionViewCell
 @property (weak, nonatomic) IBOutlet UIImageView *moodImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *redHeartImageView;
 
 
 

@@ -27,6 +27,12 @@
     self.view.backgroundColor = [UIColor mainColor];
     self.touchIDlabel.font = [UIFont regularFont:15];
     self.introductionLabel.font = [UIFont regularFont:20];
+
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    self.navigationController.navigationBar.hidden = YES;
+
 }
 
 #pragma localAutentication Touch Id

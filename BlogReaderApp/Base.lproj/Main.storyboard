@@ -323,7 +323,7 @@
                                     <constraint firstAttribute="width" constant="105" id="LWh-II-aeX"/>
                                     <constraint firstAttribute="height" constant="100" id="RKi-Xs-3wa"/>
                                 </constraints>
-                                <color key="tintColor" red="1" green="0.40000000600000002" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="tintColor" red="0.99519230769230771" green="0.99038461538461542" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="Button" image="huella@2x (1)"/>
                                 <connections>
                                     <segue destination="9Ob-CM-cgc" kind="push" identifier="success" id="WiY-Tx-qv0"/>
@@ -366,7 +366,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3bU-P3-jff" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="947" y="-154"/>
+            <point key="canvasLocation" x="1409" y="-148"/>
         </scene>
         <!--EntrylISTviewController-->
         <scene sceneID="cTQ-hD-Zqo">
@@ -414,17 +414,25 @@
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="AEE-vc-nbZ">
                                                     <rect key="frame" x="7" y="7" width="28" height="25"/>
                                                 </imageView>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="redHeart" translatesAutoresizingMaskIntoConstraints="NO" id="gFo-w8-a8q">
+                                                    <rect key="frame" x="97" y="99" width="24" height="20"/>
+                                                </imageView>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                         <constraints>
+                                            <constraint firstAttribute="trailingMargin" secondItem="gFo-w8-a8q" secondAttribute="trailing" constant="2" id="EKj-Fx-KtT"/>
                                             <constraint firstItem="AEE-vc-nbZ" firstAttribute="top" secondItem="8jW-rO-XCX" secondAttribute="topMargin" constant="-1" id="Ugy-5z-Id0"/>
+                                            <constraint firstItem="gFo-w8-a8q" firstAttribute="top" secondItem="8jW-rO-XCX" secondAttribute="topMargin" constant="91" id="WM4-IF-798"/>
                                             <constraint firstItem="AEE-vc-nbZ" firstAttribute="leading" secondItem="8jW-rO-XCX" secondAttribute="leadingMargin" constant="-1" id="b6S-Hu-e6s"/>
+                                            <constraint firstItem="gFo-w8-a8q" firstAttribute="bottom" secondItem="8jW-rO-XCX" secondAttribute="bottomMargin" id="esm-hS-ltl"/>
+                                            <constraint firstItem="gFo-w8-a8q" firstAttribute="leading" secondItem="8jW-rO-XCX" secondAttribute="leadingMargin" constant="89" id="i5h-xQ-OBL"/>
                                             <constraint firstAttribute="bottomMargin" secondItem="AEE-vc-nbZ" secondAttribute="bottom" constant="87" id="rgr-Yp-mtI"/>
                                             <constraint firstAttribute="trailingMargin" secondItem="AEE-vc-nbZ" secondAttribute="trailing" constant="88" id="xhv-Ag-agd"/>
                                         </constraints>
                                         <connections>
                                             <outlet property="moodImageView" destination="AEE-vc-nbZ" id="uKF-5D-MxA"/>
+                                            <outlet property="redHeartImageView" destination="gFo-w8-a8q" id="P7r-O9-YkK"/>
                                             <segue destination="6qr-ka-6OA" kind="modal" identifier="showFromGrid" id="wab-nu-Vyw"/>
                                         </connections>
                                     </collectionViewCell>
@@ -446,13 +454,13 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uZE-nw-GPq">
-                                                    <rect key="frame" x="83" y="17" width="186" height="21"/>
+                                                    <rect key="frame" x="83" y="17" width="149" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Esh-oq-efO">
-                                                    <rect key="frame" x="83" y="46" width="186" height="21"/>
+                                                    <rect key="frame" x="83" y="46" width="149" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -473,7 +481,7 @@
                                                         <constraint firstAttribute="width" constant="50" id="LqX-80-cBv"/>
                                                     </constraints>
                                                 </imageView>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icn_calendar" translatesAutoresizingMaskIntoConstraints="NO" id="o9s-pp-Vlt">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="o9s-pp-Vlt">
                                                     <rect key="frame" x="274" y="17" width="30" height="26"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="30" id="bC9-wC-wRz"/>
@@ -482,24 +490,25 @@
                                                 </imageView>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstAttribute="trailingMargin" secondItem="Esh-oq-efO" secondAttribute="trailing" constant="80" id="58M-7o-fdh"/>
                                                 <constraint firstItem="o9s-pp-Vlt" firstAttribute="top" secondItem="lEM-a3-5rI" secondAttribute="topMargin" constant="9" id="6wo-Ym-0jZ"/>
-                                                <constraint firstItem="GoG-Ce-4TW" firstAttribute="centerX" secondItem="uZE-nw-GPq" secondAttribute="centerX" constant="-10" id="EWi-mr-OY2"/>
+                                                <constraint firstItem="Esh-oq-efO" firstAttribute="top" secondItem="uZE-nw-GPq" secondAttribute="bottom" constant="8" symbolic="YES" id="F87-IO-I4O"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="GoG-Ce-4TW" secondAttribute="bottom" constant="10" id="FDl-DL-8iD"/>
                                                 <constraint firstItem="MfO-hI-3Rw" firstAttribute="top" secondItem="lEM-a3-5rI" secondAttribute="topMargin" constant="9" id="FK7-Zo-c2T"/>
-                                                <constraint firstItem="GoG-Ce-4TW" firstAttribute="centerX" secondItem="Esh-oq-efO" secondAttribute="centerX" constant="-10" id="M4Z-Bf-flt"/>
-                                                <constraint firstItem="uZE-nw-GPq" firstAttribute="top" secondItem="MfO-hI-3Rw" secondAttribute="top" id="XfW-Vz-atG"/>
-                                                <constraint firstItem="Esh-oq-efO" firstAttribute="top" secondItem="uZE-nw-GPq" secondAttribute="bottom" constant="8" symbolic="YES" id="aAH-e2-6Pt"/>
+                                                <constraint firstItem="uZE-nw-GPq" firstAttribute="leading" secondItem="Esh-oq-efO" secondAttribute="leading" id="FvG-E7-Ihn"/>
                                                 <constraint firstItem="MfO-hI-3Rw" firstAttribute="leading" secondItem="lEM-a3-5rI" secondAttribute="leadingMargin" constant="7" id="aDx-4a-hU5"/>
+                                                <constraint firstItem="uZE-nw-GPq" firstAttribute="top" secondItem="MfO-hI-3Rw" secondAttribute="top" id="da4-cl-Pik"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="GoG-Ce-4TW" secondAttribute="trailing" constant="16" id="ff0-Eq-iNp"/>
-                                                <constraint firstItem="uZE-nw-GPq" firstAttribute="leading" secondItem="Esh-oq-efO" secondAttribute="leading" id="fgT-gN-XeS"/>
+                                                <constraint firstItem="uZE-nw-GPq" firstAttribute="leading" secondItem="MfO-hI-3Rw" secondAttribute="trailing" constant="18" id="j6N-kP-vo8"/>
                                                 <constraint firstItem="GoG-Ce-4TW" firstAttribute="leading" secondItem="lEM-a3-5rI" secondAttribute="leadingMargin" constant="28" id="nJR-tt-cct"/>
+                                                <constraint firstItem="uZE-nw-GPq" firstAttribute="trailing" secondItem="Esh-oq-efO" secondAttribute="trailing" id="qYv-81-rX7"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="o9s-pp-Vlt" secondAttribute="trailing" constant="8" id="tKc-6a-DlB"/>
-                                                <constraint firstItem="uZE-nw-GPq" firstAttribute="leading" secondItem="MfO-hI-3Rw" secondAttribute="trailing" constant="18" id="vJK-wM-fys"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="bodyLabel" destination="GoG-Ce-4TW" id="60u-F4-5uK"/>
                                             <outlet property="dateLabel" destination="uZE-nw-GPq" id="IvG-nI-DUr"/>
+                                            <outlet property="heartImage" destination="o9s-pp-Vlt" id="64F-eR-4C0"/>
                                             <outlet property="locationLabel" destination="Esh-oq-efO" id="UWH-9h-Atz"/>
                                             <outlet property="moodImageView" destination="MfO-hI-3Rw" id="2da-iY-Ui2"/>
                                             <segue destination="6qr-ka-6OA" kind="modal" identifier="show" id="8Bn-ls-KgX"/>
@@ -574,7 +583,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="urV-S5-TAx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="523" y="-154"/>
+            <point key="canvasLocation" x="971" y="-148"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="82n-hO-TX0">
@@ -620,10 +629,10 @@
         <image name="huella@2x (1)" width="220" height="217"/>
         <image name="icn_average_lrg" width="15" height="15"/>
         <image name="icn_bad_lrg" width="15" height="15"/>
-        <image name="icn_calendar" width="28" height="30"/>
         <image name="icn_good_lrg" width="15" height="15"/>
         <image name="icn_noimage" width="47" height="47"/>
         <image name="list" width="50" height="50"/>
+        <image name="redHeart" width="75" height="65"/>
         <image name="zoom" width="94" height="94"/>
     </resources>
     <inferredMetricsTieBreakers>

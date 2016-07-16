@@ -51,12 +51,20 @@
         self.moodImageView.image = [UIImage imageNamed:@"icn_bad"];
     }
     
-    
     if (entry.location.length > 0) {
         self.locationLabel.text = entry.location;
     } else {
         self.locationLabel.text = @"No Location";
     }
+    
+    BOOL isFavorite = [entry.isFavorite boolValue];
+    if (isFavorite) {
+        self.heartImage.hidden = NO;
+        [self.heartImage setImage:[UIImage imageNamed:@"redHeart"]];
+    } else {
+        self.heartImage.hidden = YES;
+    }
+    
 }
 
 

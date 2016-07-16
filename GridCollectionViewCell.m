@@ -27,6 +27,13 @@
         self.moodImageView.image = [UIImage imageNamed:@"icn_bad"];
     }
     
+    BOOL isFavorite = [entry.isFavorite boolValue];
+    if (isFavorite) {
+        self.redHeartImageView.hidden = NO;
+        [self.redHeartImageView setImage:[UIImage imageNamed:@"redHeart"]];
+    } else {
+        self.redHeartImageView.hidden = YES;
+    }
 }
 
 
