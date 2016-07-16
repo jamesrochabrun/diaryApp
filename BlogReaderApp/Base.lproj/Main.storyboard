@@ -323,7 +323,7 @@
                                     <constraint firstAttribute="width" constant="105" id="LWh-II-aeX"/>
                                     <constraint firstAttribute="height" constant="100" id="RKi-Xs-3wa"/>
                                 </constraints>
-                                <color key="tintColor" red="0.99519230769230771" green="0.99038461538461542" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="tintColor" red="0.9882352941176471" green="0.36470588235294116" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="Button" image="huella@2x (1)"/>
                                 <connections>
                                     <segue destination="9Ob-CM-cgc" kind="push" identifier="success" id="WiY-Tx-qv0"/>
@@ -335,13 +335,12 @@
                                     <constraint firstAttribute="height" constant="21" id="VhY-9X-MX3"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="GothamNarrow-Book" family="Gotham Narrow" pointSize="17"/>
-                                <color key="textColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.93725490199999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This app needs authentication" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aon-ol-yPO">
                                 <rect key="frame" x="16" y="518" width="288" height="21"/>
                                 <fontDescription key="fontDescription" name="GothamNarrow-Book" family="Gotham Narrow" pointSize="17"/>
-                                <color key="textColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.93725490199999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="textColor" red="0.0039215686269999999" green="0.0039215686269999999" blue="0.0039215686269999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>

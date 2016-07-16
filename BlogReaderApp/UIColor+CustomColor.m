@@ -19,7 +19,7 @@
 }
 
 + (UIColor*)alertColor {
-    return [UIColor colorWithRed:0.9882 green:0.3389 blue:0.3428 alpha:1.0];
+    return [UIColor colorWithRed:0.9883 green:0.3432 blue:0.3428 alpha:1.0];
 }
 
 @end
