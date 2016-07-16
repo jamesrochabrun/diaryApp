@@ -12,7 +12,6 @@
 
 @interface THEntryCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
-@property (weak, nonatomic) IBOutlet UILabel *bodyLabel;
 @property (weak, nonatomic) IBOutlet UILabel *locationLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *moodImageView;
 @property (weak, nonatomic) IBOutlet UIImageView *heartImage;

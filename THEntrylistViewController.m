@@ -360,25 +360,28 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
     dispatch_async(dispatch_get_main_queue(), ^(void){
-
-    if ([segue.identifier isEqual :@"show"]) {
         
-        UITableViewCell *cell = sender;
-        NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
-        UINavigationController *navigationController = segue.destinationViewController;
-        DetailViewController *detailViewController = (DetailViewController*)navigationController.topViewController;
-        detailViewController.entry = [self.fetchedResultsController objectAtIndexPath:indexPath];
-        NSLog(@"show details %@", detailViewController.entry);
-        
-    } else if ([segue.identifier isEqualToString:@"showFromGrid"]) {
-        
-        UICollectionViewCell *cell = sender;
-        NSIndexPath *indexPath = [self.gridCollectionViewController indexPathForCell:cell];
-        UINavigationController *navigationController = segue.destinationViewController;
-        DetailViewController *detailViewController = (DetailViewController*)navigationController.topViewController;
-        detailViewController.entry = [self.fetchedResultsController objectAtIndexPath:indexPath];    }
+        if ([segue.identifier isEqual :@"show"]) {
+            
+            THEntryCell *cell = sender;
+            NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+            UINavigationController *navigationController = segue.destinationViewController;
+            DetailViewController *detailViewController = (DetailViewController*)navigationController.topViewController;
+            detailViewController.entry = [self.fetchedResultsController objectAtIndexPath:indexPath];
+            NSLog(@"%@", detailViewController.entry.body);
+            
+        } else if ([segue.identifier isEqualToString:@"showFromGrid"]) {
+            
+            GridCollectionViewCell *cell = sender;
+            NSIndexPath *indexPath = [self.gridCollectionViewController indexPathForCell:cell];
+            UINavigationController *navigationController = segue.destinationViewController;
+            DetailViewController *detailViewController = (DetailViewController*)navigationController.topViewController;
+            THDiaryEntry *entry = [self.fetchedResultsController objectAtIndexPath:indexPath];
+            detailViewController.entry = entry;
+            NSLog(@"%@", entry.body);
+        }
     });
-
+    
 }
 
 

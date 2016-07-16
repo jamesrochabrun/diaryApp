@@ -18,7 +18,7 @@
     [super awakeFromNib];
     self.selectionStyle = UITableViewCellSelectionStyleNone;
     
-    NSArray *labels = @[self.bodyLabel , self.locationLabel , self.dateLabel ];
+    NSArray *labels = @[self.locationLabel , self.dateLabel ];
     for (UILabel *label in labels) {
         label.font = [UIFont regularFont:15];
         label.textColor = [UIColor whiteColor];
@@ -27,9 +27,7 @@
 
 - (void)configureCellForEntry:(THDiaryEntry*)entry {
     
-    self.bodyLabel.numberOfLines = 0;
-    [self.bodyLabel sizeToFit];
-    self.bodyLabel.text = entry.body;
+
     self.locationLabel.text = entry.location;
     NSDateFormatter *dateFormatter = [NSDateFormatter new];
     [dateFormatter setDateFormat:@"EEEE, MMMM d yyyy"];

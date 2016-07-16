@@ -28,12 +28,20 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
+    NSLog(@"existe %@", self.entry.body);
+    [self showEntryData];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [self showEntryData];
+}
+
+- (void)showEntryData {
     self.doubleTapImage.image = [UIImage imageWithData:self.entry.image];
     [self.isFavoriteButton setImage:[UIImage imageNamed:@"favorite"] forState:UIControlStateNormal];
     [self.isFavoriteButton setImage:[UIImage imageNamed:@"favoriteFull"] forState:UIControlStateSelected];
     self.entryLabel.text = self.entry.body;
-
+    
     if(self.entry.mood == DiaryEntryMoodGood) {
         self.moodImage.image = [UIImage imageNamed:@"icn_happy"];
     } else if (self.entry.mood == DiaryEntryMoodAverage) {
@@ -52,6 +60,7 @@
         [self.isFavoriteButton setSelected:NO];
     }
 }
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -124,7 +133,6 @@
         [self.isFavoriteButton setSelected:NO];
         [self changingIsFavoriteToFalse];
     }
-    NSLog(@"hello");
 }
 
 
