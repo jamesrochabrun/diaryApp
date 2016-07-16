@@ -147,15 +147,16 @@
         entry.location = self.location;
         BOOL myBool = NO;
         entry.isFavorite = [NSNumber numberWithBool:myBool];
-        NSLog(@"location: %@", self.location);
         
         if (self.location == nil) {
-            NSLog(@"heloo");
+            NSLog(@"location not added");
         }
         
         [coreDataStack saveContext];
     }
 }
+
+
 
 - (void)updateDiaryEntry {
     

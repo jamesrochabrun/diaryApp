@@ -361,24 +361,22 @@
     
     dispatch_async(dispatch_get_main_queue(), ^(void){
         
-        if ([segue.identifier isEqual :@"show"]) {
+        if ([segue.identifier isEqual:@"showFromGrid"]) {
             
-            THEntryCell *cell = sender;
-            NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
-            UINavigationController *navigationController = segue.destinationViewController;
-            DetailViewController *detailViewController = (DetailViewController*)navigationController.topViewController;
-            detailViewController.entry = [self.fetchedResultsController objectAtIndexPath:indexPath];
-            NSLog(@"%@", detailViewController.entry.body);
-            
-        } else if ([segue.identifier isEqualToString:@"showFromGrid"]) {
-            
-            GridCollectionViewCell *cell = sender;
-            NSIndexPath *indexPath = [self.gridCollectionViewController indexPathForCell:cell];
+            NSIndexPath *indexPath = [self.gridCollectionViewController indexPathForCell:sender];
             UINavigationController *navigationController = segue.destinationViewController;
             DetailViewController *detailViewController = (DetailViewController*)navigationController.topViewController;
             THDiaryEntry *entry = [self.fetchedResultsController objectAtIndexPath:indexPath];
             detailViewController.entry = entry;
-            NSLog(@"%@", entry.body);
+         
+        } else if ([segue.identifier isEqual:@"show"]) {
+            
+            NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
+            UINavigationController *navigationController = segue.destinationViewController;
+            DetailViewController *detailViewController = (DetailViewController*)navigationController.topViewController;
+            detailViewController.entry = [self.fetchedResultsController objectAtIndexPath: indexPath];
+            
+      
         }
     });
     
