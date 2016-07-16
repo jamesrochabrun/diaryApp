@@ -28,7 +28,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    NSLog(@"existe %@", self.entry.body);
     [self showEntryData];
 }
 
