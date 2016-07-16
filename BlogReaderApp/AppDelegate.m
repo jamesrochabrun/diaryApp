@@ -24,9 +24,10 @@
 //custom apereance method
 - (void)setupAppereance {
     UINavigationBar *navigationBarAppereance = [UINavigationBar appearance];
-    navigationBarAppereance.barTintColor = [UIColor colorWithRed:0.114 green:0.5722 blue:0.7362 alpha:1.0];
-    navigationBarAppereance.tintColor = [UIColor whiteColor];
-    navigationBarAppereance.titleTextAttributes = @{NSForegroundColorAttributeName:[UIColor whiteColor]};
+    navigationBarAppereance.barTintColor = [UIColor whiteColor];
+    navigationBarAppereance.tintColor = [UIColor colorWithRed:0.0049 green:0.0049 blue:0.0049 alpha:1.0];
+    navigationBarAppereance.titleTextAttributes = @{NSForegroundColorAttributeName:[UIColor colorWithRed:0.0049 green:0.0049 blue:0.0049 alpha:1.0],
+                                                    NSFontAttributeName:[UIFont fontWithName:@"billabong" size:30]};
     
 }
 

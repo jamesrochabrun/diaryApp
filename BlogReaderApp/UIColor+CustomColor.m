@@ -11,7 +11,7 @@
 @implementation UIColor (CustomColor)
 
 + (UIColor*)mainColor {
-    return [UIColor colorWithRed:0.114 green:0.5722 blue:0.7362 alpha:1.0];
+    return [UIColor colorWithRed:0.0049 green:0.0049 blue:0.0049 alpha:1.0];
 }
 
 + (UIColor*)newGrayColor {

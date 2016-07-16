@@ -389,7 +389,7 @@
                                     <segment title="" image="list"/>
                                     <segment title="" image="grid"/>
                                 </segments>
-                                <color key="tintColor" red="0.114" green="0.57220000000000004" blue="0.73619999999999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="tintColor" red="0.0039215686269999999" green="0.0039215686269999999" blue="0.0039215686269999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
                                     <action selector="segmentedControl:" destination="9Ob-CM-cgc" eventType="valueChanged" id="y3k-dA-8lV"/>
                                 </connections>
@@ -527,17 +527,12 @@
                             <constraint firstItem="7oJ-S9-DgR" firstAttribute="top" secondItem="pzc-pV-dJC" secondAttribute="bottom" id="nz4-0t-PX1"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="Oq9-rK-nS0">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="Sz3-RT-bjd">
-                            <connections>
-                                <segue destination="PXd-Lp-5Ze" kind="modal" identifier="add" id="ZZb-sx-dDS"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="Oq9-rK-nS0"/>
                     <connections>
                         <outlet property="gridCollectionViewController" destination="T2E-Ns-1x0" id="tsH-ly-GUf"/>
                         <outlet property="segmentedControl" destination="7oJ-S9-DgR" id="PUZ-D5-1Ch"/>
                         <outlet property="tableView" destination="6zy-qy-RLu" id="HZ7-pl-vvf"/>
+                        <segue destination="PXd-Lp-5Ze" kind="modal" identifier="add" id="ka5-ci-gpE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uHT-qZ-qMM" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -549,6 +544,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="PXd-Lp-5Ze" customClass="THNavigationController" sceneMemberID="viewController">
                     <toolbarItems/>
+                    <navigationItem key="navigationItem" id="qs3-VY-qNh"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="wGj-Xf-Sd1">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -632,6 +628,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="wab-nu-Vyw"/>
-        <segue reference="ZZb-sx-dDS"/>
+        <segue reference="ka5-ci-gpE"/>
     </inferredMetricsTieBreakers>
 </document>

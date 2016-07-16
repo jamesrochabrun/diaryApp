@@ -27,6 +27,9 @@
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segmentedControl;
 @property NSBlockOperation *blockOperation;
 @property BOOL shouldReloadCollectionView;
+@property UIButton *home;
+@property UIButton *favorites;
+@property UIButton *addEntry;
 
 
 @end
@@ -65,25 +68,42 @@
     [toolbar setBarTintColor:[UIColor whiteColor]];
     [self.view addSubview:toolbar];
     
-    UIBarButtonItem *home = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"chart"] style:UIBarButtonItemStylePlain target:self action:@selector(goToHome)];
-    [home setTintColor:[UIColor colorWithRed:0.4976 green:0.4952 blue:0.5 alpha:1.0]];
-    [home setTitle:@"HOME"];
-    [home setWidth:85];
+    _home = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 38, 38)];
+    [_home addTarget:self action:@selector(goToHome) forControlEvents:UIControlEventTouchUpInside];
+    [_home setBackgroundImage:[UIImage imageNamed:@"home"] forState:UIControlStateNormal];
+    [_home setBackgroundImage:[UIImage imageNamed:@"grid"] forState:UIControlStateSelected];
     
-    UIBarButtonItem *favorites = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"favorites"] style:UIBarButtonItemStylePlain target:self action:@selector(goToFavorites)];
-    [favorites setTintColor:[UIColor colorWithRed:0.4976 green:0.4952 blue:0.5 alpha:1.0]];
-    [favorites setTitle:@"FAVORITES"];
-    [favorites setWidth:85];
+    UIBarButtonItem *home = [[UIBarButtonItem alloc] initWithCustomView:_home];
+    
+    _addEntry = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 38, 38)];
+    [_addEntry addTarget:self action:@selector(addentry) forControlEvents:UIControlEventTouchUpInside];
+    [_addEntry setBackgroundImage:[UIImage imageNamed:@"icn_bad"] forState:UIControlStateNormal];
+    [_addEntry setBackgroundImage:[UIImage imageNamed:@"icn_calendar"] forState:UIControlStateSelected];
+    
+    UIBarButtonItem *addEntry = [[UIBarButtonItem alloc] initWithCustomView:_addEntry];
+
+    _favorites = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 38,38)];
+    [_favorites addTarget:self action:@selector(goToFavorites) forControlEvents:UIControlEventTouchUpInside];
+    [_favorites setBackgroundImage:[UIImage imageNamed:@"favorites"] forState:UIControlStateNormal];
+    [_favorites setBackgroundImage:[UIImage imageNamed:@"icn_average"] forState:UIControlStateSelected];
+    
+    UIBarButtonItem *favorites = [[UIBarButtonItem alloc] initWithCustomView:_favorites];
     
     UIBarButtonItem *spacer = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil];
     
-    NSArray *buttonItems = [NSArray arrayWithObjects:spacer, home, spacer, favorites,spacer, nil];
+    NSArray *buttonItems = [NSArray arrayWithObjects:spacer, home, spacer, addEntry,spacer,  favorites,spacer, nil];
     [toolbar setItems:buttonItems];
     
 }
 
+- (void)addentry {
+    [self performSegueWithIdentifier:@"add" sender:_addEntry];
+}
+
 - (void)goToHome {
     
+    [_favorites setSelected:NO];
+    [_home setSelected:YES];
     THCoreDataStack *coreDataStack = [THCoreDataStack  defaultStack];
 
     NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"THDiaryEntry"];
@@ -99,6 +119,8 @@
 
 - (void)goToFavorites{
     
+    [_favorites setSelected:YES];
+    [_home setSelected:NO];
     THCoreDataStack *coreDataStack = [THCoreDataStack  defaultStack];
 
     NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"THDiaryEntry"];
@@ -329,6 +351,8 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
+    dispatch_async(dispatch_get_main_queue(), ^(void){
+
     if ([segue.identifier isEqual :@"show"]) {
         
         UITableViewCell *cell = sender;
@@ -345,6 +369,8 @@
         UINavigationController *navigationController = segue.destinationViewController;
         DetailViewController *detailViewController = (DetailViewController*)navigationController.topViewController;
         detailViewController.entry = [self.fetchedResultsController objectAtIndexPath:indexPath];    }
+    });
+
 }
 
 
