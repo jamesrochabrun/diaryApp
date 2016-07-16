@@ -323,10 +323,10 @@
                                     <constraint firstAttribute="width" constant="105" id="LWh-II-aeX"/>
                                     <constraint firstAttribute="height" constant="100" id="RKi-Xs-3wa"/>
                                 </constraints>
-                                <color key="tintColor" red="0.99519230769230771" green="0.99038461538461542" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="tintColor" red="0.9882352941176471" green="0.36470588235294116" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="Button" image="huella@2x (1)"/>
                                 <connections>
-                                    <segue destination="9Ob-CM-cgc" kind="push" identifier="success" id="WiY-Tx-qv0"/>
+                                    <action selector="authenticationButtonTapped:" destination="o8L-fm-6L6" eventType="touchUpInside" id="iX1-K4-IzA"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Touch ID " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xIk-Fi-8np">
@@ -335,13 +335,12 @@
                                     <constraint firstAttribute="height" constant="21" id="VhY-9X-MX3"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="GothamNarrow-Book" family="Gotham Narrow" pointSize="17"/>
-                                <color key="textColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.93725490199999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This app needs authentication" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aon-ol-yPO">
                                 <rect key="frame" x="16" y="518" width="288" height="21"/>
                                 <fontDescription key="fontDescription" name="GothamNarrow-Book" family="Gotham Narrow" pointSize="17"/>
-                                <color key="textColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.93725490199999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="textColor" red="0.0039215686269999999" green="0.0039215686269999999" blue="0.0039215686269999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
@@ -381,7 +380,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="7oJ-S9-DgR">
-                                <rect key="frame" x="0.0" y="64" width="320" height="39"/>
+                                <rect key="frame" x="0.0" y="20" width="320" height="39"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="38" id="Zep-KY-9Ba"/>
                                 </constraints>
@@ -395,7 +394,7 @@
                                 </connections>
                             </segmentedControl>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="T2E-Ns-1x0">
-                                <rect key="frame" x="0.0" y="103" width="320" height="415"/>
+                                <rect key="frame" x="0.0" y="59" width="320" height="459"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="g9p-tJ-8Ky">
                                     <size key="itemSize" width="131" height="127"/>
