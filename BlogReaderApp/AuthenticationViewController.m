@@ -38,48 +38,51 @@
 #pragma localAutentication Touch Id
 
 - (IBAction)authenticationButtonTapped:(UIButton *)sender {
+    
+    UIViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"success"];
+    [self.navigationController pushViewController:controller animated:YES];
 
-    LAContext *context = [[LAContext alloc] init];
-    
-    NSError *error = nil;
-    
-    NSString *myLocalizedReasonString = @"This is a private diary and needs authentication";
-    
-    if ([context canEvaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics error:&error]) {
-        // Authenticate User
-        [context evaluatePolicy:LAPolicyDeviceOwnerAuthentication
-                localizedReason:myLocalizedReasonString
-                          reply:^(BOOL success, NSError *error) {
-                              dispatch_async(dispatch_get_main_queue(), ^(void){
-                                  
-                                  if (success) {
-                                      [self authenticationSuccesful];
-                                      
-                                  }else {
-                                      switch (error.code) {
-                                          case LAErrorAuthenticationFailed:
-                                              [self authenticationFailed];
-                                              break;
-                                              
-                                          case LAErrorUserCancel:
-                                              [self userPressCancelButtonDuringAuthentication];
-                                              break;
-                                              
-                                          case LAErrorUserFallback:
-                                              [self userPressedEnterPassword];
-                                              break;
-                                              
-                                          default:
-                                              [self touchIdIsNotConfigured];
-                                              break;
-                                      }
-                                      NSLog(@"Authentication Fails");
-                                  }
-                              });
-                          }];
-    } else {
-        [self touchIdIsNotConfigured];
-    }
+//    LAContext *context = [[LAContext alloc] init];
+//    
+//    NSError *error = nil;
+//    
+//    NSString *myLocalizedReasonString = @"This is a private diary and needs authentication";
+//    
+//    if ([context canEvaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics error:&error]) {
+//        // Authenticate User
+//        [context evaluatePolicy:LAPolicyDeviceOwnerAuthentication
+//                localizedReason:myLocalizedReasonString
+//                          reply:^(BOOL success, NSError *error) {
+//                              dispatch_async(dispatch_get_main_queue(), ^(void){
+//                                  
+//                                  if (success) {
+//                                      [self authenticationSuccesful];
+//                                      
+//                                  }else {
+//                                      switch (error.code) {
+//                                          case LAErrorAuthenticationFailed:
+//                                              [self authenticationFailed];
+//                                              break;
+//                                              
+//                                          case LAErrorUserCancel:
+//                                              [self userPressCancelButtonDuringAuthentication];
+//                                              break;
+//                                              
+//                                          case LAErrorUserFallback:
+//                                              [self userPressedEnterPassword];
+//                                              break;
+//                                              
+//                                          default:
+//                                              [self touchIdIsNotConfigured];
+//                                              break;
+//                                      }
+//                                      NSLog(@"Authentication Fails");
+//                                  }
+//                              });
+//                          }];
+//    } else {
+//        [self touchIdIsNotConfigured];
+//    }
 }
 
 
@@ -93,8 +96,8 @@
     UIAlertAction *ok = [UIAlertAction actionWithTitle:@"OK"
                                                  style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
                                                      
-                                                     UIViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"success"];
-                                                     [self.navigationController pushViewController:controller animated:YES];
+//                                                     UIViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"success"];
+//                                                     [self.navigationController pushViewController:controller animated:YES];
 
                                                  }];
     [settingAlert addAction:ok];

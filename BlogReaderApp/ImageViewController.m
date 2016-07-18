@@ -8,9 +8,9 @@
 
 #import "ImageViewController.h"
 #import "UIFont+CustomFont.h"
+#import "THDiaryEntry.h"
 
 @interface ImageViewController ()
-@property (weak, nonatomic) IBOutlet UILabel *messageLabel;
 
 @end
 
@@ -18,28 +18,19 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.imageView.image = [UIImage imageWithData: self.pickedImage];
-    self.messageLabel.font = [UIFont regularFont:20];
-    [self showOrHideLabel];
+    
+    self.imageView.image = [UIImage imageWithData: self.entry.image];
+    
 }
 
 - (IBAction)dismissViewcontroller:(UIBarButtonItem *)sender {
     [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (void)showOrHideLabel {
-    
-    if (self.pickedImage == nil) {
-        self.messageLabel.hidden = NO;
-    } else {
-        self.messageLabel.hidden = YES;
-    }
-}
-
 - (IBAction)shareButtonPressed:(UIBarButtonItem *)sender {
     
     NSURL *shareLink = [[NSURL alloc] initWithString:@"https://itunes.apple.com/us/app/blogdiary/id1119667410?l=es&ls=1&mt=8"];
-    UIImage *shareImage = [UIImage imageWithData:self.pickedImage];
+    UIImage *shareImage = [UIImage imageWithData:self.entry.image];
     
     UIActivityViewController *activityViewController =
     [[UIActivityViewController alloc] initWithActivityItems:@[shareLink,shareImage]

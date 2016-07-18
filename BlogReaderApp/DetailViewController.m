@@ -28,11 +28,16 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    [self showEntryData];
+    
+    if (self.entry == nil) {
+        NSLog(@"%@ bug!", self.entry);
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated {
+    dispatch_async(dispatch_get_main_queue(), ^(void){
     [self showEntryData];
+    });
 }
 
 - (void)showEntryData {
@@ -77,7 +82,7 @@
     if ([segue.identifier isEqual :@"image"]) {
         UINavigationController *navigationController = segue.destinationViewController;
         ImageViewController *controller = (ImageViewController*)navigationController.topViewController;
-        controller.pickedImage = self.entry.image;
+        controller.entry = self.entry;
     } else {
         UINavigationController *navigationController = segue.destinationViewController;
         THEntryViewcontroller *entryViewController = (THEntryViewcontroller*)navigationController.topViewController;

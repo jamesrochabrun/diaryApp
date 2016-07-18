@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+@class THDiaryEntry;
 
 @interface ImageViewController : UIViewController
-@property (nonatomic,strong) NSData *pickedImage;
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
+@property THDiaryEntry *entry;
 
 @end

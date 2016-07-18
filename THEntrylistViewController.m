@@ -51,7 +51,6 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     self.navigationController.navigationBar.hidden = NO;
-
 }
 
 
@@ -102,7 +101,9 @@
 }
 
 - (void)addentry {
-    [self performSegueWithIdentifier:@"add" sender:_addEntry];
+    dispatch_async(dispatch_get_main_queue(), ^(void){
+    [self performSegueWithIdentifier:@"add" sender:self.addEntry];
+    });
 }
 
 - (void)goToHome {
@@ -119,8 +120,11 @@
     _fetchedResultsController.delegate = self;
 
     [self.fetchedResultsController performFetch:nil];
+    
+    dispatch_async(dispatch_get_main_queue(), ^(void){
     [self.tableView reloadData];
     [self.gridCollectionViewController reloadData];
+    });
 }
 
 - (void)goToFavorites{
@@ -140,8 +144,11 @@
     _fetchedResultsController.delegate = self;
 
     [self.fetchedResultsController performFetch:nil];
+    
+    dispatch_async(dispatch_get_main_queue(), ^(void){
     [self.tableView reloadData];
     [self.gridCollectionViewController reloadData];
+    });
 }
 
 #pragma Coredata Methods
@@ -361,22 +368,21 @@
     
     dispatch_async(dispatch_get_main_queue(), ^(void){
         
-        if ([segue.identifier isEqual:@"showFromGrid"]) {
+        if ([segue.identifier isEqualToString:@"showFromGrid"]) {
             
             NSIndexPath *indexPath = [self.gridCollectionViewController indexPathForCell:sender];
-            UINavigationController *navigationController = segue.destinationViewController;
+            UINavigationController *navigationController = (UINavigationController*)segue.destinationViewController;
             DetailViewController *detailViewController = (DetailViewController*)navigationController.topViewController;
             THDiaryEntry *entry = [self.fetchedResultsController objectAtIndexPath:indexPath];
             detailViewController.entry = entry;
-         
-        } else if ([segue.identifier isEqual:@"show"]) {
+            
+        } else if ([segue.identifier isEqualToString:@"show"]) {
             
             NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
             UINavigationController *navigationController = segue.destinationViewController;
             DetailViewController *detailViewController = (DetailViewController*)navigationController.topViewController;
             detailViewController.entry = [self.fetchedResultsController objectAtIndexPath: indexPath];
-            
-      
+  
         }
     });
     
