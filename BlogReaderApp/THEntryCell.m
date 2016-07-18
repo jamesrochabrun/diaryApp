@@ -34,11 +34,8 @@
     NSDate *date = [NSDate dateWithTimeIntervalSince1970:entry.date];
     self.dateLabel.text = [dateFormatter stringFromDate:date];
     
-    if (entry.image) {
-        UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, self.bounds.size.width, self.bounds.size.height)];
-        imageView.contentMode = UIViewContentModeScaleAspectFill;
-        imageView.image = [UIImage imageWithData:entry.image];
-        self.backgroundView = imageView;
+    if (entry.image) {        
+        self.mainImageView.image = [UIImage imageWithData:entry.image];
     }
     
     if(entry.mood == DiaryEntryMoodGood) {

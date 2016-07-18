@@ -15,6 +15,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *locationLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *moodImageView;
 @property (weak, nonatomic) IBOutlet UIImageView *heartImage;
+@property (strong, nonatomic) IBOutlet UIImageView *mainImageView;
+
 
 
 //class method
