@@ -16,10 +16,13 @@
 #import "DetailviewController.h"
 #import "GridCollectionViewCell.h"
 #import "GridCollectionViewFlowLayout.h"
+#import "FilterViewController.h"
+#import <UIKit/UIKit.h>
 
 
 
-@interface THEntrylistViewController ()<NSFetchedResultsControllerDelegate,UITableViewDelegate,UITableViewDataSource,UICollectionViewDelegate,UICollectionViewDataSource>
+@interface THEntrylistViewController ()<NSFetchedResultsControllerDelegate,UITableViewDelegate,UITableViewDataSource,UICollectionViewDelegate,UICollectionViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+
 @property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UICollectionView *gridCollectionViewController;
@@ -30,6 +33,7 @@
 @property UIButton *home;
 @property UIButton *favorites;
 @property UIButton *addEntry;
+@property (nonatomic,strong) UIImage*pickedImage;
 
 
 @end
@@ -81,7 +85,7 @@
     UIBarButtonItem *home = [[UIBarButtonItem alloc] initWithCustomView:_home];
     
     _addEntry = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 32, 32)];
-    [_addEntry addTarget:self action:@selector(addentry) forControlEvents:UIControlEventTouchUpInside];
+    [_addEntry addTarget:self action:@selector(selectPhoto) forControlEvents:UIControlEventTouchUpInside];
     [_addEntry setBackgroundImage:[UIImage imageNamed:@"add"] forState:UIControlStateNormal];
     
     UIBarButtonItem *addEntry = [[UIBarButtonItem alloc] initWithCustomView:_addEntry];
@@ -100,11 +104,13 @@
     
 }
 
-- (void)addentry {
-    dispatch_async(dispatch_get_main_queue(), ^(void){
-    [self performSegueWithIdentifier:@"add" sender:self.addEntry];
-    });
-}
+//- (void)addentry {
+    
+    
+  //  dispatch_async(dispatch_get_main_queue(), ^(void){
+   // [self performSegueWithIdentifier:@"add" sender:self.addEntry];
+    //});
+//}
 
 - (void)goToHome {
     
@@ -383,12 +389,123 @@
             DetailViewController *detailViewController = (DetailViewController*)navigationController.topViewController;
             detailViewController.entry = [self.fetchedResultsController objectAtIndexPath: indexPath];
   
+        } else if ([segue.identifier isEqualToString:@"filter"]) {
+            
+            UINavigationController *navigationController = segue.destinationViewController;
+            FilterViewController *filterVC = (FilterViewController *)navigationController.topViewController;
+           _pickedImage = filterVC.pickedImage;
         }
     });
+}
+
+#pragma camera actions
+
+- (void)selectPhoto {
+    
+    if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+        [self promptForSource];
+    } else{
+        [self promptForPhotoRoll];
+    }
+}
+
+- (void)promptForSource {
+    
+    dispatch_async(dispatch_get_main_queue(), ^(void){
+        
+        UIAlertController *modalAlert = [UIAlertController alertControllerWithTitle: @"Image Source"
+                                                                            message: nil
+                                                                     preferredStyle:UIAlertControllerStyleActionSheet];
+        UIAlertAction *camera = [UIAlertAction actionWithTitle:@"Camera"
+                                                         style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+                                                             [self promptForCamera];
+                                                         }];
+        UIAlertAction *photoRoll = [UIAlertAction actionWithTitle:@"Photo Roll"
+                                                            style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+                                                                [self promptForPhotoRoll];
+                                                            }];
+        UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"Cancel"
+                                                         style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+                                                         }];
+        [modalAlert addAction:camera];
+        [modalAlert addAction:photoRoll];
+        [modalAlert addAction:cancel];
+        
+        [self presentViewController:modalAlert animated:YES completion:nil];
+        
+    });
+}
+
+- (void)promptForCamera {
+    
+    UIImagePickerController *controller = [UIImagePickerController new];
+    controller.sourceType = UIImagePickerControllerSourceTypeCamera;
+    controller.delegate = self;
+    [self presentViewController:controller animated:YES completion:nil];
+}
+
+- (void)promptForPhotoRoll {
+    UIImagePickerController *controller = [UIImagePickerController new];
+    controller.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    controller.delegate = self;
+    [self presentViewController:controller animated:YES completion:nil];
+}
+
+//overwriting the setter for pickedImage
+
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
+    
+    UIImage *image = info[UIImagePickerControllerOriginalImage];
+    image =  [self squareImageWithImage:image scaledToSize:CGSizeMake(300, 1)];
+    _pickedImage = image;
+    
+    //go to next VC
+    
+    
+    [self dismissViewControllerAnimated:YES completion:^{
+        [self performSegueWithIdentifier:@"filter" sender:self];
+    }];
     
 }
 
-
+#pragma fixing orientation of photo and scale
+- (UIImage *)squareImageWithImage:(UIImage *)image scaledToSize:(CGSize)newSize {
+    double ratio;
+    double delta;
+    CGPoint offset;
+    //make a new square size, that is the resized imaged width
+    CGSize sz = CGSizeMake(newSize.width, newSize.width);
+    //figure out if the picture is landscape or portrait, then
+    //calculate scale factor and offset
+    if (image.size.width > image.size.height) {
+        ratio = newSize.width / image.size.width;
+        delta = (ratio*image.size.width - ratio*image.size.height);
+        offset = CGPointMake(delta/2, 0);
+    } else {
+        ratio = newSize.width / image.size.height;
+        delta = (ratio*image.size.height - ratio*image.size.width);
+        offset = CGPointMake(0, delta/2);
+    }
+    //make the final clipping rect based on the calculated values
+    CGRect clipRect = CGRectMake(-offset.x, -offset.y,
+                                 (ratio * image.size.width) + delta,
+                                 (ratio * image.size.height) + delta);
+    
+    //start a new context, with scale factor 0.0 so retina displays get
+    //high quality image
+    if ([[UIScreen mainScreen] respondsToSelector:@selector(scale)]) {
+        UIGraphicsBeginImageContextWithOptions(sz, YES, 0.0);
+    } else {
+        UIGraphicsBeginImageContext(sz);
+    }
+    UIRectClip(clipRect);
+    [image drawInRect:clipRect];
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return newImage;
+}
 
 
 

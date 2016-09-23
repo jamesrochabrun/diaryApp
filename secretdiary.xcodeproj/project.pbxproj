@@ -30,6 +30,7 @@
 		7B74B9AF1CF7D97500F69544 /* THEntrylistViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B74B9AE1CF7D97500F69544 /* THEntrylistViewController.m */; };
 		7B74B9B41CF80FAF00F69544 /* THNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B74B9B31CF80FAF00F69544 /* THNavigationController.m */; };
 		7B74B9B81CF8148D00F69544 /* THEntryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B74B9B71CF8148D00F69544 /* THEntryCell.m */; };
+		7BA833231D94E9C800841B40 /* FilterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BA833221D94E9C800841B40 /* FilterViewController.m */; };
 		7BCF0D571CF8D4EC003E4CB1 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BCF0D561CF8D4EC003E4CB1 /* QuartzCore.framework */; };
 		7BCF0D591CF8D6F2003E4CB1 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BCF0D581CF8D6F2003E4CB1 /* CoreLocation.framework */; };
 		7BDB91681D38886D0004EB6B /* GridCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BDB91671D38886D0004EB6B /* GridCollectionViewCell.m */; };
@@ -89,6 +90,8 @@
 		7B74B9B31CF80FAF00F69544 /* THNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = THNavigationController.m; path = BlogReaderApp/THNavigationController.m; sourceTree = "<group>"; };
 		7B74B9B61CF8148D00F69544 /* THEntryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = THEntryCell.h; path = BlogReaderApp/THEntryCell.h; sourceTree = "<group>"; };
 		7B74B9B71CF8148D00F69544 /* THEntryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = THEntryCell.m; path = BlogReaderApp/THEntryCell.m; sourceTree = "<group>"; };
+		7BA833211D94E9C800841B40 /* FilterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterViewController.h; sourceTree = "<group>"; };
+		7BA833221D94E9C800841B40 /* FilterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilterViewController.m; sourceTree = "<group>"; };
 		7BCF0D561CF8D4EC003E4CB1 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		7BCF0D581CF8D6F2003E4CB1 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		7BDB91661D38886D0004EB6B /* GridCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GridCollectionViewCell.h; sourceTree = "<group>"; };
@@ -135,9 +138,10 @@
 		7B470C201D271AF5009C01D0 /* categories */ = {
 			isa = PBXGroup;
 			children = (
+				7B470C241D272429009C01D0 /* UIColor+CustomColor.h */,
+				7B470C251D272429009C01D0 /* UIColor+CustomColor.m */,
 				7B470C211D272140009C01D0 /* UIFont+CustomFont.h */,
 				7B470C221D272140009C01D0 /* UIFont+CustomFont.m */,
-				7B470C251D272429009C01D0 /* UIColor+CustomColor.m */,
 			);
 			name = categories;
 			path = BlogReaderApp;
@@ -214,12 +218,13 @@
 		7B74B9A91CF7B75500F69544 /* controller */ = {
 			isa = PBXGroup;
 			children = (
+				7BA833211D94E9C800841B40 /* FilterViewController.h */,
+				7BA833221D94E9C800841B40 /* FilterViewController.m */,
 				7B380F3C1CFE92FC00EF3735 /* AuthenticationViewController.h */,
 				7B380F3D1CFE92FC00EF3735 /* AuthenticationViewController.m */,
 				7B74B9AD1CF7D97500F69544 /* THEntrylistViewController.h */,
 				7B74B9AE1CF7D97500F69544 /* THEntrylistViewController.m */,
 				7B470C271D27516D009C01D0 /* DetailViewController.h */,
-				7B470C241D272429009C01D0 /* UIColor+CustomColor.h */,
 				7B470C281D27516D009C01D0 /* DetailViewController.m */,
 				7B74B9AA1CF7BC2300F69544 /* THEntryViewcontroller.h */,
 				7B74B9AB1CF7BC2300F69544 /* THEntryViewcontroller.m */,
@@ -382,6 +387,7 @@
 				7B74B97A1CF7ABF200F69544 /* AppDelegate.m in Sources */,
 				7B74B9831CF7ABF200F69544 /* BlogReaderApp.xcdatamodeld in Sources */,
 				7B74B9B81CF8148D00F69544 /* THEntryCell.m in Sources */,
+				7BA833231D94E9C800841B40 /* FilterViewController.m in Sources */,
 				7B74B9771CF7ABF200F69544 /* main.m in Sources */,
 				7B74B9AF1CF7D97500F69544 /* THEntrylistViewController.m in Sources */,
 				7B470C231D272140009C01D0 /* UIFont+CustomFont.m in Sources */,
