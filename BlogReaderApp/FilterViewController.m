@@ -21,11 +21,23 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    NSLog(@"the image %@", _pickedImage);
 
     _imageView = [UIImageView new];
     _imageView.image = _pickedImage;
+}
+
+- (void)setPickedImage:(UIImage *)pickedImage {
+    
+    _pickedImage = pickedImage;
+    
+    NSLog(@"the image %@", _pickedImage);
+
+    
+    _imageView = [UIImageView new];
+    _imageView.image = _pickedImage;
+    
     [self.view addSubview:_imageView];
+
 }
 
 - (void)didReceiveMemoryWarning {

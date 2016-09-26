@@ -20,7 +20,6 @@
 
 
 
-
 @interface THEntrylistViewController ()<NSFetchedResultsControllerDelegate,UITableViewDelegate,UITableViewDataSource,UICollectionViewDelegate,UICollectionViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 @property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
@@ -33,8 +32,7 @@
 @property UIButton *home;
 @property UIButton *favorites;
 @property UIButton *addEntry;
-@property (nonatomic,strong) UIImage *pickedImage;
-
+@property (nonatomic, strong) UIImage *pickedImage;
 
 @end
 
@@ -394,7 +392,7 @@
             UINavigationController *navigationController = segue.destinationViewController;
             FilterViewController *filterVC = (FilterViewController *)navigationController.topViewController;
   
-           _pickedImage = filterVC.pickedImage;
+            filterVC.pickedImage = _pickedImage;
         }
     });
 }
@@ -459,30 +457,30 @@
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
     
     UIImage *image = info[UIImagePickerControllerOriginalImage];
-    
-    NSLog(@"the image %@", image);
     image =  [self squareImageWithImage:image scaledToSize:CGSizeMake(300, 1)];
-    
-    
-    UIImage *ima = [UIImage new];
-    
-    ima = image;
-    
-    _pickedImage = image;
-    
-    //go to next VC
-    
-    
-    [self dismissViewControllerAnimated:YES completion:^{
-        [self performSegueWithIdentifier:@"filter" sender:self];
-    }];
-    
+    self.pickedImage = image;
+
+    __weak THEntrylistViewController *weakSelf = self;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [weakSelf dismissViewControllerAnimated:YES completion:^{
+            [weakSelf performSegueWithIdentifier:@"filter" sender:weakSelf];
+        }];
+    });
 }
+
+- (void)setPickedImage:(UIImage *)pickedImage {
+    
+    _pickedImage = pickedImage;
+    
+    //do something if neccesary
+}
+
 
 #pragma fixing orientation of photo and scale
 - (UIImage *)squareImageWithImage:(UIImage *)image scaledToSize:(CGSize)newSize {
-    double ratio;
-    double delta;
+    
+    CGFloat ratio;
+    CGFloat delta;
     CGPoint offset;
     //make a new square size, that is the resized imaged width
     CGSize sz = CGSizeMake(newSize.width, newSize.width);
