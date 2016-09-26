@@ -17,7 +17,7 @@
 #import "GridCollectionViewCell.h"
 #import "GridCollectionViewFlowLayout.h"
 #import "FilterViewController.h"
-#import <UIKit/UIKit.h>
+
 
 
 
@@ -33,7 +33,7 @@
 @property UIButton *home;
 @property UIButton *favorites;
 @property UIButton *addEntry;
-@property (nonatomic,strong) UIImage*pickedImage;
+@property (nonatomic,strong) UIImage *pickedImage;
 
 
 @end
@@ -393,6 +393,7 @@
             
             UINavigationController *navigationController = segue.destinationViewController;
             FilterViewController *filterVC = (FilterViewController *)navigationController.topViewController;
+  
            _pickedImage = filterVC.pickedImage;
         }
     });
@@ -445,6 +446,7 @@
 }
 
 - (void)promptForPhotoRoll {
+    
     UIImagePickerController *controller = [UIImagePickerController new];
     controller.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
     controller.delegate = self;
@@ -457,7 +459,15 @@
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
     
     UIImage *image = info[UIImagePickerControllerOriginalImage];
+    
+    NSLog(@"the image %@", image);
     image =  [self squareImageWithImage:image scaledToSize:CGSizeMake(300, 1)];
+    
+    
+    UIImage *ima = [UIImage new];
+    
+    ima = image;
+    
     _pickedImage = image;
     
     //go to next VC

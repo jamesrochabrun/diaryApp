@@ -30,6 +30,10 @@
 		7B74B9AF1CF7D97500F69544 /* THEntrylistViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B74B9AE1CF7D97500F69544 /* THEntrylistViewController.m */; };
 		7B74B9B41CF80FAF00F69544 /* THNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B74B9B31CF80FAF00F69544 /* THNavigationController.m */; };
 		7B74B9B81CF8148D00F69544 /* THEntryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B74B9B71CF8148D00F69544 /* THEntryCell.m */; };
+		7B995CC61D99CF020047B6D5 /* TopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B995CC51D99CF020047B6D5 /* TopView.m */; };
+		7B995CCA1D99CF440047B6D5 /* CommonUIConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B995CC81D99CF440047B6D5 /* CommonUIConstants.m */; };
+		7B995CCE1D99CF990047B6D5 /* Common.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B995CCC1D99CF990047B6D5 /* Common.m */; };
+		7B995CD11D99D1CD0047B6D5 /* dismiss.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B995CD01D99D1CD0047B6D5 /* dismiss.png */; };
 		7BA833231D94E9C800841B40 /* FilterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BA833221D94E9C800841B40 /* FilterViewController.m */; };
 		7BCF0D571CF8D4EC003E4CB1 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BCF0D561CF8D4EC003E4CB1 /* QuartzCore.framework */; };
 		7BCF0D591CF8D6F2003E4CB1 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BCF0D581CF8D6F2003E4CB1 /* CoreLocation.framework */; };
@@ -90,6 +94,13 @@
 		7B74B9B31CF80FAF00F69544 /* THNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = THNavigationController.m; path = BlogReaderApp/THNavigationController.m; sourceTree = "<group>"; };
 		7B74B9B61CF8148D00F69544 /* THEntryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = THEntryCell.h; path = BlogReaderApp/THEntryCell.h; sourceTree = "<group>"; };
 		7B74B9B71CF8148D00F69544 /* THEntryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = THEntryCell.m; path = BlogReaderApp/THEntryCell.m; sourceTree = "<group>"; };
+		7B995CC41D99CF020047B6D5 /* TopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TopView.h; sourceTree = "<group>"; };
+		7B995CC51D99CF020047B6D5 /* TopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TopView.m; sourceTree = "<group>"; };
+		7B995CC81D99CF440047B6D5 /* CommonUIConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonUIConstants.m; sourceTree = "<group>"; };
+		7B995CC91D99CF440047B6D5 /* CommonUIConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonUIConstants.h; sourceTree = "<group>"; };
+		7B995CCB1D99CF990047B6D5 /* Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Common.h; sourceTree = "<group>"; };
+		7B995CCC1D99CF990047B6D5 /* Common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Common.m; sourceTree = "<group>"; };
+		7B995CD01D99D1CD0047B6D5 /* dismiss.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dismiss.png; sourceTree = "<group>"; };
 		7BA833211D94E9C800841B40 /* FilterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterViewController.h; sourceTree = "<group>"; };
 		7BA833221D94E9C800841B40 /* FilterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilterViewController.m; sourceTree = "<group>"; };
 		7BCF0D561CF8D4EC003E4CB1 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -154,8 +165,8 @@
 				7BCF0D581CF8D6F2003E4CB1 /* CoreLocation.framework */,
 				7B74B99D1CF7B1F300F69544 /* CoreData.framework */,
 				7BCF0D561CF8D4EC003E4CB1 /* QuartzCore.framework */,
+				7B995CC71D99CF330047B6D5 /* CommonTools */,
 				7B74B9A81CF7B73D00F69544 /* model */,
-				7B470C201D271AF5009C01D0 /* categories */,
 				7B74B9B51CF80FBF00F69544 /* view */,
 				7B74B9A91CF7B75500F69544 /* controller */,
 				7B74B9741CF7ABF200F69544 /* BlogReaderApp */,
@@ -181,6 +192,7 @@
 				7B74B9781CF7ABF200F69544 /* AppDelegate.h */,
 				7B74B97E1CF7ABF200F69544 /* Main.storyboard */,
 				7B74B9841CF7ABF200F69544 /* Assets.xcassets */,
+				7B995CD01D99D1CD0047B6D5 /* dismiss.png */,
 				7B74B9861CF7ABF200F69544 /* LaunchScreen.storyboard */,
 				7B74B9891CF7ABF200F69544 /* Info.plist */,
 				7B74B9811CF7ABF200F69544 /* BlogReaderApp.xcdatamodeld */,
@@ -258,6 +270,8 @@
 		7B74B9B51CF80FBF00F69544 /* view */ = {
 			isa = PBXGroup;
 			children = (
+				7B995CC41D99CF020047B6D5 /* TopView.h */,
+				7B995CC51D99CF020047B6D5 /* TopView.m */,
 				7BDB91691D388A930004EB6B /* GridCollectionViewFlowLayout.h */,
 				7BDB916A1D388A930004EB6B /* GridCollectionViewFlowLayout.m */,
 				7BDB91661D38886D0004EB6B /* GridCollectionViewCell.h */,
@@ -270,6 +284,18 @@
 				7B74B9B71CF8148D00F69544 /* THEntryCell.m */,
 			);
 			name = view;
+			sourceTree = "<group>";
+		};
+		7B995CC71D99CF330047B6D5 /* CommonTools */ = {
+			isa = PBXGroup;
+			children = (
+				7B995CCB1D99CF990047B6D5 /* Common.h */,
+				7B995CCC1D99CF990047B6D5 /* Common.m */,
+				7B995CC81D99CF440047B6D5 /* CommonUIConstants.m */,
+				7B995CC91D99CF440047B6D5 /* CommonUIConstants.h */,
+				7B470C201D271AF5009C01D0 /* categories */,
+			);
+			name = CommonTools;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -356,6 +382,7 @@
 				7B5045961CF9FB00008A6AB6 /* Gotham Narrow Book.otf in Resources */,
 				7B5045971CF9FB00008A6AB6 /* GOTHAM-MEDIUM.TTF in Resources */,
 				7B5045981CF9FB00008A6AB6 /* billabong.ttf in Resources */,
+				7B995CD11D99D1CD0047B6D5 /* dismiss.png in Resources */,
 				7B74B9881CF7ABF200F69544 /* LaunchScreen.storyboard in Resources */,
 				7B74B9851CF7ABF200F69544 /* Assets.xcassets in Resources */,
 				7B74B9801CF7ABF200F69544 /* Main.storyboard in Resources */,
@@ -376,12 +403,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7B995CCE1D99CF990047B6D5 /* Common.m in Sources */,
 				7B74B9A11CF7B3C400F69544 /* THCoreDataStack.m in Sources */,
 				7B74B9A71CF7B71D00F69544 /* THDiaryEntry.m in Sources */,
 				7B74B9A61CF7B71D00F69544 /* THDiaryEntry+CoreDataProperties.m in Sources */,
 				7B74B9AC1CF7BC2300F69544 /* THEntryViewcontroller.m in Sources */,
 				7B380F3E1CFE92FC00EF3735 /* AuthenticationViewController.m in Sources */,
 				7BDB91681D38886D0004EB6B /* GridCollectionViewCell.m in Sources */,
+				7B995CC61D99CF020047B6D5 /* TopView.m in Sources */,
 				7B470C291D27516D009C01D0 /* DetailViewController.m in Sources */,
 				7BF359911CFE14F300ABB239 /* ImageViewController.m in Sources */,
 				7B74B97A1CF7ABF200F69544 /* AppDelegate.m in Sources */,
@@ -393,6 +422,7 @@
 				7B470C231D272140009C01D0 /* UIFont+CustomFont.m in Sources */,
 				7B470C261D272429009C01D0 /* UIColor+CustomColor.m in Sources */,
 				7B41FB801D2C10180091DC64 /* DoubleTapImage.m in Sources */,
+				7B995CCA1D99CF440047B6D5 /* CommonUIConstants.m in Sources */,
 				7BDB916B1D388A930004EB6B /* GridCollectionViewFlowLayout.m in Sources */,
 				7B74B9B41CF80FAF00F69544 /* THNavigationController.m in Sources */,
 			);

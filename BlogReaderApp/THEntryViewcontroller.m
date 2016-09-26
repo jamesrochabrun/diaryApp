@@ -157,7 +157,6 @@
 }
 
 
-
 - (void)updateDiaryEntry {
     
     self.entry.body = self.textView.text;

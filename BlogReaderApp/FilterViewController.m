@@ -7,6 +7,9 @@
 //
 
 #import "FilterViewController.h"
+#import "TopView.h"
+#import "CommonUIConstants.h"
+#import "Common.h"
 
 @interface FilterViewController ()
 @property (nonatomic, strong) UIImageView *imageView;
@@ -18,7 +21,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
+    NSLog(@"the image %@", _pickedImage);
+
     _imageView = [UIImageView new];
     _imageView.image = _pickedImage;
     [self.view addSubview:_imageView];
@@ -39,8 +43,15 @@
     frame.size.height = 200;
     _imageView.frame = frame;
     
-    
 }
+- (IBAction)doneWasPressed:(UIBarButtonItem *)sender {
+    
+    __weak FilterViewController *weakSelf = self;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [weakSelf dismissViewControllerAnimated:YES completion:nil];
+    });
+}
+
 
 
 @end
