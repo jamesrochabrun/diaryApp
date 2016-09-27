@@ -197,6 +197,7 @@ static NSString * const FilterCelIdentifier = @"FilterCellIdentifier";
     //initializing the context
     _context = [CIContext contextWithOptions:nil];
     [self showCropMode];
+
 }
 
 - (void)showCropMode {
@@ -231,7 +232,7 @@ static NSString * const FilterCelIdentifier = @"FilterCellIdentifier";
     frame = _collectionView.frame;
     frame.size = CGSizeMake(width(self.view), 120);
     frame.origin.x = (width(self.view) - width(self.view)) /2;
-    frame.origin.y = CGRectGetMinY(_filterButton.frame) - height(_collectionView);
+    frame.origin.y = CGRectGetMinY(_filterButton.frame) - frame.size.height;
     _collectionView.frame = frame;
     
     _sliderView.frame = CGRectMake(0, _collectionView.frame.origin.y , width(self.view), CGRectGetMinY(_filterButton.frame) - CGRectGetMinY(_collectionView.frame));
@@ -241,7 +242,6 @@ static NSString * const FilterCelIdentifier = @"FilterCellIdentifier";
     
     _pickedImage = pickedImage;
     _imageView.image = _pickedImage;
-    
     [self initializeImageViewSize];
 
 }
@@ -297,14 +297,7 @@ static NSString * const FilterCelIdentifier = @"FilterCellIdentifier";
     frame.origin.x = self.view.frame.origin.x;
     frame.origin.y = height(self.view) - kGeomHeightButton;
     _nextButton.frame = frame;
-    
-    CGSize s = [_infoLabel sizeThatFits:CGSizeMake(w-2*kGeomSpaceEdge, 200)];
-    frame = _infoLabel.frame;
-    frame.size.width = s.width;
-    frame.size.height = s.height;
-    frame.origin.x = (width(self.view) - s.width) /2;
-    frame.origin.y = (CGRectGetMinY(_nextButton.frame) - CGRectGetMinY(_bottomView.frame) - kGeomHeightTextField) /2;
-    _infoLabel.frame = frame;
+
 }
 
 
@@ -318,7 +311,6 @@ static NSString * const FilterCelIdentifier = @"FilterCellIdentifier";
     _collectionView.hidden = NO;
     _nextButton.hidden = YES;
     self.view.backgroundColor = [UIColor grayColor];
-
     
     [self setTheCropViewImage];
     [self initializingTheFiltersWithCropViewImage];
