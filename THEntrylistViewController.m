@@ -17,6 +17,8 @@
 #import "GridCollectionViewCell.h"
 #import "GridCollectionViewFlowLayout.h"
 #import "FilterViewController.h"
+#import "CommonUIConstants.h"
+#import "UIImage+UIImage.h"
 
 
 
@@ -458,7 +460,14 @@
     
     UIImage *image = info[UIImagePickerControllerOriginalImage];
     
-    self.pickedImage = image;
+    if (picker.sourceType == UIImagePickerControllerSourceTypeCamera) {
+        UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil);
+    }
+    
+    CGSize s = image.size;
+    _pickedImage = [UIImage imageWithImage:image scaledToSize:CGSizeMake(kGeomUploadWidth, kGeomUploadWidth*s.height/s.width)];
+    
+    //self.pickedImage = image;
 
     //image =  [self squareImageWithImage:image scaledToSize:CGSizeMake(300, 1)];
 

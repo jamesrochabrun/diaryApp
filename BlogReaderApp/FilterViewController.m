@@ -168,7 +168,7 @@ static NSString * const FilterCelIdentifier = @"FilterCellIdentifier";
     _filterMode = YES;
     
     _intersection = [UIView new];
-    // _intersection.backgroundColor = [UIColor yellowColor];
+    NSLog(@"the images is %@", _imageView.image);
     
     _croppedIV.image = _imageView.image;
     
@@ -300,7 +300,6 @@ static NSString * const FilterCelIdentifier = @"FilterCellIdentifier";
 
 }
 
-
 - (void)goToFilterAndEditionMode {
     
     _cropView.hidden = YES;
@@ -332,6 +331,8 @@ static NSString * const FilterCelIdentifier = @"FilterCellIdentifier";
     _filteredImageThumbnail = [CIImage imageWithCGImage:[thumbnailImage CGImage]];
     
     _inputImage = [CIImage imageWithCGImage:[_croppedIV.image CGImage]];
+    NSLog(@"the croppediv.image is %@", _croppedIV.image);
+    NSLog(@"the input image is %@", _inputImage);
     
     [_saturationSettings.filter setValue:_inputImage forKey:kCIInputImageKey];
     
@@ -985,16 +986,6 @@ static NSString * const FilterCelIdentifier = @"FilterCellIdentifier";
     }
 }
 
-//-  (void)handleLongPress:(UILongPressGestureRecognizer*)sender {
-//    if (sender.state == UIGestureRecognizerStateEnded) {
-//        NSLog(@"UIGestureRecognizerStateEnded");
-//        //Do Whatever You want on End of Gesture
-//    }
-//    else if (sender.state == UIGestureRecognizerStateBegan){
-//        NSLog(@"UIGestureRecognizerStateBegan.");
-//        //Do Whatever You want on Began of Gesture
-//    }
-//}
 
 // this method moves a gesture recognizer's view's anchor point between the user's fingers
 - (void)adjustAnchorPointForGestureRecognizer:(UIGestureRecognizer *)gestureRecognizer {

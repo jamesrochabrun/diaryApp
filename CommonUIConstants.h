@@ -32,6 +32,8 @@ static CGFloat kGeomSpaceCellPadding = 3;
 static CGFloat kGeomInterImageGap = 2;
 static CGFloat kGeomIconSize = 30;
 static CGFloat kGeomHeightButton = 40.0;
+static CGFloat kGeomUploadWidth = 750;
+
 
 
 static CGFloat kMaxScale = 2.1;
