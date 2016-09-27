@@ -34,6 +34,14 @@
 		7B995CCA1D99CF440047B6D5 /* CommonUIConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B995CC81D99CF440047B6D5 /* CommonUIConstants.m */; };
 		7B995CCE1D99CF990047B6D5 /* Common.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B995CCC1D99CF990047B6D5 /* Common.m */; };
 		7B995CD11D99D1CD0047B6D5 /* dismiss.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B995CD01D99D1CD0047B6D5 /* dismiss.png */; };
+		7B995CD41D99E7E80047B6D5 /* FilterSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B995CD31D99E7E80047B6D5 /* FilterSettings.m */; };
+		7B995CD71D99E7FE0047B6D5 /* SlidersView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B995CD61D99E7FE0047B6D5 /* SlidersView.m */; };
+		7B995CDA1D99E81C0047B6D5 /* UISlider+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B995CD91D99E81C0047B6D5 /* UISlider+Additions.m */; };
+		7B995CE61D99F23B0047B6D5 /* ListCVFL.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B995CE51D99F23B0047B6D5 /* ListCVFL.m */; };
+		7B995CE91D99F2940047B6D5 /* UICollectionView+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B995CE81D99F2940047B6D5 /* UICollectionView+Additions.m */; };
+		7B995CEC1D99F3050047B6D5 /* FilterThumbnailCVCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B995CEB1D99F3050047B6D5 /* FilterThumbnailCVCell.m */; };
+		7B995CEF1D99F6EC0047B6D5 /* UIImage+UIImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B995CEE1D99F6EC0047B6D5 /* UIImage+UIImage.m */; };
+		7B995CF21D99F82D0047B6D5 /* UIView+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B995CF11D99F82D0047B6D5 /* UIView+Additions.m */; };
 		7BA833231D94E9C800841B40 /* FilterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BA833221D94E9C800841B40 /* FilterViewController.m */; };
 		7BCF0D571CF8D4EC003E4CB1 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BCF0D561CF8D4EC003E4CB1 /* QuartzCore.framework */; };
 		7BCF0D591CF8D6F2003E4CB1 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BCF0D581CF8D6F2003E4CB1 /* CoreLocation.framework */; };
@@ -101,6 +109,22 @@
 		7B995CCB1D99CF990047B6D5 /* Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Common.h; sourceTree = "<group>"; };
 		7B995CCC1D99CF990047B6D5 /* Common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Common.m; sourceTree = "<group>"; };
 		7B995CD01D99D1CD0047B6D5 /* dismiss.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dismiss.png; sourceTree = "<group>"; };
+		7B995CD21D99E7E80047B6D5 /* FilterSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterSettings.h; sourceTree = "<group>"; };
+		7B995CD31D99E7E80047B6D5 /* FilterSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilterSettings.m; sourceTree = "<group>"; };
+		7B995CD51D99E7FE0047B6D5 /* SlidersView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlidersView.h; sourceTree = "<group>"; };
+		7B995CD61D99E7FE0047B6D5 /* SlidersView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SlidersView.m; sourceTree = "<group>"; };
+		7B995CD81D99E81C0047B6D5 /* UISlider+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UISlider+Additions.h"; sourceTree = "<group>"; };
+		7B995CD91D99E81C0047B6D5 /* UISlider+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UISlider+Additions.m"; sourceTree = "<group>"; };
+		7B995CE41D99F23B0047B6D5 /* ListCVFL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListCVFL.h; sourceTree = "<group>"; };
+		7B995CE51D99F23B0047B6D5 /* ListCVFL.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListCVFL.m; sourceTree = "<group>"; };
+		7B995CE71D99F2940047B6D5 /* UICollectionView+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UICollectionView+Additions.h"; sourceTree = "<group>"; };
+		7B995CE81D99F2940047B6D5 /* UICollectionView+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UICollectionView+Additions.m"; sourceTree = "<group>"; };
+		7B995CEA1D99F3050047B6D5 /* FilterThumbnailCVCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterThumbnailCVCell.h; sourceTree = "<group>"; };
+		7B995CEB1D99F3050047B6D5 /* FilterThumbnailCVCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilterThumbnailCVCell.m; sourceTree = "<group>"; };
+		7B995CED1D99F6EC0047B6D5 /* UIImage+UIImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+UIImage.h"; sourceTree = "<group>"; };
+		7B995CEE1D99F6EC0047B6D5 /* UIImage+UIImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+UIImage.m"; sourceTree = "<group>"; };
+		7B995CF01D99F82D0047B6D5 /* UIView+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Additions.h"; sourceTree = "<group>"; };
+		7B995CF11D99F82D0047B6D5 /* UIView+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Additions.m"; sourceTree = "<group>"; };
 		7BA833211D94E9C800841B40 /* FilterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterViewController.h; sourceTree = "<group>"; };
 		7BA833221D94E9C800841B40 /* FilterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilterViewController.m; sourceTree = "<group>"; };
 		7BCF0D561CF8D4EC003E4CB1 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -149,6 +173,14 @@
 		7B470C201D271AF5009C01D0 /* categories */ = {
 			isa = PBXGroup;
 			children = (
+				7B995CF01D99F82D0047B6D5 /* UIView+Additions.h */,
+				7B995CF11D99F82D0047B6D5 /* UIView+Additions.m */,
+				7B995CED1D99F6EC0047B6D5 /* UIImage+UIImage.h */,
+				7B995CEE1D99F6EC0047B6D5 /* UIImage+UIImage.m */,
+				7B995CE71D99F2940047B6D5 /* UICollectionView+Additions.h */,
+				7B995CE81D99F2940047B6D5 /* UICollectionView+Additions.m */,
+				7B995CD81D99E81C0047B6D5 /* UISlider+Additions.h */,
+				7B995CD91D99E81C0047B6D5 /* UISlider+Additions.m */,
 				7B470C241D272429009C01D0 /* UIColor+CustomColor.h */,
 				7B470C251D272429009C01D0 /* UIColor+CustomColor.m */,
 				7B470C211D272140009C01D0 /* UIFont+CustomFont.h */,
@@ -270,6 +302,10 @@
 		7B74B9B51CF80FBF00F69544 /* view */ = {
 			isa = PBXGroup;
 			children = (
+				7B995CEA1D99F3050047B6D5 /* FilterThumbnailCVCell.h */,
+				7B995CEB1D99F3050047B6D5 /* FilterThumbnailCVCell.m */,
+				7B995CD51D99E7FE0047B6D5 /* SlidersView.h */,
+				7B995CD61D99E7FE0047B6D5 /* SlidersView.m */,
 				7B995CC41D99CF020047B6D5 /* TopView.h */,
 				7B995CC51D99CF020047B6D5 /* TopView.m */,
 				7BDB91691D388A930004EB6B /* GridCollectionViewFlowLayout.h */,
@@ -289,6 +325,10 @@
 		7B995CC71D99CF330047B6D5 /* CommonTools */ = {
 			isa = PBXGroup;
 			children = (
+				7B995CE41D99F23B0047B6D5 /* ListCVFL.h */,
+				7B995CE51D99F23B0047B6D5 /* ListCVFL.m */,
+				7B995CD21D99E7E80047B6D5 /* FilterSettings.h */,
+				7B995CD31D99E7E80047B6D5 /* FilterSettings.m */,
 				7B995CCB1D99CF990047B6D5 /* Common.h */,
 				7B995CCC1D99CF990047B6D5 /* Common.m */,
 				7B995CC81D99CF440047B6D5 /* CommonUIConstants.m */,
@@ -404,21 +444,29 @@
 			buildActionMask = 2147483647;
 			files = (
 				7B995CCE1D99CF990047B6D5 /* Common.m in Sources */,
+				7B995CD71D99E7FE0047B6D5 /* SlidersView.m in Sources */,
+				7B995CD41D99E7E80047B6D5 /* FilterSettings.m in Sources */,
 				7B74B9A11CF7B3C400F69544 /* THCoreDataStack.m in Sources */,
 				7B74B9A71CF7B71D00F69544 /* THDiaryEntry.m in Sources */,
 				7B74B9A61CF7B71D00F69544 /* THDiaryEntry+CoreDataProperties.m in Sources */,
 				7B74B9AC1CF7BC2300F69544 /* THEntryViewcontroller.m in Sources */,
 				7B380F3E1CFE92FC00EF3735 /* AuthenticationViewController.m in Sources */,
+				7B995CE61D99F23B0047B6D5 /* ListCVFL.m in Sources */,
 				7BDB91681D38886D0004EB6B /* GridCollectionViewCell.m in Sources */,
 				7B995CC61D99CF020047B6D5 /* TopView.m in Sources */,
 				7B470C291D27516D009C01D0 /* DetailViewController.m in Sources */,
 				7BF359911CFE14F300ABB239 /* ImageViewController.m in Sources */,
 				7B74B97A1CF7ABF200F69544 /* AppDelegate.m in Sources */,
+				7B995CE91D99F2940047B6D5 /* UICollectionView+Additions.m in Sources */,
 				7B74B9831CF7ABF200F69544 /* BlogReaderApp.xcdatamodeld in Sources */,
 				7B74B9B81CF8148D00F69544 /* THEntryCell.m in Sources */,
 				7BA833231D94E9C800841B40 /* FilterViewController.m in Sources */,
+				7B995CF21D99F82D0047B6D5 /* UIView+Additions.m in Sources */,
 				7B74B9771CF7ABF200F69544 /* main.m in Sources */,
+				7B995CDA1D99E81C0047B6D5 /* UISlider+Additions.m in Sources */,
+				7B995CEF1D99F6EC0047B6D5 /* UIImage+UIImage.m in Sources */,
 				7B74B9AF1CF7D97500F69544 /* THEntrylistViewController.m in Sources */,
+				7B995CEC1D99F3050047B6D5 /* FilterThumbnailCVCell.m in Sources */,
 				7B470C231D272140009C01D0 /* UIFont+CustomFont.m in Sources */,
 				7B470C261D272429009C01D0 /* UIColor+CustomColor.m in Sources */,
 				7B41FB801D2C10180091DC64 /* DoubleTapImage.m in Sources */,

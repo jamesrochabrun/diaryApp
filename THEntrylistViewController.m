@@ -457,8 +457,10 @@
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
     
     UIImage *image = info[UIImagePickerControllerOriginalImage];
-    image =  [self squareImageWithImage:image scaledToSize:CGSizeMake(300, 1)];
+    
     self.pickedImage = image;
+
+    //image =  [self squareImageWithImage:image scaledToSize:CGSizeMake(300, 1)];
 
     __weak THEntrylistViewController *weakSelf = self;
     dispatch_async(dispatch_get_main_queue(), ^{
@@ -466,13 +468,6 @@
             [weakSelf performSegueWithIdentifier:@"filter" sender:weakSelf];
         }];
     });
-}
-
-- (void)setPickedImage:(UIImage *)pickedImage {
-    
-    _pickedImage = pickedImage;
-    
-    //do something if neccesary
 }
 
 
