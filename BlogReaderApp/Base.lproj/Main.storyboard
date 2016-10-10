@@ -84,7 +84,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NSH-wx-3Lp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2597" y="592"/>
+            <point key="canvasLocation" x="2890" y="732"/>
         </scene>
         <!--Entry Viewcontroller-->
         <scene sceneID="MDP-sE-wzK">
@@ -374,7 +374,7 @@
                                             <frame key="frameInset" width="375" height="384"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="BfV-Wy-Xf2"/>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="BfV-Wy-Xf2"/>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uZE-nw-GPq">
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -490,7 +490,8 @@
                     <navigationItem key="navigationItem" id="7NR-Ts-pPN">
                         <barButtonItem key="rightBarButtonItem" title="Done" id="MoK-gO-KNw">
                             <connections>
-                                <action selector="doneWasPressed:" destination="lD4-vQ-Ndn" id="20b-hU-Dd3"/>
+                                <action selector="doneWasPressed:" destination="lD4-vQ-Ndn" id="sW8-eC-NEW"/>
+                                <segue destination="Kn8-zt-PB9" kind="push" id="cww-dA-p7H"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -505,7 +506,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="PXd-Lp-5Ze" customClass="THNavigationController" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="qs3-VY-qNh"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="wGj-Xf-Sd1">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="wGj-Xf-Sd1">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -523,7 +524,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="VWW-dU-AZH" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="74h-Wd-6Nt">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="74h-Wd-6Nt">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -542,7 +543,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="6qr-ka-6OA" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="1Yh-XE-TWx"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="G2S-D1-kR0">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="G2S-D1-kR0">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -561,7 +562,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="G8q-oh-10k" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="0UW-rJ-XtI"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="42h-zO-N21">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="42h-zO-N21">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -579,7 +580,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="4Hv-iw-vze" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="f2b-gJ-Si6">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="f2b-gJ-Si6">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -612,5 +613,6 @@
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="wab-nu-Vyw"/>
+        <segue reference="cww-dA-p7H"/>
     </inferredMetricsTieBreakers>
 </document>

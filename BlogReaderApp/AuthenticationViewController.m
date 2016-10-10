@@ -71,7 +71,9 @@
                                               break;
                                               
                                           default:
-                                              [self touchIdIsNotConfigured];
+                                              [self authenticationSuccesful];
+
+                                             // [self touchIdIsNotConfigured];
                                               break;
                                       }
                                       NSLog(@"Authentication Fails");
@@ -79,7 +81,9 @@
                               });
                           }];
     } else {
-        [self touchIdIsNotConfigured];
+        [self authenticationSuccesful];
+
+     //   [self touchIdIsNotConfigured];
     }
 }
 

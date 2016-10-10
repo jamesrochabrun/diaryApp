@@ -13,5 +13,6 @@
 @interface THEntryViewcontroller : UIViewController
 
 @property (nonatomic, strong) THDiaryEntry *entry;
+@property (nonatomic, strong) UIImage *pickedImage;
 
 @end

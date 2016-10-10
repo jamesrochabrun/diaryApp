@@ -25,7 +25,7 @@
 @property (strong, nonatomic) IBOutlet UIView *accesoryView;
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
 @property (weak, nonatomic) IBOutlet UIButton *imageButton;
-@property (nonatomic,strong) UIImage *pickedImage;
+//@property (nonatomic,strong) UIImage *pickedImage;
 @property (nonatomic,strong) CLLocationManager *locationManager;
 @property (nonatomic,strong) NSString *location;
 @property (weak, nonatomic) IBOutlet UIImageView *moodEntryImage;
@@ -39,6 +39,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    NSLog(@"the imag %@", _pickedImage);
     //if theres not an entry create it with the textfield
     if ([self.locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
         [self.locationManager requestWhenInUseAuthorization];

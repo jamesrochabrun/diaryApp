@@ -17,6 +17,7 @@
 #import "FilterThumbnailCVCell.h"
 #import "UIImage+UIImage.h"
 #import "UIView+Additions.h"
+#import "THEntryViewcontroller.h"
 
 @interface FilterViewController ()
 @property (nonatomic, strong) UIImageView *imageView;
@@ -237,6 +238,7 @@ static NSString * const FilterCelIdentifier = @"FilterCellIdentifier";
     
     _sliderView.frame = CGRectMake(0, _collectionView.frame.origin.y , width(self.view), CGRectGetMinY(_filterButton.frame) - CGRectGetMinY(_collectionView.frame));
 }
+
 
 - (void)setPickedImage:(UIImage *)pickedImage {
     
@@ -1048,14 +1050,22 @@ static NSString * const FilterCelIdentifier = @"FilterCellIdentifier";
 }
 
 
-
-- (IBAction)doneWasPressed:(UIBarButtonItem *)sender {
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
-    __weak FilterViewController *weakSelf = self;
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [weakSelf dismissViewControllerAnimated:YES completion:nil];
-    });
+    if ([segue.identifier isEqual :@"ready"]) {
+        
+        UINavigationController *navigationController = segue.destinationViewController;
+        THEntryViewcontroller *controller = (THEntryViewcontroller *)navigationController.topViewController;
+        controller.pickedImage = self.imageView.image;
+    }
+    
 }
+
+
+
+
+
+
 
 
 
