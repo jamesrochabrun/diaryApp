@@ -246,6 +246,7 @@ static NSString * const FilterCelIdentifier = @"FilterCellIdentifier";
     
     _pickedImage = pickedImage;
     _imageView.image = _pickedImage;
+    
     [self initializeImageViewSize];
     NSLog(@"the images in filter VC is %@", _imageView.image);
 

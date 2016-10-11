@@ -55,16 +55,7 @@
                     <view key="view" contentMode="scaleToFill" id="Mhd-Vz-sQC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xoO-jo-tBu"/>
-                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <constraints>
-                            <constraint firstAttribute="trailing" secondItem="xoO-jo-tBu" secondAttribute="trailing" id="0kG-6y-jCU"/>
-                            <constraint firstItem="xoO-jo-tBu" firstAttribute="leading" secondItem="Mhd-Vz-sQC" secondAttribute="leading" id="5r4-pb-x8e"/>
-                            <constraint firstItem="xoO-jo-tBu" firstAttribute="top" secondItem="iqE-Pm-XXs" secondAttribute="bottom" id="9dc-MF-thY"/>
-                            <constraint firstItem="YZW-8v-TJm" firstAttribute="top" secondItem="xoO-jo-tBu" secondAttribute="bottom" id="Dkc-Br-kPL"/>
-                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="KkG-tC-Ud9">
                         <barButtonItem key="leftBarButtonItem" title="Dismiss" id="1hv-lO-zOU">
@@ -78,9 +69,6 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
-                    <connections>
-                        <outlet property="imageView" destination="xoO-jo-tBu" id="scc-pt-uJ8"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NSH-wx-3Lp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

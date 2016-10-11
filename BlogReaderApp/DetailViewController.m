@@ -25,6 +25,7 @@
 @property (nonatomic, strong) UIButton *zoomButton;
 @property (nonatomic, strong) UIScrollView *scrollView;
 @property (nonatomic, strong) UITextView *entryText;
+@property (nonatomic , strong) UIImage *frameImage;
 
 
 @end
@@ -42,9 +43,12 @@
     _scrollView.showsVerticalScrollIndicator = NO;
     [self.view addSubview:_scrollView];
     
+    _frameImage = [UIImage imageWithData:_entry.image];
+    
     _mainImageView = [UIImageView new];
     _mainImageView.contentMode = UIViewContentModeScaleAspectFill;
     _mainImageView.clipsToBounds = YES;
+    _mainImageView.image = _frameImage;
     [_scrollView addSubview:_mainImageView];
     
     _moodImageView = [UIImageView new];
@@ -80,7 +84,6 @@
     
 }
 
-
 - (void)viewWillLayoutSubviews {
     
     [super viewWillLayoutSubviews];
@@ -93,9 +96,14 @@
     _scrollView.frame = frame;
     
     frame = _mainImageView.frame;
-    frame.size.width = width(self.view);
-    frame.size.height = width(self.view);
-    frame.origin.x = 0;
+    if (_frameImage.size.height > _frameImage.size.width) {
+        frame.size.width = _frameImage.size.width * width(self.view) / _frameImage.size.height;
+        frame.size.height = width(self.view);
+    } else {
+        frame.size.height =  _frameImage.size.height * width(self.view)/ _frameImage.size.width;
+        frame.size.width = width(self.view);
+    }
+    frame.origin.x = (width(self.view) - frame.size.width)/2;
     frame.origin.y = 0;
     _mainImageView.frame = frame;
     
@@ -130,12 +138,34 @@
     textView.frame = newFrame;
 }
 
+//- (void)setEntry:(THDiaryEntry *)entry {
+//    
+//    _entry = entry;
+//    UIImage *frameImage = [UIImage imageWithData:_entry.image];
+//    _mainImageView.image = frameImage;
+//    _mainImageView.layer.borderColor = [UIColor blackColor].CGColor;
+//    _mainImageView.layer.borderWidth = 2.0f;
+//    
+////    CGFloat vertical = height(self.view) - 100;
+////    CGFloat w = width(self.view);
+////    CGRect frame;
+////    
+////    frame = _mainImageView.frame;
+////    if (frameImage.size.height > frameImage.size.width) {
+////        frame.size.width = frameImage.size.width * width(self.view) / frameImage.size.height;
+////        frame.size.height = width(self.view);
+////    } else {
+////        frame.size.height =  frameImage.size.height * width(self.view)/ frameImage.size.width;
+////        frame.size.width = width(self.view);
+////    }
+////    frame.origin.x = (w - frame.size.width)/2;
+////    frame.origin.y = (vertical - frame.size.height)/2;
+////    _mainImageView.frame = frame;
+//}
 
 
-- (void)displayData {
-    
-    _mainImageView.image = [UIImage imageWithData:self.entry.image];
-    
+
+- (void)displayData {    
     if(self.entry.mood == DiaryEntryMoodGood) {
         _moodImageView.image = [UIImage imageNamed:@"icn_happy"];
     } else if (self.entry.mood == DiaryEntryMoodAverage) {

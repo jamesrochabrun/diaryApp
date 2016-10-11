@@ -385,7 +385,6 @@
             
             UINavigationController *navigationController = segue.destinationViewController;
             FilterViewController *filterVC = (FilterViewController *)navigationController.topViewController;
-  
             filterVC.pickedImage = _pickedImage;
         }
     });
