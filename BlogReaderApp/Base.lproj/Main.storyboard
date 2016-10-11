@@ -85,41 +85,7 @@
                     <view key="view" contentMode="scaleToFill" id="quz-N3-3Nx">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="MbW-6d-CS0">
-                                <color key="backgroundColor" red="0.97254901959999995" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <color key="textColor" red="0.5450980392" green="0.52549019610000003" blue="0.41960784309999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                <connections>
-                                    <outlet property="delegate" destination="Kn8-zt-PB9" id="JRe-et-rq2"/>
-                                </connections>
-                            </textView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="jFk-yP-aZ6">
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="100" id="gNc-Gk-Dfy"/>
-                                    <constraint firstAttribute="width" constant="100" id="rij-lc-JaI"/>
-                                </constraints>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Xrd-3x-LC1">
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="25" id="E2D-VT-D0c"/>
-                                    <constraint firstAttribute="width" constant="25" id="bLT-dC-HCG"/>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="25" id="f2r-kK-VFs"/>
-                                </constraints>
-                            </imageView>
-                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <constraints>
-                            <constraint firstAttribute="trailingMargin" secondItem="MbW-6d-CS0" secondAttribute="trailing" constant="-9" id="IVy-UH-seA"/>
-                            <constraint firstItem="MbW-6d-CS0" firstAttribute="leading" secondItem="jFk-yP-aZ6" secondAttribute="trailing" constant="1" id="Mj4-jb-oOG"/>
-                            <constraint firstItem="Xrd-3x-LC1" firstAttribute="top" secondItem="5aY-w4-gqj" secondAttribute="bottom" constant="83" id="XLd-wJ-N1L"/>
-                            <constraint firstItem="MbW-6d-CS0" firstAttribute="top" secondItem="jFk-yP-aZ6" secondAttribute="top" id="g6p-6c-o0O"/>
-                            <constraint firstItem="jFk-yP-aZ6" firstAttribute="top" secondItem="5aY-w4-gqj" secondAttribute="bottom" id="gWc-eo-gwI"/>
-                            <constraint firstItem="MbW-6d-CS0" firstAttribute="bottom" secondItem="jFk-yP-aZ6" secondAttribute="bottom" id="jJI-6e-Grb"/>
-                            <constraint firstItem="jFk-yP-aZ6" firstAttribute="leading" secondItem="quz-N3-3Nx" secondAttribute="leading" id="q5X-1h-kMs"/>
-                            <constraint firstItem="Xrd-3x-LC1" firstAttribute="leading" secondItem="quz-N3-3Nx" secondAttribute="leadingMargin" constant="69" id="xuW-iF-ixk"/>
-                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="4fF-q2-XLJ">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="yzJ-Uk-Mdr">
@@ -138,9 +104,6 @@
                         <outlet property="averageButton" destination="4MH-4c-kIL" id="WMb-xE-Hg9"/>
                         <outlet property="badButton" destination="te7-Iu-aV0" id="dTx-F5-gLl"/>
                         <outlet property="goodButton" destination="FnN-NI-oE0" id="ckY-Nw-qx9"/>
-                        <outlet property="moodEntryImage" destination="Xrd-3x-LC1" id="92h-7g-nLc"/>
-                        <outlet property="textView" destination="MbW-6d-CS0" id="6WO-G2-j8y"/>
-                        <outlet property="thumbnail" destination="jFk-yP-aZ6" id="8Dh-9d-fNM"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sEe-Qs-hZ2" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -476,7 +439,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="PXd-Lp-5Ze" customClass="THNavigationController" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="qs3-VY-qNh"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="wGj-Xf-Sd1">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="wGj-Xf-Sd1">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -494,7 +457,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="VWW-dU-AZH" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="74h-Wd-6Nt">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="74h-Wd-6Nt">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -513,7 +476,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="6qr-ka-6OA" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="1Yh-XE-TWx"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="G2S-D1-kR0">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="G2S-D1-kR0">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -532,7 +495,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="G8q-oh-10k" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="0UW-rJ-XtI"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="42h-zO-N21">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="42h-zO-N21">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -550,7 +513,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="4Hv-iw-vze" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="f2b-gJ-Si6">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="f2b-gJ-Si6">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

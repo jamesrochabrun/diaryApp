@@ -19,7 +19,7 @@
 
 @interface THEntryViewcontroller ()<UIImagePickerControllerDelegate, UINavigationControllerDelegate, CLLocationManagerDelegate,UITextViewDelegate>
 
-@property (weak, nonatomic) IBOutlet UITextView *textView;
+@property (nonatomic, strong) UITextView *textView;
 @property (nonatomic, assign) enum  DiaryEntryMood pickedMood;
 @property (weak, nonatomic) IBOutlet UIButton *badButton;
 @property (weak, nonatomic) IBOutlet UIButton *averageButton;
@@ -28,9 +28,10 @@
 @property (nonatomic, strong) UILabel *dateLabel;
 @property (nonatomic,strong) CLLocationManager *locationManager;
 @property (nonatomic,strong) NSString *location;
-@property (weak, nonatomic) IBOutlet UIImageView *moodEntryImage;
+@property (nonatomic, strong) UIImageView *moodEntryImage;
+@property (nonatomic, strong) UIImageView *thumbnail;
 @property (nonatomic, strong) UILabel *counterLabel;
-@property (weak, nonatomic) IBOutlet UIImageView *thumbnail;
+
 
 @end
 
@@ -49,6 +50,24 @@
     [_dateLabel setFont:[UIFont regularFont:15]];
     [_dateLabel setTextColor:[UIColor newGrayColor]];
     [self.view addSubview:_dateLabel];
+    
+    _thumbnail = [UIImageView new];
+    _thumbnail.clipsToBounds = YES;
+    _thumbnail.contentMode = UIViewContentModeScaleToFill;
+    [self.view addSubview:_thumbnail];
+    
+    _moodEntryImage = [UIImageView new];
+    _moodEntryImage.clipsToBounds = YES;
+    _moodEntryImage.contentMode = UIViewContentModeScaleToFill;
+    [self.view addSubview:_moodEntryImage];
+    
+    _textView = [UITextView new];
+    _textView.scrollEnabled = YES;
+    _textView.userInteractionEnabled = YES;
+    _textView.font = [UIFont regularFont:17];
+    _textView.textColor = [UIColor newGrayColor];
+    _textView.delegate = self;
+    [self.view addSubview:_textView];
     
     //[self.locationManager requestAlwaysAuthorization];
     //if theres not an entry create it with the textfield
@@ -122,11 +141,25 @@
     
     [super viewWillLayoutSubviews];
     
-    CGRect frame = _counterLabel.frame;
-    frame.origin.x = CGRectGetMaxX(self.view.frame) - width(_counterLabel) - kGeomMarginBig;
-    frame.origin.y = CGRectGetMaxY(_textView.frame) + kGeomSpaceEdge;
+    CGRect frame = _thumbnail.frame;
+    frame.size.width = 100;
+    frame.size.height = 100;
+    frame.origin.x = 0;
+    frame.origin.y = CGRectGetMaxY(self.navigationController.navigationBar.frame);
+    _thumbnail.frame = frame;
+    
+    frame = _textView.frame;
+    frame.size.height = 100;
+    frame.size.width = width(self.view) - width(_thumbnail);
+    frame.origin.x = CGRectGetMaxX(_thumbnail.frame);
+    frame.origin.y = CGRectGetMaxY(self.navigationController.navigationBar.frame);
+    _textView.frame = frame;
+    
+    frame = _counterLabel.frame;
     frame.size.height = 20;
     frame.size.width = 250;
+    frame.origin.x = CGRectGetMaxX(self.view.frame) - frame.size.width - kGeomMarginBig;
+    frame.origin.y = CGRectGetMaxY(_textView.frame) + kGeomSpaceEdge;
     _counterLabel.frame = frame;
     
     [_dateLabel sizeToFit];
@@ -240,7 +273,7 @@
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
     
-    self.counterLabel.text = [NSString stringWithFormat:@"%lu / max 210", (unsigned long)self.textView.text.length ];
+    _counterLabel.text = [NSString stringWithFormat:@"%lu / max 210", (unsigned long)textView.text.length ];
     
     BOOL maxCounter = textView.text.length + (text.length - range.length) <= 210;
 

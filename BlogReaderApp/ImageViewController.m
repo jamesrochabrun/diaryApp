@@ -64,24 +64,24 @@
     frame.origin.y = 0;
     _scrollView.frame = frame;
 //    
-    frame = _imageView.frame;
-    frame.size.height = _imageView.image.size.height;
-    frame.size.width = _imageView.image.size.width;
-    frame.origin.x = 0;
-    frame.origin.y = 0;
-    _imageView.frame = frame;
-    
 //    frame = _imageView.frame;
-//    if (_imageView.image.size.height > _imageView.image.size.width) {
-//        frame.size.width = _imageView.image.size.width * width(self.view) /_imageView.image.size.height;
-//        frame.size.height = width(self.view);
-//    } else {
-//        frame.size.height = _imageView.image.size.height * width(self.view)/_imageView.image.size.width;
-//        frame.size.width = width(self.view);
-//    }
-//    frame.origin.x = (width(self.view) - frame.size.width)/2;
-//    frame.origin.y = 0;//(height(_scrollView) - frame.size.height)/2;
+//    frame.size.height = _imageView.image.size.height;
+//    frame.size.width = _imageView.image.size.width;
+//    frame.origin.x = 0;
+//    frame.origin.y = 0;
 //    _imageView.frame = frame;
+    
+    frame = _imageView.frame;
+    if (_imageView.image.size.height > _imageView.image.size.width) {
+        frame.size.width = _imageView.image.size.width * width(self.view) /_imageView.image.size.height;
+        frame.size.height = width(self.view);
+    } else {
+        frame.size.height = _imageView.image.size.height * width(self.view)/_imageView.image.size.width;
+        frame.size.width = width(self.view);
+    }
+    frame.origin.x = (width(self.view) - frame.size.width)/2;
+    frame.origin.y = (height(_scrollView) - frame.size.height)/2;
+    _imageView.frame = frame;
     
     [_scrollView setContentSize:CGSizeMake(_imageView.frame.size.width, _imageView.frame.size.height)];
 
