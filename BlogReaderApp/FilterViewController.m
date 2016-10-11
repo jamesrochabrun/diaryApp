@@ -86,7 +86,6 @@ static NSString * const FilterCelIdentifier = @"FilterCellIdentifier";
     
     _croppedIV = [UIImageView new];
     _croppedIV.contentMode = UIViewContentModeScaleAspectFit;
-    //_croppedIV.backgroundColor = UIColorRGBA(kColorBackgroundTheme);
     _croppedIV.userInteractionEnabled = NO;
     _croppedIV.hidden = YES;
     
@@ -136,20 +135,17 @@ static NSString * const FilterCelIdentifier = @"FilterCellIdentifier";
     tapTwice.numberOfTapsRequired = 2;
     [_imageView addGestureRecognizer:tapTwice];
     
-    
     _filterButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [_filterButton setTitle:@"Filter" forState:UIControlStateNormal];
     [_filterButton addTarget:self action:@selector(showFilterMode:) forControlEvents:UIControlEventTouchUpInside];
     [_filterButton setSelected:YES];
     [_filterButton setTitleColor:[UIColor redColor] forState:UIControlStateSelected];
 
-    
     _editButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [_editButton setTitle:@"Edit" forState:UIControlStateNormal];
     [_editButton addTarget:self action:@selector(showEditMode:) forControlEvents:UIControlEventTouchUpInside];
     [_editButton setTitleColor:[UIColor redColor] forState:UIControlStateSelected];
 
-    
     _nextButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [_nextButton setTitle:@"Next" forState:UIControlStateNormal];
     [_nextButton addTarget:self action:@selector(goToFilterAndEditionMode) forControlEvents:UIControlEventTouchUpInside];
@@ -314,7 +310,7 @@ static NSString * const FilterCelIdentifier = @"FilterCellIdentifier";
     _editButton.hidden = NO;
     _collectionView.hidden = NO;
     _nextButton.hidden = YES;
-    self.view.backgroundColor = [UIColor grayColor];
+    self.view.backgroundColor = [UIColor whiteColor];
     
     UIView *doneButtonView = [_doneButton valueForKey:@"view"];
     doneButtonView.hidden = NO;

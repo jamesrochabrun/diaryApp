@@ -24,7 +24,6 @@
 @property (weak, nonatomic) IBOutlet UIButton *goodButton;
 @property (strong, nonatomic) IBOutlet UIView *accesoryView;
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
-//@property (nonatomic,strong) UIImage *pickedImage;
 @property (nonatomic,strong) CLLocationManager *locationManager;
 @property (nonatomic,strong) NSString *location;
 @property (weak, nonatomic) IBOutlet UIImageView *moodEntryImage;
@@ -48,6 +47,7 @@
     if (self.entry != nil) {
         self.textView.text = self.entry.body;
         self.pickedMood = self.entry.mood;
+        self.thumbnail.image = [UIImage imageWithData:self.entry.image];
         date = [NSDate dateWithTimeIntervalSince1970:self.entry.date];
         if(self.entry.mood == DiaryEntryMoodGood) {
             self.moodEntryImage.image = [UIImage imageNamed:@"icn_happy"];

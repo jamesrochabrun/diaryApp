@@ -17,6 +17,8 @@
     
     UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.backgroundView.frame.size.width, self.backgroundView.frame.size.height)];
     imageView.image = [UIImage imageWithData:entry.image];
+    imageView.clipsToBounds = YES;
+    imageView.contentMode = UIViewContentModeScaleAspectFill;
     self.backgroundView = imageView;
     
     if(entry.mood == DiaryEntryMoodGood) {

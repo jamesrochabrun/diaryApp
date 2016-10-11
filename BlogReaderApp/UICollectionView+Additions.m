@@ -20,7 +20,7 @@
     collectionView.showsVerticalScrollIndicator = NO;
     collectionView.alwaysBounceHorizontal = NO;
     collectionView.allowsSelection = YES;
-   // collectionView.backgroundColor =
+    collectionView.backgroundColor = [UIColor whiteColor];
     [view addSubview:collectionView];
     return collectionView;
 }
