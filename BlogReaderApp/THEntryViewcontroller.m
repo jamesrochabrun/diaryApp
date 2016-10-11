@@ -13,6 +13,8 @@
 #import "ImageViewController.h"
 #import "UIColor+CustomColor.h"
 #import "UIFont+CustomFont.h"
+#import "Common.h"
+#import "CommonUIConstants.h"
 
 
 @interface THEntryViewcontroller ()<UIImagePickerControllerDelegate, UINavigationControllerDelegate, CLLocationManagerDelegate,UITextViewDelegate>
@@ -23,11 +25,11 @@
 @property (weak, nonatomic) IBOutlet UIButton *averageButton;
 @property (weak, nonatomic) IBOutlet UIButton *goodButton;
 @property (strong, nonatomic) IBOutlet UIView *accesoryView;
-@property (weak, nonatomic) IBOutlet UILabel *dateLabel;
+@property (nonatomic, strong) UILabel *dateLabel;
 @property (nonatomic,strong) CLLocationManager *locationManager;
 @property (nonatomic,strong) NSString *location;
 @property (weak, nonatomic) IBOutlet UIImageView *moodEntryImage;
-@property (weak, nonatomic) IBOutlet UILabel *counterLabel;
+@property (nonatomic, strong) UILabel *counterLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *thumbnail;
 
 @end
@@ -36,6 +38,17 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    _counterLabel = [UILabel new];
+    [_counterLabel setFont:[UIFont regularFont:15]];
+    [_counterLabel setTextColor:[UIColor newGrayColor]];
+    _counterLabel.textAlignment = NSTextAlignmentRight;
+    [self.view addSubview:_counterLabel];
+    
+    _dateLabel = [UILabel new];
+    [_dateLabel setFont:[UIFont regularFont:15]];
+    [_dateLabel setTextColor:[UIColor newGrayColor]];
+    [self.view addSubview:_dateLabel];
     
     //[self.locationManager requestAlwaysAuthorization];
     //if theres not an entry create it with the textfield
@@ -70,14 +83,12 @@
     
     NSDateFormatter *dateFormatter = [NSDateFormatter new];
     [dateFormatter setDateFormat:@"EEEE MMMM d, YYYY"];
-    self.dateLabel.text = [dateFormatter stringFromDate:date];
+    _dateLabel.text = [dateFormatter stringFromDate:date];
     
     //this line performs the appereance of the mood buttons view in th keyboard;
     //reminder : also drag the view outside the hierarchy of the storyboard
     self.textView.inputAccessoryView = self.accesoryView;
     //appereance
-    self.dateLabel.font = [UIFont regularFont:15];
-    
     //setting the counter
     self.counterLabel.text = [NSString stringWithFormat:@"%lu / max 210", (unsigned long)self.textView.text.length ];
 }
@@ -107,6 +118,24 @@
     }];
 }
 
+- (void)viewWillLayoutSubviews {
+    
+    [super viewWillLayoutSubviews];
+    
+    CGRect frame = _counterLabel.frame;
+    frame.origin.x = CGRectGetMaxX(self.view.frame) - width(_counterLabel) - kGeomMarginBig;
+    frame.origin.y = CGRectGetMaxY(_textView.frame) + kGeomSpaceEdge;
+    frame.size.height = 20;
+    frame.size.width = 250;
+    _counterLabel.frame = frame;
+    
+    [_dateLabel sizeToFit];
+    frame = _dateLabel.frame;
+    frame.origin.x = CGRectGetMaxX(self.view.frame) - width(_dateLabel) - kGeomMarginBig;
+    frame.origin.y = CGRectGetMaxY(_counterLabel.frame) + kGeomMarginBig;
+    _dateLabel.frame = frame;
+    
+}
 
 - (void)viewWillAppear:(BOOL)animated {
     [self.textView becomeFirstResponder];

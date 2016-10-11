@@ -18,7 +18,7 @@
 #import "CommonUIConstants.h"
 
 
-@interface DetailViewController ()<DoubleTapImagedelegate>
+@interface DetailViewController ()<DoubleTapImagedelegate,UIScrollViewDelegate>
 @property (nonatomic, strong) UIButton *isFavoriteButton;
 @property (nonatomic, strong) UIImageView *mainImageView;
 @property (nonatomic, strong) UIImageView *moodImageView;
@@ -40,7 +40,17 @@
     }
     
     _scrollView = [UIScrollView new];
+    _scrollView.bouncesZoom = YES;
+    _scrollView.delegate = self;
+    //_scrollView.clipsToBounds = YES;
     _scrollView.showsVerticalScrollIndicator = NO;
+    _scrollView.showsHorizontalScrollIndicator = NO;
+    float minimumScale = 1.0;//This is the minimum scale, set it to whatever you want. 1.0 = default
+    _scrollView.maximumZoomScale = 4.0;
+    _scrollView.minimumZoomScale = minimumScale;
+    _scrollView.zoomScale = minimumScale;
+    [_scrollView setContentMode:UIViewContentModeScaleAspectFit];
+    _scrollView.decelerationRate = UIScrollViewDecelerationRateFast;
     [self.view addSubview:_scrollView];
     
     _frameImage = [UIImage imageWithData:_entry.image];
@@ -48,6 +58,9 @@
     _mainImageView = [UIImageView new];
     _mainImageView.contentMode = UIViewContentModeScaleAspectFill;
     _mainImageView.clipsToBounds = YES;
+    _mainImageView.userInteractionEnabled = YES;
+    _mainImageView.autoresizingMask = ( UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin);
+
     _mainImageView.image = _frameImage;
     [_scrollView addSubview:_mainImageView];
     
@@ -71,7 +84,7 @@
     _zoomButton = [UIButton new];
     [_zoomButton setImage:[UIImage imageNamed:@"zoom"] forState:UIControlStateNormal];
     [_zoomButton addTarget:self action:@selector(onZoomButtonPressed) forControlEvents:UIControlEventTouchUpInside];
-    [_scrollView addSubview:_zoomButton];
+   // [_scrollView addSubview:_zoomButton];
     
     _entryText = [UITextView new];
     _entryText.showsVerticalScrollIndicator = NO;
@@ -82,7 +95,15 @@
     _entryText.text = self.entry.body;
     [_scrollView addSubview:_entryText];
     
+    UITapGestureRecognizer *doubleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleDoubleTap:)];
+    
+    [doubleTap setNumberOfTapsRequired:2];
+    
+    //Adding gesture recognizer
+    [_mainImageView addGestureRecognizer:doubleTap];
+    
 }
+
 
 - (void)viewWillLayoutSubviews {
     
@@ -94,7 +115,7 @@
     frame.origin.x = 0;
     frame.origin.y = 0;
     _scrollView.frame = frame;
-    
+
     frame = _mainImageView.frame;
     if (_frameImage.size.height > _frameImage.size.width) {
         frame.size.width = _frameImage.size.width * width(self.view) / _frameImage.size.height;
@@ -107,23 +128,41 @@
     frame.origin.y = 0;
     _mainImageView.frame = frame;
     
+    frame = _moodImageView.frame;
+    frame.size.width = kGeomDismmissButton;
+    frame.size.height = kGeomDismmissButton;
+    frame.origin.x = originX(self.view) + kGeomMarginMedium;
+    frame.origin.y = originY(self.view) + kGeomMarginMedium;
+    _moodImageView.frame = frame;
+    
+//    frame = _mainImageView.frame;
+//    frame.size.height = width(self.view);
+//    frame.size.width = width(self.view);
+//    frame.origin.x = 0;
+//    frame.origin.y = 0;
+//    _mainImageView.frame = frame;
+//    
     [self textViewDidChange:_entryText];
     
-    frame = _zoomButton.frame;
+    frame = _isFavoriteButton.frame;
     frame.size.height = kGeomDismmissButton;
     frame.size.width = kGeomDismmissButton;
     frame.origin.x = CGRectGetMaxX(_mainImageView.frame) - frame.size.width - kGeomMarginMedium;
     frame.origin.y = CGRectGetMaxY(_mainImageView.frame) - frame.size.height - kGeomMarginMedium;
-    _zoomButton.frame = frame;
-    
-    frame = _isFavoriteButton.frame;
-    frame.size.width = kGeomDismmissButton;
-    frame.size.height = kGeomDismmissButton;
-    frame.origin.x = CGRectGetMinX(_zoomButton.frame) - kGeomDismmissButton - kGeomMarginSmall;
-    frame.origin.y = CGRectGetMaxY(_mainImageView.frame) - frame.size.height - kGeomMarginMedium;
     _isFavoriteButton.frame = frame;
     
+//    frame = _isFavoriteButton.frame;
+//    frame.size.width = kGeomDismmissButton;
+//    frame.size.height = kGeomDismmissButton;
+//    frame.origin.x = CGRectGetMinX(_zoomButton.frame) - kGeomDismmissButton - kGeomMarginSmall;
+//    frame.origin.y = CGRectGetMaxY(_mainImageView.frame) - frame.size.height - kGeomMarginMedium;
+//    _isFavoriteButton.frame = frame;
+    
     _scrollView.contentSize = CGSizeMake(width(self.view), CGRectGetMaxY(_entryText.frame) + kGeomBottomPadding);
+    
+    NSLog(@"the scrol.height is %f", _scrollView.contentSize.height);
+    NSLog(@"the max y of entry text is %f" , CGRectGetMaxY(_entryText.frame));
+    NSLog(@"the height of the view is %f", height(self.view));
 }
 
 
@@ -138,34 +177,8 @@
     textView.frame = newFrame;
 }
 
-//- (void)setEntry:(THDiaryEntry *)entry {
-//    
-//    _entry = entry;
-//    UIImage *frameImage = [UIImage imageWithData:_entry.image];
-//    _mainImageView.image = frameImage;
-//    _mainImageView.layer.borderColor = [UIColor blackColor].CGColor;
-//    _mainImageView.layer.borderWidth = 2.0f;
-//    
-////    CGFloat vertical = height(self.view) - 100;
-////    CGFloat w = width(self.view);
-////    CGRect frame;
-////    
-////    frame = _mainImageView.frame;
-////    if (frameImage.size.height > frameImage.size.width) {
-////        frame.size.width = frameImage.size.width * width(self.view) / frameImage.size.height;
-////        frame.size.height = width(self.view);
-////    } else {
-////        frame.size.height =  frameImage.size.height * width(self.view)/ frameImage.size.width;
-////        frame.size.width = width(self.view);
-////    }
-////    frame.origin.x = (w - frame.size.width)/2;
-////    frame.origin.y = (vertical - frame.size.height)/2;
-////    _mainImageView.frame = frame;
-//}
-
-
-
-- (void)displayData {    
+- (void)displayData {
+    
     if(self.entry.mood == DiaryEntryMoodGood) {
         _moodImageView.image = [UIImage imageNamed:@"icn_happy"];
     } else if (self.entry.mood == DiaryEntryMoodAverage) {
@@ -174,7 +187,12 @@
         _moodImageView.image = [UIImage imageNamed:@"icn_bad"];
     }
     
-
+    _entryText.text = self.entry.body;
+    
+    __weak DetailViewController *weakSelf = self;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [weakSelf textViewDidChange:_entryText];
+    });
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -256,9 +274,82 @@
 
 
 
+#pragma scrollView
+
+- (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView {
+    return _mainImageView;
+}
 
 
+#pragma mark TapDetectingImageViewDelegate methods
 
+- (void)handleDoubleTap:(UIGestureRecognizer *)gestureRecognizer {
+    // zoom in
+    float newScale = [_scrollView zoomScale] * 1.3;//ZOOM_STEP;
+    
+    if (newScale > self.scrollView.maximumZoomScale){
+        newScale = self.scrollView.minimumZoomScale;
+        CGRect zoomRect = [self zoomRectForScale:newScale withCenter:[gestureRecognizer locationInView:gestureRecognizer.view]];
+        
+        [_scrollView zoomToRect:zoomRect animated:YES];
+    }
+    else{
+        
+        newScale = self.scrollView.maximumZoomScale;
+        CGRect zoomRect = [self zoomRectForScale:newScale withCenter:[gestureRecognizer locationInView:gestureRecognizer.view]];
+        [_scrollView zoomToRect:zoomRect animated:YES];
+    }
+}
+
+- (void)scrollViewDidZoom:(UIScrollView *)scrollView {
+    
+    [self updateUI:YES];
+}
+
+- (void)scrollViewDidEndZooming:(UIScrollView *)scrollView withView:(UIView *)view atScale:(CGFloat)scale {
+    
+    if (scale == scrollView.minimumZoomScale) {
+        [self updateUI:NO];
+    }
+}
+
+- (void)updateUI:(BOOL)zoom {
+    
+    __weak DetailViewController *weakSelf = self;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        if (zoom) {
+            weakSelf.isFavoriteButton.hidden =
+            weakSelf.moodImageView.hidden =
+            weakSelf.entryText.hidden = YES;
+            
+        } else {
+            weakSelf.isFavoriteButton.hidden =
+            weakSelf.moodImageView.hidden =
+            weakSelf.entryText.hidden = NO;
+            [weakSelf.view setNeedsLayout];
+        }
+    });
+}
+
+//
+//#pragma mark Utility methods
+//
+- (CGRect)zoomRectForScale:(float)scale withCenter:(CGPoint)center {
+    
+    CGRect zoomRect;
+    
+    // the zoom rect is in the content view's coordinates.
+    //    At a zoom scale of 1.0, it would be the size of the imageScrollView's bounds.
+    //    As the zoom scale decreases, so more content is visible, the size of the rect grows.
+    zoomRect.size.height = [_scrollView frame].size.height / scale;
+    zoomRect.size.width  = [_scrollView frame].size.width  / scale;
+    
+    // choose an origin so as to get the right center.
+    zoomRect.origin.x    = center.x - (zoomRect.size.width  / 2.0);
+    zoomRect.origin.y    = center.y - (zoomRect.size.height / 2.0);
+    
+    return zoomRect;
+}
 
 
 

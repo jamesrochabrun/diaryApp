@@ -48,6 +48,7 @@
     self.title = @"My Diary";
     [self.fetchedResultsController performFetch:nil];
     self.gridCollectionViewController.collectionViewLayout = [[GridCollectionViewFlowLayout alloc] init];
+    self.gridCollectionViewController.showsVerticalScrollIndicator = NO;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self createToolbar];
     

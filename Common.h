@@ -14,6 +14,10 @@
 
 static inline CGFloat width(UIView *view) { return view.bounds.size.width; }
 static inline CGFloat height(UIView *view) { return view.bounds.size.height; }
+static inline CGFloat originX(UIView *view) { return view.frame.origin.x; }
+static inline CGFloat originY(UIView *view) { return view.frame.origin.y; }
+
+
 
 extern NSArray * parseArrayOrNullFromServer (id object);
 extern NSString * parseStringOrNullFromServer (id object);
