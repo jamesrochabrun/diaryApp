@@ -112,11 +112,6 @@
     [self.textView becomeFirstResponder];
 }
 
-- (void)viewDidAppear:(BOOL)animated {
-    
-
-}
-
 - (IBAction)cancelWasPressed:(UIBarButtonItem *)sender {
     [self dismissSelf];
     [self.view endEditing:YES];
@@ -152,6 +147,8 @@
         entry.location = self.location;
         BOOL myBool = NO;
         entry.isFavorite = [NSNumber numberWithBool:myBool];
+        
+        UIImageWriteToSavedPhotosAlbum(self.pickedImage, nil, nil, nil);
         
         if (self.location == nil) {
             NSLog(@"location not added");

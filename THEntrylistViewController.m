@@ -450,9 +450,9 @@
     
     UIImage *image = info[UIImagePickerControllerOriginalImage];
     
-    if (picker.sourceType == UIImagePickerControllerSourceTypeCamera) {
-        UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil);
-    }
+//    if (picker.sourceType == UIImagePickerControllerSourceTypeCamera) {
+//        UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil);
+//    }
     
     CGSize s = image.size;
     _pickedImage = [UIImage imageWithImage:image scaledToSize:CGSizeMake(kGeomUploadWidth, kGeomUploadWidth*s.height/s.width)];
