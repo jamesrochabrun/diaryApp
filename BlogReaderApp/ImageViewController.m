@@ -45,14 +45,11 @@
     [_scrollView addSubview:_imageView];
     
     UITapGestureRecognizer *doubleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleDoubleTap:)];
-    UITapGestureRecognizer *twoFingerTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTwoFingerTap:)];
     
     [doubleTap setNumberOfTapsRequired:2];
-    [twoFingerTap setNumberOfTouchesRequired:2];
     
     //Adding gesture recognizer
     [_imageView addGestureRecognizer:doubleTap];
-    [_imageView addGestureRecognizer:twoFingerTap];
 }
 
 - (void)viewWillLayoutSubviews {
@@ -66,8 +63,8 @@
     _scrollView.frame = frame;
     
     frame = _imageView.frame;
-    frame.size.height = _imageView.image.size.height;
-    frame.size.width = _imageView.image.size.width;
+    frame.size.height = _imageView.image.size.height/2;
+    frame.size.width = _imageView.image.size.width/2;
     frame.origin.x = 0;
     frame.origin.y = 0;
     _imageView.frame = frame;
@@ -103,21 +100,6 @@
 
 #pragma scrollView
 
-
-- (void)scrollViewDidZoom:(UIScrollView *)aScrollView {
-    
-    CGFloat offsetX = (_scrollView.bounds.size.width > _scrollView.contentSize.width)?
-    (_scrollView.bounds.size.width - _scrollView.contentSize.width) * 0.5 : 0.0;
-    CGFloat offsetY = (_scrollView.bounds.size.height > _scrollView.contentSize.height)?
-    (_scrollView.bounds.size.height - _scrollView.contentSize.height) * 0.5 : 0.0;
-    _imageView.center = CGPointMake(_scrollView.contentSize.width * 0.5 + offsetX,
-                                   _scrollView.contentSize.height * 0.5 + offsetY);
-}
-
-
-
-#pragma mark UIScrollViewDelegate methods
-
 - (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView {
     return _imageView;
 }
@@ -126,7 +108,7 @@
 
 - (void)handleDoubleTap:(UIGestureRecognizer *)gestureRecognizer {
     // zoom in
-    float newScale = [_scrollView zoomScale] * 2.0;//ZOOM_STEP;
+    float newScale = [_scrollView zoomScale] * 1.3;//ZOOM_STEP;
     
     if (newScale > self.scrollView.maximumZoomScale){
         newScale = self.scrollView.minimumZoomScale;
@@ -142,14 +124,6 @@
         
         [_scrollView zoomToRect:zoomRect animated:YES];
     }
-}
-
-
-- (void)handleTwoFingerTap:(UIGestureRecognizer *)gestureRecognizer {
-    // two-finger tap zooms out
-    float newScale = [_scrollView zoomScale] / 2.0;//ZOOM_STEP;
-    CGRect zoomRect = [self zoomRectForScale:newScale withCenter:[gestureRecognizer locationInView:gestureRecognizer.view]];
-    [_scrollView zoomToRect:zoomRect animated:YES];
 }
 
 #pragma mark Utility methods
