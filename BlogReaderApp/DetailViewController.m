@@ -26,6 +26,9 @@
 @property (nonatomic, strong) UIScrollView *scrollView;
 @property (nonatomic, strong) UITextView *entryText;
 @property (nonatomic , strong) UIImage *frameImage;
+@property (nonatomic, strong) UILabel *dateLabel;
+@property (nonatomic, strong) UILabel *locationLabel;
+
 
 
 @end
@@ -86,6 +89,21 @@
     [_zoomButton addTarget:self action:@selector(onZoomButtonPressed) forControlEvents:UIControlEventTouchUpInside];
    // [_scrollView addSubview:_zoomButton];
     
+    _dateLabel = [UILabel new];
+    _dateLabel.textColor = [UIColor newGrayColor];
+    _dateLabel.font = [UIFont regularFont:17];
+    NSDateFormatter *dateFormatter = [NSDateFormatter new];
+    [dateFormatter setDateFormat:@"EEEE, MMMM d yyyy"];
+    NSDate *date = [NSDate dateWithTimeIntervalSince1970:_entry.date];
+    _dateLabel.text = [dateFormatter stringFromDate:date];
+    [_scrollView addSubview:_dateLabel];
+    
+    _locationLabel = [UILabel new];
+    _locationLabel.textColor = [UIColor newGrayColor];
+    _locationLabel.font = [UIFont regularFont:17];
+    _locationLabel.text = self.entry.location;
+    [_scrollView addSubview:_locationLabel];
+    
     _entryText = [UITextView new];
     _entryText.showsVerticalScrollIndicator = NO;
     _entryText.userInteractionEnabled = NO;
@@ -141,7 +159,19 @@
 //    frame.origin.x = 0;
 //    frame.origin.y = 0;
 //    _mainImageView.frame = frame;
-//    
+    
+    [_locationLabel sizeToFit];
+    frame = _locationLabel.frame;
+    frame.origin.x = (width(self.view) - width(_locationLabel)) /2;
+    frame.origin.y = CGRectGetMaxY(_mainImageView.frame) + kGeomMarginMedium;
+    _locationLabel.frame = frame;
+    
+    [_dateLabel sizeToFit];
+    frame = _dateLabel.frame;
+    frame.origin.x = (width(self.view) - width(_dateLabel)) /2;
+    frame.origin.y = CGRectGetMaxY(_locationLabel.frame) + kGeomMarginSmall;
+    _dateLabel.frame = frame;
+    
     [self textViewDidChange:_entryText];
     
     frame = _isFavoriteButton.frame;
@@ -159,10 +189,7 @@
 //    _isFavoriteButton.frame = frame;
     
     _scrollView.contentSize = CGSizeMake(width(self.view), CGRectGetMaxY(_entryText.frame) + kGeomBottomPadding);
-    
-    NSLog(@"the scrol.height is %f", _scrollView.contentSize.height);
-    NSLog(@"the max y of entry text is %f" , CGRectGetMaxY(_entryText.frame));
-    NSLog(@"the height of the view is %f", height(self.view));
+
 }
 
 
@@ -173,7 +200,7 @@
     CGRect newFrame = textView.frame;
     newFrame.size = CGSizeMake(fmaxf(newSize.width, fixedWidth), newSize.height);
     newFrame.origin.x = (width(self.view) - fixedWidth) /2;
-    newFrame.origin.y = CGRectGetMaxY(_mainImageView.frame) + kGeomMarginMedium;
+    newFrame.origin.y = CGRectGetMaxY(_dateLabel.frame) + kGeomMarginMedium;
     textView.frame = newFrame;
 }
 
@@ -325,11 +352,15 @@
         if (zoom) {
             weakSelf.isFavoriteButton.hidden =
             weakSelf.moodImageView.hidden =
+            weakSelf.dateLabel.hidden =
+            weakSelf.locationLabel.hidden =
             weakSelf.entryText.hidden = YES;
             
         } else {
             weakSelf.isFavoriteButton.hidden =
             weakSelf.moodImageView.hidden =
+            weakSelf.dateLabel.hidden =
+            weakSelf.locationLabel.hidden =
             weakSelf.entryText.hidden = NO;
             [weakSelf.view setNeedsLayout];
         }

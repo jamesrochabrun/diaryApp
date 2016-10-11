@@ -110,6 +110,7 @@
     self.counterLabel.text = [NSString stringWithFormat:@"%lu / max 210", (unsigned long)self.textView.text.length ];
 }
 
+//delegate methods of LocationManager
 - (void)displayAlertInVC:(UIAlertController *)alertController {
     
     __weak THEntryViewcontroller *weakSelf = self;
@@ -120,8 +121,9 @@
 
 - (void)setlocationString:(NSString *)location {
     self.location = location;
-    NSLog(@"hhh : %@", location);
 }
+
+////////////////
 
 - (void)setPickedImage:(UIImage *)pickedImage {
     
