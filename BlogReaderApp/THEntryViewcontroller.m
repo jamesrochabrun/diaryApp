@@ -24,14 +24,12 @@
 @property (weak, nonatomic) IBOutlet UIButton *goodButton;
 @property (strong, nonatomic) IBOutlet UIView *accesoryView;
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
-@property (weak, nonatomic) IBOutlet UIButton *imageButton;
 //@property (nonatomic,strong) UIImage *pickedImage;
 @property (nonatomic,strong) CLLocationManager *locationManager;
 @property (nonatomic,strong) NSString *location;
 @property (weak, nonatomic) IBOutlet UIImageView *moodEntryImage;
 @property (weak, nonatomic) IBOutlet UILabel *counterLabel;
-
-
+@property (weak, nonatomic) IBOutlet UIImageView *thumbnail;
 
 @end
 
@@ -40,7 +38,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    NSLog(@"the imag %@", _pickedImage);
+    //[self.locationManager requestAlwaysAuthorization];
     //if theres not an entry create it with the textfield
     if ([self.locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
         [self.locationManager requestWhenInUseAuthorization];
@@ -66,9 +64,8 @@
         [self loadLocation];
     }
     
-    if (self.entry.image != nil) {
-        UIImage *image = [UIImage imageWithData:self.entry.image];
-        [self.imageButton setImage:image forState:UIControlStateNormal];
+    if (self.pickedImage != nil) {
+        self.thumbnail.image = _pickedImage;
     }
     
     NSDateFormatter *dateFormatter = [NSDateFormatter new];
@@ -79,14 +76,16 @@
     //reminder : also drag the view outside the hierarchy of the storyboard
     self.textView.inputAccessoryView = self.accesoryView;
     //appereance
-    self.imageButton.layer.cornerRadius = CGRectGetWidth(self.imageButton.frame) / 2.0f;
-    self.imageButton.titleLabel.font = [UIFont regularFont:13];
-    [[self.imageButton layer] setBorderWidth:2.0f];
-    [[self.imageButton layer] setBorderColor:(__bridge CGColorRef _Nullable)([UIColor mainColor])];
     self.dateLabel.font = [UIFont regularFont:15];
     
     //setting the counter
     self.counterLabel.text = [NSString stringWithFormat:@"%lu / max 210", (unsigned long)self.textView.text.length ];
+}
+
+- (void)setPickedImage:(UIImage *)pickedImage {
+    
+    if (_pickedImage == pickedImage) return;
+    _pickedImage = pickedImage;
 }
 
 - (void)loadLocation {
@@ -113,10 +112,14 @@
     [self.textView becomeFirstResponder];
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    
+
+}
+
 - (IBAction)cancelWasPressed:(UIBarButtonItem *)sender {
     [self dismissSelf];
     [self.view endEditing:YES];
-
 }
 
 - (IBAction)doneWasPressed:(id)sender {
@@ -163,9 +166,9 @@
     
     self.entry.body = self.textView.text;
     self.entry.mood = self.pickedMood;
-    if (self.pickedImage != nil) {
-        self.entry.image = UIImageJPEGRepresentation(self.pickedImage, 0.75);
-    }
+//    if (self.pickedImage != nil) {
+//        self.entry.image = UIImageJPEGRepresentation(self.pickedImage, 0.75);
+//    }
     THCoreDataStack *coreDataStack = [THCoreDataStack defaultStack];
     [coreDataStack saveContext];
 }

@@ -32,6 +32,8 @@
 	<true/>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Allow &quot;BlogDiary&quot; to access your location to add it to your entry?</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Allow &quot;BlogDiary&quot; to access your location to add it to your entry?</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Gotham Narrow Book.otf</string>

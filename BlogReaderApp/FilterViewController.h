@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "THEntryViewcontroller.h"
 
 
-@interface FilterViewController : UIViewController<UIGestureRecognizerDelegate>
+@interface FilterViewController : UIViewController<UIGestureRecognizerDelegate, THEntryViewcontrollerDelegate>
 @property (nonatomic, strong) UIImage *pickedImage;
 
 @end

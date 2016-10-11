@@ -104,14 +104,6 @@
     
 }
 
-//- (void)addentry {
-    
-    
-  //  dispatch_async(dispatch_get_main_queue(), ^(void){
-   // [self performSegueWithIdentifier:@"add" sender:self.addEntry];
-    //});
-//}
-
 - (void)goToHome {
     
     [_home setSelected:YES];
@@ -454,8 +446,6 @@
 }
 
 //overwriting the setter for pickedImage
-
-
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
     
     UIImage *image = info[UIImagePickerControllerOriginalImage];

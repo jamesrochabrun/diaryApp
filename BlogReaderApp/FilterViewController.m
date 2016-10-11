@@ -21,6 +21,7 @@
 
 @interface FilterViewController ()
 @property (nonatomic, strong) UIImageView *imageView;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *doneButton;
 
 @property (nonatomic, strong) UIButton *editButton;
 @property (nonatomic, strong) UIButton *filterButton;
@@ -169,10 +170,8 @@ static NSString * const FilterCelIdentifier = @"FilterCellIdentifier";
     _filterMode = YES;
     
     _intersection = [UIView new];
-    NSLog(@"the images is %@", _imageView.image);
     
     _croppedIV.image = _imageView.image;
-    
     
     [self.view addSubview:_imageView];
     [self.view addSubview:_cropView];
@@ -197,11 +196,14 @@ static NSString * const FilterCelIdentifier = @"FilterCellIdentifier";
     
     //initializing the context
     _context = [CIContext contextWithOptions:nil];
-    [self showCropMode];
+    [self startCropMode];
 
+    UIView *doneButtonView = [_doneButton valueForKey:@"view"];
+    doneButtonView.hidden = YES;
 }
 
-- (void)showCropMode {
+
+- (void)startCropMode {
     
     _filterButton.hidden = YES;
     _editButton.hidden = YES;
@@ -245,6 +247,7 @@ static NSString * const FilterCelIdentifier = @"FilterCellIdentifier";
     _pickedImage = pickedImage;
     _imageView.image = _pickedImage;
     [self initializeImageViewSize];
+    NSLog(@"the images in filter VC is %@", _imageView.image);
 
 }
 
@@ -312,6 +315,9 @@ static NSString * const FilterCelIdentifier = @"FilterCellIdentifier";
     _collectionView.hidden = NO;
     _nextButton.hidden = YES;
     self.view.backgroundColor = [UIColor grayColor];
+    
+    UIView *doneButtonView = [_doneButton valueForKey:@"view"];
+    doneButtonView.hidden = NO;
     
     [self setTheCropViewImage];
     [self initializingTheFiltersWithCropViewImage];
@@ -1050,13 +1056,26 @@ static NSString * const FilterCelIdentifier = @"FilterCellIdentifier";
 }
 
 
+- (IBAction)cancelWaspressed:(UIBarButtonItem *)sender {
+
+    if (_pickedImage) {
+        _pickedImage = nil;
+    }
+    [self dismissSelf];
+}
+
+
+- (void)dismissSelf {
+    [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+}
+
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
     if ([segue.identifier isEqual :@"ready"]) {
         
         UINavigationController *navigationController = segue.destinationViewController;
         THEntryViewcontroller *controller = (THEntryViewcontroller *)navigationController.topViewController;
-        controller.pickedImage = self.imageView.image;
+        controller.pickedImage =  self.croppedIV.image;
     }
     
 }
