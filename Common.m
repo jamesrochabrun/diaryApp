@@ -51,6 +51,38 @@ NSNumber * parseNSNumberOrNullFromServer (id object) {
 
 @implementation Common
 
+// For other settings check:
+// http://stackoverflow.com/questions/9092142/ios-uialertview-button-to-go-to-setting-app
+//
++ (void)goToSettings:(kAppSettings)settings
+{
+    NSString *path;
+    
+    switch (settings) {
+        case kAppSettingsCamera:
+            path = @"prefs:root=Privacy&path=CAMERA";
+            break;
+        case kAppSettingsPhotos:
+            path = @"prefs:root=Privacy&path=PHOTOS";
+            break;
+        case kAppSettingsLocation:
+            path = @"prefs:root=LOCATION_SERVICES";
+            break;
+        case kAppSettingsContacts:
+            path = @"prefs:root=Privacy&path=CONTACTS";
+            break;
+        default:
+            break;
+    }
+    
+    NSURL *url = [NSURL URLWithString:path];
+    if ([[UIApplication sharedApplication] canOpenURL:url]) {
+        [[UIApplication sharedApplication] openURL:url];
+    } else {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
+    }
+}
+
 
 
 

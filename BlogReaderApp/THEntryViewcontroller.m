@@ -15,9 +15,10 @@
 #import "UIFont+CustomFont.h"
 #import "Common.h"
 #import "CommonUIConstants.h"
+#import "LocationManager.h"
 
 
-@interface THEntryViewcontroller ()<UIImagePickerControllerDelegate, UINavigationControllerDelegate, CLLocationManagerDelegate,UITextViewDelegate>
+@interface THEntryViewcontroller ()<UINavigationControllerDelegate, CLLocationManagerDelegate,UITextViewDelegate,LocationManagerDelegate>
 
 @property (nonatomic, strong) UITextView *textView;
 @property (nonatomic, assign) enum  DiaryEntryMood pickedMood;
@@ -26,13 +27,11 @@
 @property (weak, nonatomic) IBOutlet UIButton *goodButton;
 @property (strong, nonatomic) IBOutlet UIView *accesoryView;
 @property (nonatomic, strong) UILabel *dateLabel;
-@property (nonatomic,strong) CLLocationManager *locationManager;
 @property (nonatomic,strong) NSString *location;
 @property (nonatomic, strong) UIImageView *moodEntryImage;
 @property (nonatomic, strong) UIImageView *thumbnail;
 @property (nonatomic, strong) UILabel *counterLabel;
-
-
+@property (nonatomic, strong) LocationManager *locationManager;
 @end
 
 @implementation THEntryViewcontroller
@@ -53,14 +52,9 @@
     
     _thumbnail = [UIImageView new];
     _thumbnail.clipsToBounds = YES;
-    _thumbnail.contentMode = UIViewContentModeScaleToFill;
+    _thumbnail.contentMode = UIViewContentModeScaleAspectFit;
     [self.view addSubview:_thumbnail];
-    
-    _moodEntryImage = [UIImageView new];
-    _moodEntryImage.clipsToBounds = YES;
-    _moodEntryImage.contentMode = UIViewContentModeScaleToFill;
-    [self.view addSubview:_moodEntryImage];
-    
+
     _textView = [UITextView new];
     _textView.scrollEnabled = YES;
     _textView.userInteractionEnabled = YES;
@@ -69,11 +63,15 @@
     _textView.delegate = self;
     [self.view addSubview:_textView];
     
+    _moodEntryImage = [UIImageView new];
+    _moodEntryImage.clipsToBounds = YES;
+    _moodEntryImage.contentMode = UIViewContentModeScaleToFill;
+    [self.view addSubview:_moodEntryImage];
+    
     //[self.locationManager requestAlwaysAuthorization];
     //if theres not an entry create it with the textfield
-    if ([self.locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
-        [self.locationManager requestWhenInUseAuthorization];
-    }
+    _locationManager = [LocationManager new];
+    _locationManager.delegate = self;
 
     NSDate *date;
     if (self.entry != nil) {
@@ -93,7 +91,7 @@
         self.moodEntryImage.image = [UIImage imageNamed:@"icn_happy"];
         date = [NSDate date];
         //we only want to load location for a new entry
-        [self loadLocation];
+      //  [self l];
     }
     
     if (self.pickedImage != nil) {
@@ -112,29 +110,23 @@
     self.counterLabel.text = [NSString stringWithFormat:@"%lu / max 210", (unsigned long)self.textView.text.length ];
 }
 
+- (void)displayAlertInVC:(UIAlertController *)alertController {
+    
+    __weak THEntryViewcontroller *weakSelf = self;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [weakSelf presentViewController:alertController animated:YES completion:nil];
+    });
+}
+
+- (void)setlocationString:(NSString *)location {
+    self.location = location;
+    NSLog(@"hhh : %@", location);
+}
+
 - (void)setPickedImage:(UIImage *)pickedImage {
     
     if (_pickedImage == pickedImage) return;
     _pickedImage = pickedImage;
-}
-
-- (void)loadLocation {
-    
-    self.locationManager = [[CLLocationManager alloc] init];
-    self.locationManager.delegate = self;
-    self.locationManager.desiredAccuracy = 1000;
-    [self.locationManager startUpdatingLocation];
-}
-
-- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations {
-    
-    [self.locationManager stopUpdatingLocation];
-    CLLocation *location = [locations firstObject];
-    CLGeocoder *geocoer = [[CLGeocoder alloc]init];
-    [geocoer reverseGeocodeLocation:location completionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks, NSError * _Nullable error) {
-        CLPlacemark *placeMark = [placemarks firstObject];
-        self.location = placeMark.name;
-    }];
 }
 
 - (void)viewWillLayoutSubviews {
@@ -147,6 +139,13 @@
     frame.origin.x = 0;
     frame.origin.y = CGRectGetMaxY(self.navigationController.navigationBar.frame);
     _thumbnail.frame = frame;
+    
+    frame = _moodEntryImage.frame;
+    frame.size.height = 20;
+    frame.size.width = 20;
+    frame.origin.x = CGRectGetMaxX(_thumbnail.frame) - 10;
+    frame.origin.y = CGRectGetMaxY(_thumbnail.frame) - 10;
+    _moodEntryImage.frame = frame;
     
     frame = _textView.frame;
     frame.size.height = 100;
