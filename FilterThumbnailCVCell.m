@@ -27,19 +27,19 @@
         _imageView.clipsToBounds = YES;
         
         _filterType = [UILabel new];
-        [_filterType setTextColor:[UIColor blackColor]];
+        [_filterType setTextColor:UIColorRGB(kColorOffBlack)];
         [_filterType setTextAlignment:NSTextAlignmentCenter];
         [_filterType setLineBreakMode:NSLineBreakByWordWrapping];
         [_filterType setNumberOfLines:0];
         
         _editionType = [UILabel new];
-        [_editionType setTextColor:[UIColor blackColor]];
+        [_editionType setTextColor:UIColorRGB(kColorOffBlack)];
         [_editionType setTextAlignment:NSTextAlignmentCenter];
         [_editionType setLineBreakMode:NSLineBreakByWordWrapping];
         [_editionType setNumberOfLines:0];
         
         _selectedView = [UIView new];
-        _selectedView.backgroundColor = [UIColor orangeColor];
+        _selectedView.backgroundColor = UIColorRGB(kColorOffBlack);
         _selectedView.hidden = YES;
         
         [self addSubview:_filterType];

@@ -72,12 +72,12 @@
 
 static NSString * const FilterCelIdentifier = @"FilterCellIdentifier";
 
-
 @implementation FilterViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.view.backgroundColor = UIColorRGB(kColorOverlay50);
 
     _imageView = [UIImageView new];
     _imageView.clipsToBounds = YES;
@@ -137,25 +137,29 @@ static NSString * const FilterCelIdentifier = @"FilterCellIdentifier";
     
     _filterButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [_filterButton setTitle:@"Filter" forState:UIControlStateNormal];
+    [_filterButton setTitleColor:UIColorRGB(kColorGrayLight) forState:UIControlStateNormal];
     [_filterButton addTarget:self action:@selector(showFilterMode:) forControlEvents:UIControlEventTouchUpInside];
     [_filterButton setSelected:YES];
-    [_filterButton setTitleColor:[UIColor redColor] forState:UIControlStateSelected];
+    [_filterButton setTitleColor:UIColorRGB(kColorOffBlack) forState:UIControlStateSelected];
 
     _editButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [_editButton setTitle:@"Edit" forState:UIControlStateNormal];
+    [_editButton setTitleColor:UIColorRGB(kColorGrayLight) forState:UIControlStateNormal];
     [_editButton addTarget:self action:@selector(showEditMode:) forControlEvents:UIControlEventTouchUpInside];
-    [_editButton setTitleColor:[UIColor redColor] forState:UIControlStateSelected];
+    [_editButton setTitleColor:UIColorRGB(kColorOffBlack) forState:UIControlStateSelected];
 
     _nextButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [_nextButton setTitle:@"Next" forState:UIControlStateNormal];
     [_nextButton addTarget:self action:@selector(goToFilterAndEditionMode) forControlEvents:UIControlEventTouchUpInside];
+    [_nextButton setTitleColor:UIColorRGB(kColorOffBlack) forState:UIControlStateNormal];
+    _nextButton.backgroundColor = [UIColor whiteColor];
     
     _topView = [UIView new];
     _topView.userInteractionEnabled = NO;
-    _topView.backgroundColor = [UIColor redColor];
+    _topView.backgroundColor = UIColorRGB(kColorOffBlack);
     _bottomView = [UIView new];
     _bottomView.userInteractionEnabled = NO;
-    _bottomView.backgroundColor = [UIColor redColor];
+    _bottomView.backgroundColor = UIColorRGB(kColorOffBlack);
     
     _cropView = [UIView new];
     _cropView.userInteractionEnabled = NO;

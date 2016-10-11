@@ -455,7 +455,7 @@
 //    }
     
     CGSize s = image.size;
-    _pickedImage = [UIImage imageWithImage:image scaledToSize:CGSizeMake(kGeomUploadWidth, kGeomUploadWidth*s.height/s.width)];
+    _pickedImage = [UIImage imageWithImage:image scaledToSize:CGSizeMake(kGeomUploadWidth, kGeomUploadWidth* s.height/s.width)];
     
     __weak THEntrylistViewController *weakSelf = self;
     dispatch_async(dispatch_get_main_queue(), ^{
