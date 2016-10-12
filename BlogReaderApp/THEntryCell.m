@@ -26,7 +26,6 @@
 }
 
 - (void)configureCellForEntry:(THDiaryEntry*)entry {
-    
 
     self.locationLabel.text = entry.location;
     NSDateFormatter *dateFormatter = [NSDateFormatter new];

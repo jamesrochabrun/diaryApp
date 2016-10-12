@@ -13,41 +13,71 @@
 #import "ImageViewController.h"
 #import "UIColor+CustomColor.h"
 #import "UIFont+CustomFont.h"
+#import "Common.h"
+#import "CommonUIConstants.h"
+#import "LocationManager.h"
 
 
-@interface THEntryViewcontroller ()<UIImagePickerControllerDelegate, UINavigationControllerDelegate, CLLocationManagerDelegate,UITextViewDelegate>
+@interface THEntryViewcontroller ()<UINavigationControllerDelegate, CLLocationManagerDelegate,UITextViewDelegate,LocationManagerDelegate>
 
-@property (weak, nonatomic) IBOutlet UITextView *textView;
+@property (nonatomic, strong) UITextView *textView;
 @property (nonatomic, assign) enum  DiaryEntryMood pickedMood;
 @property (weak, nonatomic) IBOutlet UIButton *badButton;
 @property (weak, nonatomic) IBOutlet UIButton *averageButton;
 @property (weak, nonatomic) IBOutlet UIButton *goodButton;
 @property (strong, nonatomic) IBOutlet UIView *accesoryView;
-@property (weak, nonatomic) IBOutlet UILabel *dateLabel;
-@property (weak, nonatomic) IBOutlet UIButton *imageButton;
-@property (nonatomic,strong) UIImage *pickedImage;
-@property (nonatomic,strong) CLLocationManager *locationManager;
+@property (nonatomic, strong) UILabel *dateLabel;
 @property (nonatomic,strong) NSString *location;
-@property (weak, nonatomic) IBOutlet UIImageView *moodEntryImage;
-@property (weak, nonatomic) IBOutlet UILabel *counterLabel;
-
-
-
+@property (nonatomic, strong) UIImageView *moodEntryImage;
+@property (nonatomic, strong) UIImageView *thumbnail;
+@property (nonatomic, strong) UILabel *counterLabel;
+@property (nonatomic, strong) LocationManager *locationManager;
 @end
 
 @implementation THEntryViewcontroller
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    _counterLabel = [UILabel new];
+    [_counterLabel setFont:[UIFont regularFont:15]];
+    [_counterLabel setTextColor:[UIColor newGrayColor]];
+    _counterLabel.textAlignment = NSTextAlignmentRight;
+    [self.view addSubview:_counterLabel];
+    
+    _dateLabel = [UILabel new];
+    [_dateLabel setFont:[UIFont regularFont:15]];
+    [_dateLabel setTextColor:[UIColor newGrayColor]];
+    [self.view addSubview:_dateLabel];
+    
+    _thumbnail = [UIImageView new];
+    _thumbnail.clipsToBounds = YES;
+    _thumbnail.contentMode = UIViewContentModeScaleAspectFit;
+    [self.view addSubview:_thumbnail];
+
+    _textView = [UITextView new];
+    _textView.scrollEnabled = YES;
+    _textView.userInteractionEnabled = YES;
+    _textView.font = [UIFont regularFont:17];
+    _textView.textColor = [UIColor newGrayColor];
+    _textView.delegate = self;
+    [self.view addSubview:_textView];
+    
+    _moodEntryImage = [UIImageView new];
+    _moodEntryImage.clipsToBounds = YES;
+    _moodEntryImage.contentMode = UIViewContentModeScaleToFill;
+    [self.view addSubview:_moodEntryImage];
+    
+    //[self.locationManager requestAlwaysAuthorization];
     //if theres not an entry create it with the textfield
-    if ([self.locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
-        [self.locationManager requestWhenInUseAuthorization];
-    }
+    _locationManager = [LocationManager new];
+    _locationManager.delegate = self;
 
     NSDate *date;
     if (self.entry != nil) {
         self.textView.text = self.entry.body;
         self.pickedMood = self.entry.mood;
+        self.thumbnail.image = [UIImage imageWithData:self.entry.image];
         date = [NSDate dateWithTimeIntervalSince1970:self.entry.date];
         if(self.entry.mood == DiaryEntryMoodGood) {
             self.moodEntryImage.image = [UIImage imageNamed:@"icn_happy"];
@@ -61,60 +91,98 @@
         self.moodEntryImage.image = [UIImage imageNamed:@"icn_happy"];
         date = [NSDate date];
         //we only want to load location for a new entry
-        [self loadLocation];
+      //  [self l];
     }
     
-    if (self.entry.image != nil) {
-        UIImage *image = [UIImage imageWithData:self.entry.image];
-        [self.imageButton setImage:image forState:UIControlStateNormal];
+    if (self.pickedImage != nil) {
+        self.thumbnail.image = _pickedImage;
     }
     
     NSDateFormatter *dateFormatter = [NSDateFormatter new];
     [dateFormatter setDateFormat:@"EEEE MMMM d, YYYY"];
-    self.dateLabel.text = [dateFormatter stringFromDate:date];
+    _dateLabel.text = [dateFormatter stringFromDate:date];
     
     //this line performs the appereance of the mood buttons view in th keyboard;
     //reminder : also drag the view outside the hierarchy of the storyboard
     self.textView.inputAccessoryView = self.accesoryView;
     //appereance
-    self.imageButton.layer.cornerRadius = CGRectGetWidth(self.imageButton.frame) / 2.0f;
-    self.imageButton.titleLabel.font = [UIFont regularFont:13];
-    [[self.imageButton layer] setBorderWidth:2.0f];
-    [[self.imageButton layer] setBorderColor:(__bridge CGColorRef _Nullable)([UIColor mainColor])];
-    self.dateLabel.font = [UIFont regularFont:15];
-    
     //setting the counter
     self.counterLabel.text = [NSString stringWithFormat:@"%lu / max 210", (unsigned long)self.textView.text.length ];
 }
 
-- (void)loadLocation {
+//delegate methods of LocationManager
+- (void)displayAlertInVC:(UIAlertController *)alertController {
     
-    self.locationManager = [[CLLocationManager alloc] init];
-    self.locationManager.delegate = self;
-    self.locationManager.desiredAccuracy = 1000;
-    [self.locationManager startUpdatingLocation];
+    __weak THEntryViewcontroller *weakSelf = self;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [weakSelf presentViewController:alertController animated:YES completion:nil];
+    });
 }
 
-- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations {
-    
-    [self.locationManager stopUpdatingLocation];
-    CLLocation *location = [locations firstObject];
-    CLGeocoder *geocoer = [[CLGeocoder alloc]init];
-    [geocoer reverseGeocodeLocation:location completionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks, NSError * _Nullable error) {
-        CLPlacemark *placeMark = [placemarks firstObject];
-        self.location = placeMark.name;
-    }];
+- (void)setlocationString:(NSString *)location {
+    self.location = location;
 }
 
+////////////////
+
+- (void)setPickedImage:(UIImage *)pickedImage {
+    
+    if (_pickedImage == pickedImage) return;
+    _pickedImage = pickedImage;
+}
+
+- (void)viewWillLayoutSubviews {
+    
+    [super viewWillLayoutSubviews];
+    
+    CGRect frame = _thumbnail.frame;
+    frame.size.width = 100;
+    frame.size.height = 100;
+    frame.origin.x = 0;
+    frame.origin.y = CGRectGetMaxY(self.navigationController.navigationBar.frame);
+    _thumbnail.frame = frame;
+    
+    frame = _moodEntryImage.frame;
+    frame.size.height = 20;
+    frame.size.width = 20;
+    frame.origin.x = CGRectGetMaxX(_thumbnail.frame) - 10;
+    frame.origin.y = CGRectGetMaxY(_thumbnail.frame) - 10;
+    _moodEntryImage.frame = frame;
+    
+    frame = _textView.frame;
+    frame.size.height = 100;
+    frame.size.width = width(self.view) - width(_thumbnail);
+    frame.origin.x = CGRectGetMaxX(_thumbnail.frame);
+    frame.origin.y = CGRectGetMaxY(self.navigationController.navigationBar.frame);
+    _textView.frame = frame;
+    
+    frame = _counterLabel.frame;
+    frame.size.height = 20;
+    frame.size.width = 250;
+    frame.origin.x = CGRectGetMaxX(self.view.frame) - frame.size.width - kGeomMarginBig;
+    frame.origin.y = CGRectGetMaxY(_textView.frame) + kGeomSpaceEdge;
+    _counterLabel.frame = frame;
+    
+    [_dateLabel sizeToFit];
+    frame = _dateLabel.frame;
+    frame.origin.x = CGRectGetMaxX(self.view.frame) - width(_dateLabel) - kGeomMarginBig;
+    frame.origin.y = CGRectGetMaxY(_counterLabel.frame) + kGeomMarginBig;
+    _dateLabel.frame = frame;
+    
+}
 
 - (void)viewWillAppear:(BOOL)animated {
     [self.textView becomeFirstResponder];
 }
 
 - (IBAction)cancelWasPressed:(UIBarButtonItem *)sender {
-    [self dismissSelf];
-    [self.view endEditing:YES];
-
+    
+    if (_editMode) {
+        [self dismissSelf];
+        [self.view endEditing:YES];
+    } else {
+    [self.navigationController popViewControllerAnimated:YES];
+    }
 }
 
 - (IBAction)doneWasPressed:(id)sender {
@@ -148,6 +216,8 @@
         BOOL myBool = NO;
         entry.isFavorite = [NSNumber numberWithBool:myBool];
         
+        UIImageWriteToSavedPhotosAlbum(self.pickedImage, nil, nil, nil);
+        
         if (self.location == nil) {
             NSLog(@"location not added");
         }
@@ -157,14 +227,13 @@
 }
 
 
-
 - (void)updateDiaryEntry {
     
     self.entry.body = self.textView.text;
     self.entry.mood = self.pickedMood;
-    if (self.pickedImage != nil) {
-        self.entry.image = UIImageJPEGRepresentation(self.pickedImage, 0.75);
-    }
+//    if (self.pickedImage != nil) {
+//        self.entry.image = UIImageJPEGRepresentation(self.pickedImage, 0.75);
+//    }
     THCoreDataStack *coreDataStack = [THCoreDataStack defaultStack];
     [coreDataStack saveContext];
 }
@@ -210,120 +279,14 @@
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
     
-    self.counterLabel.text = [NSString stringWithFormat:@"%lu / max 210", (unsigned long)self.textView.text.length ];
+    _counterLabel.text = [NSString stringWithFormat:@"%lu / max 210", (unsigned long)textView.text.length ];
     
     BOOL maxCounter = textView.text.length + (text.length - range.length) <= 210;
 
     return maxCounter;
 }
 
-#pragma camera actions
 
-- (IBAction)imageButtonWasPressed:(id)sender {
-    if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-        [self promptForSource];
-    } else{
-        [self promptForPhotoRoll];
-    }
-}
-
-- (void)promptForSource {
-    
-    dispatch_async(dispatch_get_main_queue(), ^(void){
-        
-        UIAlertController *modalAlert = [UIAlertController alertControllerWithTitle: @"Image Source"
-                                                                            message: nil
-                                                                     preferredStyle:UIAlertControllerStyleActionSheet];
-        UIAlertAction *camera = [UIAlertAction actionWithTitle:@"Camera"
-                                                         style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
-                                                             [self promptForCamera];
-                                                         }];
-        UIAlertAction *photoRoll = [UIAlertAction actionWithTitle:@"Photo Roll"
-                                                            style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
-                                                                [self promptForPhotoRoll];
-                                                            }];
-        UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"Cancel"
-                                                         style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
-                                                         }];
-        [modalAlert addAction:camera];
-        [modalAlert addAction:photoRoll];
-        [modalAlert addAction:cancel];
-        
-        [self presentViewController:modalAlert animated:YES completion:nil];
-        
-    });
-}
-
-- (void)promptForCamera {
-    UIImagePickerController *controller = [UIImagePickerController new];
-    controller.sourceType = UIImagePickerControllerSourceTypeCamera;
-    controller.delegate = self;
-    [self presentViewController:controller animated:YES completion:nil];
-}
-
-- (void)promptForPhotoRoll {
-    UIImagePickerController *controller = [UIImagePickerController new];
-    controller.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-    controller.delegate = self;
-    [self presentViewController:controller animated:YES completion:nil];
-}
-
-//overwriting the setter for pickedImage
-- (void)setPickedImage:(UIImage *)pickedImage {
-    _pickedImage = pickedImage;
-    
-    if (pickedImage == nil) {
-        [self.imageButton setImage:[UIImage imageNamed:@"icn_noimage"] forState:UIControlStateNormal];
-    } else {
-        [self.imageButton setImage:pickedImage forState:UIControlStateNormal];
-    }
-}
-
-- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
-    
-    UIImage *image = info[UIImagePickerControllerOriginalImage];
-    image =  [self squareImageWithImage:image scaledToSize:CGSizeMake(300, 1)];
-    self.pickedImage = image;
-    [self dismissViewControllerAnimated:YES completion:nil];
-}
-
-#pragma fixing orientation of photo and scale
-- (UIImage *)squareImageWithImage:(UIImage *)image scaledToSize:(CGSize)newSize {
-    double ratio;
-    double delta;
-    CGPoint offset;
-    //make a new square size, that is the resized imaged width
-    CGSize sz = CGSizeMake(newSize.width, newSize.width);
-    //figure out if the picture is landscape or portrait, then
-    //calculate scale factor and offset
-    if (image.size.width > image.size.height) {
-        ratio = newSize.width / image.size.width;
-        delta = (ratio*image.size.width - ratio*image.size.height);
-        offset = CGPointMake(delta/2, 0);
-    } else {
-        ratio = newSize.width / image.size.height;
-        delta = (ratio*image.size.height - ratio*image.size.width);
-        offset = CGPointMake(0, delta/2);
-    }
-    //make the final clipping rect based on the calculated values
-    CGRect clipRect = CGRectMake(-offset.x, -offset.y,
-                                 (ratio * image.size.width) + delta,
-                                 (ratio * image.size.height) + delta);
-    
-    //start a new context, with scale factor 0.0 so retina displays get
-    //high quality image
-    if ([[UIScreen mainScreen] respondsToSelector:@selector(scale)]) {
-        UIGraphicsBeginImageContextWithOptions(sz, YES, 0.0);
-    } else {
-        UIGraphicsBeginImageContext(sz);
-    }
-    UIRectClip(clipRect);
-    [image drawInRect:clipRect];
-    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    
-    return newImage;
-}
 
 
 

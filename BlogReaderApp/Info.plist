@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>secret diary</string>
+	<string>momentum</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -17,19 +17,25 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.1.2</string>
+	<string>1.1.3</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>4</string>
+	<string>5</string>
 	<key>LSApplicationCategoryType</key>
 	<array>
 		<string></string>
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSCameraUsageDescription</key>
+	<string>Allow Secret Diary access to camera?</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Allow "BlogDiary" to access your location to add it to your entry?</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Allow "BlogDiary" to access your location to add it to your entry?</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Allow Secret Diary access to Photo Library?</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Gotham Narrow Book.otf</string>

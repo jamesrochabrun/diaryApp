@@ -9,8 +9,7 @@
 #import <UIKit/UIKit.h>
 @class THDiaryEntry;
 
-@interface ImageViewController : UIViewController
-@property (weak, nonatomic) IBOutlet UIImageView *imageView;
+@interface ImageViewController : UIViewController<UIScrollViewDelegate>
 @property THDiaryEntry *entry;
 
 @end

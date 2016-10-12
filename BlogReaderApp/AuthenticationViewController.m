@@ -38,8 +38,7 @@
 #pragma localAutentication Touch Id
 
 - (IBAction)authenticationButtonTapped:(UIButton *)sender {
-
-
+    
     LAContext *context = [[LAContext alloc] init];
     
     NSError *error = nil;
@@ -70,16 +69,19 @@
                                               [self userPressedEnterPassword];
                                               break;
                                               
+                                         case LAErrorTouchIDNotAvailable:
+                                              [self authenticationSuccesful];
+                                              break;
+                                              
                                           default:
-                                              [self touchIdIsNotConfigured];
+                                             [self touchIdIsNotConfigured];
                                               break;
                                       }
-                                      NSLog(@"Authentication Fails");
                                   }
                               });
                           }];
     } else {
-        [self touchIdIsNotConfigured];
+        [self authenticationSuccesful];
     }
 }
 

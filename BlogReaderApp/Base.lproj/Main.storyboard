@@ -42,7 +42,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Atk-Df-m46" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1744" y="592"/>
+            <point key="canvasLocation" x="1680" y="645"/>
         </scene>
         <!--Image View Controller-->
         <scene sceneID="Lvq-ma-32F">
@@ -65,6 +65,7 @@
                             <constraint firstItem="xoO-jo-tBu" firstAttribute="top" secondItem="iqE-Pm-XXs" secondAttribute="bottom" id="9dc-MF-thY"/>
                             <constraint firstItem="YZW-8v-TJm" firstAttribute="top" secondItem="xoO-jo-tBu" secondAttribute="bottom" id="Dkc-Br-kPL"/>
                         </constraints>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                     <navigationItem key="navigationItem" id="KkG-tC-Ud9">
                         <barButtonItem key="leftBarButtonItem" title="Dismiss" id="1hv-lO-zOU">
@@ -78,13 +79,10 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
-                    <connections>
-                        <outlet property="imageView" destination="xoO-jo-tBu" id="scc-pt-uJ8"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NSH-wx-3Lp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2597" y="592"/>
+            <point key="canvasLocation" x="2717" y="1028"/>
         </scene>
         <!--Entry Viewcontroller-->
         <scene sceneID="MDP-sE-wzK">
@@ -156,6 +154,9 @@
                             <constraint firstItem="4aj-yI-gSp" firstAttribute="top" secondItem="ZFa-Qp-2hg" secondAttribute="bottom" constant="331" id="rVW-Cr-Wn1"/>
                             <constraint firstItem="Xrd-3x-LC1" firstAttribute="bottom" secondItem="Vvu-Hu-2P2" secondAttribute="bottom" id="zJe-Cw-NJZ"/>
                         </constraints>
+=======
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+>>>>>>> filters
                     </view>
                     <navigationItem key="navigationItem" id="4fF-q2-XLJ">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="yzJ-Uk-Mdr">
@@ -173,12 +174,7 @@
                         <outlet property="accesoryView" destination="39H-pC-2aB" id="jZ5-fn-qNt"/>
                         <outlet property="averageButton" destination="4MH-4c-kIL" id="WMb-xE-Hg9"/>
                         <outlet property="badButton" destination="te7-Iu-aV0" id="dTx-F5-gLl"/>
-                        <outlet property="counterLabel" destination="ZFa-Qp-2hg" id="n27-18-xDq"/>
-                        <outlet property="dateLabel" destination="EYv-jA-1ys" id="hpU-Dd-eLs"/>
                         <outlet property="goodButton" destination="FnN-NI-oE0" id="ckY-Nw-qx9"/>
-                        <outlet property="imageButton" destination="Vvu-Hu-2P2" id="eWk-DS-nT9"/>
-                        <outlet property="moodEntryImage" destination="Xrd-3x-LC1" id="92h-7g-nLc"/>
-                        <outlet property="textView" destination="MbW-6d-CS0" id="6WO-G2-j8y"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sEe-Qs-hZ2" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -230,7 +226,7 @@
                     </constraints>
                 </view>
             </objects>
-            <point key="canvasLocation" x="2989" y="-98"/>
+            <point key="canvasLocation" x="2988.5" y="-98.5"/>
         </scene>
         <!--Authentication View Controller-->
         <scene sceneID="Kyt-Jx-68M">
@@ -289,7 +285,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3bU-P3-jff" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1409" y="-148"/>
+            <point key="canvasLocation" x="1293" y="-150"/>
         </scene>
         <!--EntrylISTviewController-->
         <scene sceneID="cTQ-hD-Zqo">
@@ -318,15 +314,16 @@
                             </segmentedControl>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="T2E-Ns-1x0">
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="g9p-tJ-8Ky">
+
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="g9p-tJ-8Ky" customClass="GridCollectionViewFlowLayout">
                                     <size key="itemSize" width="131" height="127"/>
-                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="headerReferenceSize" width="50" height="50"/>
+                                    <size key="footerReferenceSize" width="50" height="50"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" id="8jW-rO-XCX" customClass="GridCollectionViewCell">
-                                        <rect key="frame" x="0.0" y="0.0" width="131" height="127"/>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" reuseIdentifier="cell" id="8jW-rO-XCX" customClass="GridCollectionViewCell">
+                                        <rect key="frame" x="0.0" y="50" width="131" height="127"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="131" height="127"/>
@@ -359,6 +356,32 @@
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
+                                <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="header" id="p9i-MH-i2v" customClass="SectionReusableView">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0eM-Rx-4z0">
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="200" id="R7g-4Q-Lcx"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" red="0.5450980392" green="0.52549019610000003" blue="0.41960784309999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="0eM-Rx-4z0" firstAttribute="centerX" secondItem="p9i-MH-i2v" secondAttribute="centerX" id="9I5-G3-4z3"/>
+                                        <constraint firstItem="0eM-Rx-4z0" firstAttribute="centerY" secondItem="p9i-MH-i2v" secondAttribute="centerY" id="ODY-0b-muh"/>
+                                    </constraints>
+                                    <connections>
+                                        <outlet property="titleLabel" destination="0eM-Rx-4z0" id="Ri9-W9-B7h"/>
+                                    </connections>
+                                </collectionReusableView>
+                                <collectionReusableView key="sectionFooterView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="footer" id="s3X-V3-Hd7" customClass="SectionReusableView">
+                                    <rect key="frame" x="0.0" y="177" width="375" height="50"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <color key="backgroundColor" red="0.34901960780000002" green="0.91372549020000005" blue="0.84705882349999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </collectionReusableView>
                                 <connections>
                                     <outlet property="dataSource" destination="9Ob-CM-cgc" id="56F-tf-Q8D"/>
                                     <outlet property="delegate" destination="9Ob-CM-cgc" id="H8f-hA-1kW"/>
@@ -374,7 +397,8 @@
                                             <frame key="frameInset" width="375" height="384"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="BfV-Wy-Xf2"/>
+
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="BfV-Wy-Xf2"/>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uZE-nw-GPq">
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -467,12 +491,46 @@
                         <outlet property="gridCollectionViewController" destination="T2E-Ns-1x0" id="tsH-ly-GUf"/>
                         <outlet property="segmentedControl" destination="7oJ-S9-DgR" id="PUZ-D5-1Ch"/>
                         <outlet property="tableView" destination="6zy-qy-RLu" id="HZ7-pl-vvf"/>
-                        <segue destination="PXd-Lp-5Ze" kind="modal" identifier="add" id="ka5-ci-gpE"/>
+                        <segue destination="4Hv-iw-vze" kind="modal" identifier="filter" id="Aoy-wL-vRO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uHT-qZ-qMM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2029" y="-148"/>
+            <point key="canvasLocation" x="1840" y="-149"/>
+        </scene>
+        <!--Filter View Controller-->
+        <scene sceneID="8Z1-Vg-QKS">
+            <objects>
+                <viewController id="lD4-vQ-Ndn" customClass="FilterViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="tvU-gM-4mJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="LTt-Oi-PC0"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="52L-p9-dmF">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="7NR-Ts-pPN">
+                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="hwV-6V-adq">
+                            <connections>
+                                <action selector="cancelWaspressed:" destination="lD4-vQ-Ndn" id="YeG-3a-OnF"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Next" id="MoK-gO-KNw">
+                            <connections>
+                                <action selector="doneWasPressed:" destination="lD4-vQ-Ndn" id="tB8-u8-xcw"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="doneButton" destination="MoK-gO-KNw" id="cNw-3J-cTB"/>
+                        <segue destination="Kn8-zt-PB9" kind="push" identifier="ready" id="zIC-WZ-Kbw"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jPt-NA-TqG" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2841.5" y="-961.5"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="fNc-6L-AE2">
@@ -480,7 +538,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="PXd-Lp-5Ze" customClass="THNavigationController" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="qs3-VY-qNh"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="wGj-Xf-Sd1">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="wGj-Xf-Sd1">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -498,7 +556,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="VWW-dU-AZH" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="74h-Wd-6Nt">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="74h-Wd-6Nt">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -509,7 +567,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="urV-S5-TAx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="971" y="-148"/>
+            <point key="canvasLocation" x="832" y="-149"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="82n-hO-TX0">
@@ -517,7 +575,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="6qr-ka-6OA" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="1Yh-XE-TWx"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="G2S-D1-kR0">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="G2S-D1-kR0">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -528,7 +586,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nSZ-mU-KOb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1343" y="592"/>
+            <point key="canvasLocation" x="1179" y="687"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="7Md-IF-r54">
@@ -536,7 +594,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="G8q-oh-10k" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="0UW-rJ-XtI"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="42h-zO-N21">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="42h-zO-N21">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -547,23 +605,45 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7y0-U2-jp9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2184" y="592"/>
+            <point key="canvasLocation" x="2177" y="1015"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="qVT-51-3mw">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="4Hv-iw-vze" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="f2b-gJ-Si6">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="lD4-vQ-Ndn" kind="relationship" relationship="rootViewController" id="yoZ-iI-g64"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="haO-EB-mp7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2351" y="-948"/>
         </scene>
     </scenes>
     <resources>
-        <image name="grid" width="45" height="45"/>
+        <image name="grid" width="22" height="22"/>
         <image name="huella@2x (1)" width="220" height="217"/>
-        <image name="icn_average_lrg" width="15" height="15"/>
+        <image name="icn_average_lrg" width="14" height="14"/>
         <image name="icn_bad_lrg" width="15" height="15"/>
         <image name="icn_calendar" width="28" height="30"/>
-        <image name="icn_geolocate" width="30" height="30"/>
+        <image name="icn_geolocate" width="17" height="17"/>
         <image name="icn_good_lrg" width="15" height="15"/>
-        <image name="icn_noimage" width="47" height="47"/>
-        <image name="list" width="50" height="50"/>
-        <image name="redHeart" width="75" height="65"/>
+        <image name="list" width="25" height="25"/>
+        <image name="redHeart" width="37" height="32"/>
     </resources>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4_7.fullscreen"/>
+    </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="ka5-ci-gpE"/>
+        <segue reference="zIC-WZ-Kbw"/>
         <segue reference="wab-nu-Vyw"/>
     </inferredMetricsTieBreakers>
 </document>

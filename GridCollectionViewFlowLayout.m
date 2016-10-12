@@ -7,6 +7,7 @@
 //
 
 #import "GridCollectionViewFlowLayout.h"
+#import "Common.h"
 
 @implementation GridCollectionViewFlowLayout
 
@@ -17,6 +18,8 @@
         self.minimumLineSpacing = 1.0;
         self.minimumInteritemSpacing = 1.0;
         self.scrollDirection = UICollectionViewScrollDirectionVertical;
+        //.self.sectionInset = UIEdgeInsetsMake(20, 0, 20, 0);
+        self.headerReferenceSize = CGSizeMake(width(self.collectionView), 50);
     }
     return self;
 }
