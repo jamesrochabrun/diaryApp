@@ -39,55 +39,50 @@
 
 - (IBAction)authenticationButtonTapped:(UIButton *)sender {
     
-    [self authenticationSuccesful];
-
-
-//
-//    LAContext *context = [[LAContext alloc] init];
-//    
-//    NSError *error = nil;
-//    
-//    NSString *myLocalizedReasonString = @"This is a private diary and needs authentication";
-//    
-//    if ([context canEvaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics error:&error]) {
-//        // Authenticate User
-//        [context evaluatePolicy:LAPolicyDeviceOwnerAuthentication
-//                localizedReason:myLocalizedReasonString
-//                          reply:^(BOOL success, NSError *error) {
-//                              dispatch_async(dispatch_get_main_queue(), ^(void){
-//                                  
-//                                  if (success) {
-//                                      [self authenticationSuccesful];
-//                                      
-//                                  }else {
-//                                      switch (error.code) {
-//                                          case LAErrorAuthenticationFailed:
-//                                              [self authenticationFailed];
-//                                              break;
-//                                              
-//                                          case LAErrorUserCancel:
-//                                              [self userPressCancelButtonDuringAuthentication];
-//                                              break;
-//                                              
-//                                          case LAErrorUserFallback:
-//                                              [self userPressedEnterPassword];
-//                                              break;
-//                                              
-//                                          default:
-//                                              [self authenticationSuccesful];
-//
-//                                             // [self touchIdIsNotConfigured];
-//                                              break;
-//                                      }
-//                                      NSLog(@"Authentication Fails");
-//                                  }
-//                              });
-//                          }];
-//    } else {
-//        [self authenticationSuccesful];
-//
-//     //   [self touchIdIsNotConfigured];
-//    }
+    LAContext *context = [[LAContext alloc] init];
+    
+    NSError *error = nil;
+    
+    NSString *myLocalizedReasonString = @"This is a private diary and needs authentication";
+    
+    if ([context canEvaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics error:&error]) {
+        // Authenticate User
+        [context evaluatePolicy:LAPolicyDeviceOwnerAuthentication
+                localizedReason:myLocalizedReasonString
+                          reply:^(BOOL success, NSError *error) {
+                              dispatch_async(dispatch_get_main_queue(), ^(void){
+                                  
+                                  if (success) {
+                                      [self authenticationSuccesful];
+                                      
+                                  }else {
+                                      switch (error.code) {
+                                          case LAErrorAuthenticationFailed:
+                                              [self authenticationFailed];
+                                              break;
+                                              
+                                          case LAErrorUserCancel:
+                                              [self userPressCancelButtonDuringAuthentication];
+                                              break;
+                                              
+                                          case LAErrorUserFallback:
+                                              [self userPressedEnterPassword];
+                                              break;
+                                              
+                                         case LAErrorTouchIDNotAvailable:
+                                              [self authenticationSuccesful];
+                                              break;
+                                              
+                                          default:
+                                             [self touchIdIsNotConfigured];
+                                              break;
+                                      }
+                                  }
+                              });
+                          }];
+    } else {
+        [self authenticationSuccesful];
+    }
 }
 
 
