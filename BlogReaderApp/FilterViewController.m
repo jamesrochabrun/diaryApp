@@ -1074,6 +1074,7 @@ static NSString * const FilterCelIdentifier = @"FilterCellIdentifier";
     if ([segue.identifier isEqual :@"ready"]) {
         THEntryViewcontroller *controller = segue.destinationViewController;
         controller.pickedImage =  self.croppedIV.image;
+        controller.editMode = NO;
     }
 }
 

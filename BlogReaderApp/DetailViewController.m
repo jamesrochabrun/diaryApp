@@ -251,6 +251,7 @@
     } else {
         UINavigationController *navigationController = segue.destinationViewController;
         THEntryViewcontroller *entryViewController = (THEntryViewcontroller*)navigationController.topViewController;
+        entryViewController.editMode = YES;
         entryViewController.entry = self.entry;
     }
 }
@@ -303,7 +304,6 @@
     THCoreDataStack *coreDataStack = [THCoreDataStack defaultStack];
     [coreDataStack saveContext];
 }
-
 
 
 #pragma scrollView

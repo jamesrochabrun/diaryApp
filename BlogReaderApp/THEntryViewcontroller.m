@@ -176,8 +176,13 @@
 }
 
 - (IBAction)cancelWasPressed:(UIBarButtonItem *)sender {
-    [self dismissSelf];
-    [self.view endEditing:YES];
+    
+    if (_editMode) {
+        [self dismissSelf];
+        [self.view endEditing:YES];
+    } else {
+    [self.navigationController popViewControllerAnimated:YES];
+    }
 }
 
 - (IBAction)doneWasPressed:(id)sender {

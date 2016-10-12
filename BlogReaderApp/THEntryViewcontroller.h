@@ -15,5 +15,6 @@
 
 @property (nonatomic, strong) THDiaryEntry *entry;
 @property (nonatomic, strong) UIImage *pickedImage;
+@property (nonatomic, assign) BOOL editMode;
 
 @end
