@@ -19,7 +19,7 @@
 #import "FilterViewController.h"
 #import "CommonUIConstants.h"
 #import "UIImage+UIImage.h"
-
+#import "SectionReusableView.h"
 
 
 @interface THEntrylistViewController ()<NSFetchedResultsControllerDelegate,UITableViewDelegate,UITableViewDataSource,UICollectionViewDelegate,UICollectionViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
@@ -37,7 +37,6 @@
 @property (nonatomic, strong) UIImage *pickedImage;
 @property (nonatomic, assign) NSInteger sourceType;
 
-
 @end
 
 @implementation THEntrylistViewController
@@ -49,6 +48,10 @@
     //step 4
     self.title = @"My Diary";
     [self.fetchedResultsController performFetch:nil];
+    
+//    UICollectionViewFlowLayout *collectionViewLayout = (UICollectionViewFlowLayout*)self.gridCollectionViewController.collectionViewLayout;
+//    collectionViewLayout.sectionInset = UIEdgeInsetsMake(20, 0, 20, 0);
+    
     self.gridCollectionViewController.collectionViewLayout = [[GridCollectionViewFlowLayout alloc] init];
     self.gridCollectionViewController.showsVerticalScrollIndicator = NO;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -283,6 +286,7 @@
 }
 
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+   
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, 18)];
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 4, tableView.frame.size.width, 25)];
     [label setFont:[UIFont regularFont:15]];
@@ -299,11 +303,9 @@
     return view;
 }
 
-
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     return 30;
 }
-
 
 //step 6
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -315,6 +317,33 @@
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     id <NSFetchedResultsSectionInfo> sectionInfo = [[self.fetchedResultsController sections] objectAtIndex:section];
     return [sectionInfo numberOfObjects];
+}
+
+
+- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
+    
+    UICollectionReusableView *reusableview = nil;
+    
+    if (kind == UICollectionElementKindSectionHeader) {
+        SectionReusableView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"header" forIndexPath:indexPath];
+     
+        id <NSFetchedResultsSectionInfo> sectionInfo = [[self.fetchedResultsController sections] objectAtIndex:indexPath.section];
+        //this is setted in THDiaryEntry+CoreDataProperties.m
+        NSString *sectionName = [sectionInfo name];
+        
+        headerView.titleLabel.text = sectionName;
+ 
+        reusableview = headerView;
+    }
+    
+    if (kind == UICollectionElementKindSectionFooter) {
+        UICollectionReusableView *footerview = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"footer" forIndexPath:indexPath];
+        
+        reusableview = footerview;
+    }
+    
+    return reusableview;
+    
 }
 
 

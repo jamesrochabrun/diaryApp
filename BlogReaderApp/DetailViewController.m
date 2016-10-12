@@ -29,8 +29,6 @@
 @property (nonatomic, strong) UILabel *dateLabel;
 @property (nonatomic, strong) UILabel *locationLabel;
 
-
-
 @end
 
 @implementation DetailViewController
@@ -122,6 +120,10 @@
     
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    
+   
+}
 
 - (void)viewWillLayoutSubviews {
     
@@ -333,6 +335,7 @@
 }
 
 - (void)scrollViewDidZoom:(UIScrollView *)scrollView {
+
     
     __weak DetailViewController *wekSelf = self;
     dispatch_async(dispatch_get_main_queue(), ^{
@@ -392,25 +395,26 @@
     return zoomRect;
 }
 
-- (void)centerScrollViewContents {
-    
-    CGSize boundsSize = self.scrollView.bounds.size;
-    CGRect contentsFrame = self.mainImageView.frame;
-    
-    if (contentsFrame.size.width < boundsSize.width) {
-        contentsFrame.origin.x = (boundsSize.width - contentsFrame.size.width) / 2.0f;
-    } else {
-        contentsFrame.origin.x = 0.0f;
-    }
-    
-    if (contentsFrame.size.height < boundsSize.height) {
-        contentsFrame.origin.y = (boundsSize.height - contentsFrame.size.height) / 2.0f;
-    } else {
-        contentsFrame.origin.y = 0.0f;
-    }
-    
-    self.mainImageView.frame = contentsFrame;
-}
+
+//- (void)centerScrollViewContents {
+//    
+//    CGSize boundsSize = self.scrollView.bounds.size;
+//    CGRect contentsFrame = self.mainImageView.frame;
+//    
+//    if (contentsFrame.size.width < boundsSize.width) {
+//        contentsFrame.origin.x = (boundsSize.width - contentsFrame.size.width) / 2.0f;
+//    } else {
+//        contentsFrame.origin.x = 0.0f;
+//    }
+//    
+//    if (contentsFrame.size.height < boundsSize.height) {
+//        contentsFrame.origin.y = (boundsSize.height - contentsFrame.size.height) / 2.0f;
+//    } else {
+//        contentsFrame.origin.y = 0.0f;
+//    }
+//    
+//    self.mainImageView.frame = contentsFrame;
+//}
 
 
 
