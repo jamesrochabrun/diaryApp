@@ -6,8 +6,9 @@
 //  Copyright © 2016 James Rochabrun. All rights reserved.
 //
 #import <UIKit/UIKit.h>
+#import "FilterViewController.h"
 
 
-@interface THEntrylistViewController : UIViewController
+@interface THEntrylistViewController : UIViewController<FilterViewControllerDelegate>
 
 @end

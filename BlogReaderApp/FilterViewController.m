@@ -1050,10 +1050,13 @@ static NSString * const FilterCelIdentifier = @"FilterCellIdentifier";
 
 - (IBAction)cancelWaspressed:(UIBarButtonItem *)sender {
 
-    if (_pickedImage) {
-        _pickedImage = nil;
-    }
-    [self dismissSelf];
+//    if (_pickedImage) {
+//        _pickedImage = nil;
+//    }
+//    [self dismissSelf];
+//    
+    [_delegate filterPhotoCancelled:self getNewPhoto:YES ofType:_sourceType];
+
 }
 
 - (IBAction)doneWasPressed:(UIBarButtonItem *)sender {

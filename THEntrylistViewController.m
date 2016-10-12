@@ -35,6 +35,8 @@
 @property UIButton *favorites;
 @property UIButton *addEntry;
 @property (nonatomic, strong) UIImage *pickedImage;
+@property (nonatomic, assign) NSInteger sourceType;
+
 
 @end
 
@@ -387,6 +389,8 @@
             UINavigationController *navigationController = segue.destinationViewController;
             FilterViewController *filterVC = (FilterViewController *)navigationController.topViewController;
             filterVC.pickedImage = _pickedImage;
+            filterVC.sourceType = _sourceType;
+            filterVC.delegate = self;
         }
     });
 }
@@ -450,12 +454,17 @@
     
     UIImage *image = info[UIImagePickerControllerOriginalImage];
     
-//    if (picker.sourceType == UIImagePickerControllerSourceTypeCamera) {
-//        UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil);
-//    }
-    
     CGSize s = image.size;
     _pickedImage = [UIImage imageWithImage:image scaledToSize:CGSizeMake(kGeomUploadWidth, kGeomUploadWidth* s.height/s.width)];
+    
+    
+    if (picker.sourceType == UIImagePickerControllerSourceTypeSavedPhotosAlbum) {
+        _sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
+    } else if (picker.sourceType == UIImagePickerControllerSourceTypePhotoLibrary) {
+        _sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    } else if (picker.sourceType == UIImagePickerControllerSourceTypeCamera)   {
+        _sourceType = UIImagePickerControllerSourceTypeCamera;
+    }
     
     __weak THEntrylistViewController *weakSelf = self;
     dispatch_async(dispatch_get_main_queue(), ^{
@@ -463,6 +472,22 @@
             [weakSelf performSegueWithIdentifier:@"filter" sender:weakSelf];
         }];
     });
+}
+
+- (void)filterPhotoCancelled:(FilterViewController *)filterVC getNewPhoto:(BOOL)getNewPhoto ofType:(NSInteger)type {
+    
+    [self dismissViewControllerAnimated:YES completion:^{
+        
+        if (getNewPhoto) {
+            if (type == UIImagePickerControllerSourceTypeSavedPhotosAlbum ||
+                type == UIImagePickerControllerSourceTypePhotoLibrary) {
+                [self promptForPhotoRoll];
+            } else {
+                [self promptForCamera];
+            }
+        }
+    }];
+    
 }
 
 
