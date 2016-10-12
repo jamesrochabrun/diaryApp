@@ -1058,11 +1058,10 @@ static NSString * const FilterCelIdentifier = @"FilterCellIdentifier";
 
 - (IBAction)doneWasPressed:(UIBarButtonItem *)sender {
     
-    
-    [self.presentingViewController dismissViewControllerAnimated:YES completion:^{
-        [self performSegueWithIdentifier:@"ready" sender:sender];
-    }];
-
+    __weak FilterViewController *weakSelf = self;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [weakSelf performSegueWithIdentifier:@"ready" sender:sender];
+    });
 }
 
 
@@ -1073,12 +1072,9 @@ static NSString * const FilterCelIdentifier = @"FilterCellIdentifier";
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
     if ([segue.identifier isEqual :@"ready"]) {
-        
-        UINavigationController *navigationController = segue.destinationViewController;
-        THEntryViewcontroller *controller = (THEntryViewcontroller *)navigationController.topViewController;
+        THEntryViewcontroller *controller = segue.destinationViewController;
         controller.pickedImage =  self.croppedIV.image;
     }
-    
 }
 
 

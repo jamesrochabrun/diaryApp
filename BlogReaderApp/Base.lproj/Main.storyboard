@@ -418,7 +418,7 @@
                                 <action selector="cancelWaspressed:" destination="lD4-vQ-Ndn" id="YeG-3a-OnF"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Done" id="MoK-gO-KNw">
+                        <barButtonItem key="rightBarButtonItem" title="Next" id="MoK-gO-KNw">
                             <connections>
                                 <action selector="doneWasPressed:" destination="lD4-vQ-Ndn" id="tB8-u8-xcw"/>
                             </connections>
@@ -426,7 +426,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="doneButton" destination="MoK-gO-KNw" id="cNw-3J-cTB"/>
-                        <segue destination="PXd-Lp-5Ze" kind="modal" identifier="ready" id="uRi-dW-fFR"/>
+                        <segue destination="Kn8-zt-PB9" kind="push" identifier="ready" id="zIC-WZ-Kbw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jPt-NA-TqG" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -544,7 +544,7 @@
         <simulatedScreenMetrics key="destination" type="retina4_7.fullscreen"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
+        <segue reference="zIC-WZ-Kbw"/>
         <segue reference="wab-nu-Vyw"/>
-        <segue reference="uRi-dW-fFR"/>
     </inferredMetricsTieBreakers>
 </document>
