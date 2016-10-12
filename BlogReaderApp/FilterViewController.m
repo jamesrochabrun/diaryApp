@@ -610,12 +610,12 @@ static NSString * const FilterCelIdentifier = @"FilterCellIdentifier";
     if (_filterMode) {
         
         FilterSettings *settings = [_filtersArray objectAtIndex:row];
+        
         cell.settings = settings;
         cell.filterType.text = settings.displayName;
-        cell.editionType.text = nil;
-        
+        cell.imageView.contentMode = UIViewContentModeScaleAspectFit;        
         if (settings.touched) {
-            cell.selectedView.hidden = NO;
+            cell.selectedView.hidden = NO;//
             _selectedFilter = row;
         } else {
             cell.selectedView.hidden = YES;
@@ -654,18 +654,9 @@ static NSString * const FilterCelIdentifier = @"FilterCellIdentifier";
         });
     } else {
         
-        cell.editionType.textColor = [UIColor blackColor];
-        cell.imageView.backgroundColor = [UIColor whiteColor];
         FilterSettings *settings = [_editionFiltersArray objectAtIndex:row];
-        cell.settings = settings;
-        cell.editionType.text = nil;
-        cell.filterType.text = settings.displayName;
-        cell.imageView.image = [UIImage imageNamed:settings.displayName];
-        if (settings.touched) {
-            cell.selectedView.hidden = NO;
-        } else {
-            cell.selectedView.hidden = YES;
-        }
+        [cell configureEditionCellTypeWithSettings:settings];
+
     }
     return cell;
 }

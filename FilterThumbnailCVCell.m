@@ -10,6 +10,7 @@
 #import "FilterSettings.h"
 #import "Common.h"
 #import "CommonUIConstants.h"
+#import "UIFont+CustomFont.h"
 
 
 @implementation FilterThumbnailCVCell
@@ -19,8 +20,9 @@
     self = [super initWithFrame:frame];
     if (self) {
         
+       // self.backgroundColor = [UIColor whiteColor];
+        
         _filterType = [UILabel new];
-        _editionType = [UILabel new];
         
         _imageView = [UIImageView new];
         _imageView.contentMode = UIViewContentModeScaleAspectFit;
@@ -30,13 +32,8 @@
         [_filterType setTextColor:UIColorRGB(kColorOffBlack)];
         [_filterType setTextAlignment:NSTextAlignmentCenter];
         [_filterType setLineBreakMode:NSLineBreakByWordWrapping];
+        [_filterType setFont:[UIFont regularFont:15]];
         [_filterType setNumberOfLines:0];
-        
-        _editionType = [UILabel new];
-        [_editionType setTextColor:UIColorRGB(kColorOffBlack)];
-        [_editionType setTextAlignment:NSTextAlignmentCenter];
-        [_editionType setLineBreakMode:NSLineBreakByWordWrapping];
-        [_editionType setNumberOfLines:0];
         
         _selectedView = [UIView new];
         _selectedView.backgroundColor = UIColorRGB(kColorOffBlack);
@@ -44,10 +41,7 @@
         
         [self addSubview:_filterType];
         [self addSubview:_imageView];
-        [self addSubview:_editionType];
         [self addSubview:_selectedView];
-        
-        //[DebugUtilities addBorderToViews:@[ self]];
     }
     return self;
 }
@@ -64,13 +58,6 @@
     frame.size = CGSizeMake(width(self), height(self) - height(_filterType));
     frame.origin.y = CGRectGetMaxY(_filterType.frame) + kGeomInterImageGap ;
     _imageView.frame = frame;
-    
-    frame = _editionType.frame;
-    frame.size.width = width(self);
-    frame.size.height = kGeomIconSize;
-    frame.origin.x = 0;
-    frame.origin.y = (height(self) - height(_filterType) + kGeomInterImageGap ) /2;
-    _editionType.frame = frame;
     
     frame = _selectedView.frame;
     frame.size.width = width(self);
@@ -94,7 +81,22 @@
     [self setNeedsLayout];
 }
 
-
+- (void)configureEditionCellTypeWithSettings:(FilterSettings *)settings {
+    
+    _settings = settings;
+    _filter = settings.filter;
+    _touched = settings.touched;
+    _filterType.text = settings.displayName;
+    _imageView.contentMode = UIViewContentModeCenter;
+    _imageView.image = [UIImage imageNamed:settings.displayName];
+    
+    if (_touched) {
+        _selectedView.hidden = NO;
+    } else {
+        _selectedView.hidden = YES;
+    }
+    [self setNeedsLayout];
+}
 
 
 
