@@ -52,7 +52,7 @@
     _scrollView.maximumZoomScale = 4.0;
     _scrollView.minimumZoomScale = minimumScale;
     _scrollView.zoomScale = minimumScale;
-    [_scrollView setContentMode:UIViewContentModeScaleAspectFit];
+  //  [_scrollView setContentMode:UIViewContentModeScaleAspectFit];
     _scrollView.decelerationRate = UIScrollViewDecelerationRateFast;
     [self.view addSubview:_scrollView];
     
@@ -316,7 +316,6 @@
 #pragma mark TapDetectingImageViewDelegate methods
 
 - (void)handleDoubleTap:(UIGestureRecognizer *)gestureRecognizer {
-    // zoom in
     float newScale = [_scrollView zoomScale] * 1.3;//ZOOM_STEP;
     
     if (newScale > self.scrollView.maximumZoomScale){
@@ -325,8 +324,8 @@
         
         [_scrollView zoomToRect:zoomRect animated:YES];
     }
-    else{
-        
+    else{    // zoom in
+
         newScale = self.scrollView.maximumZoomScale;
         CGRect zoomRect = [self zoomRectForScale:newScale withCenter:[gestureRecognizer locationInView:gestureRecognizer.view]];
         [_scrollView zoomToRect:zoomRect animated:YES];
@@ -335,13 +334,19 @@
 
 - (void)scrollViewDidZoom:(UIScrollView *)scrollView {
     
-    [self updateUI:YES];
+    __weak DetailViewController *wekSelf = self;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [wekSelf updateUI:YES];
+    });
 }
 
 - (void)scrollViewDidEndZooming:(UIScrollView *)scrollView withView:(UIView *)view atScale:(CGFloat)scale {
     
     if (scale == scrollView.minimumZoomScale) {
-        [self updateUI:NO];
+        __weak DetailViewController *wekSelf = self;
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [wekSelf updateUI:NO];
+        });
     }
 }
 
@@ -385,6 +390,26 @@
     zoomRect.origin.y    = center.y - (zoomRect.size.height / 2.0);
     
     return zoomRect;
+}
+
+- (void)centerScrollViewContents {
+    
+    CGSize boundsSize = self.scrollView.bounds.size;
+    CGRect contentsFrame = self.mainImageView.frame;
+    
+    if (contentsFrame.size.width < boundsSize.width) {
+        contentsFrame.origin.x = (boundsSize.width - contentsFrame.size.width) / 2.0f;
+    } else {
+        contentsFrame.origin.x = 0.0f;
+    }
+    
+    if (contentsFrame.size.height < boundsSize.height) {
+        contentsFrame.origin.y = (boundsSize.height - contentsFrame.size.height) / 2.0f;
+    } else {
+        contentsFrame.origin.y = 0.0f;
+    }
+    
+    self.mainImageView.frame = contentsFrame;
 }
 
 
