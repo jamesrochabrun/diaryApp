@@ -654,13 +654,13 @@ static NSString * const FilterCelIdentifier = @"FilterCellIdentifier";
         });
     } else {
         
-        cell.imageView.image = nil;//need assets
         cell.editionType.textColor = [UIColor blackColor];
         cell.imageView.backgroundColor = [UIColor whiteColor];
         FilterSettings *settings = [_editionFiltersArray objectAtIndex:row];
         cell.settings = settings;
-        cell.editionType.text = settings.displayName;
-        cell.filterType.text = nil;
+        cell.editionType.text = nil;
+        cell.filterType.text = settings.displayName;
+        cell.imageView.image = [UIImage imageNamed:settings.displayName];
         if (settings.touched) {
             cell.selectedView.hidden = NO;
         } else {
@@ -1063,6 +1063,15 @@ static NSString * const FilterCelIdentifier = @"FilterCellIdentifier";
         _pickedImage = nil;
     }
     [self dismissSelf];
+}
+
+- (IBAction)doneWasPressed:(UIBarButtonItem *)sender {
+    
+    
+    [self.presentingViewController dismissViewControllerAnimated:YES completion:^{
+        [self performSegueWithIdentifier:@"ready" sender:sender];
+    }];
+
 }
 
 

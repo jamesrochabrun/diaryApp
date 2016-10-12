@@ -420,13 +420,13 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Done" id="MoK-gO-KNw">
                             <connections>
-                                <action selector="doneWasPressed:" destination="lD4-vQ-Ndn" id="sW8-eC-NEW"/>
-                                <segue destination="PXd-Lp-5Ze" kind="modal" identifier="ready" id="zZK-To-WmI"/>
+                                <action selector="doneWasPressed:" destination="lD4-vQ-Ndn" id="tB8-u8-xcw"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="doneButton" destination="MoK-gO-KNw" id="cNw-3J-cTB"/>
+                        <segue destination="PXd-Lp-5Ze" kind="modal" identifier="ready" id="uRi-dW-fFR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jPt-NA-TqG" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -439,7 +439,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="PXd-Lp-5Ze" customClass="THNavigationController" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="qs3-VY-qNh"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="wGj-Xf-Sd1">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="wGj-Xf-Sd1">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -457,7 +457,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="VWW-dU-AZH" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="74h-Wd-6Nt">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="74h-Wd-6Nt">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -476,7 +476,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="6qr-ka-6OA" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="1Yh-XE-TWx"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="G2S-D1-kR0">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="G2S-D1-kR0">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -495,7 +495,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="G8q-oh-10k" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="0UW-rJ-XtI"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="42h-zO-N21">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="42h-zO-N21">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -513,7 +513,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="4Hv-iw-vze" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="f2b-gJ-Si6">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="f2b-gJ-Si6">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -545,6 +545,6 @@
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="wab-nu-Vyw"/>
-        <segue reference="yUV-Jz-bX8"/>
+        <segue reference="uRi-dW-fFR"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -23,7 +23,7 @@
         _editionType = [UILabel new];
         
         _imageView = [UIImageView new];
-        _imageView.contentMode = UIViewContentModeScaleAspectFill;
+        _imageView.contentMode = UIViewContentModeScaleAspectFit;
         _imageView.clipsToBounds = YES;
         
         _filterType = [UILabel new];
