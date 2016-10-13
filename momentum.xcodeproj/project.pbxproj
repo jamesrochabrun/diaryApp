@@ -17,6 +17,7 @@
 		7B5045981CF9FB00008A6AB6 /* billabong.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7B24DAFD1CF962A4001435E7 /* billabong.ttf */; };
 		7B516BDD1DAD8D92000F36EE /* LocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B516BDC1DAD8D92000F36EE /* LocationManager.m */; };
 		7B516BE01DAEDC50000F36EE /* SectionReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B516BDF1DAEDC50000F36EE /* SectionReusableView.m */; };
+		7B516BE31DAF51C5000F36EE /* PlaceholderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B516BE21DAF51C5000F36EE /* PlaceholderView.m */; };
 		7B74B9771CF7ABF200F69544 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B74B9761CF7ABF200F69544 /* main.m */; };
 		7B74B97A1CF7ABF200F69544 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B74B9791CF7ABF200F69544 /* AppDelegate.m */; };
 		7B74B9801CF7ABF200F69544 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7B74B97E1CF7ABF200F69544 /* Main.storyboard */; };
@@ -81,6 +82,8 @@
 		7B516BDC1DAD8D92000F36EE /* LocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationManager.m; sourceTree = "<group>"; };
 		7B516BDE1DAEDC50000F36EE /* SectionReusableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SectionReusableView.h; sourceTree = "<group>"; };
 		7B516BDF1DAEDC50000F36EE /* SectionReusableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SectionReusableView.m; sourceTree = "<group>"; };
+		7B516BE11DAF51C5000F36EE /* PlaceholderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlaceholderView.h; sourceTree = "<group>"; };
+		7B516BE21DAF51C5000F36EE /* PlaceholderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlaceholderView.m; sourceTree = "<group>"; };
 		7B74B9721CF7ABF200F69544 /* secret diary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "secret diary.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7B74B9761CF7ABF200F69544 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		7B74B9781CF7ABF200F69544 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -310,6 +313,8 @@
 		7B74B9B51CF80FBF00F69544 /* view */ = {
 			isa = PBXGroup;
 			children = (
+				7B516BE11DAF51C5000F36EE /* PlaceholderView.h */,
+				7B516BE21DAF51C5000F36EE /* PlaceholderView.m */,
 				7B516BDE1DAEDC50000F36EE /* SectionReusableView.h */,
 				7B516BDF1DAEDC50000F36EE /* SectionReusableView.m */,
 				7B995CEA1D99F3050047B6D5 /* FilterThumbnailCVCell.h */,
@@ -482,6 +487,7 @@
 				7B470C231D272140009C01D0 /* UIFont+CustomFont.m in Sources */,
 				7B470C261D272429009C01D0 /* UIColor+CustomColor.m in Sources */,
 				7B41FB801D2C10180091DC64 /* DoubleTapImage.m in Sources */,
+				7B516BE31DAF51C5000F36EE /* PlaceholderView.m in Sources */,
 				7B995CCA1D99CF440047B6D5 /* CommonUIConstants.m in Sources */,
 				7BDB916B1D388A930004EB6B /* GridCollectionViewFlowLayout.m in Sources */,
 				7B74B9B41CF80FAF00F69544 /* THNavigationController.m in Sources */,
@@ -621,7 +627,7 @@
 				INFOPLIST_FILE = BlogReaderApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.speedelo.secretdiary;
+				PRODUCT_BUNDLE_IDENTIFIER = com.speedelo.momentumApp;
 				PRODUCT_NAME = "secret diary";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -636,7 +642,7 @@
 				INFOPLIST_FILE = BlogReaderApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.speedelo.secretdiary;
+				PRODUCT_BUNDLE_IDENTIFIER = com.speedelo.momentumApp;
 				PRODUCT_NAME = "secret diary";
 				TARGETED_DEVICE_FAMILY = 1;
 			};

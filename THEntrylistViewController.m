@@ -20,6 +20,8 @@
 #import "CommonUIConstants.h"
 #import "UIImage+UIImage.h"
 #import "SectionReusableView.h"
+#import "PlaceholderView.h"
+#import "Common.h"
 
 
 @interface THEntrylistViewController ()<NSFetchedResultsControllerDelegate,UITableViewDelegate,UITableViewDataSource,UICollectionViewDelegate,UICollectionViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
@@ -36,6 +38,7 @@
 @property UIButton *addEntry;
 @property (nonatomic, strong) UIImage *pickedImage;
 @property (nonatomic, assign) NSInteger sourceType;
+@property (nonatomic, strong) PlaceholderView *placeHolder;
 
 @end
 
@@ -57,6 +60,26 @@
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self createToolbar];
     
+    _placeHolder = [PlaceholderView new];
+    [self.view addSubview:_placeHolder];
+    
+    if (self.fetchedResultsController.sections.count <= 0) {
+        _placeHolder.hidden = NO;
+        [_placeHolder setContentWithImage:[UIImage imageNamed:@"train"] andTitle:@"test" withMessage:@"test test test test test test test test etst 'lkjgl kjl jerlgj klj lrkj lkjglkrjg l'g 'lkrng l'kng lkngl' n 'lkne'l knelkrgn q'elrgnelkng en lkn ekln g'leknr 'kelnr n 'lke n'l kn'lknlken g lkeng lkneg 'kn lkeng kn 'lken 'lknr 'lkn l'n l' nlne n"];
+    } else {
+        _placeHolder.hidden = YES;
+    }
+}
+
+- (void)viewWillLayoutSubviews {
+    
+    [super viewWillLayoutSubviews];
+    CGRect frame = _placeHolder.frame;
+    frame.size.height = height(self.view) - 50;
+    frame.size.width = width(self.view);
+    frame.origin.x = 0;
+    frame.origin.y = 0;
+    _placeHolder.frame = frame;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
