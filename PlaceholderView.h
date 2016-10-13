@@ -12,6 +12,7 @@
 @property (nonatomic, strong) UIImageView *imageView;
 @property (nonatomic, strong) UILabel *titleLabel;
 @property (nonatomic, strong) UITextView *textView;
+@property (nonatomic, strong) UIView *overLay;
 - (void)setContentWithImage:(UIImage *)image andTitle:(NSString *)title withMessage:(NSString *)message;
 
 
