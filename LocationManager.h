@@ -11,7 +11,6 @@
 #import <UIKit/UIKit.h>
 
 @protocol LocationManagerDelegate <NSObject>
-- (void)setlocationString:(NSString *)location;
 -(void)displayAlertInVC:(UIAlertController *)alertController;
 
 @end
@@ -20,5 +19,6 @@
 @interface LocationManager : NSObject<CLLocationManagerDelegate>
 @property (nonatomic, strong) CLLocationManager *locationManager;
 @property (nonatomic, weak) id<LocationManagerDelegate>delegate;
+@property (nonatomic, strong) NSString *locationString;
 
 @end

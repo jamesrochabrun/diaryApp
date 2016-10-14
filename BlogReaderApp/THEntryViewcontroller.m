@@ -18,7 +18,7 @@
 #import "LocationManager.h"
 
 
-@interface THEntryViewcontroller ()<UINavigationControllerDelegate, CLLocationManagerDelegate,UITextViewDelegate,LocationManagerDelegate>
+@interface THEntryViewcontroller ()<UINavigationControllerDelegate,UITextViewDelegate,LocationManagerDelegate>
 
 @property (nonatomic, strong) UITextView *textView;
 @property (nonatomic, assign) enum  DiaryEntryMood pickedMood;
@@ -27,11 +27,11 @@
 @property (weak, nonatomic) IBOutlet UIButton *goodButton;
 @property (strong, nonatomic) IBOutlet UIView *accesoryView;
 @property (nonatomic, strong) UILabel *dateLabel;
-@property (nonatomic,strong) NSString *location;
 @property (nonatomic, strong) UIImageView *moodEntryImage;
 @property (nonatomic, strong) UIImageView *thumbnail;
 @property (nonatomic, strong) UILabel *counterLabel;
 @property (nonatomic, strong) LocationManager *locationManager;
+@property (nonatomic, assign) BOOL captionReady;
 @end
 
 @implementation THEntryViewcontroller
@@ -67,11 +67,7 @@
     _moodEntryImage.clipsToBounds = YES;
     _moodEntryImage.contentMode = UIViewContentModeScaleToFill;
     [self.view addSubview:_moodEntryImage];
-    
-    //[self.locationManager requestAlwaysAuthorization];
-    //if theres not an entry create it with the textfield
-    _locationManager = [LocationManager new];
-    _locationManager.delegate = self;
+
 
     NSDate *date;
     if (self.entry != nil) {
@@ -91,7 +87,9 @@
         self.moodEntryImage.image = [UIImage imageNamed:@"icn_happy"];
         date = [NSDate date];
         //we only want to load location for a new entry
-      //  [self l];
+        _locationManager = [LocationManager new];
+        _locationManager.delegate = self;
+        _captionReady = NO;
     }
     
     if (self.pickedImage != nil) {
@@ -117,10 +115,6 @@
     dispatch_async(dispatch_get_main_queue(), ^{
         [weakSelf presentViewController:alertController animated:YES completion:nil];
     });
-}
-
-- (void)setlocationString:(NSString *)location {
-    self.location = location;
 }
 
 ////////////////
@@ -189,11 +183,18 @@
     
     if (self.entry != nil) {
         [self updateDiaryEntry];
+        [self dismissSelf];
+        [self.view endEditing:YES];
     }else {
-        [self insertDiaryEntry];
+        
+        if (_captionReady) {
+            [self insertDiaryEntry];
+            [self dismissSelf];
+            [self.view endEditing:YES];
+        } else {
+            [self alertUserForMinAmountOfCharactersOnCaption];
+        }
     }
-    [self dismissSelf];
-    [self.view endEditing:YES];
 }
 
 - (void)dismissSelf {
@@ -212,18 +213,19 @@
         entry.date = [[NSDate date] timeIntervalSince1970];
         entry.mood = self.pickedMood;
         entry.image = UIImageJPEGRepresentation(self.pickedImage, 0.75);
-        entry.location = self.location;
+        entry.location = _locationManager.locationString;
         BOOL myBool = NO;
         entry.isFavorite = [NSNumber numberWithBool:myBool];
         
         UIImageWriteToSavedPhotosAlbum(self.pickedImage, nil, nil, nil);
         
-        if (self.location == nil) {
+        if (_locationManager.locationString == nil) {
             NSLog(@"location not added");
         }
         
         [coreDataStack saveContext];
     }
+
 }
 
 
@@ -282,12 +284,31 @@
     _counterLabel.text = [NSString stringWithFormat:@"%lu / max 210", (unsigned long)textView.text.length ];
     
     BOOL maxCounter = textView.text.length + (text.length - range.length) <= 210;
+    
+    BOOL minCounter = textView.text.length + (text.length - range.length) >= 50;
 
+    if (minCounter) {
+        _captionReady = YES;
+    } else {
+        _captionReady = NO;
+    }
+ 
     return maxCounter;
 }
 
-
-
+- (void)alertUserForMinAmountOfCharactersOnCaption {
+    
+    __weak THEntryViewcontroller *weakSelf = self;
+    UIAlertController *alertSaved = [UIAlertController alertControllerWithTitle:@"Caption is too short" message:@"caption must be at least 50 characters long" preferredStyle:UIAlertControllerStyleAlert];
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [weakSelf presentViewController:alertSaved animated:YES completion:nil];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [alertSaved dismissViewControllerAnimated:YES completion:nil];
+        });
+    });
+    
+}
 
 
 

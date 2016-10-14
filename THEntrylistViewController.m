@@ -20,9 +20,14 @@
 #import "CommonUIConstants.h"
 #import "UIImage+UIImage.h"
 #import "SectionReusableView.h"
+#import "PlaceholderView.h"
+#import "Common.h"
+#import "TableViewHeaderView.h"
+#import "CustomToolBar.h"
+#import "UITableView+Additions.h"
 
 
-@interface THEntrylistViewController ()<NSFetchedResultsControllerDelegate,UITableViewDelegate,UITableViewDataSource,UICollectionViewDelegate,UICollectionViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+@interface THEntrylistViewController ()<NSFetchedResultsControllerDelegate,UITableViewDelegate,UITableViewDataSource,UICollectionViewDelegate,UICollectionViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate, CustomToolBarDelegate, UIScrollViewDelegate>
 
 @property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -31,11 +36,11 @@
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segmentedControl;
 @property NSBlockOperation *blockOperation;
 @property BOOL shouldReloadCollectionView;
-@property UIButton *home;
-@property UIButton *favorites;
-@property UIButton *addEntry;
 @property (nonatomic, strong) UIImage *pickedImage;
 @property (nonatomic, assign) NSInteger sourceType;
+@property (nonatomic, strong) PlaceholderView *placeHolder;
+@property (nonatomic, strong) PlaceholderView *placeHolderFavorite;
+@property (nonatomic, strong) CustomToolBar *customToolBar;
 
 @end
 
@@ -43,24 +48,59 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    
     //this performs the fetch request
     //step 4
     self.title = @"Momentum";
     [self.fetchedResultsController performFetch:nil];
     
-//    UICollectionViewFlowLayout *collectionViewLayout = (UICollectionViewFlowLayout*)self.gridCollectionViewController.collectionViewLayout;
-//    collectionViewLayout.sectionInset = UIEdgeInsetsMake(20, 0, 20, 0);
-    
     self.gridCollectionViewController.collectionViewLayout = [[GridCollectionViewFlowLayout alloc] init];
     self.gridCollectionViewController.showsVerticalScrollIndicator = NO;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    [self createToolbar];
     
+    _customToolBar = [CustomToolBar new];
+    _customToolBar.del = self;
+    [_customToolBar.homebutton setSelected:YES];
+    [self.view addSubview:_customToolBar];
+    
+    _placeHolder = [PlaceholderView new];
+    [_placeHolder setContentWithImage:[UIImage imageNamed:@"train"] andTitle:@"No Moments saved, yet" withMessage:@"Start saving your memories, snap every Moment and keep it just for you."];
+    [self.view addSubview:_placeHolder];
+    
+    _placeHolderFavorite = [PlaceholderView new];
+    [_placeHolderFavorite setContentWithImage:[UIImage imageNamed:@"favoritePic"] andTitle:@"No favorite Moments, yet" withMessage:@"Select your favorite moments by tapping on the heart button in your pictures."];
+    _placeHolderFavorite.hidden = YES;
+    [self.view addSubview:_placeHolderFavorite];
+}
+
+- (void)viewWillLayoutSubviews {
+    
+    [super viewWillLayoutSubviews];
+    CGRect frame = _placeHolder.frame;
+    frame.size.height = height(self.view) - 50;
+    frame.size.width = width(self.view);
+    frame.origin.x = 0;
+    frame.origin.y = 0;
+    _placeHolder.frame = frame;
+    _placeHolderFavorite.frame = frame;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     self.navigationController.navigationBar.hidden = NO;
+    
+    if ( _customToolBar.favoritesSelected) {
+        if (self.fetchedResultsController.sections.count <= 0 ) {
+            _placeHolderFavorite.hidden = NO;
+        } else {
+            _placeHolderFavorite.hidden = YES;
+        }
+    } else {
+        if (self.fetchedResultsController.sections.count <= 0) {
+            _placeHolder.hidden = NO;
+        } else {
+            _placeHolder.hidden = YES;
+        }
+    }
 }
 
 
@@ -74,69 +114,35 @@
     }
 }
 
-#pragma toolbar
-- (void)createToolbar {
-    
-    CGRect frame = CGRectMake(0, [[UIScreen mainScreen] bounds].size.height - 50, [[UIScreen mainScreen] bounds].size.width, 50);
-    UIToolbar *toolbar = [[UIToolbar alloc] initWithFrame:frame];
-    [toolbar setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin];
-    [toolbar setBarTintColor:[UIColor whiteColor]];
-    [self.view addSubview:toolbar];
-    
-    _home = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 40, 40)];
-    [_home setSelected:YES];
-    [_home addTarget:self action:@selector(goToHome) forControlEvents:UIControlEventTouchUpInside];
-    [_home setBackgroundImage:[UIImage imageNamed:@"home"] forState:UIControlStateNormal];
-    [_home setBackgroundImage:[UIImage imageNamed:@"homeSelected"] forState:UIControlStateSelected];
-    
-    UIBarButtonItem *home = [[UIBarButtonItem alloc] initWithCustomView:_home];
-    
-    _addEntry = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
-    [_addEntry addTarget:self action:@selector(selectPhoto) forControlEvents:UIControlEventTouchUpInside];
-    [_addEntry setBackgroundImage:[UIImage imageNamed:@"camera"] forState:UIControlStateNormal];
-    
-    UIBarButtonItem *addEntry = [[UIBarButtonItem alloc] initWithCustomView:_addEntry];
-
-    _favorites = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 40,40)];
-    [_favorites addTarget:self action:@selector(goToFavorites) forControlEvents:UIControlEventTouchUpInside];
-    [_favorites setBackgroundImage:[UIImage imageNamed:@"love"] forState:UIControlStateNormal];
-    [_favorites setBackgroundImage:[UIImage imageNamed:@"favoriteSelected"] forState:UIControlStateSelected];
-    
-    UIBarButtonItem *favorites = [[UIBarButtonItem alloc] initWithCustomView:_favorites];
-    
-    UIBarButtonItem *spacer = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil];
-    
-    NSArray *buttonItems = [NSArray arrayWithObjects:spacer, home, spacer, addEntry,spacer,  favorites,spacer, nil];
-    [toolbar setItems:buttonItems];
-    
-}
-
 - (void)goToHome {
     
-    [_home setSelected:YES];
-    [_favorites setSelected:NO];
-    [_addEntry setSelected:NO];
-    THCoreDataStack *coreDataStack = [THCoreDataStack  defaultStack];
+    _placeHolderFavorite.hidden = YES;
 
+    THCoreDataStack *coreDataStack = [THCoreDataStack  defaultStack];
+    
     NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"THDiaryEntry"];
     fetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"date" ascending:NO]];
     
     _fetchedResultsController = [[NSFetchedResultsController alloc]initWithFetchRequest:fetchRequest managedObjectContext:coreDataStack.managedObjectContext sectionNameKeyPath:@"sectionName" cacheName:nil];
     _fetchedResultsController.delegate = self;
-
+    
     [self.fetchedResultsController performFetch:nil];
     
+    if (self.fetchedResultsController.sections.count <= 0) {
+        _placeHolder.hidden = NO;
+    } else {
+        _placeHolder.hidden = YES;
+    }
+    
     dispatch_async(dispatch_get_main_queue(), ^(void){
-    [self.tableView reloadData];
-    [self.gridCollectionViewController reloadData];
+        [self.tableView reloadData];
+        [self.gridCollectionViewController reloadData];
     });
 }
 
 - (void)goToFavorites{
     
-    [_favorites setSelected:YES];
-    [_home setSelected:NO];
-    [_addEntry setSelected:NO];
+    _placeHolder.hidden = YES;
 
     THCoreDataStack *coreDataStack = [THCoreDataStack  defaultStack];
 
@@ -149,6 +155,12 @@
     _fetchedResultsController.delegate = self;
 
     [self.fetchedResultsController performFetch:nil];
+    
+    if (self.fetchedResultsController.sections.count <= 0) {
+        _placeHolderFavorite.hidden = NO;
+    } else {
+        _placeHolderFavorite.hidden = YES;
+    }
     
     dispatch_async(dispatch_get_main_queue(), ^(void){
     [self.tableView reloadData];
@@ -169,7 +181,7 @@
 //step 3
 //this is a getter so thats why we replace self for  _
 //sectionName is a property in the THDiaryEntry object we can use any name of a property in the thDiaryEntry for create a section
-- (NSFetchedResultsController*)fetchedResultsController {
+- (NSFetchedResultsController *)fetchedResultsController {
     if (_fetchedResultsController != nil) {
         return _fetchedResultsController;
     }
@@ -203,7 +215,6 @@
         } completion:nil];
     }
 }
-
 //this performs the animation
 
 - (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath {
@@ -275,7 +286,6 @@
     }
 }
 
-
 #pragma tableView methods
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -288,24 +298,17 @@
 
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
    
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, 18)];
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 4, tableView.frame.size.width, 25)];
-    [label setFont:[UIFont regularFont:15]];
-    [label setTextAlignment:NSTextAlignmentCenter];
-    [label setTextColor:[UIColor newGrayColor]];
-    //NSFETCHRESULTCONTROLLER
     id <NSFetchedResultsSectionInfo> sectionInfo = [[self.fetchedResultsController sections] objectAtIndex:section];
     //this is setted in THDiaryEntry+CoreDataProperties.m
-    NSString *sectionName = [sectionInfo name];
-    ///////////////////////////////////////////
-    [label setText:sectionName];
-    [view addSubview:label];
-    [view setBackgroundColor:[UIColor whiteColor]]; //your background
-    return view;
+    //headerView.title = [sectionInfo name];
+    NSString *sectionTitle = sectionInfo.name;
+    
+    TableViewHeaderView *headerView = [[TableViewHeaderView alloc] initWithSectionTitle:sectionTitle];
+    return headerView;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return 30;
+    return kGeomHeaderHeightInSection;
 }
 
 //step 6
@@ -381,6 +384,15 @@
     UITableViewRowAction *deleteButton = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:@"Delete" handler:^(UITableViewRowAction *action, NSIndexPath *indexPath)
                                      {
                                          [self removeEntryFromCoreData:indexPath];
+                                         
+                                         if (self.fetchedResultsController.sections.count <= 0) {
+                                                                                          
+                                             if (_customToolBar.favoritesSelected) {
+                                                 _placeHolderFavorite.hidden = NO;
+                                             } else {
+                                                 _placeHolder.hidden = NO;
+                                             }
+                                         }
                                      }];
     deleteButton.backgroundColor = [UIColor alertColor]; //arbitrary color
     
@@ -388,6 +400,7 @@
 }
 
 - (void)removeEntryFromCoreData:(NSIndexPath*)indexPath {
+    
     THDiaryEntry *entry = [self.fetchedResultsController objectAtIndexPath:indexPath];
     THCoreDataStack *coreDataStack = [THCoreDataStack defaultStack];
     [[coreDataStack managedObjectContext] deleteObject:entry];
@@ -427,7 +440,7 @@
 
 #pragma camera actions
 
-- (void)selectPhoto {
+- (void)goToCameraActions {
     
     if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
         [self promptForSource];
@@ -487,7 +500,6 @@
     CGSize s = image.size;
     _pickedImage = [UIImage imageWithImage:image scaledToSize:CGSizeMake(kGeomUploadWidth, kGeomUploadWidth* s.height/s.width)];
     
-    
     if (picker.sourceType == UIImagePickerControllerSourceTypeSavedPhotosAlbum) {
         _sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
     } else if (picker.sourceType == UIImagePickerControllerSourceTypePhotoLibrary) {
@@ -517,20 +529,11 @@
             }
         }
     }];
-    
 }
 
-
-
-
-
-
-
-
-
-
-
-
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    [_tableView fadeTopAndBottomCellsOnTableViewScroll:_tableView withModifier:1.0];
+}
 
 
 

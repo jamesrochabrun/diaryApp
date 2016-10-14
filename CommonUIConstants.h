@@ -51,12 +51,11 @@ static const NSUInteger kColorRedFlat = 0xe74c3c;
 
 // Geometry and metrics
 
-static CGFloat kGeomHeightStatusBar = 20.0;
 static CGFloat kGeomWidthBigButton = 210.0;
 static CGFloat kGeomHeightBigbutton = 40.0;
 static CGFloat kGeomBottomPadding = 100.0;
 static CGFloat kGeomMarginMedium = 20.0;
-static CGFloat kGeomHeightToolBar = 70.0;
+static CGFloat kGeomHeightToolBar = 50.0;
 static CGFloat kGeomMarginBig = 40.0;
 static CGFloat kGeomHeaderHeightInSection = 40.0;
 static CGFloat kGeomWidthToolBarButton = 85.0;
@@ -74,6 +73,10 @@ static CGFloat kGeomIconSize = 30;
 static CGFloat kGeomHeightButton = 40.0;
 static CGFloat kGeomUploadWidth = 750;
 static CGFloat kGeomMarginSmall = 10;
+static CGFloat kGeomHeightStatusBar = 20;
+static CGFloat kGeomHeightNavigationBar = 44;
+static CGFloat kGeomToolBarButtonSize = 40.0;
+
 
 
 

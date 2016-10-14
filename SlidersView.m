@@ -22,7 +22,7 @@
     self = [super init];
     if (self) {
         
-        _slider = [UISlider sliderWithMinValue:_settings.minValue minTrackTintColor:UIColorRGB(kColorOffBlack) andMaxValue:_settings.maxValue maxTrackTintColor:UIColorRGB(kColorOffBlack) continuous:YES];
+        _slider = [UISlider sliderWithMinValue:_settings.minValue minTrackTintColor:UIColorRGB(kColorGrayMiddle) andMaxValue:_settings.maxValue maxTrackTintColor:UIColorRGB(kColorGrayMiddle) continuous:YES];
         [self addSubview:_slider];
         
         _nameLabel = [UILabel new];

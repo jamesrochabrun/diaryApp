@@ -36,7 +36,7 @@
         [_filterType setNumberOfLines:0];
         
         _selectedView = [UIView new];
-        _selectedView.backgroundColor = UIColorRGB(kColorOffBlack);
+        _selectedView.backgroundColor = UIColorRGB(kColorGrayMiddle);
         _selectedView.hidden = YES;
         
         [self addSubview:_filterType];

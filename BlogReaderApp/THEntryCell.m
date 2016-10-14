@@ -10,15 +10,17 @@
 #import "THDiaryEntry.h"
 #import <QuartzCore/QuartzCore.h>
 #import "UIFont+CustomFont.h"
-
+#import "Common.h"
+#import "CommonUIConstants.h"
 
 @implementation THEntryCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];
     self.selectionStyle = UITableViewCellSelectionStyleNone;
+    self.backgroundColor = UIColorRGB(kColorOffBlack);
     
-    NSArray *labels = @[self.locationLabel , self.dateLabel ];
+    NSArray *labels = @[self.locationLabel , self.dateLabel];
     for (UILabel *label in labels) {
         label.font = [UIFont regularFont:15];
         label.textColor = [UIColor whiteColor];
