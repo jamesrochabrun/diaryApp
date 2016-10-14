@@ -20,6 +20,8 @@
     _locationManager = [CLLocationManager new];
     _locationManager.delegate = self;
     _locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+    [_locationManager startUpdatingLocation]; //Will update location immediately
+
     }
     return self;
 }
@@ -67,8 +69,9 @@
         case kCLAuthorizationStatusAuthorizedWhenInUse:
         case kCLAuthorizationStatusAuthorizedAlways: {
             // clear text
-            [_locationManager startUpdatingLocation]; //Will update location immediately
             NSLog(@"yes located");
+            [_locationManager startUpdatingLocation]; //Will update location immediately
+
         } break;
         default:
             break;
