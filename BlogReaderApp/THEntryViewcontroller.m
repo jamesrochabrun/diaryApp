@@ -199,7 +199,22 @@
 //step 1 insert data and save it 
 - (void)insertDiaryEntry {
     
-    self.location = _locationManager.locationString;
+    NSString *location = _locationManager.locationString;
+    
+    NSLog(@"self.location= %@" , location);
+    
+    __weak THEntryViewcontroller *weak = self;
+    [self addLocation:location completionBlock:^(BOOL finished) {
+        
+        if (finished) {
+            [weak test];
+        };
+    }];
+
+}
+
+- (void)test {
+    
     if (self.pickedImage != nil) {
         //creating a new coreDataStack entity (singleton)
         THCoreDataStack *coreDataStack = [THCoreDataStack defaultStack];
@@ -283,6 +298,26 @@
     return maxCounter;
 }
 
+
+#pragma block
+
+- (void)addLocation:(NSString *)location completionBlock:(void (^)(BOOL))completionBlock; {
+    
+    NSLog(@"the location %@", location);
+    
+//    if (!location) {
+//        if (completionBlock) completionBlock (NO);
+//        return;
+//    }
+    if (location) {
+        self.location = location;
+        completionBlock(YES);
+    } else{
+        completionBlock(NO);
+    }
+
+    
+}
 
 
 
