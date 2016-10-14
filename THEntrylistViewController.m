@@ -24,9 +24,10 @@
 #import "Common.h"
 #import "TableViewHeaderView.h"
 #import "CustomToolBar.h"
+#import "UITableView+Additions.h"
 
 
-@interface THEntrylistViewController ()<NSFetchedResultsControllerDelegate,UITableViewDelegate,UITableViewDataSource,UICollectionViewDelegate,UICollectionViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate, CustomToolBarDelegate>
+@interface THEntrylistViewController ()<NSFetchedResultsControllerDelegate,UITableViewDelegate,UITableViewDataSource,UICollectionViewDelegate,UICollectionViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate, CustomToolBarDelegate, UIScrollViewDelegate>
 
 @property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -528,20 +529,11 @@
             }
         }
     }];
-    
 }
 
-
-
-
-
-
-
-
-
-
-
-
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    [_tableView fadeTopAndBottomCellsOnTableViewScroll:_tableView withModifier:1.0];
+}
 
 
 

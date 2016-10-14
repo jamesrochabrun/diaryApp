@@ -35,6 +35,7 @@
 		7B74B9AF1CF7D97500F69544 /* THEntrylistViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B74B9AE1CF7D97500F69544 /* THEntrylistViewController.m */; };
 		7B74B9B41CF80FAF00F69544 /* THNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B74B9B31CF80FAF00F69544 /* THNavigationController.m */; };
 		7B74B9B81CF8148D00F69544 /* THEntryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B74B9B71CF8148D00F69544 /* THEntryCell.m */; };
+		7B9606E01DB150E000D9C5F7 /* UITableView+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B9606DF1DB150E000D9C5F7 /* UITableView+Additions.m */; };
 		7B995CC61D99CF020047B6D5 /* TopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B995CC51D99CF020047B6D5 /* TopView.m */; };
 		7B995CCA1D99CF440047B6D5 /* CommonUIConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B995CC81D99CF440047B6D5 /* CommonUIConstants.m */; };
 		7B995CCE1D99CF990047B6D5 /* Common.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B995CCC1D99CF990047B6D5 /* Common.m */; };
@@ -117,6 +118,8 @@
 		7B74B9B31CF80FAF00F69544 /* THNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = THNavigationController.m; path = BlogReaderApp/THNavigationController.m; sourceTree = "<group>"; };
 		7B74B9B61CF8148D00F69544 /* THEntryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = THEntryCell.h; path = BlogReaderApp/THEntryCell.h; sourceTree = "<group>"; };
 		7B74B9B71CF8148D00F69544 /* THEntryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = THEntryCell.m; path = BlogReaderApp/THEntryCell.m; sourceTree = "<group>"; };
+		7B9606DE1DB150E000D9C5F7 /* UITableView+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+Additions.h"; sourceTree = "<group>"; };
+		7B9606DF1DB150E000D9C5F7 /* UITableView+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+Additions.m"; sourceTree = "<group>"; };
 		7B995CC41D99CF020047B6D5 /* TopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TopView.h; sourceTree = "<group>"; };
 		7B995CC51D99CF020047B6D5 /* TopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TopView.m; sourceTree = "<group>"; };
 		7B995CC81D99CF440047B6D5 /* CommonUIConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonUIConstants.m; sourceTree = "<group>"; };
@@ -188,6 +191,8 @@
 		7B470C201D271AF5009C01D0 /* categories */ = {
 			isa = PBXGroup;
 			children = (
+				7B9606DE1DB150E000D9C5F7 /* UITableView+Additions.h */,
+				7B9606DF1DB150E000D9C5F7 /* UITableView+Additions.m */,
 				7B995CF01D99F82D0047B6D5 /* UIView+Additions.h */,
 				7B995CF11D99F82D0047B6D5 /* UIView+Additions.m */,
 				7B995CED1D99F6EC0047B6D5 /* UIImage+UIImage.h */,
@@ -489,6 +494,7 @@
 				7B74B9831CF7ABF200F69544 /* BlogReaderApp.xcdatamodeld in Sources */,
 				7B74B9B81CF8148D00F69544 /* THEntryCell.m in Sources */,
 				7BA833231D94E9C800841B40 /* FilterViewController.m in Sources */,
+				7B9606E01DB150E000D9C5F7 /* UITableView+Additions.m in Sources */,
 				7B516BE01DAEDC50000F36EE /* SectionReusableView.m in Sources */,
 				7B995CF21D99F82D0047B6D5 /* UIView+Additions.m in Sources */,
 				7B74B9771CF7ABF200F69544 /* main.m in Sources */,
