@@ -119,10 +119,6 @@
     });
 }
 
-- (void)setlocationString:(NSString *)location {
-    self.location = location;
-}
-
 ////////////////
 
 - (void)setPickedImage:(UIImage *)pickedImage {
@@ -203,6 +199,7 @@
 //step 1 insert data and save it 
 - (void)insertDiaryEntry {
     
+    self.location = _locationManager.locationString;
     if (self.pickedImage != nil) {
         //creating a new coreDataStack entity (singleton)
         THCoreDataStack *coreDataStack = [THCoreDataStack defaultStack];

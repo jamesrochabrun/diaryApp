@@ -103,8 +103,8 @@
     CLLocation *location = [locations firstObject];
     CLGeocoder *geocoer = [[CLGeocoder alloc]init];
     [geocoer reverseGeocodeLocation:location completionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks, NSError * _Nullable error) {
-        CLPlacemark *placeMark = [placemarks firstObject];        
-        [self.delegate setlocationString:placeMark.name];
+        CLPlacemark *placeMark = [placemarks firstObject];
+        _locationString = placeMark.name;
     }];
 }
 
