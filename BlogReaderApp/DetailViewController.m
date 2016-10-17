@@ -16,6 +16,9 @@
 #import "UIColor+CustomColor.h"
 #import "Common.h"
 #import "CommonUIConstants.h"
+#import "THCoreDataStack.h"
+
+static NSString *shareURL = @"https://itunes.apple.com/us/app/momentumapp/id1164714008?l=es&ls=1&mt=8";
 
 
 @interface DetailViewController ()<DoubleTapImagedelegate,UIScrollViewDelegate>
@@ -28,7 +31,7 @@
 @property (nonatomic , strong) UIImage *frameImage;
 @property (nonatomic, strong) UILabel *dateLabel;
 @property (nonatomic, strong) UILabel *locationLabel;
-
+@property (nonatomic, strong) UIButton *optionsButton;
 @end
 
 @implementation DetailViewController
@@ -64,6 +67,11 @@
 
     _mainImageView.image = _frameImage;
     [_scrollView addSubview:_mainImageView];
+    
+    _optionsButton = [UIButton new];
+    [_optionsButton addTarget:self action:@selector(showOptions) forControlEvents:UIControlEventTouchUpInside];
+    [_optionsButton setImage:[UIImage imageNamed:@"zoom"] forState:UIControlStateNormal];
+    [_scrollView addSubview:_optionsButton];
     
     _moodImageView = [UIImageView new];
     [_mainImageView addSubview:_moodImageView];
@@ -154,6 +162,13 @@
     frame.origin.x = originX(self.view) + kGeomMarginMedium;
     frame.origin.y = originY(self.view) + kGeomMarginMedium;
     _moodImageView.frame = frame;
+    
+    frame = _optionsButton.frame;
+    frame.size.height = 30;
+    frame.size.width = kGeomMarginDismissButton;
+    frame.origin.x = CGRectGetMaxX(self.view.frame) - kGeomMarginDismissButton - kGeomMarginMedium;
+    frame.origin.y = CGRectGetMaxY(_mainImageView.frame) + kGeomMarginMedium;
+    _optionsButton.frame = frame;
     
 //    frame = _mainImageView.frame;
 //    frame.size.height = width(self.view);
@@ -395,27 +410,103 @@
     return zoomRect;
 }
 
+- (void)showOptions {
+    
+    UIAlertController *options = [UIAlertController alertControllerWithTitle:nil
+                                                                     message:nil
+                                                              preferredStyle:UIAlertControllerStyleActionSheet];
+    
+    UIAlertAction *Share = [UIAlertAction actionWithTitle:@"Share Photo"
+                                                    style: UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+                                                        [self shareImage];
+                                                    }];
+    UIAlertAction *Save = [UIAlertAction actionWithTitle:@"Save In Photos"
+                                                   style: UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+                                                       
+                                                       [self saveImegeInPhotoRoll];
+                                                   }];
+    
+    UIAlertAction *Delete = [UIAlertAction actionWithTitle:@"Delete Entry"
+                                                     style: UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+                                                         [self removeEntryFromCoreData];
+                                                     }];
+    
+    UIAlertAction *Cancel = [UIAlertAction actionWithTitle:@"Cancel"
+                                                     style: UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
+                                                         
+                                                     }];
+    
+    
+    [options addAction:Share];
+    [options addAction:Save];
+    [options addAction:Delete];
+    [options addAction:Cancel];
+    
+    __weak DetailViewController *weakSelf = self;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [weakSelf presentViewController:options animated:YES completion:nil];
+    });
+}
 
-//- (void)centerScrollViewContents {
-//    
-//    CGSize boundsSize = self.scrollView.bounds.size;
-//    CGRect contentsFrame = self.mainImageView.frame;
-//    
-//    if (contentsFrame.size.width < boundsSize.width) {
-//        contentsFrame.origin.x = (boundsSize.width - contentsFrame.size.width) / 2.0f;
-//    } else {
-//        contentsFrame.origin.x = 0.0f;
-//    }
-//    
-//    if (contentsFrame.size.height < boundsSize.height) {
-//        contentsFrame.origin.y = (boundsSize.height - contentsFrame.size.height) / 2.0f;
-//    } else {
-//        contentsFrame.origin.y = 0.0f;
-//    }
-//    
-//    self.mainImageView.frame = contentsFrame;
-//}
+- (void)saveImegeInPhotoRoll {
+    
+    UIImageWriteToSavedPhotosAlbum(_frameImage, nil, nil, nil);
+    [self imageSavedInPhotoRollAlert];
+}
 
+
+- (void)shareImage {
+    
+    NSURL *shareLink = [[NSURL alloc] initWithString:shareURL];
+    
+    UIActivityViewController *activityViewController =
+    [[UIActivityViewController alloc] initWithActivityItems:@[shareLink,_frameImage]
+                                      applicationActivities:nil];
+    
+    [activityViewController setModalTransitionStyle:UIModalTransitionStyleCoverVertical];
+    
+    [activityViewController setExcludedActivityTypes:@[UIActivityTypePostToWeibo,
+                                                       UIActivityTypeCopyToPasteboard,
+                                                       UIActivityTypeMessage]];
+    
+    dispatch_async(dispatch_get_main_queue(), ^(void){
+        [self presentViewController:activityViewController animated:YES completion:nil];
+    });
+}
+
+
+- (void)removeEntryFromCoreData {
+    
+    THCoreDataStack *coreDataStack = [THCoreDataStack defaultStack];
+    [[coreDataStack managedObjectContext] deleteObject:_entry];
+    [coreDataStack saveContext];
+    
+    __weak DetailViewController *weakSelf = self;
+    UIAlertController *alertDeleted = [UIAlertController alertControllerWithTitle:@"Entry Deleted." message:nil preferredStyle:UIAlertControllerStyleAlert];
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [weakSelf presentViewController:alertDeleted animated:YES completion:nil];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            
+            [alertDeleted dismissViewControllerAnimated:YES completion:^{
+                [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+            }];
+        });
+    });
+}
+
+- (void)imageSavedInPhotoRollAlert {
+    
+    __weak DetailViewController *weakSelf = self;
+    UIAlertController *alertSaved = [UIAlertController alertControllerWithTitle:@"Image saved in your library." message:nil preferredStyle:UIAlertControllerStyleAlert];
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [weakSelf presentViewController:alertSaved animated:YES completion:nil];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [alertSaved dismissViewControllerAnimated:YES completion:nil];
+        });
+    });
+}
 
 
 
