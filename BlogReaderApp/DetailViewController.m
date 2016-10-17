@@ -42,6 +42,7 @@ static NSString *shareURL = @"https://itunes.apple.com/us/app/momentumapp/id1164
     if (self.entry == nil) {
         NSLog(@"%@", self.entry);
     }
+
     
     _scrollView = [UIScrollView new];
     _scrollView.bouncesZoom = YES;
@@ -70,7 +71,7 @@ static NSString *shareURL = @"https://itunes.apple.com/us/app/momentumapp/id1164
     
     _optionsButton = [UIButton new];
     [_optionsButton addTarget:self action:@selector(showOptions) forControlEvents:UIControlEventTouchUpInside];
-    [_optionsButton setImage:[UIImage imageNamed:@"zoom"] forState:UIControlStateNormal];
+    [_optionsButton setImage:[UIImage imageNamed:@"options"] forState:UIControlStateNormal];
     [_scrollView addSubview:_optionsButton];
     
     _moodImageView = [UIImageView new];
@@ -118,6 +119,7 @@ static NSString *shareURL = @"https://itunes.apple.com/us/app/momentumapp/id1164
     _entryText.scrollEnabled = NO;
     _entryText.text = self.entry.body;
     [_scrollView addSubview:_entryText];
+
     
     UITapGestureRecognizer *doubleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleDoubleTap:)];
     
@@ -126,11 +128,6 @@ static NSString *shareURL = @"https://itunes.apple.com/us/app/momentumapp/id1164
     //Adding gesture recognizer
     [_mainImageView addGestureRecognizer:doubleTap];
     
-}
-
-- (void)viewDidAppear:(BOOL)animated {
-    
-   
 }
 
 - (void)viewWillLayoutSubviews {
@@ -165,8 +162,8 @@ static NSString *shareURL = @"https://itunes.apple.com/us/app/momentumapp/id1164
     
     frame = _optionsButton.frame;
     frame.size.height = 30;
-    frame.size.width = kGeomMarginDismissButton;
-    frame.origin.x = CGRectGetMaxX(self.view.frame) - kGeomMarginDismissButton - kGeomMarginMedium;
+    frame.size.width = 50;
+    frame.origin.x = CGRectGetMaxX(self.view.frame) - kGeomMarginDismissButton - kGeomMarginBig;
     frame.origin.y = CGRectGetMaxY(_mainImageView.frame) + kGeomMarginMedium;
     _optionsButton.frame = frame;
     
@@ -180,7 +177,7 @@ static NSString *shareURL = @"https://itunes.apple.com/us/app/momentumapp/id1164
     [_locationLabel sizeToFit];
     frame = _locationLabel.frame;
     frame.origin.x = (width(self.view) - width(_locationLabel)) /2;
-    frame.origin.y = CGRectGetMaxY(_mainImageView.frame) + kGeomMarginMedium;
+    frame.origin.y = CGRectGetMaxY(_optionsButton.frame) + kGeomMarginSmall;
     _locationLabel.frame = frame;
     
     [_dateLabel sizeToFit];
