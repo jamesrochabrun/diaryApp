@@ -216,9 +216,7 @@
         entry.location = _locationManager.locationString;
         BOOL myBool = NO;
         entry.isFavorite = [NSNumber numberWithBool:myBool];
-        
-        UIImageWriteToSavedPhotosAlbum(self.pickedImage, nil, nil, nil);
-        
+                
         if (_locationManager.locationString == nil) {
             NSLog(@"location not added");
         }
