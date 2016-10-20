@@ -374,6 +374,7 @@ static NSString *shareURL = @"https://itunes.apple.com/us/app/momentumapp/id1164
             weakSelf.moodImageView.hidden =
             weakSelf.dateLabel.hidden =
             weakSelf.locationLabel.hidden =
+            weakSelf.optionsButton.hidden =
             weakSelf.entryText.hidden = YES;
             
         } else {
@@ -381,6 +382,7 @@ static NSString *shareURL = @"https://itunes.apple.com/us/app/momentumapp/id1164
             weakSelf.moodImageView.hidden =
             weakSelf.dateLabel.hidden =
             weakSelf.locationLabel.hidden =
+            weakSelf.optionsButton.hidden =
             weakSelf.entryText.hidden = NO;
             [weakSelf.view setNeedsLayout];
         }
@@ -417,7 +419,7 @@ static NSString *shareURL = @"https://itunes.apple.com/us/app/momentumapp/id1164
                                                     style: UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
                                                         [self shareImage];
                                                     }];
-    UIAlertAction *Save = [UIAlertAction actionWithTitle:@"Save In Photos"
+    UIAlertAction *Save = [UIAlertAction actionWithTitle:@"Save In Camera Roll"
                                                    style: UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
                                                        
                                                        [self saveImegeInPhotoRoll];
