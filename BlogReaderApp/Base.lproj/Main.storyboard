@@ -32,17 +32,18 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Edit" id="wdo-ZB-nmG">
                             <connections>
-                                <segue destination="PXd-Lp-5Ze" kind="modal" identifier="edit" id="yUV-Jz-bX8"/>
+                                <segue destination="PXd-Lp-5Ze" kind="modal" identifier="edit" modalPresentationStyle="currentContext" modalTransitionStyle="crossDissolve" id="yUV-Jz-bX8"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
                         <segue destination="G8q-oh-10k" kind="modal" identifier="showImage" id="FFG-t0-aUh"/>
+                        <segue destination="Eps-4N-0Og" kind="modal" identifier="map" modalPresentationStyle="currentContext" modalTransitionStyle="crossDissolve" id="aj4-2r-Hfr"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Atk-Df-m46" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1680" y="645"/>
+            <point key="canvasLocation" x="1873" y="738"/>
         </scene>
         <!--Image View Controller-->
         <scene sceneID="Lvq-ma-32F">
@@ -81,7 +82,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NSH-wx-3Lp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2717" y="1028"/>
+            <point key="canvasLocation" x="3303.5" y="1027.5"/>
         </scene>
         <!--Entry Viewcontroller-->
         <scene sceneID="MDP-sE-wzK">
@@ -347,7 +348,7 @@
                                         <connections>
                                             <outlet property="moodImageView" destination="AEE-vc-nbZ" id="uKF-5D-MxA"/>
                                             <outlet property="redHeartImageView" destination="gFo-w8-a8q" id="P7r-O9-YkK"/>
-                                            <segue destination="6qr-ka-6OA" kind="modal" identifier="showFromGrid" id="wab-nu-Vyw"/>
+                                            <segue destination="6qr-ka-6OA" kind="modal" identifier="showFromGrid" modalPresentationStyle="currentContext" modalTransitionStyle="crossDissolve" id="wab-nu-Vyw"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -455,7 +456,7 @@
                                             <outlet property="locationLabel" destination="Esh-oq-efO" id="UWH-9h-Atz"/>
                                             <outlet property="mainImageView" destination="BfV-Wy-Xf2" id="Z10-5D-u4g"/>
                                             <outlet property="moodImageView" destination="MfO-hI-3Rw" id="2da-iY-Ui2"/>
-                                            <segue destination="6qr-ka-6OA" kind="modal" identifier="show" id="8Bn-ls-KgX"/>
+                                            <segue destination="6qr-ka-6OA" kind="modal" identifier="show" modalPresentationStyle="currentContext" modalTransitionStyle="crossDissolve" id="8Bn-ls-KgX"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -599,7 +600,32 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7y0-U2-jp9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2177" y="1015"/>
+            <point key="canvasLocation" x="2763.5" y="1014.5"/>
+        </scene>
+        <!--Map View Controller-->
+        <scene sceneID="TYh-Nz-WBN">
+            <objects>
+                <viewController id="e3S-Se-kYZ" customClass="MapViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ZZL-ZW-1Tp"/>
+                        <viewControllerLayoutGuide type="bottom" id="3ab-fp-OJl"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="L8P-WE-lXN">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="RZN-as-EP3">
+                        <barButtonItem key="leftBarButtonItem" title="Dismiss" id="gOx-4S-H4X">
+                            <connections>
+                                <action selector="dismissView:" destination="e3S-Se-kYZ" id="Jts-Xe-FBv"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ib3-bc-llL" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1688" y="2255"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="qVT-51-3mw">
@@ -618,6 +644,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="haO-EB-mp7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2351" y="-948"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="8EJ-pT-Bfd">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="khE-Jl-eSl" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Eps-4N-0Og" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="SsL-OB-Yza">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="e3S-Se-kYZ" kind="relationship" relationship="rootViewController" id="rHv-tE-ywS"/>
+                    </connections>
+                </navigationController>
+            </objects>
+            <point key="canvasLocation" x="1688" y="1466"/>
         </scene>
     </scenes>
     <resources>
@@ -638,7 +682,7 @@
         <simulatedScreenMetrics key="destination" type="retina4_7.fullscreen"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
+        <segue reference="8Bn-ls-KgX"/>
         <segue reference="zIC-WZ-Kbw"/>
-        <segue reference="wab-nu-Vyw"/>
     </inferredMetricsTieBreakers>
 </document>

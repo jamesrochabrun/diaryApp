@@ -206,8 +206,11 @@ static NSString * const FilterCelIdentifier = @"FilterCellIdentifier";
 - (void)startCropMode {
     
     _filterButton.hidden = YES;
+    _filterButton.alpha = 0;
     _editButton.hidden = YES;
+    _editButton.alpha = 0;
     _collectionView.hidden = YES;
+    _collectionView.alpha = 0;
 }
 
 - (void)viewWillLayoutSubviews {
@@ -311,12 +314,21 @@ static NSString * const FilterCelIdentifier = @"FilterCellIdentifier";
     _cropView.hidden = YES;
     _topView.hidden = YES;
     _bottomView.hidden = YES;
-    _filterButton.hidden = NO;
-    _editButton.hidden = NO;
-    _collectionView.hidden = NO;
     _nextButton.hidden = YES;
     self.view.backgroundColor = [UIColor whiteColor];
     
+    [UIView animateWithDuration:.5 animations:^{
+        _collectionView.hidden = NO;
+        _collectionView.alpha = 1;
+        _filterButton.hidden = NO;
+        _filterButton.alpha = 1;
+        _editButton.hidden = NO;
+        _editButton.alpha = 1;
+    } completion:^(BOOL finished) {
+
+    }];
+    
+    //uibarbutton trick
     UIView *doneButtonView = [_doneButton valueForKey:@"view"];
     doneButtonView.hidden = NO;
     
@@ -358,6 +370,11 @@ static NSString * const FilterCelIdentifier = @"FilterCellIdentifier";
     if (_filterMode) {
         return;
     }
+    _collectionView.alpha = 0;
+    [UIView animateWithDuration:.5 animations:^{
+        _collectionView.alpha =1; 
+    }];
+    
     if ([_filterButton.titleLabel.text isEqualToString:@"Reset"]) {
         
         [self resetEditingAction];
@@ -375,6 +392,15 @@ static NSString * const FilterCelIdentifier = @"FilterCellIdentifier";
 
 - (void)showEditMode:(id)sender {
     
+    if (!_filterMode && [_editButton.titleLabel.text isEqualToString:@"Edit"] ) {
+        return;
+    }
+    
+    _collectionView.alpha = 0;
+    [UIView animateWithDuration:.5 animations:^{
+        _collectionView.alpha = 1;
+    }];
+
     if ([_editButton.titleLabel.text isEqualToString:@"Done"]) {
         
         [_filterButton setSelected:NO];
@@ -389,13 +415,22 @@ static NSString * const FilterCelIdentifier = @"FilterCellIdentifier";
     dispatch_async(dispatch_get_main_queue(), ^{
         [weakSelf.collectionView reloadData];
     });
+        
+
 }
 
 - (void)showSliderView:(BOOL)show {
     
     if (show) {
+        
+        _sliderView.alpha = 0;
+        [UIView animateWithDuration:.5 animations:^{
+            _sliderView.hidden = NO;
+            _sliderView.alpha = 1;
+        } completion:^(BOOL finished) {
+        }];
+        
         _collectionView.hidden = YES;
-        _sliderView.hidden = NO;
         [_filterButton setTitle:@"Reset" forState:UIControlStateNormal];
         [_editButton setTitle:@"Done" forState:UIControlStateNormal];
         [_filterButton setSelected:YES];

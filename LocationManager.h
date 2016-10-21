@@ -20,5 +20,7 @@
 @property (nonatomic, strong) CLLocationManager *locationManager;
 @property (nonatomic, weak) id<LocationManagerDelegate>delegate;
 @property (nonatomic, strong) NSString *locationString;
+@property (nonatomic) CGFloat longitude;
+@property (nonatomic) CGFloat latitude;
 
 @end

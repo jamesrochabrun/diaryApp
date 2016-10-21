@@ -1,24 +1,27 @@
 //
 //  THDiaryEntry+CoreDataProperties.m
-//  secretdiary
+//  momentum
 //
-//  Created by James Rochabrun on 05-07-16.
+//  Created by James Rochabrun on 10/20/16.
 //  Copyright © 2016 James Rochabrun. All rights reserved.
-//
-//  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
-//  to delete and recreate this implementation file for your updated model.
 //
 
 #import "THDiaryEntry+CoreDataProperties.h"
 
 @implementation THDiaryEntry (CoreDataProperties)
 
++ (NSFetchRequest<THDiaryEntry *> *)fetchRequest {
+	return [[NSFetchRequest alloc] initWithEntityName:@"THDiaryEntry"];
+}
+
 @dynamic body;
 @dynamic date;
 @dynamic image;
+@dynamic isFavorite;
 @dynamic location;
 @dynamic mood;
-@dynamic isFavorite;
+@dynamic latitude;
+@dynamic longitude;
 
 
 //this returns a string for the property sectionName
@@ -31,4 +34,5 @@
     NSString *stringDate  = [dateFormatter stringFromDate:date];
     return stringDate;
 }
+
 @end

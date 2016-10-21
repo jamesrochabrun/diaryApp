@@ -182,6 +182,7 @@
 - (IBAction)doneWasPressed:(id)sender {
     
     if (self.entry != nil) {
+        
         [self updateDiaryEntry];
         [self dismissSelf];
         [self.view endEditing:YES];
@@ -198,10 +199,11 @@
 }
 
 - (void)dismissSelf {
+    
     [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
 }
 
-//step 1 insert data and save it 
+//step 1 insert data and save it
 - (void)insertDiaryEntry {
     
     if (self.pickedImage != nil) {
@@ -214,6 +216,8 @@
         entry.mood = self.pickedMood;
         entry.image = UIImageJPEGRepresentation(self.pickedImage, 0.75);
         entry.location = _locationManager.locationString;
+        entry.latitude = [NSString stringWithFormat:@"%f", _locationManager.latitude];
+        entry.longitude = [NSString stringWithFormat:@"%f", _locationManager.longitude];
         BOOL myBool = NO;
         entry.isFavorite = [NSNumber numberWithBool:myBool];
                 
@@ -223,7 +227,6 @@
         
         [coreDataStack saveContext];
     }
-
 }
 
 
