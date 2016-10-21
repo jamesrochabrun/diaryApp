@@ -35,6 +35,7 @@ static NSString *shareURL = @"https://itunes.apple.com/us/app/momentumapp/id1164
 @property (nonatomic, strong) UIButton *optionsButton;
 @property (nonatomic, strong) MKMapView *mapView;
 @property (nonatomic, strong) CLLocationManager *locationManager;
+@property (nonatomic, assign) BOOL showMap;
 @end
 
 @implementation DetailViewController
@@ -141,8 +142,9 @@ static NSString *shareURL = @"https://itunes.apple.com/us/app/momentumapp/id1164
     _locationManager.desiredAccuracy = kCLLocationAccuracyBest;
     [_locationManager startUpdatingLocation]; //Will update location immediately
     
-    NSLog(@"the lat %@ and the long %@", _entry.latitude , _entry.longitude);
-    
+    UITapGestureRecognizer *showMap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showMapX)];
+    //showMap.numberOfTapsRequired = 2;
+    [_mapView addGestureRecognizer:showMap];
 }
 
 - (void)displayAlertInVC:(UIAlertController *)alertController {
@@ -151,6 +153,44 @@ static NSString *shareURL = @"https://itunes.apple.com/us/app/momentumapp/id1164
     dispatch_async(dispatch_get_main_queue(), ^{
         [weakSelf presentViewController:alertController animated:YES completion:nil];
     });
+}
+
+- (void)showMapX {
+    
+    _showMap = !_showMap;
+    
+    __weak DetailViewController *weakSelf = self;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        
+        
+            [UIView animateWithDuration:kPanVelocity delay:0.5 options:kUIViewAnimationOption animations:^{
+
+            
+            if (weakSelf.showMap) {
+                
+                CGRect frame = weakSelf.mapView.frame;
+                frame.size.height = height(weakSelf.view);
+                frame.size.width = width(weakSelf.view);
+                frame.origin.x = 0;
+                frame.origin.y = 0;
+                weakSelf.mapView.frame = frame;
+            } else {
+              //  [weakSelf.view setNeedsLayout];
+                
+                CGRect frame = _mapView.frame;
+                frame.origin.x = 0;
+                frame.origin.y = CGRectGetMaxY(_entryText.frame) + kGeomMarginSmall;
+                frame.size.height = 150;
+                frame.size.width = width(self.view);
+                _mapView.frame = frame;
+            }
+            
+            
+        } completion:nil];
+        
+
+    });
+    
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
