@@ -49,9 +49,7 @@
     frame.origin.x = 0;
     frame.origin.y = 0;
     _mapView.frame = frame;
- 
 }
-
 
 #pragma mapKit
 - (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(nonnull MKUserLocation *)userLocation {
@@ -69,8 +67,8 @@
 
 
 - (IBAction)dismissView:(UIBarButtonItem *)sender {
-    
-        [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+
+  [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
 }
 
 
