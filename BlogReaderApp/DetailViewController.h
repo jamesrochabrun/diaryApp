@@ -7,6 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreLocation/CoreLocation.h>
+#import <MapKit/MapKit.h>
+
+
 @class THDiaryEntry;
 
 @interface DetailViewController : UIViewController

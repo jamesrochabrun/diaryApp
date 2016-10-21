@@ -18,10 +18,11 @@
 #import "CommonUIConstants.h"
 #import "THCoreDataStack.h"
 
+
 static NSString *shareURL = @"https://itunes.apple.com/us/app/momentumapp/id1164714008?l=es&ls=1&mt=8";
 
 
-@interface DetailViewController ()<DoubleTapImagedelegate,UIScrollViewDelegate>
+@interface DetailViewController ()<DoubleTapImagedelegate,UIScrollViewDelegate,MKMapViewDelegate, CLLocationManagerDelegate>
 @property (nonatomic, strong) UIButton *isFavoriteButton;
 @property (nonatomic, strong) UIImageView *mainImageView;
 @property (nonatomic, strong) UIImageView *moodImageView;
@@ -32,6 +33,8 @@ static NSString *shareURL = @"https://itunes.apple.com/us/app/momentumapp/id1164
 @property (nonatomic, strong) UILabel *dateLabel;
 @property (nonatomic, strong) UILabel *locationLabel;
 @property (nonatomic, strong) UIButton *optionsButton;
+@property (nonatomic, strong) MKMapView *mapView;
+@property (nonatomic, strong) CLLocationManager *locationManager;
 @end
 
 @implementation DetailViewController
@@ -42,7 +45,6 @@ static NSString *shareURL = @"https://itunes.apple.com/us/app/momentumapp/id1164
     if (self.entry == nil) {
         NSLog(@"%@", self.entry);
     }
-
     
     _scrollView = [UIScrollView new];
     _scrollView.bouncesZoom = YES;
@@ -127,7 +129,34 @@ static NSString *shareURL = @"https://itunes.apple.com/us/app/momentumapp/id1164
     
     //Adding gesture recognizer
     [_mainImageView addGestureRecognizer:doubleTap];
+        
+    _mapView = [MKMapView new];
+    _mapView.delegate = self;
+    self.mapView.showsUserLocation = YES;
+
+    [_scrollView addSubview:_mapView];
     
+    _locationManager = [CLLocationManager new];
+    _locationManager.delegate = self;
+    _locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+    [_locationManager startUpdatingLocation]; //Will update location immediately
+    
+    NSLog(@"the lat %@ and the long %@", _entry.latitude , _entry.longitude);
+    
+}
+
+- (void)displayAlertInVC:(UIAlertController *)alertController {
+    
+    __weak DetailViewController *weakSelf = self;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [weakSelf presentViewController:alertController animated:YES completion:nil];
+    });
+}
+
+- (void)viewDidDisappear:(BOOL)animated {
+    
+    [super viewDidDisappear:YES];
+    [_locationManager stopUpdatingLocation];
 }
 
 - (void)viewWillLayoutSubviews {
@@ -194,15 +223,15 @@ static NSString *shareURL = @"https://itunes.apple.com/us/app/momentumapp/id1164
     frame.origin.x = CGRectGetMaxX(_mainImageView.frame) - frame.size.width - kGeomMarginMedium;
     frame.origin.y = CGRectGetMaxY(_mainImageView.frame) - frame.size.height - kGeomMarginMedium;
     _isFavoriteButton.frame = frame;
+
+    frame = _mapView.frame;
+    frame.origin.x = 0;
+    frame.origin.y = CGRectGetMaxY(_entryText.frame) + kGeomMarginSmall;
+    frame.size.height = 150;
+    frame.size.width = width(self.view);
+    _mapView.frame = frame;
     
-//    frame = _isFavoriteButton.frame;
-//    frame.size.width = kGeomDismmissButton;
-//    frame.size.height = kGeomDismmissButton;
-//    frame.origin.x = CGRectGetMinX(_zoomButton.frame) - kGeomDismmissButton - kGeomMarginSmall;
-//    frame.origin.y = CGRectGetMaxY(_mainImageView.frame) - frame.size.height - kGeomMarginMedium;
-//    _isFavoriteButton.frame = frame;
-    
-    _scrollView.contentSize = CGSizeMake(width(self.view), CGRectGetMaxY(_entryText.frame) + kGeomBottomPadding);
+    _scrollView.contentSize = CGSizeMake(width(self.view), CGRectGetMaxY(_mapView.frame));
 
 }
 
@@ -375,6 +404,7 @@ static NSString *shareURL = @"https://itunes.apple.com/us/app/momentumapp/id1164
             weakSelf.dateLabel.hidden =
             weakSelf.locationLabel.hidden =
             weakSelf.optionsButton.hidden =
+            weakSelf.mapView.hidden =
             weakSelf.entryText.hidden = YES;
             
         } else {
@@ -383,6 +413,7 @@ static NSString *shareURL = @"https://itunes.apple.com/us/app/momentumapp/id1164
             weakSelf.dateLabel.hidden =
             weakSelf.locationLabel.hidden =
             weakSelf.optionsButton.hidden =
+            weakSelf.mapView.hidden =
             weakSelf.entryText.hidden = NO;
             [weakSelf.view setNeedsLayout];
         }
@@ -507,6 +538,22 @@ static NSString *shareURL = @"https://itunes.apple.com/us/app/momentumapp/id1164
     });
 }
 
+
+#pragma mapKit
+- (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(nonnull MKUserLocation *)userLocation {
+    
+    MKPointAnnotation *point = [[MKPointAnnotation alloc] init];
+    
+   // NSLog(@"the latitude is %@ , and the longitude is %@", _charterService.latitude , _charterService.longitude);
+    
+    point.coordinate = CLLocationCoordinate2DMake([self.entry.latitude doubleValue], [self.entry.longitude doubleValue]);
+    point.title = @"Departure point";
+    // point.subtitle = @"Richmond";
+    
+    [self.mapView setRegion:MKCoordinateRegionMake(point.coordinate, MKCoordinateSpanMake(0.8f, 0.8f)) animated:YES];
+    
+    [self.mapView addAnnotation:point];
+}
 
 
 

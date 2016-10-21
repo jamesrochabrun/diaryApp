@@ -102,12 +102,14 @@
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations {
     
-    [self.locationManager stopUpdatingLocation];
+   // [self.locationManager stopUpdatingLocation];
     CLLocation *location = [locations firstObject];
-    CLGeocoder *geocoer = [[CLGeocoder alloc]init];
-    [geocoer reverseGeocodeLocation:location completionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks, NSError * _Nullable error) {
+    CLGeocoder *geocoder = [[CLGeocoder alloc]init];
+    [geocoder reverseGeocodeLocation:location completionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks, NSError * _Nullable error) {
         CLPlacemark *placeMark = [placemarks firstObject];
         _locationString = placeMark.name;
+        _longitude = placeMark.location.coordinate.longitude;
+        _latitude = placeMark.location.coordinate.latitude;
     }];
 }
 

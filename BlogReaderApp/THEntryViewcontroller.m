@@ -214,6 +214,8 @@
         entry.mood = self.pickedMood;
         entry.image = UIImageJPEGRepresentation(self.pickedImage, 0.75);
         entry.location = _locationManager.locationString;
+        entry.latitude = [NSString stringWithFormat:@"%f", _locationManager.latitude];
+        entry.longitude = [NSString stringWithFormat:@"%f", _locationManager.longitude];
         BOOL myBool = NO;
         entry.isFavorite = [NSNumber numberWithBool:myBool];
                 
@@ -223,7 +225,6 @@
         
         [coreDataStack saveContext];
     }
-
 }
 
 
