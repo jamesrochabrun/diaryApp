@@ -17,6 +17,7 @@
 #import "Common.h"
 #import "CommonUIConstants.h"
 #import "THCoreDataStack.h"
+#import "MapViewController.h"
 
 
 static NSString *shareURL = @"https://itunes.apple.com/us/app/momentumapp/id1164714008?l=es&ls=1&mt=8";
@@ -157,40 +158,32 @@ static NSString *shareURL = @"https://itunes.apple.com/us/app/momentumapp/id1164
 
 - (void)showMapX {
     
-    _showMap = !_showMap;
-    
-    __weak DetailViewController *weakSelf = self;
-    dispatch_async(dispatch_get_main_queue(), ^{
-        
-        
-            [UIView animateWithDuration:kPanVelocity delay:0.5 options:kUIViewAnimationOption animations:^{
+//    _showMap = !_showMap;
+//    
+//    __weak DetailViewController *weakSelf = self;
+//    dispatch_async(dispatch_get_main_queue(), ^{
+//        
+//            [UIView animateWithDuration:kPanVelocity delay:0.5 options:kUIViewAnimationOption animations:^{
+//            if (weakSelf.showMap) {
+//                CGRect frame = weakSelf.mapView.frame;
+//                frame.size.height = height(weakSelf.view) + height(self.navigationController.navigationBar);
+//                frame.size.width = width(weakSelf.view);
+//                frame.origin.x = 0;
+//                frame.origin.y = 0;
+//                weakSelf.mapView.frame = frame;
+//            } else {
+//              //  [weakSelf.view setNeedsLayout];
+//                CGRect frame = _mapView.frame;
+//                frame.origin.x = 0;
+//                frame.origin.y = CGRectGetMaxY(_entryText.frame) + kGeomMarginSmall;
+//                frame.size.height = 150;
+//                frame.size.width = width(self.view);
+//                _mapView.frame = frame;
+//            }
+//        } completion:nil];
+//    });
+    [self performSegueWithIdentifier:@"map" sender:self];
 
-            
-            if (weakSelf.showMap) {
-                
-                CGRect frame = weakSelf.mapView.frame;
-                frame.size.height = height(weakSelf.view);
-                frame.size.width = width(weakSelf.view);
-                frame.origin.x = 0;
-                frame.origin.y = 0;
-                weakSelf.mapView.frame = frame;
-            } else {
-              //  [weakSelf.view setNeedsLayout];
-                
-                CGRect frame = _mapView.frame;
-                frame.origin.x = 0;
-                frame.origin.y = CGRectGetMaxY(_entryText.frame) + kGeomMarginSmall;
-                frame.size.height = 150;
-                frame.size.width = width(self.view);
-                _mapView.frame = frame;
-            }
-            
-            
-        } completion:nil];
-        
-
-    });
-    
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
@@ -301,7 +294,8 @@ static NSString *shareURL = @"https://itunes.apple.com/us/app/momentumapp/id1164
     
     __weak DetailViewController *weakSelf = self;
     dispatch_async(dispatch_get_main_queue(), ^{
-        [weakSelf textViewDidChange:_entryText];
+      //  [weakSelf textViewDidChange:_entryText];
+        [weakSelf.view setNeedsLayout];
     });
 }
 
@@ -331,6 +325,10 @@ static NSString *shareURL = @"https://itunes.apple.com/us/app/momentumapp/id1164
         UINavigationController *navigationController = segue.destinationViewController;
         ImageViewController *controller = (ImageViewController*)navigationController.topViewController;
         controller.entry = self.entry;
+    } else if ([segue.identifier isEqualToString:@"map"]) {
+        UINavigationController *navigationController = segue.destinationViewController;
+        MapViewController *mapVC = (MapViewController *)navigationController.topViewController;
+        mapVC.entry = self.entry;
     } else {
         UINavigationController *navigationController = segue.destinationViewController;
         THEntryViewcontroller *entryViewController = (THEntryViewcontroller*)navigationController.topViewController;
@@ -577,6 +575,7 @@ static NSString *shareURL = @"https://itunes.apple.com/us/app/momentumapp/id1164
         });
     });
 }
+
 
 
 #pragma mapKit

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		7B1DB37D1DB979B200D64BDB /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B1DB37C1DB979B200D64BDB /* MapKit.framework */; };
+		7B1DB3831DB9CED100D64BDB /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B1DB3821DB9CED100D64BDB /* MapViewController.m */; };
 		7B380F3E1CFE92FC00EF3735 /* AuthenticationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B380F3D1CFE92FC00EF3735 /* AuthenticationViewController.m */; };
 		7B41FB801D2C10180091DC64 /* DoubleTapImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B41FB7F1D2C10180091DC64 /* DoubleTapImage.m */; };
 		7B470C231D272140009C01D0 /* UIFont+CustomFont.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B470C221D272140009C01D0 /* UIFont+CustomFont.m */; };
@@ -70,6 +71,8 @@
 
 /* Begin PBXFileReference section */
 		7B1DB37C1DB979B200D64BDB /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		7B1DB3811DB9CED100D64BDB /* MapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapViewController.h; sourceTree = "<group>"; };
+		7B1DB3821DB9CED100D64BDB /* MapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
 		7B24DAFD1CF962A4001435E7 /* billabong.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = billabong.ttf; path = ../billabong.ttf; sourceTree = "<group>"; };
 		7B24DAFE1CF962A4001435E7 /* Gotham Narrow Book.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Gotham Narrow Book.otf"; path = "../Gotham Narrow Book.otf"; sourceTree = "<group>"; };
 		7B24DAFF1CF962A4001435E7 /* GOTHAM-MEDIUM.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; name = "GOTHAM-MEDIUM.TTF"; path = "../GOTHAM-MEDIUM.TTF"; sourceTree = "<group>"; };
@@ -296,6 +299,8 @@
 		7B74B9A91CF7B75500F69544 /* controller */ = {
 			isa = PBXGroup;
 			children = (
+				7B1DB3811DB9CED100D64BDB /* MapViewController.h */,
+				7B1DB3821DB9CED100D64BDB /* MapViewController.m */,
 				7BA833211D94E9C800841B40 /* FilterViewController.h */,
 				7BA833221D94E9C800841B40 /* FilterViewController.m */,
 				7B380F3C1CFE92FC00EF3735 /* AuthenticationViewController.h */,
@@ -487,6 +492,7 @@
 			files = (
 				7B995CCE1D99CF990047B6D5 /* Common.m in Sources */,
 				7B72CF261DB00401004E65D7 /* TableViewHeaderView.m in Sources */,
+				7B1DB3831DB9CED100D64BDB /* MapViewController.m in Sources */,
 				7B995CD71D99E7FE0047B6D5 /* SlidersView.m in Sources */,
 				7B995CD41D99E7E80047B6D5 /* FilterSettings.m in Sources */,
 				7B72CF291DB00E46004E65D7 /* CustomToolBar.m in Sources */,
