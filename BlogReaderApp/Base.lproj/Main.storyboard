@@ -43,7 +43,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Atk-Df-m46" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1680" y="645"/>
+            <point key="canvasLocation" x="1873" y="738"/>
         </scene>
         <!--Image View Controller-->
         <scene sceneID="Lvq-ma-32F">
@@ -615,6 +615,6 @@
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="8Bn-ls-KgX"/>
-        <segue reference="Btk-Vh-c0a"/>
+        <segue reference="zIC-WZ-Kbw"/>
     </inferredMetricsTieBreakers>
 </document>
