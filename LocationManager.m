@@ -102,7 +102,7 @@
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations {
     
-   // [self.locationManager stopUpdatingLocation];
+    [self.locationManager stopUpdatingLocation];
     CLLocation *location = [locations firstObject];
     CLGeocoder *geocoder = [[CLGeocoder alloc]init];
     [geocoder reverseGeocodeLocation:location completionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks, NSError * _Nullable error) {

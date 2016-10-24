@@ -157,31 +157,7 @@ static NSString *shareURL = @"https://itunes.apple.com/us/app/momentumapp/id1164
 }
 
 - (void)showMapX {
-    
-//    _showMap = !_showMap;
-//    
-//    __weak DetailViewController *weakSelf = self;
-//    dispatch_async(dispatch_get_main_queue(), ^{
-//        
-//            [UIView animateWithDuration:kPanVelocity delay:0.5 options:kUIViewAnimationOption animations:^{
-//            if (weakSelf.showMap) {
-//                CGRect frame = weakSelf.mapView.frame;
-//                frame.size.height = height(weakSelf.view) + height(self.navigationController.navigationBar);
-//                frame.size.width = width(weakSelf.view);
-//                frame.origin.x = 0;
-//                frame.origin.y = 0;
-//                weakSelf.mapView.frame = frame;
-//            } else {
-//              //  [weakSelf.view setNeedsLayout];
-//                CGRect frame = _mapView.frame;
-//                frame.origin.x = 0;
-//                frame.origin.y = CGRectGetMaxY(_entryText.frame) + kGeomMarginSmall;
-//                frame.size.height = 150;
-//                frame.size.width = width(self.view);
-//                _mapView.frame = frame;
-//            }
-//        } completion:nil];
-//    });
+
     [self performSegueWithIdentifier:@"map" sender:self];
 
 }
@@ -228,13 +204,6 @@ static NSString *shareURL = @"https://itunes.apple.com/us/app/momentumapp/id1164
     frame.origin.x = CGRectGetMaxX(self.view.frame) - kGeomMarginDismissButton - kGeomMarginBig;
     frame.origin.y = CGRectGetMaxY(_mainImageView.frame) + kGeomMarginMedium;
     _optionsButton.frame = frame;
-    
-//    frame = _mainImageView.frame;
-//    frame.size.height = width(self.view);
-//    frame.size.width = width(self.view);
-//    frame.origin.x = 0;
-//    frame.origin.y = 0;
-//    _mainImageView.frame = frame;
     
     [_locationLabel sizeToFit];
     frame = _locationLabel.frame;
