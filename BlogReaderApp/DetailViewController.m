@@ -18,12 +18,13 @@
 #import "CommonUIConstants.h"
 #import "THCoreDataStack.h"
 #import "MapViewController.h"
-
+#import "MarkerDetailView.h"
+@import GoogleMaps;
 
 static NSString *shareURL = @"https://itunes.apple.com/us/app/momentumapp/id1164714008?l=es&ls=1&mt=8";
 
 
-@interface DetailViewController ()<DoubleTapImagedelegate,UIScrollViewDelegate,MKMapViewDelegate, CLLocationManagerDelegate>
+@interface DetailViewController ()<DoubleTapImagedelegate,UIScrollViewDelegate,GMSMapViewDelegate, CLLocationManagerDelegate>
 @property (nonatomic, strong) UIButton *isFavoriteButton;
 @property (nonatomic, strong) UIImageView *mainImageView;
 @property (nonatomic, strong) UIImageView *moodImageView;
@@ -34,9 +35,10 @@ static NSString *shareURL = @"https://itunes.apple.com/us/app/momentumapp/id1164
 @property (nonatomic, strong) UILabel *dateLabel;
 @property (nonatomic, strong) UILabel *locationLabel;
 @property (nonatomic, strong) UIButton *optionsButton;
-@property (nonatomic, strong) MKMapView *mapView;
-@property (nonatomic, strong) CLLocationManager *locationManager;
-@property (nonatomic, strong) UIButton *streetView;
+@property (nonatomic, strong) UIButton *mapViewButton;
+@property (nonatomic, strong) GMSMapView *googleMap;
+
+
 @end
 
 @implementation DetailViewController
@@ -131,30 +133,61 @@ static NSString *shareURL = @"https://itunes.apple.com/us/app/momentumapp/id1164
     
     //Adding gesture recognizer
     [_mainImageView addGestureRecognizer:doubleTap];
-        
-    _mapView = [MKMapView new];
-    _mapView.delegate = self;
-    self.mapView.showsUserLocation = YES;
-
-    [_scrollView addSubview:_mapView];
     
-    _locationManager = [CLLocationManager new];
-    _locationManager.delegate = self;
-    _locationManager.desiredAccuracy = kCLLocationAccuracyBest;
-    [_locationManager startUpdatingLocation]; //Will update location immediately
+    GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude: [self.entry.latitude doubleValue]
+                                                            longitude: [self.entry.longitude doubleValue]
+                                                                 zoom:15
+                                                              bearing:0//rotation
+                                                         viewingAngle:0];
     
-    UITapGestureRecognizer *showMapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showMap:)];
-    //showMap.numberOfTapsRequired = 2;
-    [_mapView addGestureRecognizer:showMapGesture];
+    _googleMap = [GMSMapView mapWithFrame:CGRectZero camera:camera];
+    _googleMap.myLocationEnabled = YES;
+    _googleMap.userInteractionEnabled = YES;
+    _googleMap.settings.compassButton = YES;
+    _googleMap.settings.myLocationButton = YES;
+    _googleMap.delegate = self;
+    [_googleMap setMinZoom:10 maxZoom:15];
+    [_scrollView addSubview:_googleMap];
+    [self setUpMarkerData];
     
-    _streetView = [UIButton new];
-    [_streetView addTarget:self action:@selector(showStreetView:) forControlEvents:UIControlEventTouchUpInside];
-    [_streetView setTitle:@"Street View" forState:UIControlStateNormal];
-    _streetView.titleLabel.font = [UIFont regularFont:17];
-    _streetView.backgroundColor = [UIColor mainColor];
-    _streetView.titleLabel.textColor = [UIColor whiteColor];
-    [_scrollView addSubview:_streetView];
+    _mapViewButton = [UIButton new];
+    [_mapViewButton addTarget:self action:@selector(goToMapView:) forControlEvents:UIControlEventTouchUpInside];
+    [_mapViewButton setTitle:@"Show Full Map" forState:UIControlStateNormal];
+    _mapViewButton.titleLabel.font = [UIFont regularFont:17];
+    _mapViewButton.backgroundColor = [UIColor mainColor];
+    _mapViewButton.titleLabel.textColor = [UIColor whiteColor];
+    [_scrollView addSubview:_mapViewButton];
 }
+
+- (void)setUpMarkerData {
+    
+    GMSMarker *marker = [GMSMarker new];
+    marker.position = CLLocationCoordinate2DMake([self.entry.latitude doubleValue], [self.entry.longitude doubleValue]);
+    marker.appearAnimation = kGMSMarkerAnimationPop;
+    marker.icon = [UIImage imageNamed:@"locationIcon"];
+    GMSGeocoder *geoCoder = [GMSGeocoder new];
+    [geoCoder reverseGeocodeCoordinate:marker.position completionHandler:^(GMSReverseGeocodeResponse *response, NSError *error) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            marker.title = response.firstResult.locality;
+            marker.snippet = response.firstResult.thoroughfare;
+        });
+    }];
+    marker.map = nil;
+    [self drawMarker:marker];
+}
+
+- (void)drawMarker:(GMSMarker *)marker {
+    
+    if (marker.map == nil) {
+        marker.map = self.googleMap;
+    }
+}
+
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    _googleMap.selectedMarker = nil;
+}
+
 
 - (void)displayAlertInVC:(UIAlertController *)alertController {
     
@@ -164,21 +197,12 @@ static NSString *shareURL = @"https://itunes.apple.com/us/app/momentumapp/id1164
     });
 }
 
-- (void)showMap:(UITapGestureRecognizer *)sender {
+- (void)goToMapView:(id)sender {
 
     [self performSegueWithIdentifier:@"map" sender:sender];
 
 }
 
-- (void)showStreetView:(UIButton *)sender {
-    [self performSegueWithIdentifier:@"streetView" sender:sender];
-}
-
-- (void)viewDidDisappear:(BOOL)animated {
-    
-    [super viewDidDisappear:YES];
-    [_locationManager stopUpdatingLocation];
-}
 
 - (void)viewWillLayoutSubviews {
     
@@ -238,24 +262,23 @@ static NSString *shareURL = @"https://itunes.apple.com/us/app/momentumapp/id1164
     frame.origin.y = CGRectGetMaxY(_mainImageView.frame) - frame.size.height - kGeomMarginMedium;
     _isFavoriteButton.frame = frame;
 
-    frame = _mapView.frame;
+    frame = _googleMap.frame;
     frame.origin.x = 0;
     frame.origin.y = CGRectGetMaxY(_entryText.frame) + kGeomMarginSmall;
-    frame.size.height = 150;
+    frame.size.height = 200;
     frame.size.width = width(self.view);
-    _mapView.frame = frame;
+    _googleMap.frame = frame;
     
-    frame = _streetView.frame;
+    frame = _mapViewButton.frame;
     frame.size.height = kGeomDismmissButton;
     frame.size.width  = width(self.view);
     frame.origin.x = 0;
-    frame.origin.y = CGRectGetMaxY(_mapView.frame);
-    _streetView.frame = frame;
+    frame.origin.y = CGRectGetMaxY(_googleMap.frame);
+    _mapViewButton.frame = frame;
     
-    _scrollView.contentSize = CGSizeMake(width(self.view), CGRectGetMaxY(_streetView.frame));
+    _scrollView.contentSize = CGSizeMake(width(self.view), CGRectGetMaxY(_mapViewButton.frame));
 
 }
-
 
 - (void)textViewDidChange:(UITextView *)textView {
     
@@ -318,11 +341,6 @@ static NSString *shareURL = @"https://itunes.apple.com/us/app/momentumapp/id1164
         MapViewController *mapVC = (MapViewController *)navigationController.topViewController;
         mapVC.entry = self.entry;
         mapVC.street = NO;
-    } else  if ([segue.identifier isEqualToString:@"streetView"]){
-        UINavigationController *navigationController = segue.destinationViewController;
-        MapViewController *mapVC = (MapViewController *)navigationController.topViewController;
-        mapVC.entry = self.entry;
-        mapVC.street = YES;
     } else {
         UINavigationController *navigationController = segue.destinationViewController;
         THEntryViewcontroller *entryViewController = (THEntryViewcontroller*)navigationController.topViewController;
@@ -436,7 +454,7 @@ static NSString *shareURL = @"https://itunes.apple.com/us/app/momentumapp/id1164
             weakSelf.dateLabel.hidden =
             weakSelf.locationLabel.hidden =
             weakSelf.optionsButton.hidden =
-            weakSelf.mapView.hidden =
+            weakSelf.googleMap.hidden =
             weakSelf.entryText.hidden = YES;
             
         } else {
@@ -445,7 +463,7 @@ static NSString *shareURL = @"https://itunes.apple.com/us/app/momentumapp/id1164
             weakSelf.dateLabel.hidden =
             weakSelf.locationLabel.hidden =
             weakSelf.optionsButton.hidden =
-            weakSelf.mapView.hidden =
+            weakSelf.googleMap.hidden =
             weakSelf.entryText.hidden = NO;
             [weakSelf.view setNeedsLayout];
         }
@@ -571,21 +589,16 @@ static NSString *shareURL = @"https://itunes.apple.com/us/app/momentumapp/id1164
 }
 
 
-#pragma mapKit
-- (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(nonnull MKUserLocation *)userLocation {
-    
-    MKPointAnnotation *point = [[MKPointAnnotation alloc] init];
-    
-   // NSLog(@"the latitude is %@ , and the longitude is %@", _charterService.latitude , _charterService.longitude);
-    
-    point.coordinate = CLLocationCoordinate2DMake([self.entry.latitude doubleValue], [self.entry.longitude doubleValue]);
-    point.title = @"Memory location";
-    // point.subtitle = @"Richmond";
-    
-    [self.mapView setRegion:MKCoordinateRegionMake(point.coordinate, MKCoordinateSpanMake(0.8f, 0.8f)) animated:YES];
-    
-    [self.mapView addAnnotation:point];
+#pragma googlemapdelegate
+- (UIView *)mapView:(GMSMapView *)mapView markerInfoWindow:(GMSMarker *)marker {
+  
+    MarkerDetailView *markerView = [[MarkerDetailView alloc] initWithMarker:marker];
+    markerView.frame = CGRectMake(0, 0, 200, 70);
+    return markerView;
 }
+
+
+
 
 
 
