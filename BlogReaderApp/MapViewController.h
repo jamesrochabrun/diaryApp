@@ -13,5 +13,6 @@
 
 @interface MapViewController : UIViewController
 @property (nonatomic, strong) THDiaryEntry *entry;
+@property (nonatomic) BOOL street;
 
 @end

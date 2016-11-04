@@ -36,7 +36,7 @@ static NSString *shareURL = @"https://itunes.apple.com/us/app/momentumapp/id1164
 @property (nonatomic, strong) UIButton *optionsButton;
 @property (nonatomic, strong) MKMapView *mapView;
 @property (nonatomic, strong) CLLocationManager *locationManager;
-@property (nonatomic, assign) BOOL showMap;
+@property (nonatomic, strong) UIButton *streetView;
 @end
 
 @implementation DetailViewController
@@ -143,9 +143,17 @@ static NSString *shareURL = @"https://itunes.apple.com/us/app/momentumapp/id1164
     _locationManager.desiredAccuracy = kCLLocationAccuracyBest;
     [_locationManager startUpdatingLocation]; //Will update location immediately
     
-    UITapGestureRecognizer *showMap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showMapX)];
+    UITapGestureRecognizer *showMapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showMap:)];
     //showMap.numberOfTapsRequired = 2;
-    [_mapView addGestureRecognizer:showMap];
+    [_mapView addGestureRecognizer:showMapGesture];
+    
+    _streetView = [UIButton new];
+    [_streetView addTarget:self action:@selector(showStreetView:) forControlEvents:UIControlEventTouchUpInside];
+    [_streetView setTitle:@"Street View" forState:UIControlStateNormal];
+    _streetView.titleLabel.font = [UIFont regularFont:17];
+    _streetView.backgroundColor = [UIColor mainColor];
+    _streetView.titleLabel.textColor = [UIColor whiteColor];
+    [_scrollView addSubview:_streetView];
 }
 
 - (void)displayAlertInVC:(UIAlertController *)alertController {
@@ -156,10 +164,14 @@ static NSString *shareURL = @"https://itunes.apple.com/us/app/momentumapp/id1164
     });
 }
 
-- (void)showMapX {
+- (void)showMap:(UITapGestureRecognizer *)sender {
 
-    [self performSegueWithIdentifier:@"map" sender:self];
+    [self performSegueWithIdentifier:@"map" sender:sender];
 
+}
+
+- (void)showStreetView:(UIButton *)sender {
+    [self performSegueWithIdentifier:@"streetView" sender:sender];
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
@@ -233,7 +245,14 @@ static NSString *shareURL = @"https://itunes.apple.com/us/app/momentumapp/id1164
     frame.size.width = width(self.view);
     _mapView.frame = frame;
     
-    _scrollView.contentSize = CGSizeMake(width(self.view), CGRectGetMaxY(_mapView.frame));
+    frame = _streetView.frame;
+    frame.size.height = kGeomDismmissButton;
+    frame.size.width  = width(self.view);
+    frame.origin.x = 0;
+    frame.origin.y = CGRectGetMaxY(_mapView.frame);
+    _streetView.frame = frame;
+    
+    _scrollView.contentSize = CGSizeMake(width(self.view), CGRectGetMaxY(_streetView.frame));
 
 }
 
@@ -298,6 +317,12 @@ static NSString *shareURL = @"https://itunes.apple.com/us/app/momentumapp/id1164
         UINavigationController *navigationController = segue.destinationViewController;
         MapViewController *mapVC = (MapViewController *)navigationController.topViewController;
         mapVC.entry = self.entry;
+        mapVC.street = NO;
+    } else  if ([segue.identifier isEqualToString:@"streetView"]){
+        UINavigationController *navigationController = segue.destinationViewController;
+        MapViewController *mapVC = (MapViewController *)navigationController.topViewController;
+        mapVC.entry = self.entry;
+        mapVC.street = YES;
     } else {
         UINavigationController *navigationController = segue.destinationViewController;
         THEntryViewcontroller *entryViewController = (THEntryViewcontroller*)navigationController.topViewController;
@@ -546,7 +571,6 @@ static NSString *shareURL = @"https://itunes.apple.com/us/app/momentumapp/id1164
 }
 
 
-
 #pragma mapKit
 - (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(nonnull MKUserLocation *)userLocation {
     
@@ -555,7 +579,7 @@ static NSString *shareURL = @"https://itunes.apple.com/us/app/momentumapp/id1164
    // NSLog(@"the latitude is %@ , and the longitude is %@", _charterService.latitude , _charterService.longitude);
     
     point.coordinate = CLLocationCoordinate2DMake([self.entry.latitude doubleValue], [self.entry.longitude doubleValue]);
-    point.title = @"Departure point";
+    point.title = @"Memory location";
     // point.subtitle = @"Richmond";
     
     [self.mapView setRegion:MKCoordinateRegionMake(point.coordinate, MKCoordinateSpanMake(0.8f, 0.8f)) animated:YES];

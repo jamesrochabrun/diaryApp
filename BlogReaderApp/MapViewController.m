@@ -10,6 +10,8 @@
 #import "TopView.h"
 #import "Common.h"
 #import "THDiaryEntry.h"
+@import GoogleMaps;
+
 
 
 @interface MapViewController ()<MKMapViewDelegate, CLLocationManagerDelegate>
@@ -23,16 +25,21 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-
-    _mapView = [MKMapView new];
-    _mapView.delegate = self;
-    _mapView.showsUserLocation = YES;
-    [self.view addSubview:_mapView];
     
-    _locationManager = [CLLocationManager new];
-    _locationManager.delegate = self;
-    _locationManager.desiredAccuracy = kCLLocationAccuracyBest;
-    [_locationManager startUpdatingLocation]; //Will update location immediately
+    if (_street) {
+        [self streetView];
+        
+    } else{
+        _mapView = [MKMapView new];
+        _mapView.delegate = self;
+        _mapView.showsUserLocation = YES;
+        [self.view addSubview:_mapView];
+        
+        _locationManager = [CLLocationManager new];
+        _locationManager.delegate = self;
+        _locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+        [_locationManager startUpdatingLocation]; //Will update location immediately
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -57,12 +64,34 @@
     MKPointAnnotation *point = [[MKPointAnnotation alloc] init];
     
     point.coordinate = CLLocationCoordinate2DMake([self.entry.latitude doubleValue], [self.entry.longitude doubleValue]);
-    point.title = @"Departure point";
-    // point.subtitle = @"Richmond";
+    point.title = @"Memory location";
     
+    NSDateFormatter *dateFormatter = [NSDateFormatter new];
+    [dateFormatter setDateFormat:@"EEEE, MMMM d yyyy"];
+    NSDate *date = [NSDate dateWithTimeIntervalSince1970:self.entry.date];
+    point.subtitle = [dateFormatter stringFromDate:date];
+        
     [self.mapView setRegion:MKCoordinateRegionMake(point.coordinate, MKCoordinateSpanMake(0.8f, 0.8f)) animated:YES];
     
     [self.mapView addAnnotation:point];
+}
+
+- (void)streetView {
+    
+    CLLocationCoordinate2D panoramaNear = CLLocationCoordinate2DMake([self.entry.latitude doubleValue], [self.entry.longitude doubleValue]);
+    NSLog(@"the lat %f", [self.entry.latitude doubleValue]);
+    NSLog(@"the long %f", [self.entry.longitude doubleValue]);
+    
+    GMSPanoramaView *panoView =
+    [GMSPanoramaView panoramaWithFrame:CGRectZero
+                        nearCoordinate:panoramaNear];
+    
+    self.view = panoView;
+}
+
+- (void)viewDidDisappear:(BOOL)animated {
+    
+      [_locationManager stopUpdatingLocation];
 }
 
 
