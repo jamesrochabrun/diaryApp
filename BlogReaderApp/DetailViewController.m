@@ -340,7 +340,6 @@ static NSString *shareURL = @"https://itunes.apple.com/us/app/momentumapp/id1164
         UINavigationController *navigationController = segue.destinationViewController;
         MapViewController *mapVC = (MapViewController *)navigationController.topViewController;
         mapVC.entry = self.entry;
-        mapVC.street = NO;
     } else {
         UINavigationController *navigationController = segue.destinationViewController;
         THEntryViewcontroller *entryViewController = (THEntryViewcontroller*)navigationController.topViewController;

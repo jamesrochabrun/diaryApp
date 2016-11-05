@@ -58,6 +58,7 @@
 		7BDB91681D38886D0004EB6B /* GridCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BDB91671D38886D0004EB6B /* GridCollectionViewCell.m */; };
 		7BDB916B1D388A930004EB6B /* GridCollectionViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BDB916A1D388A930004EB6B /* GridCollectionViewFlowLayout.m */; };
 		7BEB6BCB1CFE49E000C018FD /* LocalAuthentication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BEB6BCA1CFE49E000C018FD /* LocalAuthentication.framework */; };
+		7BF0F6951DCD78C3005DDB93 /* StreetVCViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BF0F6941DCD78C3005DDB93 /* StreetVCViewController.m */; };
 		7BF359911CFE14F300ABB239 /* ImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BF359901CFE14F300ABB239 /* ImageViewController.m */; };
 		E18964A0EA6A14C766B1441F /* libPods-secret diaryTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BE3A182758288E4FF1CAB2DB /* libPods-secret diaryTests.a */; };
 /* End PBXBuildFile section */
@@ -165,6 +166,8 @@
 		7BDB91691D388A930004EB6B /* GridCollectionViewFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GridCollectionViewFlowLayout.h; sourceTree = "<group>"; };
 		7BDB916A1D388A930004EB6B /* GridCollectionViewFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GridCollectionViewFlowLayout.m; sourceTree = "<group>"; };
 		7BEB6BCA1CFE49E000C018FD /* LocalAuthentication.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LocalAuthentication.framework; path = System/Library/Frameworks/LocalAuthentication.framework; sourceTree = SDKROOT; };
+		7BF0F6931DCD78C3005DDB93 /* StreetVCViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StreetVCViewController.h; sourceTree = "<group>"; };
+		7BF0F6941DCD78C3005DDB93 /* StreetVCViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StreetVCViewController.m; sourceTree = "<group>"; };
 		7BF3598F1CFE14F300ABB239 /* ImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageViewController.h; sourceTree = "<group>"; };
 		7BF359901CFE14F300ABB239 /* ImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageViewController.m; sourceTree = "<group>"; };
 		90B1855AA239A194986F825E /* Pods-secret diary.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-secret diary.release.xcconfig"; path = "Pods/Target Support Files/Pods-secret diary/Pods-secret diary.release.xcconfig"; sourceTree = "<group>"; };
@@ -315,6 +318,8 @@
 		7B74B9A91CF7B75500F69544 /* controller */ = {
 			isa = PBXGroup;
 			children = (
+				7BF0F6931DCD78C3005DDB93 /* StreetVCViewController.h */,
+				7BF0F6941DCD78C3005DDB93 /* StreetVCViewController.m */,
 				7B1DB3811DB9CED100D64BDB /* MapViewController.h */,
 				7B1DB3821DB9CED100D64BDB /* MapViewController.m */,
 				7BA833211D94E9C800841B40 /* FilterViewController.h */,
@@ -631,6 +636,7 @@
 				7B74B9AC1CF7BC2300F69544 /* THEntryViewcontroller.m in Sources */,
 				7B380F3E1CFE92FC00EF3735 /* AuthenticationViewController.m in Sources */,
 				7B995CE61D99F23B0047B6D5 /* ListCVFL.m in Sources */,
+				7BF0F6951DCD78C3005DDB93 /* StreetVCViewController.m in Sources */,
 				7BDB91681D38886D0004EB6B /* GridCollectionViewCell.m in Sources */,
 				7B995CC61D99CF020047B6D5 /* TopView.m in Sources */,
 				7B516BDD1DAD8D92000F36EE /* LocationManager.m in Sources */,
