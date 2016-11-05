@@ -13,6 +13,9 @@
 #import "MarkerDetailView.h"
 #import "Common.h"
 #import "UIFont+CustomFont.h"
+#import "StreetVCViewController.h"
+#import "UIColor+CustomColor.h"
+#import "CommonUIConstants.h"
 @import GoogleMaps;
 
 
@@ -31,6 +34,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     // Do any additional setup after loading the view.
     GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude: [self.entry.latitude doubleValue]
                                                             longitude: [self.entry.longitude doubleValue]
@@ -46,22 +50,24 @@
     self.mapView.settings.myLocationButton = YES;
     [self.mapView setMinZoom:10 maxZoom:18];
     self.view = _mapView;
+    
     [self setUpMarkerData];
     
     _directionsButton = [UIButton new];
     _directionsButton.layer.borderColor = [UIColor blackColor].CGColor;
     _directionsButton.titleLabel.font = [UIFont regularFont:17];
     [_directionsButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    _directionsButton.layer.borderWidth = 2.0;
+    _directionsButton.layer.borderWidth = 1.5;
     [_directionsButton setTitle:@"Show Directions" forState:UIControlStateNormal];
     [_directionsButton addTarget:self action:@selector(showDirections:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:_directionsButton];
+    //[self.view addSubview:_directionsButton];
     
     _streetButton = [UIButton new];
-    _streetButton.layer.borderColor = [UIColor blackColor].CGColor;
-    [_streetButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    _streetButton.titleLabel.font = [UIFont regularFont:17];
-    _streetButton .layer.borderWidth = 2.0;
+   // _streetButton.layer.borderColor = [UIColor blackColor].CGColor;
+    [_streetButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    _streetButton.backgroundColor = [UIColor mainColor];
+    _streetButton.titleLabel.textColor = [UIColor whiteColor];
+    //_streetButton .layer.borderWidth = 1.5;
     [_streetButton setTitle:@"Show Street View" forState:UIControlStateNormal];
     [_streetButton addTarget:self action:@selector(showStreetView:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_streetButton];
@@ -74,10 +80,16 @@
     marker.appearAnimation = kGMSMarkerAnimationPop;
     marker.icon = [UIImage imageNamed:@"locationIcon"];
     GMSGeocoder *geoCoder = [GMSGeocoder new];
+    __weak MapViewController *weakSelf = self;
     [geoCoder reverseGeocodeCoordinate:marker.position completionHandler:^(GMSReverseGeocodeResponse *response, NSError *error) {
         dispatch_async(dispatch_get_main_queue(), ^{
-            marker.title = response.firstResult.locality;
-            marker.snippet = response.firstResult.thoroughfare;
+            if (weakSelf.entry.location.length > 0) {
+                marker.title = response.firstResult.locality;
+                marker.snippet = response.firstResult.thoroughfare;
+            } else {
+                marker.title = @"No Location";
+                marker.snippet = @"Turn on your location next time!";
+            }
         });
     }];
     marker.map = nil;
@@ -93,25 +105,23 @@
 
 - (void)viewWillLayoutSubviews {
     [super viewWillLayoutSubviews];
-    CGRect frame = _directionsButton.frame;
-    frame.size.height = 50;
-    frame.size.width = 200;
-    frame.origin.x = (width(self.view) - frame.size.width) /2;
-    frame.origin.y = CGRectGetMaxY(self.view.frame) - frame.size.height *2;
-    _directionsButton.frame = frame;
     
-    frame = _streetButton.frame;
-    frame.size.height = 50;
-    frame.size.width = 200;
-    frame.origin.x = frame.origin.x = (width(self.view) - frame.size.width) /2;
-    frame.origin.y = CGRectGetMinY(_directionsButton.frame) - frame.size.height - 10;
-    _streetButton.frame = frame;
+    self.mapView.padding = UIEdgeInsetsMake(self.topLayoutGuide.length + 5, 0, self.bottomLayoutGuide.length + kGeomDismmissButton, 0);
+    CGRect frame = _streetButton.frame;
+    frame.size.height = kGeomDismmissButton;
+    frame.size.width = width(self.view);
+    frame.origin.x = 0;
+    frame.origin.y = CGRectGetMaxY(self.view.frame) - kGeomDismmissButton;
+    _streetButton .frame = frame;
 
 }
 
 - (IBAction)dismissView:(UIBarButtonItem *)sender {
 
-  [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+  [self.presentingViewController dismissViewControllerAnimated:YES completion:^{
+      self.mapView.selectedMarker = nil;
+      self.mapView = nil;
+  }];
 }
 
 #pragma googlemapdelegate
@@ -167,10 +177,11 @@
                 NSLog(@"steps.count %lu", weakSelf.steps.count);
             } else {
                 [self alertUserNoRouteAvailable];
-                NSLog(@"do something if no route");
             }
         }];
         [directionsTask resume];
+    } else {
+        [self goToSettingsAndAllowLocation];
     }
 }
 
@@ -191,12 +202,39 @@
     });
 }
 
-- (void)showStreetView:(id)sender {
+- (void)goToSettingsAndAllowLocation {
+    
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Please go to your settings and allow access to your location"
+                                                              message:@"Allow access to your location and tap here again to show you the best route provided by google."
+                                                       preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"Cancel"
+                                                     style: UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
+                                                         //donothing
+                                                         
+                                                     }];
+    UIAlertAction *ok = [UIAlertAction actionWithTitle:@"Go"
+                                                 style: UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+                                                     [Common goToSettings:kAppSettingsLocation];
+                                                     
+                                                 }];
+    [alert addAction:cancel];
+    [alert addAction:ok];
+    
+    __weak MapViewController *weakSelf = self;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [weakSelf presentViewController:alert animated:YES completion:nil];
+    });
+    
     
 }
 
+- (void)showStreetView:(id)sender {
+    [self performSegueWithIdentifier:@"street" sender:sender];
+}
+
 - (void)showDirections:(id)sender {
-    
+    [self performSegueWithIdentifier:@"directions" sender:sender];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -204,7 +242,22 @@
     // Dispose of any resources that can be recreated.
 }
 
-
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    
+    if ([segue.identifier isEqual :@"street"]) {
+        UINavigationController *navigationController = segue.destinationViewController;
+        StreetVCViewController *streetVC = (StreetVCViewController *)navigationController.topViewController;
+        streetVC.entry = self.entry;
+        streetVC.street = YES;
+    } else {
+        UINavigationController *navigationController = segue.destinationViewController;
+        StreetVCViewController *streetVC = (StreetVCViewController *)navigationController.topViewController;
+        streetVC.entry = self.entry;
+        streetVC.street = NO;
+        streetVC.steps = self.steps;
+    }
+    
+}
 
 
 

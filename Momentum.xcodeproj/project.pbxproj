@@ -52,6 +52,7 @@
 		7B995CEC1D99F3050047B6D5 /* FilterThumbnailCVCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B995CEB1D99F3050047B6D5 /* FilterThumbnailCVCell.m */; };
 		7B995CEF1D99F6EC0047B6D5 /* UIImage+UIImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B995CEE1D99F6EC0047B6D5 /* UIImage+UIImage.m */; };
 		7B995CF21D99F82D0047B6D5 /* UIView+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B995CF11D99F82D0047B6D5 /* UIView+Additions.m */; };
+		7B9FC3591DCD82D5000AC79F /* DirectionsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B9FC3581DCD82D5000AC79F /* DirectionsCell.m */; };
 		7BA833231D94E9C800841B40 /* FilterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BA833221D94E9C800841B40 /* FilterViewController.m */; };
 		7BCF0D571CF8D4EC003E4CB1 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BCF0D561CF8D4EC003E4CB1 /* QuartzCore.framework */; };
 		7BCF0D591CF8D6F2003E4CB1 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BCF0D581CF8D6F2003E4CB1 /* CoreLocation.framework */; };
@@ -157,6 +158,8 @@
 		7B995CEE1D99F6EC0047B6D5 /* UIImage+UIImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+UIImage.m"; sourceTree = "<group>"; };
 		7B995CF01D99F82D0047B6D5 /* UIView+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Additions.h"; sourceTree = "<group>"; };
 		7B995CF11D99F82D0047B6D5 /* UIView+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Additions.m"; sourceTree = "<group>"; };
+		7B9FC3571DCD82D5000AC79F /* DirectionsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DirectionsCell.h; sourceTree = "<group>"; };
+		7B9FC3581DCD82D5000AC79F /* DirectionsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DirectionsCell.m; sourceTree = "<group>"; };
 		7BA833211D94E9C800841B40 /* FilterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterViewController.h; sourceTree = "<group>"; };
 		7BA833221D94E9C800841B40 /* FilterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilterViewController.m; sourceTree = "<group>"; };
 		7BCF0D561CF8D4EC003E4CB1 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -362,6 +365,8 @@
 		7B74B9B51CF80FBF00F69544 /* view */ = {
 			isa = PBXGroup;
 			children = (
+				7B9FC3571DCD82D5000AC79F /* DirectionsCell.h */,
+				7B9FC3581DCD82D5000AC79F /* DirectionsCell.m */,
 				7B206F1D1DCD413900773BDE /* MarkerDetailView.h */,
 				7B206F1E1DCD413900773BDE /* MarkerDetailView.m */,
 				7B72CF271DB00E46004E65D7 /* CustomToolBar.h */,
@@ -662,6 +667,7 @@
 				7B995CCA1D99CF440047B6D5 /* CommonUIConstants.m in Sources */,
 				7BDB916B1D388A930004EB6B /* GridCollectionViewFlowLayout.m in Sources */,
 				7B74B9B41CF80FAF00F69544 /* THNavigationController.m in Sources */,
+				7B9FC3591DCD82D5000AC79F /* DirectionsCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -7,7 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+@class THDiaryEntry;
+@import GoogleMaps;
+
 
 @interface StreetVCViewController : UIViewController
+@property (nonatomic) BOOL street;
+@property (nonatomic, strong) THDiaryEntry *entry;
+@property (nonatomic, strong) NSArray *steps;
 
 @end

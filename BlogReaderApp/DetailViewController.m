@@ -114,7 +114,13 @@ static NSString *shareURL = @"https://itunes.apple.com/us/app/momentumapp/id1164
     _locationLabel = [UILabel new];
     _locationLabel.textColor = [UIColor newGrayColor];
     _locationLabel.font = [UIFont regularFont:17];
-    _locationLabel.text = self.entry.location;
+    
+    if (_entry.location.length > 0) {
+        _locationLabel.text = _entry.location;
+    } else {
+        _locationLabel.text = @"No Location";
+    }
+    
     [_scrollView addSubview:_locationLabel];
     
     _entryText = [UITextView new];
@@ -166,10 +172,16 @@ static NSString *shareURL = @"https://itunes.apple.com/us/app/momentumapp/id1164
     marker.appearAnimation = kGMSMarkerAnimationPop;
     marker.icon = [UIImage imageNamed:@"locationIcon"];
     GMSGeocoder *geoCoder = [GMSGeocoder new];
+    __weak DetailViewController *weakSelf = self;
     [geoCoder reverseGeocodeCoordinate:marker.position completionHandler:^(GMSReverseGeocodeResponse *response, NSError *error) {
         dispatch_async(dispatch_get_main_queue(), ^{
+            if (weakSelf.entry.location.length > 0) {
             marker.title = response.firstResult.locality;
             marker.snippet = response.firstResult.thoroughfare;
+            } else {
+                marker.title = @"No Location";
+                marker.snippet = @"Turn on your location next time!";
+            }
         });
     }];
     marker.map = nil;
@@ -182,12 +194,6 @@ static NSString *shareURL = @"https://itunes.apple.com/us/app/momentumapp/id1164
         marker.map = self.googleMap;
     }
 }
-
-- (void)viewDidDisappear:(BOOL)animated {
-    [super viewDidDisappear:animated];
-    _googleMap.selectedMarker = nil;
-}
-
 
 - (void)displayAlertInVC:(UIAlertController *)alertController {
     
@@ -326,7 +332,10 @@ static NSString *shareURL = @"https://itunes.apple.com/us/app/momentumapp/id1164
 
 - (IBAction)dismissView:(UIBarButtonItem *)sender {
     
-    [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+    [self.presentingViewController dismissViewControllerAnimated:YES completion:^{
+        self.googleMap.selectedMarker = nil;
+        self.googleMap = nil;
+    }];
 }
 
 //remeber with buttons the file dont need ibactions just define the segue identifiers to perform the action (pass the data);
@@ -454,6 +463,7 @@ static NSString *shareURL = @"https://itunes.apple.com/us/app/momentumapp/id1164
             weakSelf.locationLabel.hidden =
             weakSelf.optionsButton.hidden =
             weakSelf.googleMap.hidden =
+            weakSelf.mapViewButton.hidden =
             weakSelf.entryText.hidden = YES;
             
         } else {
@@ -463,6 +473,7 @@ static NSString *shareURL = @"https://itunes.apple.com/us/app/momentumapp/id1164
             weakSelf.locationLabel.hidden =
             weakSelf.optionsButton.hidden =
             weakSelf.googleMap.hidden =
+            weakSelf.mapViewButton.hidden =
             weakSelf.entryText.hidden = NO;
             [weakSelf.view setNeedsLayout];
         }
