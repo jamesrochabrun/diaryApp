@@ -174,7 +174,7 @@
                 });
                 
                 // NSArray *test = [json valueForKeyPath:@"routes.legs.steps.html_instructions"];
-                NSLog(@"steps.count %lu", weakSelf.steps.count);
+               // NSLog(@"steps.count %lu", weakSelf.steps.count);
             } else {
                 [self alertUserNoRouteAvailable];
             }

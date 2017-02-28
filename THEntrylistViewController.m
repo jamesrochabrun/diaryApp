@@ -134,9 +134,10 @@
         _placeHolder.hidden = YES;
     }
     
+    __weak THEntrylistViewController *weakSelf = self;
     dispatch_async(dispatch_get_main_queue(), ^(void){
-        [self.tableView reloadData];
-        [self.gridCollectionViewController reloadData];
+        [weakSelf.tableView reloadData];
+        [weakSelf.gridCollectionViewController reloadData];
     });
 }
 
@@ -347,7 +348,6 @@
     }
     
     return reusableview;
-    
 }
 
 

@@ -434,7 +434,6 @@ static NSString *shareURL = @"https://itunes.apple.com/us/app/momentumapp/id1164
 }
 
 - (void)scrollViewDidZoom:(UIScrollView *)scrollView {
-
     
     __weak DetailViewController *wekSelf = self;
     dispatch_async(dispatch_get_main_queue(), ^{
