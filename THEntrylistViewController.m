@@ -25,6 +25,9 @@
 #import "TableViewHeaderView.h"
 #import "CustomToolBar.h"
 #import "UITableView+Additions.h"
+#import "WaterfallCV.h"
+#import "WaterFallCVDatasource.h"
+#import "UICollectionViewWaterfallCell.h"
 
 
 @interface THEntrylistViewController ()<NSFetchedResultsControllerDelegate,UITableViewDelegate,UITableViewDataSource,UICollectionViewDelegate,UICollectionViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate, CustomToolBarDelegate, UIScrollViewDelegate>
@@ -41,13 +44,35 @@
 @property (nonatomic, strong) PlaceholderView *placeHolder;
 @property (nonatomic, strong) PlaceholderView *placeHolderFavorite;
 @property (nonatomic, strong) CustomToolBar *customToolBar;
+@property (nonatomic, strong) WaterfallCV *waterFallCollectionView;
+@property (nonatomic, strong) WaterFallCVDatasource *data;
 
 @end
 
 @implementation THEntrylistViewController
 
+
+
+- (void)setUpWCV {
+    
+    UICollectionViewWaterfallLayout *layout = [UICollectionViewWaterfallLayout new];
+    layout.delegate = self;
+    _waterFallCollectionView = [[WaterfallCV alloc] initWithFrame:CGRectMake(0, 0, 0, 0) collectionViewLayout: layout];
+    [_waterFallCollectionView registerClass:[UICollectionViewWaterfallCell self] forCellWithReuseIdentifier:@"Cell"];
+    _waterFallCollectionView.delegate = self;
+    _data = [WaterFallCVDatasource new];
+    _waterFallCollectionView.dataSource = _data;
+
+    [self.view addSubview:_waterFallCollectionView];
+}
+
+
+
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self setUpWCV];
     
     //this performs the fetch request
     //step 4
@@ -83,6 +108,13 @@
     frame.origin.y = 0;
     _placeHolder.frame = frame;
     _placeHolderFavorite.frame = frame;
+    
+    frame = _waterFallCollectionView.frame;
+    frame.size.width = self.view.frame.size.width;
+    frame.origin.y = CGRectGetMaxY(_segmentedControl.frame);
+    frame.origin.x = 0;
+    frame.size.height = CGRectGetMaxY(self.view.frame) - CGRectGetMaxY(_segmentedControl.frame) - 44;
+    _waterFallCollectionView.frame = frame;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -535,6 +567,13 @@
     [_tableView fadeTopAndBottomCellsOnTableViewScroll:_tableView withModifier:1.0];
 }
 
+
+
+
+
+
+
+//MARK: WATERFALL
 
 
 
