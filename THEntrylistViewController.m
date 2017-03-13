@@ -25,13 +25,10 @@
 #import "TableViewHeaderView.h"
 #import "CustomToolBar.h"
 #import "UITableView+Additions.h"
-#import "WaterFallCVDatasource.h"
-#import "UICollectionViewWaterfallCell.h"
 
 static NSString * const reuseIdentifier = @"Cell";
 
-
-@interface THEntrylistViewController ()<NSFetchedResultsControllerDelegate,UITableViewDelegate,UITableViewDataSource,UICollectionViewDelegate,UICollectionViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate, CustomToolBarDelegate, UIScrollViewDelegate>
+@interface THEntrylistViewController ()<NSFetchedResultsControllerDelegate,UITableViewDelegate,UITableViewDataSource,UICollectionViewDelegate,UICollectionViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate, CustomToolBarDelegate, UIScrollViewDelegate, UICollectionViewDelegateFlowLayout>
 
 @property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -46,48 +43,25 @@ static NSString * const reuseIdentifier = @"Cell";
 @property (nonatomic, strong) PlaceholderView *placeHolderFavorite;
 @property (nonatomic, strong) CustomToolBar *customToolBar;
 
-@property (nonatomic, strong) UICollectionView *waterFallCV;
-@property (nonatomic, strong) WaterFallCVDatasource *dataSource;
-
 @end
 
 @implementation THEntrylistViewController
 
-- (void)setUpWCV {
-    
-    UICollectionViewWaterfallLayout *layout = [UICollectionViewWaterfallLayout new];
-    // Uncomment the following line to preserve selection between presentations
-    // self.clearsSelectionOnViewWillAppear = NO;
-    layout.delegate = self;
-    layout.columnCount = 2;
-    layout.itemWidth = self.view.frame.size.width / 2 ;
-    //layout.sectionInset = UIEdgeInsetsMake(4, 4, 4, 4);
-    
-    CGRect frame = CGRectMake(0, 0, 0, 0);
-    // _waterFallCollectionView = [_waterFallCollectionView initWithFrame:frame];
-    _waterFallCV = [[UICollectionView alloc] initWithFrame:frame collectionViewLayout: layout];
-    _waterFallCV.hidden = YES;
-    [_waterFallCV registerClass:[UICollectionViewWaterfallCell self] forCellWithReuseIdentifier:@"Cell"];
-    
-    _dataSource = [WaterFallCVDatasource new];
-    self.waterFallCV.dataSource = _dataSource;
-    
-    [self.waterFallCV setAutoresizingMask:UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth];
-    [self.waterFallCV registerClass:[UICollectionViewWaterfallCell class] forCellWithReuseIdentifier:reuseIdentifier];
-    [self.view addSubview:_waterFallCV];
-}
+#pragma app life cycle and UI
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self setUpWCV];
+   // [self setUpWCV];
     
     //this performs the fetch request
     //step 4
     self.title = @"Momentum";
     [self.fetchedResultsController performFetch:nil];
     
-    self.gridCollectionViewController.collectionViewLayout = [[GridCollectionViewFlowLayout alloc] init];
     self.gridCollectionViewController.showsVerticalScrollIndicator = NO;
+    [self.gridCollectionViewController setAutoresizingMask:UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth];
+    self.gridCollectionViewController.collectionViewLayout = [[UICollectionViewFlowLayout alloc] init];
+
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
     _customToolBar = [CustomToolBar new];
@@ -115,13 +89,6 @@ static NSString * const reuseIdentifier = @"Cell";
     frame.origin.y = 0;
     _placeHolder.frame = frame;
     _placeHolderFavorite.frame = frame;
-    
-    frame = _waterFallCV.frame;
-    frame.size.width = self.view.frame.size.width;
-    frame.origin.y = CGRectGetMaxY(_segmentedControl.frame);
-    frame.origin.x = 0;
-    frame.size.height = CGRectGetMaxY(self.view.frame) - CGRectGetMaxY(_segmentedControl.frame) - kGeomHeightToolBar;
-    _waterFallCV.frame = frame;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -142,22 +109,17 @@ static NSString * const reuseIdentifier = @"Cell";
     }
 }
 
+#pragma Tool bar navigation
 
-#pragma show tableview or collectionView
 - (IBAction)segmentedControl:(UISegmentedControl *)sender {
     
     if (sender.selectedSegmentIndex == 0) {
+        self.gridCollectionViewController.hidden = YES;
         self.tableView.hidden = NO;
-        self.gridCollectionViewController.hidden = YES;
-        self.waterFallCV.hidden = YES;
     } else if (sender.selectedSegmentIndex == 1) {
-        self.tableView.hidden = YES;
         self.gridCollectionViewController.hidden = NO;
-        self.waterFallCV.hidden = YES;
-    } else {
         self.tableView.hidden = YES;
-        self.gridCollectionViewController.hidden = YES;
-        self.waterFallCV.hidden = NO;
+    } else {
     }
 }
 
@@ -216,9 +178,8 @@ static NSString * const reuseIdentifier = @"Cell";
     });
 }
 
-#pragma Coredata Methods
+#pragma Coredata
 
-//step 2
 - (NSFetchRequest *)entrylistfetchRequest {
     
     NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"THDiaryEntry"];
@@ -226,7 +187,6 @@ static NSString * const reuseIdentifier = @"Cell";
     return  fetchRequest;
 }
 
-//step 3
 //this is a getter so thats why we replace self for  _
 //sectionName is a property in the THDiaryEntry object we can use any name of a property in the thDiaryEntry for create a section
 - (NSFetchedResultsController *)fetchedResultsController {
@@ -249,9 +209,7 @@ static NSString * const reuseIdentifier = @"Cell";
     self.shouldReloadCollectionView = NO;
     self.blockOperation = [[NSBlockOperation alloc]init];
 }
-//
-////step 8
-////delegate method
+
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
     [self.tableView endUpdates];
     
@@ -263,7 +221,6 @@ static NSString * const reuseIdentifier = @"Cell";
         } completion:nil];
     }
 }
-//this performs the animation
 
 - (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath {
     
@@ -309,6 +266,14 @@ static NSString * const reuseIdentifier = @"Cell";
     }
 }
 
+- (void)removeEntryFromCoreData:(NSIndexPath*)indexPath {
+    
+    THDiaryEntry *entry = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    THCoreDataStack *coreDataStack = [THCoreDataStack defaultStack];
+    [[coreDataStack managedObjectContext] deleteObject:entry];
+    [coreDataStack saveContext];
+}
+
 //if we dont use this method the app will crash when we delete tha last item
 - (void)controller:(NSFetchedResultsController *)controller didChangeSection:(id<NSFetchedResultsSectionInfo>)sectionInfo atIndex:(NSUInteger)sectionIndex forChangeType:(NSFetchedResultsChangeType)type {
     
@@ -334,14 +299,81 @@ static NSString * const reuseIdentifier = @"Cell";
     }
 }
 
+#pragma collectionview methods
+
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
+    return self.fetchedResultsController.sections.count;
+}
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    id <NSFetchedResultsSectionInfo> sectionInfo = [[self.fetchedResultsController sections] objectAtIndex:section];
+    return [sectionInfo numberOfObjects];
+}
+
+- (UICollectionViewCell*)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    
+    GridCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell" forIndexPath:indexPath];
+    THDiaryEntry *entry = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    [cell configureGridCellForEntry:entry];
+    return cell;
+}
+
+- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
+    
+    UICollectionReusableView *reusableview = nil;
+    
+    if (kind == UICollectionElementKindSectionHeader) {
+        SectionReusableView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"header" forIndexPath:indexPath];
+        
+        id <NSFetchedResultsSectionInfo> sectionInfo = [[self.fetchedResultsController sections] objectAtIndex:indexPath.section];
+        //this is setted in THDiaryEntry+CoreDataProperties.m
+        NSString *sectionName = [sectionInfo name];
+        
+        headerView.titleLabel.text = sectionName;
+        
+        reusableview = headerView;
+    }
+    
+    if (kind == UICollectionElementKindSectionFooter) {
+        UICollectionReusableView *footerview = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"footer" forIndexPath:indexPath];
+        
+        reusableview = footerview;
+    }
+    return reusableview;
+}
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+    
+    THDiaryEntry *entry = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    UIImage *img = [UIImage imageWithData:entry.image];
+
+    //h1/ w1 = h2 / w2
+    //h2 = h1 / w1 * w2
+    CGFloat numberofcloumns = 2.0;
+    CGFloat width = self.gridCollectionViewController.frame.size.width / numberofcloumns;
+    CGFloat height = img.size.height / img.size.width * width;
+    
+    return  CGSizeMake(width, height);
+}
+
 #pragma tableView methods
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return  self.fetchedResultsController.sections.count;
 }
 
-- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
-    return self.fetchedResultsController.sections.count;
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    
+    id <NSFetchedResultsSectionInfo> sectionInfo = [[self.fetchedResultsController sections] objectAtIndex:section];
+    return [sectionInfo numberOfObjects];
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    THEntryCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+    THDiaryEntry *entry = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    [cell configureCellForEntry:entry];
+    
+    return cell;
 }
 
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
@@ -359,61 +391,24 @@ static NSString * const reuseIdentifier = @"Cell";
     return kGeomHeaderHeightInSection;
 }
 
-//step 6
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+-(NSArray *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    id <NSFetchedResultsSectionInfo> sectionInfo = [[self.fetchedResultsController sections] objectAtIndex:section];
-    return [sectionInfo numberOfObjects];
-}
-
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    id <NSFetchedResultsSectionInfo> sectionInfo = [[self.fetchedResultsController sections] objectAtIndex:section];
-    return [sectionInfo numberOfObjects];
-}
-
-
-- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
+    UITableViewRowAction *deleteButton = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:@"Delete" handler:^(UITableViewRowAction *action, NSIndexPath *indexPath)
+                                          {
+                                              [self removeEntryFromCoreData:indexPath];
+                                              
+                                              if (self.fetchedResultsController.sections.count <= 0) {
+                                                  
+                                                  if (_customToolBar.favoritesSelected) {
+                                                      _placeHolderFavorite.hidden = NO;
+                                                  } else {
+                                                      _placeHolder.hidden = NO;
+                                                  }
+                                              }
+                                          }];
+    deleteButton.backgroundColor = [UIColor alertColor]; //arbitrary color
     
-    UICollectionReusableView *reusableview = nil;
-    
-    if (kind == UICollectionElementKindSectionHeader) {
-        SectionReusableView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"header" forIndexPath:indexPath];
-     
-        id <NSFetchedResultsSectionInfo> sectionInfo = [[self.fetchedResultsController sections] objectAtIndex:indexPath.section];
-        //this is setted in THDiaryEntry+CoreDataProperties.m
-        NSString *sectionName = [sectionInfo name];
-        
-        headerView.titleLabel.text = sectionName;
- 
-        reusableview = headerView;
-    }
-    
-    if (kind == UICollectionElementKindSectionFooter) {
-        UICollectionReusableView *footerview = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"footer" forIndexPath:indexPath];
-        
-        reusableview = footerview;
-    }
-    
-    return reusableview;
-}
-
-
-//step 7
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    THEntryCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
-    THDiaryEntry *entry = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    [cell configureCellForEntry:entry];
-    
-    return cell;
-}
-
-- (UICollectionViewCell*)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-  
-    GridCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell" forIndexPath:indexPath];
-    THDiaryEntry *entry = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    [cell configureGridCellForEntry:entry];    
-    return cell;
+    return @[deleteButton];
 }
 
 //deleting cell methods
@@ -425,36 +420,7 @@ static NSString * const reuseIdentifier = @"Cell";
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
 }
 
-//adding an extra button to the cell
--(NSArray *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath {
- 
-    UITableViewRowAction *deleteButton = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:@"Delete" handler:^(UITableViewRowAction *action, NSIndexPath *indexPath)
-                                     {
-                                         [self removeEntryFromCoreData:indexPath];
-                                         
-                                         if (self.fetchedResultsController.sections.count <= 0) {
-                                                                                          
-                                             if (_customToolBar.favoritesSelected) {
-                                                 _placeHolderFavorite.hidden = NO;
-                                             } else {
-                                                 _placeHolder.hidden = NO;
-                                             }
-                                         }
-                                     }];
-    deleteButton.backgroundColor = [UIColor alertColor]; //arbitrary color
-    
-    return @[deleteButton];
-}
-
-- (void)removeEntryFromCoreData:(NSIndexPath*)indexPath {
-    
-    THDiaryEntry *entry = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    THCoreDataStack *coreDataStack = [THCoreDataStack defaultStack];
-    [[coreDataStack managedObjectContext] deleteObject:entry];
-    [coreDataStack saveContext];
-}
-
-
+#pragma Navigation on cell taps
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
     dispatch_async(dispatch_get_main_queue(), ^(void){
@@ -580,66 +546,6 @@ static NSString * const reuseIdentifier = @"Cell";
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     [_tableView fadeTopAndBottomCellsOnTableViewScroll:_tableView withModifier:1.0];
-}
-
-
-//MARK: WATERFALL
-
-#pragma mark - UICollectionViewWaterfallLayoutDelegate
-- (CGFloat)collectionView:(UICollectionView *)collectionView
-                   layout:(UICollectionViewWaterfallLayout *)collectionViewLayout
- heightForItemAtIndexPath:(NSIndexPath *)indexPath {
-    
-    ImageDetail *prenda = [_dataSource.collection objectAtIndex:[indexPath item]];
-    [prenda loadImageData];
-    
-    
-    // si no hay url, devuelve un tamaño "estándar" :)
-    if (!prenda.images) {
-        return 152 + 30;
-    }
-    
-    // si no hay altura calculada, calcularla a partir del nombre de la imagen
-    if (!prenda.imageSizeH) {
-        
-        [prenda setImageSizeH:152];
-        
-        // conseguir ancho y alto de la imagen
-        NSString *widthString = nil;
-        NSString *heightString = nil;
-        
-        // Create a regular expression with the pattern: Author
-        NSRegularExpression *reg = [[NSRegularExpression alloc] initWithPattern:@"-(\\d{1,})x(\\d{1,})."
-                                                                        options:0
-                                                                          error:nil];
-        
-        // Find matches in the string. The range
-        // argument specifies how much of the string to search;
-        // in this case, all of it.
-        NSArray *matches = [reg matchesInString:prenda.images
-                                        options:0
-                                          range:NSMakeRange(0, prenda.images.length)];
-        
-        // If there was a match
-        if (matches.count == 1) {
-            NSTextCheckingResult *result = [matches objectAtIndex:0];
-            
-            if (result.numberOfRanges == 3) {
-                
-                NSRange widthRange = [result rangeAtIndex:1];
-                NSRange heightRange = [result rangeAtIndex:2];
-                
-                widthString = [prenda.images substringWithRange:widthRange];
-                heightString = [prenda.images substringWithRange:heightRange];
-                
-                float ancho = widthString.floatValue;
-                float alto = heightString.floatValue;
-                
-                [prenda setImageSizeH:(alto / ancho) * 152];
-            }
-        }
-    }
-    return prenda.imageSizeH + 30;
 }
 
 

@@ -22,9 +22,8 @@ NSString *const API_KEY = @"AIzaSyByZuMTB4A68tMazHfPwGj5CIn_4D4cfPg";
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
-        [self setupAppereance];
+    [self setupAppereance];
     [GMSServices provideAPIKey:API_KEY];
-
     return YES;
 }
 

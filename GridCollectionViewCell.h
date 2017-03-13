@@ -14,7 +14,6 @@
 @property (weak, nonatomic) IBOutlet UIImageView *redHeartImageView;
 
 
-
 - (void)configureGridCellForEntry:(THDiaryEntry*)entry;
 
 

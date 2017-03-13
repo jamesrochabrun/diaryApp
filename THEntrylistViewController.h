@@ -7,10 +7,9 @@
 //
 #import <UIKit/UIKit.h>
 #import "FilterViewController.h"
-#import "WaterfallLayout.h"
 
 
 
-@interface THEntrylistViewController : UIViewController<FilterViewControllerDelegate, UICollectionViewDelegateWaterfallLayout>
+@interface THEntrylistViewController : UIViewController<FilterViewControllerDelegate>
 
 @end
