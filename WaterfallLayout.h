@@ -5,7 +5,6 @@
 //  Created by James Rochabrun on 3/11/17.
 //  Copyright © 2017 James Rochabrun. All rights reserved.
 //
-
 #import <UIKit/UIKit.h>
 
 @class UICollectionViewWaterfallLayout;

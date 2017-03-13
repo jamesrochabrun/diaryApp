@@ -25,9 +25,10 @@
 #import "TableViewHeaderView.h"
 #import "CustomToolBar.h"
 #import "UITableView+Additions.h"
-#import "WaterfallCV.h"
 #import "WaterFallCVDatasource.h"
 #import "UICollectionViewWaterfallCell.h"
+
+static NSString * const reuseIdentifier = @"Cell";
 
 
 @interface THEntrylistViewController ()<NSFetchedResultsControllerDelegate,UITableViewDelegate,UITableViewDataSource,UICollectionViewDelegate,UICollectionViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate, CustomToolBarDelegate, UIScrollViewDelegate>
@@ -44,31 +45,37 @@
 @property (nonatomic, strong) PlaceholderView *placeHolder;
 @property (nonatomic, strong) PlaceholderView *placeHolderFavorite;
 @property (nonatomic, strong) CustomToolBar *customToolBar;
-@property (nonatomic, strong) WaterfallCV *waterFallCollectionView;
-@property (nonatomic, strong) WaterFallCVDatasource *data;
+
+@property (nonatomic, strong) UICollectionView *waterFallCV;
+@property (nonatomic, strong) WaterFallCVDatasource *dataSource;
 
 @end
 
 @implementation THEntrylistViewController
 
-
-
 - (void)setUpWCV {
     
     UICollectionViewWaterfallLayout *layout = [UICollectionViewWaterfallLayout new];
+    // Uncomment the following line to preserve selection between presentations
+    // self.clearsSelectionOnViewWillAppear = NO;
     layout.delegate = self;
-    _waterFallCollectionView = [[WaterfallCV alloc] initWithFrame:CGRectMake(0, 0, 0, 0) collectionViewLayout: layout];
-    [_waterFallCollectionView registerClass:[UICollectionViewWaterfallCell self] forCellWithReuseIdentifier:@"Cell"];
-    _waterFallCollectionView.delegate = self;
-    _data = [WaterFallCVDatasource new];
-    _waterFallCollectionView.dataSource = _data;
-
-    [self.view addSubview:_waterFallCollectionView];
+    layout.columnCount = 2;
+    layout.itemWidth = self.view.frame.size.width / 2 ;
+    //layout.sectionInset = UIEdgeInsetsMake(4, 4, 4, 4);
+    
+    CGRect frame = CGRectMake(0, 0, 0, 0);
+    // _waterFallCollectionView = [_waterFallCollectionView initWithFrame:frame];
+    _waterFallCV = [[UICollectionView alloc] initWithFrame:frame collectionViewLayout: layout];
+    _waterFallCV.hidden = YES;
+    [_waterFallCV registerClass:[UICollectionViewWaterfallCell self] forCellWithReuseIdentifier:@"Cell"];
+    
+    _dataSource = [WaterFallCVDatasource new];
+    self.waterFallCV.dataSource = _dataSource;
+    
+    [self.waterFallCV setAutoresizingMask:UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth];
+    [self.waterFallCV registerClass:[UICollectionViewWaterfallCell class] forCellWithReuseIdentifier:reuseIdentifier];
+    [self.view addSubview:_waterFallCV];
 }
-
-
-
-
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -109,12 +116,12 @@
     _placeHolder.frame = frame;
     _placeHolderFavorite.frame = frame;
     
-    frame = _waterFallCollectionView.frame;
+    frame = _waterFallCV.frame;
     frame.size.width = self.view.frame.size.width;
     frame.origin.y = CGRectGetMaxY(_segmentedControl.frame);
     frame.origin.x = 0;
-    frame.size.height = CGRectGetMaxY(self.view.frame) - CGRectGetMaxY(_segmentedControl.frame) - 44;
-    _waterFallCollectionView.frame = frame;
+    frame.size.height = CGRectGetMaxY(self.view.frame) - CGRectGetMaxY(_segmentedControl.frame) - kGeomHeightToolBar;
+    _waterFallCV.frame = frame;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -139,10 +146,18 @@
 #pragma show tableview or collectionView
 - (IBAction)segmentedControl:(UISegmentedControl *)sender {
     
-    if (sender.selectedSegmentIndex == 1) {
-        self.tableView.hidden = YES;
-    } else {
+    if (sender.selectedSegmentIndex == 0) {
         self.tableView.hidden = NO;
+        self.gridCollectionViewController.hidden = YES;
+        self.waterFallCV.hidden = YES;
+    } else if (sender.selectedSegmentIndex == 1) {
+        self.tableView.hidden = YES;
+        self.gridCollectionViewController.hidden = NO;
+        self.waterFallCV.hidden = YES;
+    } else {
+        self.tableView.hidden = YES;
+        self.gridCollectionViewController.hidden = YES;
+        self.waterFallCV.hidden = NO;
     }
 }
 
@@ -568,12 +583,65 @@
 }
 
 
-
-
-
-
-
 //MARK: WATERFALL
+
+#pragma mark - UICollectionViewWaterfallLayoutDelegate
+- (CGFloat)collectionView:(UICollectionView *)collectionView
+                   layout:(UICollectionViewWaterfallLayout *)collectionViewLayout
+ heightForItemAtIndexPath:(NSIndexPath *)indexPath {
+    
+    ImageDetail *prenda = [_dataSource.collection objectAtIndex:[indexPath item]];
+    [prenda loadImageData];
+    
+    
+    // si no hay url, devuelve un tamaño "estándar" :)
+    if (!prenda.images) {
+        return 152 + 30;
+    }
+    
+    // si no hay altura calculada, calcularla a partir del nombre de la imagen
+    if (!prenda.imageSizeH) {
+        
+        [prenda setImageSizeH:152];
+        
+        // conseguir ancho y alto de la imagen
+        NSString *widthString = nil;
+        NSString *heightString = nil;
+        
+        // Create a regular expression with the pattern: Author
+        NSRegularExpression *reg = [[NSRegularExpression alloc] initWithPattern:@"-(\\d{1,})x(\\d{1,})."
+                                                                        options:0
+                                                                          error:nil];
+        
+        // Find matches in the string. The range
+        // argument specifies how much of the string to search;
+        // in this case, all of it.
+        NSArray *matches = [reg matchesInString:prenda.images
+                                        options:0
+                                          range:NSMakeRange(0, prenda.images.length)];
+        
+        // If there was a match
+        if (matches.count == 1) {
+            NSTextCheckingResult *result = [matches objectAtIndex:0];
+            
+            if (result.numberOfRanges == 3) {
+                
+                NSRange widthRange = [result rangeAtIndex:1];
+                NSRange heightRange = [result rangeAtIndex:2];
+                
+                widthString = [prenda.images substringWithRange:widthRange];
+                heightString = [prenda.images substringWithRange:heightRange];
+                
+                float ancho = widthString.floatValue;
+                float alto = heightString.floatValue;
+                
+                [prenda setImageSizeH:(alto / ancho) * 152];
+            }
+        }
+    }
+    return prenda.imageSizeH + 30;
+}
+
 
 
 

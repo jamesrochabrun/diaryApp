@@ -10,9 +10,9 @@
 #import "ImageDetail.h"
 #import "UICollectionViewWaterfallCell.h"
 
-@implementation WaterFallCVDatasource
-
 static NSString * const reuseIdentifier = @"Cell";
+
+@implementation WaterFallCVDatasource
 
 - (instancetype)init
 {
@@ -26,8 +26,8 @@ static NSString * const reuseIdentifier = @"Cell";
 
 - (void)loadDummyData {
     
-    self.collection = [NSMutableArray new];
-
+    _collection = [NSMutableArray new];
+    
     ImageDetail *sasha = [[ImageDetail alloc] init];
     sasha.author = @"sasha";
     sasha.ruta_thumbnail = @"sasha";
@@ -83,13 +83,16 @@ static NSString * const reuseIdentifier = @"Cell";
     [self.collection addObject:polera];
 }
 
+
+#pragma mark <UICollectionViewDataSource>
+
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
     return 1;
 }
 
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return 8;
+    return self.collection.count;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -120,6 +123,5 @@ static NSString * const reuseIdentifier = @"Cell";
     
     return  cell;
 }
-
 
 @end

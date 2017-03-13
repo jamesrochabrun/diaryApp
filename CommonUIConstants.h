@@ -78,8 +78,6 @@ static CGFloat kGeomHeightNavigationBar = 44;
 static CGFloat kGeomToolBarButtonSize = 40.0;
 
 
-
-
 static CGFloat kMaxScale = 2.1;
 static CGFloat kMinScale = 0.9;
 static CGFloat kExternalOffset = 100.0;
