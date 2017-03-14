@@ -347,89 +347,6 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="385" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="6zy-qy-RLu">
                                 <rect key="frame" x="0.0" y="103" width="375" height="514"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" rowHeight="385" id="W81-EG-9CX" customClass="THEntryCell">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="385"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="W81-EG-9CX" id="lEM-a3-5rI">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="384"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="BfV-Wy-Xf2">
-                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="385"/>
-                                                </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uZE-nw-GPq">
-                                                    <rect key="frame" x="55" y="297" width="229" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Esh-oq-efO">
-                                                    <rect key="frame" x="55" y="342" width="229" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="MfO-hI-3Rw">
-                                                    <rect key="frame" x="15" y="17" width="50" height="50"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="50" id="Blw-1v-uJ2"/>
-                                                        <constraint firstAttribute="width" constant="50" id="LqX-80-cBv"/>
-                                                    </constraints>
-                                                </imageView>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="o9s-pp-Vlt">
-                                                    <rect key="frame" x="320" y="330" width="32" height="28"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="28" id="9c3-Zv-YoK"/>
-                                                    </constraints>
-                                                </imageView>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icn_calendar" translatesAutoresizingMaskIntoConstraints="NO" id="bNq-8L-kd5">
-                                                    <rect key="frame" x="15" y="295" width="28" height="26"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="26" id="s7P-JQ-vZo"/>
-                                                    </constraints>
-                                                </imageView>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icn_geolocate" translatesAutoresizingMaskIntoConstraints="NO" id="rTS-UY-iYX">
-                                                    <rect key="frame" x="15" y="337" width="31" height="31"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="31" id="joU-FI-7Hy"/>
-                                                    </constraints>
-                                                </imageView>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstAttribute="trailingMargin" secondItem="Esh-oq-efO" secondAttribute="trailing" constant="83" id="3Ci-PS-Q7E"/>
-                                                <constraint firstItem="BfV-Wy-Xf2" firstAttribute="top" secondItem="lEM-a3-5rI" secondAttribute="top" id="57D-EX-a6f"/>
-                                                <constraint firstAttribute="bottom" secondItem="BfV-Wy-Xf2" secondAttribute="bottom" id="5qY-d8-WhK"/>
-                                                <constraint firstItem="BfV-Wy-Xf2" firstAttribute="leading" secondItem="lEM-a3-5rI" secondAttribute="leading" id="6xA-dV-vSi"/>
-                                                <constraint firstAttribute="trailing" secondItem="BfV-Wy-Xf2" secondAttribute="trailing" id="CeU-XE-eXj"/>
-                                                <constraint firstItem="Esh-oq-efO" firstAttribute="top" secondItem="uZE-nw-GPq" secondAttribute="bottom" constant="24" id="Drt-Qb-xOE"/>
-                                                <constraint firstItem="MfO-hI-3Rw" firstAttribute="top" secondItem="lEM-a3-5rI" secondAttribute="topMargin" constant="9" id="FK7-Zo-c2T"/>
-                                                <constraint firstItem="bNq-8L-kd5" firstAttribute="leading" secondItem="rTS-UY-iYX" secondAttribute="leading" id="HEA-wM-hQN"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="o9s-pp-Vlt" secondAttribute="bottom" constant="19" id="Jtn-cK-Nay"/>
-                                                <constraint firstItem="o9s-pp-Vlt" firstAttribute="leading" secondItem="Esh-oq-efO" secondAttribute="trailing" constant="36" id="MmC-tO-7Pj"/>
-                                                <constraint firstItem="uZE-nw-GPq" firstAttribute="leading" secondItem="Esh-oq-efO" secondAttribute="leading" id="OEK-EU-QYe"/>
-                                                <constraint firstItem="uZE-nw-GPq" firstAttribute="centerY" secondItem="bNq-8L-kd5" secondAttribute="centerY" id="WpQ-5d-vhe"/>
-                                                <constraint firstItem="MfO-hI-3Rw" firstAttribute="leading" secondItem="lEM-a3-5rI" secondAttribute="leadingMargin" constant="7" id="aDx-4a-hU5"/>
-                                                <constraint firstItem="rTS-UY-iYX" firstAttribute="leading" secondItem="MfO-hI-3Rw" secondAttribute="leading" id="di7-fQ-gub"/>
-                                                <constraint firstAttribute="bottom" secondItem="bNq-8L-kd5" secondAttribute="bottom" constant="64" id="gcs-yg-UOM"/>
-                                                <constraint firstItem="Esh-oq-efO" firstAttribute="leading" secondItem="rTS-UY-iYX" secondAttribute="trailing" constant="9" id="hFx-TD-lQ0"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="Esh-oq-efO" secondAttribute="bottom" constant="14" id="kAj-fG-qkZ"/>
-                                                <constraint firstItem="rTS-UY-iYX" firstAttribute="centerY" secondItem="Esh-oq-efO" secondAttribute="centerY" id="muh-vd-zUl"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="o9s-pp-Vlt" secondAttribute="trailing" constant="15" id="w3z-ec-Tey"/>
-                                                <constraint firstItem="uZE-nw-GPq" firstAttribute="trailing" secondItem="Esh-oq-efO" secondAttribute="trailing" id="x2a-7B-b99"/>
-                                                <constraint firstItem="rTS-UY-iYX" firstAttribute="top" secondItem="bNq-8L-kd5" secondAttribute="bottom" constant="16" id="zz3-nH-byp"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                        <connections>
-                                            <outlet property="dateLabel" destination="uZE-nw-GPq" id="IvG-nI-DUr"/>
-                                            <outlet property="heartImage" destination="o9s-pp-Vlt" id="64F-eR-4C0"/>
-                                            <outlet property="locationLabel" destination="Esh-oq-efO" id="UWH-9h-Atz"/>
-                                            <outlet property="mainImageView" destination="BfV-Wy-Xf2" id="Z10-5D-u4g"/>
-                                            <outlet property="moodImageView" destination="MfO-hI-3Rw" id="2da-iY-Ui2"/>
-                                            <segue destination="6qr-ka-6OA" kind="modal" identifier="show" modalPresentationStyle="currentContext" modalTransitionStyle="crossDissolve" id="8Bn-ls-KgX"/>
-                                        </connections>
-                                    </tableViewCell>
-                                </prototypes>
                                 <connections>
                                     <outlet property="dataSource" destination="9Ob-CM-cgc" id="K2d-dB-zma"/>
                                     <outlet property="delegate" destination="9Ob-CM-cgc" id="xMs-bW-JrT"/>
@@ -686,8 +603,6 @@
         <image name="huella@2x (1)" width="220" height="217"/>
         <image name="icn_average_lrg" width="14" height="14"/>
         <image name="icn_bad_lrg" width="15" height="15"/>
-        <image name="icn_calendar" width="28" height="30"/>
-        <image name="icn_geolocate" width="17" height="17"/>
         <image name="icn_good_lrg" width="15" height="15"/>
         <image name="list" width="25" height="25"/>
         <image name="redHeart" width="37" height="32"/>
@@ -698,7 +613,6 @@
         <simulatedScreenMetrics key="destination" type="retina4_7.fullscreen"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="8Bn-ls-KgX"/>
         <segue reference="zIC-WZ-Kbw"/>
         <segue reference="ySq-UV-5s3"/>
     </inferredMetricsTieBreakers>

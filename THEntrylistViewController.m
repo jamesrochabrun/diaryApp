@@ -25,6 +25,7 @@
 #import "TableViewHeaderView.h"
 #import "CustomToolBar.h"
 #import "UITableView+Additions.h"
+#import "THEntryCell.h"
 
 static NSString * const reuseIdentifier = @"Cell";
 
@@ -63,6 +64,7 @@ static NSString * const reuseIdentifier = @"Cell";
     self.gridCollectionViewController.collectionViewLayout = [[UICollectionViewFlowLayout alloc] init];
 
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    [self.tableView registerClass:[THEntryCell self] forCellReuseIdentifier:reuseIdentifier];
     
     _customToolBar = [CustomToolBar new];
     _customToolBar.del = self;
@@ -369,7 +371,7 @@ static NSString * const reuseIdentifier = @"Cell";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    THEntryCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+    THEntryCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier forIndexPath:indexPath];
     THDiaryEntry *entry = [self.fetchedResultsController objectAtIndexPath:indexPath];
     [cell configureCellForEntry:entry];
     
@@ -418,6 +420,19 @@ static NSString * const reuseIdentifier = @"Cell";
 
 //deleting coredata method
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
+}
+
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    THDiaryEntry *entry = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    UIImage *img = [UIImage imageWithData:entry.image];
+    //h1/ w1 = h2 / w2
+    //h2 = h1 / w1 * w2
+    CGFloat width = self.tableView.frame.size.width;
+    CGFloat height = img.size.height / img.size.width * width;
+    
+    return  height + 40;
 }
 
 #pragma Navigation on cell taps
