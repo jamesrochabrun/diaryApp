@@ -76,8 +76,10 @@ static CGFloat kGeomMarginSmall = 10;
 static CGFloat kGeomHeightStatusBar = 20;
 static CGFloat kGeomHeightNavigationBar = 44;
 static CGFloat kGeomToolBarButtonSize = 40.0;
-
-
+static CGFloat kGeomLabelCellHeight = 30.0;
+static CGFloat kGeomCellPadding = 10.0;
+static CGFloat kGeomCellPaddingBottom = 30.0;
+static CGFloat kGeomCellIconSize = 30.0;
 
 
 static CGFloat kMaxScale = 2.1;

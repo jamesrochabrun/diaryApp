@@ -46,6 +46,8 @@
 
 @implementation THEntrylistViewController
 
+#pragma LifCycle
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -57,6 +59,8 @@
     self.gridCollectionViewController.collectionViewLayout = [[GridCollectionViewFlowLayout alloc] init];
     self.gridCollectionViewController.showsVerticalScrollIndicator = NO;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    [self.tableView registerClass:[THEntryCell self] forCellReuseIdentifier:@"tableviewCell"];
+    self.tableView.delegate = self;
     
     _customToolBar = [CustomToolBar new];
     _customToolBar.del = self;
@@ -103,8 +107,8 @@
     }
 }
 
+#pragma segmented control navigation
 
-#pragma show tableview or collectionView
 - (IBAction)segmentedControl:(UISegmentedControl *)sender {
     
     if (sender.selectedSegmentIndex == 1) {
@@ -113,6 +117,8 @@
         self.tableView.hidden = NO;
     }
 }
+
+#pragma toolbar navigation
 
 - (void)goToHome {
     
@@ -171,7 +177,14 @@
 
 #pragma Coredata Methods
 
-//step 2
+- (void)removeEntryFromCoreData:(NSIndexPath*)indexPath {
+    
+    THDiaryEntry *entry = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    THCoreDataStack *coreDataStack = [THCoreDataStack defaultStack];
+    [[coreDataStack managedObjectContext] deleteObject:entry];
+    [coreDataStack saveContext];
+}
+
 - (NSFetchRequest *)entrylistfetchRequest {
     
     NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"THDiaryEntry"];
@@ -179,9 +192,6 @@
     return  fetchRequest;
 }
 
-//step 3
-//this is a getter so thats why we replace self for  _
-//sectionName is a property in the THDiaryEntry object we can use any name of a property in the thDiaryEntry for create a section
 - (NSFetchedResultsController *)fetchedResultsController {
     if (_fetchedResultsController != nil) {
         return _fetchedResultsController;
@@ -195,16 +205,13 @@
     return _fetchedResultsController;
 }
 
-
 //delegate methods
 - (void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
     [self.tableView beginUpdates];
     self.shouldReloadCollectionView = NO;
     self.blockOperation = [[NSBlockOperation alloc]init];
 }
-//
-////step 8
-////delegate method
+
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
     [self.tableView endUpdates];
     
@@ -216,7 +223,6 @@
         } completion:nil];
     }
 }
-//this performs the animation
 
 - (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath {
     
@@ -289,8 +295,28 @@
 
 #pragma tableView methods
 
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    THEntryCell *cell = [tableView dequeueReusableCellWithIdentifier:@"tableviewCell" forIndexPath:indexPath];
+    THDiaryEntry *entry = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    [cell configureCellForEntry:entry];
+    
+    return cell;
+}
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return  self.fetchedResultsController.sections.count;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    THDiaryEntry *entry = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    UIImage *img = [UIImage imageWithData:entry.image];
+    //h1/ w1 = h2 / w2
+    //h2 = h1 / w1 * w2
+    CGFloat width = self.tableView.frame.size.width;
+    CGFloat height = img.size.height / img.size.width * width;
+    return  height + ((kGeomLabelCellHeight * 2) + (kGeomCellPadding * 2) + kGeomCellPaddingBottom);
 }
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
@@ -312,7 +338,6 @@
     return kGeomHeaderHeightInSection;
 }
 
-//step 6
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
     id <NSFetchedResultsSectionInfo> sectionInfo = [[self.fetchedResultsController sections] objectAtIndex:section];
@@ -324,6 +349,46 @@
     return [sectionInfo numberOfObjects];
 }
 
+//deleting cell methods
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return UITableViewCellEditingStyleDelete;
+}
+
+//deleting coredata method
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
+}
+
+//adding an extra button to the cell
+-(NSArray *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    UITableViewRowAction *deleteButton = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:@"Delete" handler:^(UITableViewRowAction *action, NSIndexPath *indexPath)
+                                          {
+                                              [self removeEntryFromCoreData:indexPath];
+                                              
+                                              if (self.fetchedResultsController.sections.count <= 0) {
+                                                  
+                                                  if (_customToolBar.favoritesSelected) {
+                                                      _placeHolderFavorite.hidden = NO;
+                                                  } else {
+                                                      _placeHolder.hidden = NO;
+                                                  }
+                                              }
+                                          }];
+    deleteButton.backgroundColor = [UIColor alertColor]; //arbitrary color
+    
+    return @[deleteButton];
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    DetailViewController *detailViewController = [DetailViewController new];
+    detailViewController.entry = [self.fetchedResultsController objectAtIndexPath: indexPath];
+    //UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:detailViewController];
+    [self.navigationController pushViewController:detailViewController animated:true];
+    
+}
+
+#pragma collectionview methods
 
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
     
@@ -350,17 +415,6 @@
     return reusableview;
 }
 
-
-//step 7
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    THEntryCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
-    THDiaryEntry *entry = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    [cell configureCellForEntry:entry];
-    
-    return cell;
-}
-
 - (UICollectionViewCell*)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
   
     GridCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell" forIndexPath:indexPath];
@@ -369,44 +423,7 @@
     return cell;
 }
 
-//deleting cell methods
-- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return UITableViewCellEditingStyleDelete;
-}
-
-//deleting coredata method
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
-}
-
-//adding an extra button to the cell
--(NSArray *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath {
- 
-    UITableViewRowAction *deleteButton = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:@"Delete" handler:^(UITableViewRowAction *action, NSIndexPath *indexPath)
-                                     {
-                                         [self removeEntryFromCoreData:indexPath];
-                                         
-                                         if (self.fetchedResultsController.sections.count <= 0) {
-                                                                                          
-                                             if (_customToolBar.favoritesSelected) {
-                                                 _placeHolderFavorite.hidden = NO;
-                                             } else {
-                                                 _placeHolder.hidden = NO;
-                                             }
-                                         }
-                                     }];
-    deleteButton.backgroundColor = [UIColor alertColor]; //arbitrary color
-    
-    return @[deleteButton];
-}
-
-- (void)removeEntryFromCoreData:(NSIndexPath*)indexPath {
-    
-    THDiaryEntry *entry = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    THCoreDataStack *coreDataStack = [THCoreDataStack defaultStack];
-    [[coreDataStack managedObjectContext] deleteObject:entry];
-    [coreDataStack saveContext];
-}
-
+#pragma segues
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     

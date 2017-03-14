@@ -11,12 +11,14 @@
 @class THDiaryEntry;
 
 @interface THEntryCell : UITableViewCell
-@property (weak, nonatomic) IBOutlet UILabel *dateLabel;
-@property (weak, nonatomic) IBOutlet UILabel *locationLabel;
-@property (weak, nonatomic) IBOutlet UIImageView *moodImageView;
-@property (weak, nonatomic) IBOutlet UIImageView *heartImage;
-@property (strong, nonatomic) IBOutlet UIImageView *mainImageView;
-
+@property (strong, nonatomic)  UILabel *dateLabel;
+@property (strong, nonatomic)  UILabel *locationLabel;
+@property (strong, nonatomic)  UIImageView *moodImageView;
+@property (strong, nonatomic)  UIImageView *heartImage;
+@property (strong, nonatomic)  UIImageView *mainImageView;
+@property (nonatomic, strong) UIImageView *locationIcon;
+@property (nonatomic, strong) UIImageView *calendarIcon;
+@property (nonatomic, strong) UIView *line;
 
 
 //class method
