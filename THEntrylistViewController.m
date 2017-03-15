@@ -59,7 +59,7 @@
     self.gridCollectionViewController.collectionViewLayout = [[GridCollectionViewFlowLayout alloc] init];
     self.gridCollectionViewController.showsVerticalScrollIndicator = NO;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    [self.tableView registerClass:[THEntryCell self] forCellReuseIdentifier:@"tableviewCell"];
+   // [self.tableView registerClass:[THEntryCell self] forCellReuseIdentifier:@"tableviewCell"];
     self.tableView.delegate = self;
     
     _customToolBar = [CustomToolBar new];
