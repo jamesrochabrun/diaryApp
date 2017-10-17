@@ -106,9 +106,8 @@
     _titleLabel.text = title;
     _textView.text = message;
     
-    __weak PlaceholderView *weakSelf = self;
     dispatch_async(dispatch_get_main_queue(), ^{
-        [weakSelf setNeedsLayout];
+        [self setNeedsLayout];
     });
 }
 

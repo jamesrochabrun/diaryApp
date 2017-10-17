@@ -78,11 +78,6 @@ static NSString * const FilterCelIdentifier = @"FilterCellIdentifier";
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.view.backgroundColor = UIColorRGB(kColorOverlay50);
-
-    _imageView = [UIImageView new];
-    _imageView.clipsToBounds = YES;
-    _imageView.contentMode = UIViewContentModeScaleAspectFit;
-    _imageView.userInteractionEnabled = YES;
     
     _croppedIV = [UIImageView new];
     _croppedIV.contentMode = UIViewContentModeScaleAspectFit;
@@ -247,10 +242,18 @@ static NSString * const FilterCelIdentifier = @"FilterCellIdentifier";
 
 - (void)setPickedImage:(UIImage *)pickedImage {
     
+    _imageView = [UIImageView new];
+    _imageView.clipsToBounds = YES;
+    _imageView.contentMode = UIViewContentModeScaleAspectFit;
+    _imageView.userInteractionEnabled = YES;
+    
     _pickedImage = pickedImage;
     _imageView.image = _pickedImage;
+        
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self initializeImageViewSize];
+    });
     
-    [self initializeImageViewSize];
     NSLog(@"the images in filter VC is %@", _imageView.image);
 
 }
@@ -264,9 +267,9 @@ static NSString * const FilterCelIdentifier = @"FilterCellIdentifier";
     
     CGFloat vertical = height(self.view) - 100;
     CGFloat w = width(self.view);
-    CGRect frame;
+    //frame;
     
-    frame = _imageView.frame;
+     CGRect frame = _imageView.frame;
     if (_imageView.image.size.height > _imageView.image.size.width) {
         frame.size.width = _imageView.image.size.width * width(self.view) /_imageView.image.size.height;
         frame.size.height = width(self.view);
@@ -276,6 +279,8 @@ static NSString * const FilterCelIdentifier = @"FilterCellIdentifier";
     }
     frame.origin.x = (w - frame.size.width)/2;
     frame.origin.y = (vertical - frame.size.height)/2;
+    
+    NSLog(@"float %d", frame);
     _imageView.frame = frame;
     
     frame = _cropView.frame;

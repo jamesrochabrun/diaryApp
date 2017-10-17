@@ -427,7 +427,7 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
-    dispatch_async(dispatch_get_main_queue(), ^(void){
+   // dispatch_async(dispatch_get_main_queue(), ^(void){
         
         if ([segue.identifier isEqualToString:@"showFromGrid"]) {
             
@@ -452,7 +452,7 @@
             filterVC.sourceType = _sourceType;
             filterVC.delegate = self;
         }
-    });
+   // });
 }
 
 #pragma camera actions
@@ -525,12 +525,11 @@
         _sourceType = UIImagePickerControllerSourceTypeCamera;
     }
     
-    __weak THEntrylistViewController *weakSelf = self;
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [weakSelf dismissViewControllerAnimated:YES completion:^{
-            [weakSelf performSegueWithIdentifier:@"filter" sender:weakSelf];
+   // dispatch_async(dispatch_get_main_queue(), ^{
+        [self dismissViewControllerAnimated:YES completion:^{
+            [self performSegueWithIdentifier:@"filter" sender: self];
         }];
-    });
+   // });
 }
 
 - (void)filterPhotoCancelled:(FilterViewController *)filterVC getNewPhoto:(BOOL)getNewPhoto ofType:(NSInteger)type {
